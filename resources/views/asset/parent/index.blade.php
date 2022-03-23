@@ -67,8 +67,8 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Group</th>
                                 <th>Name</th>
+                                <th>Group</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
@@ -76,8 +76,8 @@
                             @foreach ($assets as $parent)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $parent->group->asset_group_name }}</td>
                                     <td>{{ $parent->asset_name }}</td>
+                                    <td>{{ $parent->group->asset_group_name }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>

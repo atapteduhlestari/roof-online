@@ -44,9 +44,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/maintenance', MaintenanceController::class);
     Route::resource('/renewal', RenewalController::class);
     Route::resource('/storage', StorageController::class);
+
     Route::resource('/trn-renewal', TrnRenewalController::class);
-    Route::get('/trn-renewal/asset-parent', [TrnRenewalController::class, 'createParent']);
-    Route::get('/trn-renewal/asset-child', [TrnRenewalController::class, 'createChild']);
 
     Route::resource('/trn-maintenance', TrnMaintenanceController::class);
 

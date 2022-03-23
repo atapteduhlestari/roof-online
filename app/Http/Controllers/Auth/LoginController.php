@@ -22,11 +22,7 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
+
     protected $redirectTo = RouteServiceProvider::HOME;
 
     protected $maxAttempts = 3;  // Default is 5
@@ -42,7 +38,7 @@ class LoginController extends Controller
     protected function authenticated()
     {
         Auth::logoutOtherDevices(request('password'));
-        return redirect('/')->with('success', 'Login Berhasil!');
+        return redirect('/')->with('success', 'Login Success!');
     }
 
     public function findUsername()

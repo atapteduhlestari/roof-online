@@ -37,12 +37,14 @@
     <div class="container">
         <!-- Outer Row -->
         <div class="row justify-content-center">
-            <div class="col-md-5 pt-5">
+            <div class="col-md-4 pt-5">
                 <div class="card border-0 shadow my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="p-5">
                             <div class="text-center">
+                                <img class="rounded" width="auto" height="75"
+                                    src="/assets/app/images/logo/logo.png" alt="">
                                 <h1 class="h4 text-dark mb-4"> <i class="fa fa-user"></i> Login Page</h1>
                             </div>
                             <form class="user" method="POST" action="{{ route('login') }}">
@@ -69,13 +71,13 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <div class="custom-control custom-checkbox small">
                                         <input type="checkbox" class="custom-control-input" id="customCheck">
                                         <label class="custom-control-label" for="customCheck">Remember
                                             Me</label>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <button type="submit" class="btn btn-outline-primary btn-user btn-block">
                                     Login
                                 </button>

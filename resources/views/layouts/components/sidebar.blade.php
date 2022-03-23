@@ -60,15 +60,15 @@
                 </div>
             </li>
             <li
-                class="nav-item {{ request()->is('storage*') || request()->is('renewal*') || request()->is('maintenance*') ? 'active' : '' }}">
-                <a class="nav-link {{ request()->is('storage*') || request()->is('renewal*') || request()->is('maintenance*') ? '' : 'collapsed' }}"
+                class="nav-item {{ request()->is('storage*') ||request()->is('renewal*') ||request()->is('maintenance*') ||request()->is('cycle*')? 'active': '' }}">
+                <a class="nav-link {{ request()->is('storage*') ||request()->is('renewal*') ||request()->is('maintenance*') ||request()->is('cycle*')? '': 'collapsed' }}"
                     href="#" data-toggle="collapse" data-target="#collapseData" aria-expanded="true"
                     aria-controls="collapseData">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Data</span>
                 </a>
                 <div id="collapseData"
-                    class="collapse {{ request()->is('storage*') || request()->is('renewal*') || request()->is('maintenance*') ? 'show' : '' }}"
+                    class="collapse {{ request()->is('storage*') ||request()->is('renewal*') ||request()->is('maintenance*') ||request()->is('cycle*')? 'show': '' }}"
                     aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item {{ request()->is('storage*') ? 'active' : '' }}"
@@ -77,6 +77,8 @@
                             href="/renewal">Renewal</a>
                         <a class="collapse-item {{ request()->is('maintenance*') ? 'active' : '' }}"
                             href="/maintenance">Maintenance</a>
+                        <a class="collapse-item {{ request()->is('cycle*') ? 'active' : '' }}"
+                            href="/cycle">Cycle</a>
                     </div>
                 </div>
             </li>

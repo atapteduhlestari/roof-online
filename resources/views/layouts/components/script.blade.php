@@ -11,6 +11,12 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @stack('scripts')
 
+<script>
+    $('.input-group.date').datepicker({
+        format: "dd.mm.yyyy"
+    });
+</script>
+
 @if (session('success'))
     <script>
         Swal.fire({

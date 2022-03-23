@@ -34,11 +34,6 @@ class AppServiceProvider extends ServiceProvider
         View::share('tes', $tes);
     }
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
     public function boot()
     {
         //

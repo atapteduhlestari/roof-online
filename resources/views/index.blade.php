@@ -97,7 +97,7 @@
         </div>
 
         <!-- Content Row -->
-
+        {{ test('2025-03-21') }}
         <div class="row">
 
             <!-- Area Chart -->
