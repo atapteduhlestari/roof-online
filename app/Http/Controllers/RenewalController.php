@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cycle;
 use App\Models\Renewal;
 use Illuminate\Http\Request;
 
@@ -9,8 +10,9 @@ class RenewalController extends Controller
 {
     public function index()
     {
+        $cycles = Cycle::get();
         $renewals = Renewal::get();
-        return view('asset.renewal.index', compact('renewals'));
+        return view('asset.renewal.index', compact('renewals', 'cycles'));
     }
 
     public function create()
@@ -22,6 +24,7 @@ class RenewalController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'cycle_id' => 'required',
         ]);
 
         $data = $request->all();
@@ -37,14 +40,16 @@ class RenewalController extends Controller
 
     public function edit(Renewal $renewal)
     {
+        $cycles = Cycle::get();
         $renewals = Renewal::get();
-        return view('asset.renewal.edit', compact('renewal', 'renewals'));
+        return view('asset.renewal.edit', compact('renewal', 'renewals', 'cycles'));
     }
 
     public function update(Request $request, Renewal $renewal)
     {
         $request->validate([
             'name' => 'required',
+            'cycle_id' => 'required',
         ]);
 
         $data = $request->all();

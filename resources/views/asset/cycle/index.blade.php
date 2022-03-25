@@ -2,50 +2,39 @@
 @push('styles')
     <link href="/assets/template/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 @endpush
-@section('title', 'GA | Maintenance')
+@section('title', 'GA | Cycle')
 @section('container')
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Maintenance</h1>
+        <h1 class="h3 mb-2 text-gray-800">Cycle</h1>
 
         <div class="my-4">
             <div class="mb-3">
                 <h6 class="text-muted">Add new record</h6>
             </div>
-            <form action="/maintenance" method="POST">
+            <form action="/cycle" method="POST">
                 @csrf
+                <input type="hidden" name="cycle_type" value="1">
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <input name="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                placeholder="Maintenance Name" value="{{ old('name') }}" autocomplete="off" autofocus>
-                            @error('name')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
+                    <div class="form-group col-6">
+                        <input name="cycle_name" type="text" class="form-control @error('cycle_name') is-invalid @enderror"
+                            placeholder="Cycle Name" value="{{ old('cycle_name') }}" autocomplete="off" autofocus>
+                        @error('cycle_name')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <select class="form-control @error('cycle_id') is-invalid @enderror" name="cycle_id"
-                                id="cycle_id">
-                                <option value="">-Select Cycle-</option>
-                                @foreach ($cycles as $cycle)
-                                    <option value="{{ $cycle->id }}"
-                                        {{ old('cycle_id') == $cycle->id ? 'selected' : '' }}>
-                                        {{ $cycle->cycle_name }}</option>
-                                @endforeach
-                            </select>
-                            @error('cycle_id')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-
+                    <div class="form-group col-6">
+                        <input name="qty" type="number" class="form-control @error('qty') is-invalid @enderror"
+                            placeholder="Cycle Days" value="{{ old('qty') }}" autocomplete="off">
+                        @error('qty')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="col-6">
                         <button type="submit" class="btn btn-primary">
@@ -68,27 +57,27 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
+                                <th>Days</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($maintenances as $m)
+                            @foreach ($cycles as $c)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $m->name }}</td>
+                                    <td>{{ $c->cycle_name }}</td>
+                                    <td>{{ $c->qty }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
-                                                <a href="/maintenance/{{ $m->id }}/edit"
-                                                    class="btn btn-info">Edit</a>
+                                                <a href="/cycle/{{ $c->id }}/edit" class="btn btn-info">Edit</a>
                                             </div>
                                             <div>
-                                                <form action="/maintenance/{{ $m->id }}" method="post"
-                                                    id="deleteForm">
+                                                <form action="/cycle/{{ $c->id }}" method="post" id="deleteForm">
                                                     @csrf
                                                     @method('delete')
                                                     <button title="Hapus Data" class="btn btn-danger" onclick="return false"
-                                                        id="deleteButton" data-id="{{ $m->id }}">
+                                                        id="deleteButton" data-id="{{ $c->id }}">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
                                                 </form>
@@ -121,7 +110,7 @@
         $(document).on('click', '#deleteButton', function(e) {
             e.preventDefault();
             let id = $(this).data('id');
-            formDelete.attr('action', `/maintenance/${id}`)
+            formDelete.attr('action', `/cycle/${id}`)
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",

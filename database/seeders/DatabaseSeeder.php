@@ -14,6 +14,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UserSeedeR::class);
+        $this->call(CycleSeeder::class);
+        $this->call(AssetGroupSeeder::class);
         // \App\Models\User::factory(10)->create();
+        // \App\Models\Cycle::factory(10000)->create();
     }
 }

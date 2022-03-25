@@ -34,7 +34,7 @@
                             <label for="asset_group_id">Asset Groups</label>
                             <select class="form-control @error('asset_group_id') is-invalid @enderror" name="asset_group_id"
                                 id="asset_group_id">
-                                <option value="">-Select group-</option>
+                                <option value="">-Select Group-</option>
                                 @foreach ($assetGroup as $group)
                                     <option value="{{ $group->id }}"
                                         {{ old('asset_group_id', $asset->asset_group_id) == $group->id ? 'selected' : '' }}>

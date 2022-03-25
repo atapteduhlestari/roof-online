@@ -1,16 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AssetController;
-use App\Http\Controllers\AssetGroupController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\MaintenanceController;
+use App\Http\Controllers\CycleController;
 use App\Http\Controllers\RenewalController;
 use App\Http\Controllers\StorageController;
-use App\Http\Controllers\TrnMaintenanceController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AssetGroupController;
 use App\Http\Controllers\TrnRenewalController;
 use App\Http\Controllers\TrnStorageController;
+use App\Http\Controllers\MaintenanceController;
+use App\Http\Controllers\TrnMaintenanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +52,17 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/trn-maintenance', TrnMaintenanceController::class);
 
     Route::resource('/trn-storage', TrnStorageController::class);
+
+    Route::resource('/cycle', CycleController::class);
 });
+
+// Route::get('/get-api', function () {
+//     $response = Http::get('http://192.168.1.11:8101/api/tes-api');
+//     $json = $response->json();
+
+//     $data = collect($json)->where('id', 1)->first();
+//     return $data;
+// });
 
 Auth::routes([
     'register' => false,

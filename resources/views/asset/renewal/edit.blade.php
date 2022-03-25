@@ -26,7 +26,27 @@
                             </div>
                         @enderror
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cycle_id">Cycle</label>
+                            <select class="form-control @error('cycle_id') is-invalid @enderror" name="cycle_id"
+                                id="cycle_id">
+                                <option value="">-Select Cycle-</option>
+                                @foreach ($cycles as $cycle)
+                                    <option value="{{ $cycle->id }}"
+                                        {{ old('cycle_id', $renewal->cycle_id) == $cycle->id ? 'selected' : '' }}>
+                                        {{ $cycle->cycle_name }}</option>
+                                @endforeach
+                            </select>
+                            @error('cycle_id')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
+
                 <div class="row">
                     <div class="col-6">
                         <button type="submit" class="btn btn-primary">
@@ -60,7 +80,8 @@
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
-                                                <a href="/renewal/{{ $renewal->id }}/edit" class="btn btn-info">Edit</a>
+                                                <a href="/renewal/{{ $renewal->id }}/edit"
+                                                    class="btn btn-info">Edit</a>
                                             </div>
                                             <div>
                                                 <form action="/renewal/{{ $renewal->id }}" method="post" id="deleteForm">

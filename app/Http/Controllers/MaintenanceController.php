@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cycle;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
 
@@ -9,8 +10,9 @@ class MaintenanceController extends Controller
 {
     public function index()
     {
+        $cycles = Cycle::get();
         $maintenances = Maintenance::get();
-        return view('asset.maintenance.index', compact('maintenances'));
+        return view('asset.maintenance.index', compact('maintenances', 'cycles'));
     }
 
     public function create()
@@ -22,6 +24,7 @@ class MaintenanceController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'cycle_id' => 'required'
         ]);
 
         $data = $request->all();
@@ -36,14 +39,16 @@ class MaintenanceController extends Controller
 
     public function edit(Maintenance $maintenance)
     {
+        $cycles = Cycle::get();
         $maintenances = Maintenance::get();
-        return view('asset.maintenance.edit', compact('maintenance', 'maintenances'));
+        return view('asset.maintenance.edit', compact('maintenance', 'maintenances', 'cycles'));
     }
 
     public function update(Request $request, Maintenance $maintenance)
     {
         $request->validate([
             'name' => 'required',
+            'cycle_id' => 'required'
         ]);
 
         $data = $request->all();

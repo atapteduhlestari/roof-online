@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAssetRenewalTable extends Migration
+class CreateCyclesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateAssetRenewalTable extends Migration
      */
     public function up()
     {
-        Schema::create('asset_renewal', function (Blueprint $table) {
+        Schema::create('cycles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cycle_id')->nullable();
-            $table->string('name');
+            $table->string('cycle_name');
+            $table->string('cycle_type', 1);
+            $table->smallInteger('qty');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateAssetRenewalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('asset_renewal');
+        Schema::dropIfExists('cycles');
     }
 }

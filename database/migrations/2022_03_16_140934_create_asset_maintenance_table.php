@@ -15,6 +15,7 @@ class CreateAssetMaintenanceTable extends Migration
     {
         Schema::create('asset_maintenance', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('cycle_id')->nullable();
             $table->string('name');
             $table->timestamps();
         });

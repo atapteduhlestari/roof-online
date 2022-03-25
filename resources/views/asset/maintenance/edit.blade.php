@@ -15,16 +15,38 @@
                 @csrf
                 @method('PUT')
                 <div class="row">
-                    <div class="form-group col-6">
-                        <label for="name">Maintenance Name</label>
-                        <input name="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                            placeholder="Maintenance Name" value="{{ old('name', $maintenance->name) }}"
-                            autocomplete="off" autofocus>
-                        @error('name')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">Maintenance Name</label>
+                            <input name="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                                placeholder="Maintenance Name" value="{{ old('name', $maintenance->name) }}"
+                                autocomplete="off" autofocus>
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cycle_id">Cycle</label>
+                            <select class="form-control @error('cycle_id') is-invalid @enderror" name="cycle_id"
+                                id="cycle_id">
+                                <option value="">-Select Cycle-</option>
+                                @foreach ($cycles as $cycle)
+                                    <option value="{{ $cycle->id }}"
+                                        {{ old('cycle_id', $maintenance->cycle_id) == $cycle->id ? 'selected' : '' }}>
+                                        {{ $cycle->cycle_name }}</option>
+                                @endforeach
+                            </select>
+                            @error('cycle_id')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                     </div>
                 </div>
                 <div class="row">

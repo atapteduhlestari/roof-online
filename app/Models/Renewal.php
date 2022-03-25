@@ -11,4 +11,9 @@ class Renewal extends Model
 
     protected $table = 'asset_renewal';
     protected $guarded = ['id'];
+
+    public function cycle()
+    {
+        return $this->belongsTo(Cycle::class, 'cycle_id');
+    }
 }
