@@ -16,6 +16,11 @@ class Cycle extends Model
         return $this->hasMany(Renewal::class, 'cycle_id');
     }
 
+    public function storages()
+    {
+        return $this->hasMany(Storage::class, 'cycle_id');
+    }
+
     public function maintenances()
     {
         return $this->hasMany(Maintenance::class, 'cycle_id');

@@ -78,7 +78,7 @@ class TrnRenewalController extends Controller
         $data['asset_child_id'] = $trnRenewal->assetChildren()->exists() ? $trnRenewal->asset_child_id : null;
 
         $trnRenewal->update($data);
-        return redirect('/trn-renewal')->with('success', 'Success!');
+        return redirect()->back()->with('success', 'Success!');
     }
 
     public function destroy(TrnRenewal $trnRenewal)

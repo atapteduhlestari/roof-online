@@ -15,6 +15,7 @@ class CreateAssetStorageTable extends Migration
     {
         Schema::create('asset_storage', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('cycle_id')->nullable();
             $table->string('name');
             $table->timestamps();
         });

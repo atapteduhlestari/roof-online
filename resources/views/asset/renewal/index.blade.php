@@ -44,7 +44,6 @@
                                 </div>
                             @enderror
                         </div>
-
                     </div>
                     <div class="col-6">
                         <button type="submit" class="btn btn-primary">

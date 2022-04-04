@@ -58,16 +58,32 @@ class TrnMaintenanceController extends Controller
 
     public function edit(TrnMaintenance $trnMaintenance)
     {
-        //
+        $trnMaintenances = TrnMaintenance::get();
+        $employees = Employee::get();
+        return view('transaction.maintenance.edit', compact('trnMaintenance', 'trnMaintenances', 'employees'));
     }
 
     public function update(Request $request, TrnMaintenance $trnMaintenance)
     {
-        //
+        $request->validate([
+            'trn_date' => 'required',
+            'pelaksana' => 'required',
+            'penyetuju' => 'required',
+        ]);
+
+        $data = $request->all();
+        $data['user_id'] = auth()->user()->id;
+        $data['maintenance_id'] = $trnMaintenance->maintenance_id;
+        $data['asset_id'] = $trnMaintenance->assets()->exists() ? $trnMaintenance->asset_id : null;
+        $data['asset_child_id'] = $trnMaintenance->assetChildren()->exists() ? $trnMaintenance->asset_child_id : null;
+
+        $trnMaintenance->update($data);
+        return redirect()->back()->with('success', 'Success!');
     }
 
     public function destroy(TrnMaintenance $trnMaintenance)
     {
-        //
+        $trnMaintenance->delete();
+        return redirect('/trn-maintenance')->with('success', 'Success!');
     }
 }

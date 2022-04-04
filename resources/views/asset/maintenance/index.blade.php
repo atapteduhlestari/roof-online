@@ -68,6 +68,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
+                                <th>Cycle</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
@@ -76,6 +77,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $m->name }}</td>
+                                    <td>{{ $m->cycle->cycle_name }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>

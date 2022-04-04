@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\TrnRenewal;
-use App\Models\TrnStorage;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AssetSeeder::class);
         $this->call(RenewalSeeder::class);
         $this->call(StorageSeeder::class);
+        $this->call(MaintenanceSeeder::class);
 
         \App\Models\Employee::factory(25)->create();
 

@@ -17,14 +17,17 @@ class StorageSeeder extends Seeder
         $data = [
             [
                 'name' => 'SDB',
+                'cycle_id' => 1,
                 'created_at' => now()
             ],
             [
                 'name' => 'Brankas',
+                'cycle_id' => 1,
                 'created_at' => now()
             ],
             [
                 'name' => 'Server',
+                'cycle_id' => 1,
                 'created_at' => now()
             ],
         ];

@@ -15,16 +15,37 @@
                 @csrf
                 @method('PUT')
                 <div class="row">
-                    <div class="form-group col-6">
-                        <label for="name">Storage Name</label>
-                        <input name="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                            placeholder="Storage Name" value="{{ old('name', $storage->name) }}" autocomplete="off"
-                            autofocus>
-                        @error('name')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">Storage Name</label>
+                            <input name="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                                placeholder="Storage Name" value="{{ old('name', $storage->name) }}" autocomplete="off"
+                                autofocus>
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cycle_id">Cycle</label>
+                            <select class="form-control @error('cycle_id') is-invalid @enderror" name="cycle_id"
+                                id="cycle_id">
+                                <option value="">-Select Cycle-</option>
+                                @foreach ($cycles as $cycle)
+                                    <option value="{{ $cycle->id }}"
+                                        {{ old('cycle_id', $storage->cycle_id) == $cycle->id ? 'selected' : '' }}>
+                                        {{ $cycle->cycle_name }}</option>
+                                @endforeach
+                            </select>
+                            @error('cycle_id')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -60,7 +81,8 @@
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
-                                                <a href="/storage/{{ $storage->id }}/edit" class="btn btn-info">Edit</a>
+                                                <a href="/storage/{{ $storage->id }}/edit"
+                                                    class="btn btn-info">Edit</a>
                                             </div>
                                             <div>
                                                 <form action="/storage/{{ $storage->id }}" method="post" id="deleteForm">

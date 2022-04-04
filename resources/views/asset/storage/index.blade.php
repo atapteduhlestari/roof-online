@@ -17,16 +17,36 @@
             <form action="/storage" method="POST">
                 @csrf
                 <div class="row">
-                    <div class="form-group col-6">
-                        <input name="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                            placeholder="Storage Name" value="{{ old('name') }}" autocomplete="off" autofocus>
-                        @error('name')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input name=" name" type="text" class="form-control @error('name') is-invalid @enderror"
+                                placeholder="Storage Name" value="{{ old('name') }}" autocomplete="off" autofocus>
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <select class="form-control @error('cycle_id') is-invalid @enderror" name="cycle_id"
+                                id="cycle_id">
+                                <option value="">-Select Cycle-</option>
+                                @foreach ($cycles as $cycle)
+                                    <option value="{{ $cycle->id }}"
+                                        {{ old('cycle_id') == $cycle->id ? 'selected' : '' }}>
+                                        {{ $cycle->cycle_name }}</option>
+                                @endforeach
+                            </select>
+                            @error('cycle_id')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
                         <button type="submit" class="btn btn-primary">
                             Submit
                         </button>
@@ -47,6 +67,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
+                                <th>Cycle</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
@@ -55,6 +76,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $storage->name }}</td>
+                                    <td>{{ $storage->cycle->cycle_name }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>

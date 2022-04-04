@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cycle;
 use App\Models\Storage;
 use Illuminate\Http\Request;
 
@@ -9,8 +10,9 @@ class StorageController extends Controller
 {
     public function index()
     {
+        $cycles = Cycle::get();
         $storages = Storage::get();
-        return view('asset.storage.index', compact('storages'));
+        return view('asset.storage.index', compact('storages', 'cycles'));
     }
 
     public function create()
@@ -37,8 +39,9 @@ class StorageController extends Controller
 
     public function edit(Storage $storage)
     {
+        $cycles = Cycle::get();
         $storages = Storage::get();
-        return view('asset.storage.edit', compact('storage', 'storages'));
+        return view('asset.storage.edit', compact('storage', 'storages', 'cycles'));
     }
 
     public function update(Request $request, Storage $storage)

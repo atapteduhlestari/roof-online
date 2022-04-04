@@ -77,7 +77,7 @@ class TrnStorageController extends Controller
         $data['asset_child_id'] = $trnStorage->assetChildren()->exists() ? $trnStorage->asset_child_id : null;
 
         $trnStorage->update($data);
-        return redirect('/trn-storage')->with('success', 'Success!');
+        return redirect()->back()->with('success', 'Success!');
     }
 
     public function destroy(TrnStorage $trnStorage)
