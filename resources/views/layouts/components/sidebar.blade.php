@@ -44,21 +44,6 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTransaction"
-                    aria-expanded="true" aria-controls="collapseTransaction">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Transaction</span>
-                </a>
-                <div id="collapseTransaction" class="collapse" aria-labelledby="headingTwo"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/trn-storage">Storage</a>
-                        <a class="collapse-item" href="/trn-renewal">Renewal</a>
-                        <a class="collapse-item" href="/trn-maintenance">Maintenance</a>
-                    </div>
-                </div>
-            </li>
             <li
                 class="nav-item {{ request()->is('storage*') ||request()->is('renewal*') ||request()->is('maintenance*') ||request()->is('cycle*')? 'active': '' }}">
                 <a class="nav-link {{ request()->is('storage*') ||request()->is('renewal*') ||request()->is('maintenance*') ||request()->is('cycle*')? '': 'collapsed' }}"
@@ -79,6 +64,27 @@
                             href="/maintenance">Maintenance</a>
                         <a class="collapse-item {{ request()->is('cycle*') ? 'active' : '' }}"
                             href="/cycle">Cycle</a>
+                    </div>
+                </div>
+            </li>
+            <li
+                class="nav-item {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') || request()->is('trn-storage*')? 'active': '' }}">
+                <a class="nav-link {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') || request()->is('trn-storage*')? '': 'collapsed' }}"
+                    href="#" data-toggle="collapse" data-target="#collapseTransaction" aria-expanded="true"
+                    aria-controls="collapseTransaction">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Transaction</span>
+                </a>
+                <div id="collapseTransaction"
+                    class="collapse {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') || request()->is('trn-storage*')? 'show': '' }}"
+                    aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item {{ request()->is('trn-storage*') ? 'active' : '' }}"
+                            href="/trn-storage">Storage</a>
+                        <a class="collapse-item {{ request()->is('trn-renewal*') ? 'active' : '' }}"
+                            href="/trn-renewal">Renewal</a>
+                        <a class="collapse-item {{ request()->is('trn-maintenance*') ? 'active' : '' }}"
+                            href="/trn-maintenance">Maintenance</a>
                     </div>
                 </div>
             </li>

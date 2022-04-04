@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Cycle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AssetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,15 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/tes-api', function () {
-    $data = Cycle::get();
-    $api = json_encode($data);
-    echo $api;
-    // return response()->json(
-    //     [
-    //         'data' => $data,
-    //         'message' => 'success',
-    //         'status' => 200
-    //     ]
-    // );
-});
+Route::get('/asset-parent/get-data/{id}', [AssetController::class, 'getData'])->name('apiGetData');

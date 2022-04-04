@@ -16,4 +16,9 @@ class Maintenance extends Model
     {
         return $this->belongsTo(Cycle::class, 'cycle_id');
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(TrnMaintenance::class);
+    }
 }

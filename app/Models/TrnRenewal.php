@@ -21,4 +21,14 @@ class TrnRenewal extends Model
     {
         return $this->belongsTo(AssetChild::class, 'asset_child_id');
     }
+
+    public function renewal()
+    {
+        return $this->belongsTo(Renewal::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

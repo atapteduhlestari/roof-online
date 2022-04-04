@@ -14,3 +14,7 @@ function test($param)
 
     return date_diff($dt, $next)->format('%y years, %m months and %d days');
 }
+
+function no_docs($param)
+{
+}

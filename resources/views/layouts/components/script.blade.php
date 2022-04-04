@@ -11,11 +11,11 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @stack('scripts')
 
-<script>
+{{-- <script>
     $('.input-group.date').datepicker({
         format: "dd.mm.yyyy"
     });
-</script>
+</script> --}}
 
 @if (session('success'))
     <script>

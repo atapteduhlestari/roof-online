@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\CycleController;
 use App\Http\Controllers\RenewalController;
 use App\Http\Controllers\StorageController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AssetGroupController;
 use App\Http\Controllers\TrnRenewalController;
@@ -54,6 +54,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/trn-storage', TrnStorageController::class);
 
     Route::resource('/cycle', CycleController::class);
+
+    Route::resource('/employee', EmployeeController::class);
 });
 
 // Route::get('/get-api', function () {

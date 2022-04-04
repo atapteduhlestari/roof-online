@@ -110,4 +110,14 @@ class AssetController extends Controller
         $asset->children()->where('id', $childId)->delete();
         return redirect('/asset-parent')->with('success', 'Success!');
     }
+
+    public function getData($id)
+    {
+        $data = Asset::find($id);
+        $child = $data->children;
+
+        return response()->json(
+            $child,
+        );
+    }
 }

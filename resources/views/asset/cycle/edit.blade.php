@@ -14,30 +14,57 @@
             <form action="/cycle/{{ $cycle->id }}" method="POST">
                 @csrf
                 @method('PUT')
-                <input type="hidden" name="cycle_type" value="1">
                 <div class="row">
-                    <div class="form-group col-6">
-                        <label for="cycle_name">Cycle Name</label>
-                        <input name="cycle_name" type="text" class="form-control @error('cycle_name') is-invalid @enderror"
-                            placeholder="Cycle Name" value="{{ old('cycle_name', $cycle->cycle_name) }}"
-                            autocomplete="off" autofocus>
-                        @error('cycle_name')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cycle_name">Cycle Name</label>
+                            <input name="cycle_name" type="text"
+                                class="form-control @error('cycle_name') is-invalid @enderror" placeholder="Cycle Name"
+                                value="{{ old('cycle_name', $cycle->cycle_name) }}" autocomplete="off" autofocus>
+                            @error('cycle_name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                     </div>
-                    <div class="form-group col-6">
-                        <label for="cycle_name">Cycle Days</label>
 
-                        <input name="qty" type="number" class="form-control @error('qty') is-invalid @enderror"
-                            placeholder="Cycle Days" value="{{ old('qty', $cycle->qty) }}" autocomplete="off">
-                        @error('qty')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cycle_name">Cycle Qty</label>
+                            <input name="qty" type="number" class="form-control @error('qty') is-invalid @enderror"
+                                placeholder="Cycle Qty" value="{{ old('qty', $cycle->qty) }}" autocomplete="off">
+                            @error('qty')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                     </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cycle_type">Cycle Type</label>
+                            <select class="form-control  @error('cycle_type') is-invalid @enderror" id="cycle_type"
+                                name="cycle_type">
+                                <option value="">Cycle Type</option>
+                                <option value="D" {{ old('cycle_type', $cycle->cycle_type) == 'D' ? 'selected' : '' }}>Day
+                                </option>
+                                <option value="M" {{ old('cycle_type', $cycle->cycle_type) == 'M' ? 'selected' : '' }}>
+                                    Month</option>
+                                <option value="Y" {{ old('cycle_type', $cycle->cycle_type) == 'Y' ? 'selected' : '' }}>
+                                    Year
+                                </option>
+                            </select>
+                            @error('cycle_type')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-6">
                         <button type="submit" class="btn btn-primary">
                             Submit

@@ -16,4 +16,9 @@ class Renewal extends Model
     {
         return $this->belongsTo(Cycle::class, 'cycle_id');
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(TrnRenewal::class);
+    }
 }

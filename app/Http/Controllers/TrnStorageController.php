@@ -2,84 +2,87 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Asset;
+use App\Models\Employee;
+use App\Models\AssetChild;
+use App\Models\Storage;
 use App\Models\TrnStorage;
 use Illuminate\Http\Request;
 
 class TrnStorageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $trnStorages = TrnStorage::get();
+        $storages = Storage::get();
+        $assets = Asset::get();
+        $assetChild = AssetChild::get();
+        $employees = Employee::get();
+        return view('transaction.storage.index', compact('trnStorages', 'storages', 'assets', 'assetChild', 'employees'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'trn_no' => 'required',
+            'trn_date' => 'required',
+            'asset_id' => 'required',
+            'storage_id' => 'required',
+            'pelaksana' => 'required',
+            'penyetuju' => 'required',
+            'check' => 'required|boolean',
+        ]);
+
+        $data = $request->all();
+        $data['user_id'] = auth()->user()->id;
+
+        if ($request->check == 0) {
+            $data['asset_child_id'] = $data['asset_id'];
+            unset($data['asset_id']);
+        }
+
+        TrnStorage::create($data);
+        return redirect()->back()->with('success', 'Success!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\TrnStorage  $trnStorage
-     * @return \Illuminate\Http\Response
-     */
     public function show(TrnStorage $trnStorage)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\TrnStorage  $trnStorage
-     * @return \Illuminate\Http\Response
-     */
     public function edit(TrnStorage $trnStorage)
     {
-        //
+        $trnStorages = TrnStorage::get();
+        $employees = Employee::get();
+        return view('transaction.storage.edit', compact('trnStorage', 'trnStorages', 'employees'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TrnStorage  $trnStorage
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, TrnStorage $trnStorage)
     {
-        //
+        $request->validate([
+            'trn_date' => 'required',
+            'pelaksana' => 'required',
+            'penyetuju' => 'required'
+        ]);
+
+        $data = $request->all();
+        $data['user_id'] = auth()->user()->id;
+        $data['storage_id'] = $trnStorage->storage_id;
+        $data['asset_id'] = $trnStorage->assets()->exists() ? $trnStorage->asset_id : null;
+        $data['asset_child_id'] = $trnStorage->assetChildren()->exists() ? $trnStorage->asset_child_id : null;
+
+        $trnStorage->update($data);
+        return redirect('/trn-storage')->with('success', 'Success!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\TrnStorage  $trnStorage
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(TrnStorage $trnStorage)
     {
-        //
+        $trnStorage->delete();
+        return redirect('/trn-storage')->with('success', 'Success!');
     }
 }

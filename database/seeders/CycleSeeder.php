@@ -12,26 +12,26 @@ class CycleSeeder extends Seeder
         $data = [
             [
                 'cycle_name' => 'Daily',
-                'cycle_type' => '1',
+                'cycle_type' => 'D',
                 'qty' => '1',
                 'created_at' => now(),
             ],
             [
                 'cycle_name' => 'Weekly',
-                'cycle_type' => '1',
+                'cycle_type' => 'D',
                 'qty' => '7',
                 'created_at' => now(),
             ],
             [
                 'cycle_name' => 'Monthly',
-                'cycle_type' => '1',
-                'qty' => '30',
+                'cycle_type' => 'M',
+                'qty' => '1',
                 'created_at' => now(),
             ],
             [
                 'cycle_name' => 'Yearly',
-                'cycle_type' => '1',
-                'qty' => '365',
+                'cycle_type' => 'M',
+                'qty' => '1',
                 'created_at' => now(),
             ],
             [

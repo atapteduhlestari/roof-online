@@ -27,4 +27,14 @@ class Asset extends Model
     {
         return $this->hasMany(TrnRenewal::class, 'asset_id');
     }
+
+    public function trnStorage()
+    {
+        return $this->hasMany(TrnStorage::class, 'asset_id');
+    }
+
+    public function trnMaintanencae()
+    {
+        return $this->hasMany(TrnMaintenance::class, 'asset_id');
+    }
 }
