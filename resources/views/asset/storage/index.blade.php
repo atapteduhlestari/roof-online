@@ -30,9 +30,20 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
+                            <input type="text" class="form-control @error('no_doc') is-invalid @enderror" name="no_doc"
+                                placeholder="Document No." value="{{ old('no_doc', $no_doc) }}">
+                            @error('no_doc')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
                             <select class="form-control @error('cycle_id') is-invalid @enderror" name="cycle_id"
                                 id="cycle_id">
-                                <option value="">-Select Cycle-</option>
+                                <option value="">Select Cycle</option>
                                 @foreach ($cycles as $cycle)
                                     <option value="{{ $cycle->id }}"
                                         {{ old('cycle_id') == $cycle->id ? 'selected' : '' }}>
@@ -46,6 +57,8 @@
                             @enderror
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                         <button type="submit" class="btn btn-primary">
                             Submit
@@ -66,6 +79,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>No</th>
                                 <th>Name</th>
                                 <th>Cycle</th>
                                 <th class="text-center">Actions</th>
@@ -75,12 +89,14 @@
                             @foreach ($storages as $storage)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $storage->no_doc }}</td>
                                     <td>{{ $storage->name }}</td>
                                     <td>{{ $storage->cycle->cycle_name }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
-                                                <a href="/storage/{{ $storage->id }}/edit" class="btn btn-info">Edit</a>
+                                                <a href="/storage/{{ $storage->id }}/edit"
+                                                    class="btn btn-info">Edit</a>
                                             </div>
                                             <div>
                                                 <form action="/storage/{{ $storage->id }}" method="post" id="deleteForm">

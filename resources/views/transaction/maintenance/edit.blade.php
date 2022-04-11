@@ -14,9 +14,9 @@
                 @method('PUT')
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="trn_no">Document No.</label>
-                        <input type="text" class="form-control @error('trn_no') is-invalid @enderror" name="trn_no"
-                            placeholder="Document No." value="{{ old('trn_no', $trnMaintenance->trn_no) }}" readonly>
+                        <label for="no_doc">Document No.</label>
+                        <input type="text" class="form-control @error('no_doc') is-invalid @enderror" name="no_doc"
+                            placeholder="Document No." value="{{ old('no_doc', $trnMaintenance->no_doc) }}">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="trn_date">Date</label>
@@ -29,8 +29,8 @@
                     @if ($trnMaintenance->assets()->exists())
                         <div class="col-md-6 mb-3">
                             <label for="asset_id">Assets</label>
-                            <input type="text" class="form-control" value="{{ $trnMaintenance->assets->asset_name }}"
-                                disabled>
+                            <input type="text" class="form-control not-allowed"
+                                value="{{ $trnMaintenance->assets->asset_name }}" disabled>
                             </select>
                         </div>
                     @endif
@@ -38,15 +38,15 @@
                     @if ($trnMaintenance->assetChildren()->exists())
                         <div class="col-md-6 mb-3" id="docsCol">
                             <label for="asset_child_id">Docs</label>
-                            <input type="text" class="form-control" value="{{ $trnMaintenance->assetChildren->name }}"
-                                disabled>
+                            <input type="text" class="form-control not-allowed"
+                                value="{{ $trnMaintenance->assetChildren->name }}" disabled>
 
                         </div>
                     @endif
                     <div class="col-md-6 mb-3">
                         <label for="maintenance_id">Select Maintenance</label>
-                        <input type="text" class="form-control" value="{{ $trnMaintenance->maintenance->name }}"
-                            disabled>
+                        <input type="text" class="form-control not-allowed"
+                            value="{{ $trnMaintenance->maintenance->name }}" disabled>
                     </div>
                 </div>
                 <hr>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="pemohon">Pemohon</label>
-                        <input type="text" class="form-control" value="{{ auth()->user()->name }}" disabled>
+                        <input type="text" class="form-control not-allowed" value="{{ auth()->user()->name }}" disabled>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="penyetuju">Menyetujui</label>
@@ -83,7 +83,7 @@
                     <textarea class="form-control" id="trn_desc" name="trn_desc" cols="10"
                         rows="5">{{ old('trn_desc', $trnMaintenance->trn_desc) }}</textarea>
                 </div>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a href="/trn-maintenance" class="btn btn-secondary">Back</a>
                 <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>
             </form>
         </div>
@@ -107,7 +107,7 @@
                             @foreach ($trnMaintenances as $trn)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $trn->trn_no }}</td>
+                                    <td>{{ $trn->no_doc }}</td>
                                     <td>{{ createDate($trn->trn_date)->format('d-m-Y') }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">

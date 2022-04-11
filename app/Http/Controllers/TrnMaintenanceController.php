@@ -19,7 +19,18 @@ class TrnMaintenanceController extends Controller
         $assets = Asset::get();
         $assetChild = AssetChild::get();
         $employees = Employee::get();
-        return view('transaction.maintenance.index', compact('trnMaintenances', 'maintenances', 'assets', 'assetChild', 'employees'));
+
+        $lastNoDoc = TrnMaintenance::latest()->first();
+        $no_doc = setNoDoc($lastNoDoc->trn_no ?? "ATL-HO-SOP-GAN-01-00");
+
+        return view('transaction.maintenance.index', compact(
+            'trnMaintenances',
+            'maintenances',
+            'assets',
+            'assetChild',
+            'employees',
+            'no_doc'
+        ));
     }
 
     public function create()

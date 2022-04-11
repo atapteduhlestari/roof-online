@@ -35,10 +35,21 @@
             <div id="content">
                 @include('layouts.header')
                 @yield('container')
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
             </div>
             <!-- End of Main Content -->
 
             <!-- Footer -->
+
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">

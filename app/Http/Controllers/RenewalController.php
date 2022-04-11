@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cycle;
 use App\Models\Renewal;
 use Illuminate\Http\Request;
+use App\Rules\DocumentFormat;
 
 class RenewalController extends Controller
 {
@@ -12,7 +13,15 @@ class RenewalController extends Controller
     {
         $cycles = Cycle::get();
         $renewals = Renewal::get();
-        return view('asset.renewal.index', compact('renewals', 'cycles'));
+
+        $lastNoDoc = $renewals->last();
+        $no_doc = setNoDoc($lastNoDoc->no_doc ?? "ATL-HO-SOP-GAN-01-00");
+
+        return view('asset.renewal.index', compact(
+            'renewals',
+            'cycles',
+            'no_doc'
+        ));
     }
 
     public function create()
@@ -25,6 +34,7 @@ class RenewalController extends Controller
         $request->validate([
             'name' => 'required',
             'cycle_id' => 'required',
+            'no_doc' =>  ['nullable', 'unique:asset_renewal', new DocumentFormat],
         ]);
 
         $data = $request->all();
@@ -50,6 +60,7 @@ class RenewalController extends Controller
         $request->validate([
             'name' => 'required',
             'cycle_id' => 'required',
+            'no_doc' =>  ['nullable', "unique:asset_renewal,no_doc,{$renewal->id}", new DocumentFormat],
         ]);
 
         $data = $request->all();

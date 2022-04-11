@@ -28,13 +28,24 @@
                             @enderror
                         </div>
                     </div>
-
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="no_doc">Document No.</label>
+                            <input type="text" class="form-control @error('no_doc') is-invalid @enderror" name="no_doc"
+                                placeholder="Document No." value="{{ old('no_doc', $maintenance->no_doc) }}">
+                            @error('no_doc')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="cycle_id">Cycle</label>
                             <select class="form-control @error('cycle_id') is-invalid @enderror" name="cycle_id"
                                 id="cycle_id">
-                                <option value="">-Select Cycle-</option>
+                                <option value="">Select Cycle</option>
                                 @foreach ($cycles as $cycle)
                                     <option value="{{ $cycle->id }}"
                                         {{ old('cycle_id', $maintenance->cycle_id) == $cycle->id ? 'selected' : '' }}>
@@ -70,6 +81,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>No</th>
                                 <th>Name</th>
                                 <th class="text-center">Actions</th>
                             </tr>
@@ -78,6 +90,7 @@
                             @foreach ($maintenances as $m)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $m->no_doc }}</td>
                                     <td>{{ $m->name }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">

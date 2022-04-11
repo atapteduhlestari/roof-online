@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cycle;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
+use App\Rules\DocumentFormat;
 
 class MaintenanceController extends Controller
 {
@@ -12,7 +13,15 @@ class MaintenanceController extends Controller
     {
         $cycles = Cycle::get();
         $maintenances = Maintenance::get();
-        return view('asset.maintenance.index', compact('maintenances', 'cycles'));
+
+        $lastNoDoc = $maintenances->last();
+        $no_doc = setNoDoc($lastNoDoc->no_doc ?? "ATL-HO-SOP-GAN-01-00");
+
+        return view('asset.maintenance.index', compact(
+            'maintenances',
+            'cycles',
+            'no_doc'
+        ));
     }
 
     public function create()
@@ -24,7 +33,8 @@ class MaintenanceController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'cycle_id' => 'required'
+            'cycle_id' => 'required',
+            'no_doc' =>  ['nullable', 'unique:asset_storage', new DocumentFormat],
         ]);
 
         $data = $request->all();
@@ -48,7 +58,8 @@ class MaintenanceController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'cycle_id' => 'required'
+            'cycle_id' => 'required',
+            'no_doc' =>  ['nullable', "unique:asset_maintenance,no_doc,{$maintenance->id}", new DocumentFormat],
         ]);
 
         $data = $request->all();

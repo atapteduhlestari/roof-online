@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Asset;
 use App\Models\Renewal;
-use App\Models\AssetChild;
 use App\Models\Employee;
+use App\Models\AssetChild;
 use App\Models\TrnRenewal;
-use Illuminate\Http\Request;
+use App\Http\Requests\TrnRenewalRequest;
 
 class TrnRenewalController extends Controller
 {
@@ -18,25 +18,19 @@ class TrnRenewalController extends Controller
         $assets = Asset::get();
         $assetChild = AssetChild::get();
         $employees = Employee::get();
-        return view('transaction.renewal.index', compact('trnRenewals', 'renewals', 'assets', 'assetChild', 'employees'));
+
+        return view('transaction.renewal.index', compact(
+            'trnRenewals',
+            'renewals',
+            'assets',
+            'assetChild',
+            'employees',
+        ));
     }
 
-    public function create()
+    public function store(TrnRenewalRequest $request)
     {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'trn_no' => 'required',
-            'trn_date' => 'required',
-            'asset_id' => 'required',
-            'renewal_id' => 'required',
-            'pelaksana' => 'required',
-            'penyetuju' => 'required',
-            'check' => 'required|boolean',
-        ]);
+        // $validated = $request->validated();
 
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
@@ -46,12 +40,16 @@ class TrnRenewalController extends Controller
             unset($data['asset_id']);
         }
 
+        $lastTrn = TrnRenewal::orderBy('trn_date', 'desc')->first();
+        $data['trn_no'] = setNoTrn($data['trn_date'], $lastTrn, 'REN');
+
         TrnRenewal::create($data);
         return redirect()->back()->with('success', 'Success!');
     }
 
     public function show(TrnRenewal $trnRenewal)
     {
+        return $trnRenewal;
         return view('transaction.renewal.show', compact('trnRenewal'));
     }
 
@@ -59,18 +57,16 @@ class TrnRenewalController extends Controller
     {
         $trnRenewals = TrnRenewal::get();
         $employees = Employee::get();
-        return view('transaction.renewal.edit', compact('trnRenewal', 'trnRenewals', 'employees'));
+
+        return view('transaction.renewal.edit', compact(
+            'trnRenewal',
+            'trnRenewals',
+            'employees'
+        ));
     }
 
-    public function update(Request $request, TrnRenewal $trnRenewal)
+    public function update(TrnRenewalRequest $request, TrnRenewal $trnRenewal)
     {
-
-        $request->validate([
-            'trn_date' => 'required',
-            'pelaksana' => 'required',
-            'penyetuju' => 'required',
-        ]);
-
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
         $data['renewal_id'] = $trnRenewal->renewal_id;

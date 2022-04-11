@@ -33,7 +33,7 @@
                             @foreach ($trnMaintenances as $trn)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $trn->trn_no }}</td>
+                                    <td>{{ $trn->no_doc }}</td>
                                     <td>{{ createDate($trn->trn_date)->format('d-m-Y') }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
@@ -79,9 +79,14 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="trn_no">Document No.</label>
-                                <input type="text" class="form-control @error('trn_no') is-invalid @enderror" name="trn_no"
-                                    placeholder="Document No." value="{{ old('trn_no') }}">
+                                <label for="no_doc">Document No.</label>
+                                <input type="text" class="form-control @error('no_doc') is-invalid @enderror" name="no_doc"
+                                    placeholder="Document No." value="{{ old('no_doc', $no_doc) }}">
+                                @error('no_doc')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="trn_date">Date</label>

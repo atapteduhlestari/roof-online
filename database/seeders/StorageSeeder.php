@@ -18,16 +18,19 @@ class StorageSeeder extends Seeder
             [
                 'name' => 'SDB',
                 'cycle_id' => 1,
+                'no_doc' => 'ATL-HO-SOP-GAN-01-01',
                 'created_at' => now()
             ],
             [
                 'name' => 'Brankas',
                 'cycle_id' => 1,
+                'no_doc' => 'ATL-HO-SOP-GAN-01-02',
                 'created_at' => now()
             ],
             [
                 'name' => 'Server',
                 'cycle_id' => 1,
+                'no_doc' => 'ATL-HO-SOP-GAN-01-03',
                 'created_at' => now()
             ],
         ];

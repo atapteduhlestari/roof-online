@@ -14,48 +14,48 @@ use App\Http\Controllers\TrnStorageController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\TrnMaintenanceController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', [DashboardController::class, 'index'])->name('home');
 
-    Route::get('/', function () {
-        return view('index');
+    Route::get('/', [DashboardController::class, 'index'])->name('home');
+
+    Route::get('/home', function () {
+        return redirect('/');
     })->name('home');
 
-    Route::resource('/asset-group', AssetGroupController::class);
-    Route::resource('/asset-parent', AssetController::class)->parameters([
-        'asset-parent' => 'asset',
-    ]);
-    Route::get('/asset-parent/docs/{asset}', [AssetController::class, 'documents'])->name('assetDocuments');
-    Route::post('/asset-parent/docs/add/{asset}', [AssetController::class, 'addDocuments'])->name('assetAddDocuments');
-    Route::get('/asset-parent/docs/edit/{asset}/{id}', [AssetController::class, 'editDocuments'])->name('asseteditDocuments');
-    Route::put('/asset-parent/docs/update/{asset}/{id}', [AssetController::class, 'updateDocuments'])->name('assetupdateDocuments');
-    Route::delete('/asset-parent/docs/delete/{asset}/{id}', [AssetController::class, 'deleteDocuments'])->name('assetDeleteDocuments');
+    Route::resource('/asset-group', AssetGroupController::class)
+        ->except(['create']);
 
-    Route::resource('/maintenance', MaintenanceController::class);
-    Route::resource('/renewal', RenewalController::class);
-    Route::resource('/storage', StorageController::class);
+    Route::resource('/asset-parent', AssetController::class)
+        ->parameters([
+            'asset-parent' => 'asset',
+        ])->except(['create']);
 
-    Route::resource('/trn-renewal', TrnRenewalController::class);
+    Route::get('/asset-parent/docs/{asset}', [AssetController::class, 'documents'])
+        ->name('assetDocuments');
 
-    Route::resource('/trn-maintenance', TrnMaintenanceController::class);
+    Route::post('/asset-parent/docs/add/{asset}', [AssetController::class, 'addDocuments'])
+        ->name('assetAddDocuments');
 
-    Route::resource('/trn-storage', TrnStorageController::class);
+    Route::get('/asset-parent/docs/edit/{asset}/{id}', [AssetController::class, 'editDocuments'])
+        ->name('asseteditDocuments');
 
-    Route::resource('/cycle', CycleController::class);
+    Route::put('/asset-parent/docs/update/{asset}/{id}', [AssetController::class, 'updateDocuments'])
+        ->name('assetupdateDocuments');
 
-    Route::resource('/employee', EmployeeController::class);
+    Route::delete('/asset-parent/docs/delete/{asset}/{id}', [AssetController::class, 'deleteDocuments'])
+        ->name('assetDeleteDocuments');
+
+    Route::resource('/maintenance', MaintenanceController::class)->except(['create']);
+    Route::resource('/renewal', RenewalController::class)->except(['create']);
+    Route::resource('/storage', StorageController::class)->except(['create']);
+
+    Route::resource('/trn-renewal', TrnRenewalController::class)->except(['create']);
+    Route::resource('/trn-maintenance', TrnMaintenanceController::class)->except(['create']);
+    Route::resource('/trn-storage', TrnStorageController::class)->except(['create']);
+
+    Route::resource('/cycle', CycleController::class)->except(['create']);
+    Route::resource('/employee', EmployeeController::class)->except(['create']);
 });
 
 // Route::get('/get-api', function () {

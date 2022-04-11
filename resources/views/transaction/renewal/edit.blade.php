@@ -12,12 +12,18 @@
             <form action="/trn-renewal/{{ $trnRenewal->id }}" method="POST" id="formTrnRenewal">
                 @csrf
                 @method('PUT')
+                <input type="hidden" name="trn_id" value="{{ $trnRenewal->id }}" readonly>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="trn_no">Document No.</label>
-                        <input type="text" class="form-control @error('trn_no') is-invalid @enderror" name="trn_no"
-                            placeholder="Document No." value="{{ old('trn_no', $trnRenewal->trn_no) }}" readonly>
+                        <label for="trn_no">No. Document</label>
+                        <input type="text" class="form-control not-allowed" value="{{ $trnRenewal->trn_no }}" disabled>
                     </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="trn_no">No ISO</label>
+                        <input type="text" class="form-control not-allowed" value="{{ $trnRenewal->renewal->no_doc }}"
+                            disabled>
+                    </div>
+
                     <div class="col-md-6 mb-3">
                         <label for="trn_date">Date</label>
                         <input type="date" class="form-control @error('trn_date') is-invalid @enderror" name="trn_date"
@@ -29,8 +35,8 @@
                     @if ($trnRenewal->assets()->exists())
                         <div class="col-md-6 mb-3">
                             <label for="asset_id">Assets</label>
-                            <input type="text" class="form-control" value="{{ $trnRenewal->assets->asset_name }}"
-                                disabled>
+                            <input type="text" class="form-control not-allowed"
+                                value="{{ $trnRenewal->assets->asset_name }}" disabled>
                             </select>
                         </div>
                     @endif
@@ -38,14 +44,15 @@
                     @if ($trnRenewal->assetChildren()->exists())
                         <div class="col-md-6 mb-3" id="docsCol">
                             <label for="asset_child_id">Docs</label>
-                            <input type="text" class="form-control" value="{{ $trnRenewal->assetChildren->name }}"
-                                disabled>
+                            <input type="text" class="form-control not-allowed"
+                                value="{{ $trnRenewal->assetChildren->name }}" disabled>
 
                         </div>
                     @endif
                     <div class="col-md-6 mb-3">
                         <label for="renewal_id">Select Renewal</label>
-                        <input type="text" class="form-control" value="{{ $trnRenewal->renewal->name }}" disabled>
+                        <input type="text" class="form-control not-allowed" value="{{ $trnRenewal->renewal->name }}"
+                            disabled>
                     </div>
                 </div>
                 <hr>
@@ -63,7 +70,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="pemohon">Pemohon</label>
-                        <input type="text" class="form-control" value="{{ auth()->user()->name }}" disabled>
+                        <input type="text" class="form-control not-allowed" value="{{ auth()->user()->name }}" disabled>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="penyetuju">Menyetujui</label>
@@ -82,7 +89,7 @@
                     <textarea class="form-control" id="trn_desc" name="trn_desc" cols="10"
                         rows="5">{{ old('trn_desc', $trnRenewal->trn_desc) }}</textarea>
                 </div>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a href="/trn-renewal" class="btn btn-secondary">Back</a>
                 <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>
             </form>
         </div>
@@ -111,16 +118,22 @@
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
+                                                <a href="/trn-renewal/{{ $trn->id }}" class="btn btn-sm btn-light">
+                                                    <i class="fas fa-search-plus"></i>
+                                                </a>
+                                            </div>
+                                            <div>
                                                 <a href="/trn-renewal/{{ $trn->id }}/edit"
-                                                    class="btn btn-info">Edit</a>
+                                                    class="btn btn-sm btn-info">Edit</a>
                                             </div>
                                             <div>
                                                 <form action="/trn-renewal/{{ $trn->id }}" method="post"
                                                     id="deleteForm">
                                                     @csrf
                                                     @method('delete')
-                                                    <button title="Hapus Data" class="btn btn-danger" onclick="return false"
-                                                        id="deleteButton" data-id="{{ $trn->id }}">
+                                                    <button title="Hapus Data" class="btn btn-sm btn-danger"
+                                                        onclick="return false" id="deleteButton"
+                                                        data-id="{{ $trn->id }}">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
                                                 </form>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Cycle;
 use App\Models\Storage;
 use Illuminate\Http\Request;
+use App\Rules\DocumentFormat;
+use Illuminate\Validation\Rule;
 
 class StorageController extends Controller
 {
@@ -12,7 +14,14 @@ class StorageController extends Controller
     {
         $cycles = Cycle::get();
         $storages = Storage::get();
-        return view('asset.storage.index', compact('storages', 'cycles'));
+
+        $lastNoDoc = $storages->last();
+        $no_doc = setNoDoc($lastNoDoc->no_doc ?? "ATL-HO-SOP-GAN-01-00");
+        return view('asset.storage.index', compact(
+            'storages',
+            'cycles',
+            'no_doc'
+        ));
     }
 
     public function create()
@@ -24,6 +33,7 @@ class StorageController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'no_doc' =>  ['nullable', 'unique:asset_storage', new DocumentFormat],
         ]);
 
         $data = $request->all();
@@ -48,6 +58,7 @@ class StorageController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'no_doc' =>  ['nullable', "unique:asset_storage,no_doc,{$storage->id}", new DocumentFormat],
         ]);
 
         $data = $request->all();

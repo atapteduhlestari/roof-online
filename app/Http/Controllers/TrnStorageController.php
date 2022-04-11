@@ -18,7 +18,18 @@ class TrnStorageController extends Controller
         $assets = Asset::get();
         $assetChild = AssetChild::get();
         $employees = Employee::get();
-        return view('transaction.storage.index', compact('trnStorages', 'storages', 'assets', 'assetChild', 'employees'));
+
+        $lastNoDoc = TrnStorage::latest()->first();
+        $no_doc = setNoDoc($lastNoDoc->trn_no ?? "ATL-HO-SOP-GAN-01-00");
+
+        return view('transaction.storage.index', compact(
+            'trnStorages',
+            'storages',
+            'assets',
+            'assetChild',
+            'employees',
+            'no_doc'
+        ));
     }
 
     public function create()
@@ -29,7 +40,6 @@ class TrnStorageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'trn_no' => 'required',
             'trn_date' => 'required',
             'asset_id' => 'required',
             'storage_id' => 'required',
@@ -38,6 +48,7 @@ class TrnStorageController extends Controller
             'check' => 'required|boolean',
         ]);
 
+
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
 
@@ -45,6 +56,9 @@ class TrnStorageController extends Controller
             $data['asset_child_id'] = $data['asset_id'];
             unset($data['asset_id']);
         }
+
+        $lastTrn = TrnStorage::orderBy('trn_date', 'desc')->first();
+        $data['trn_no'] = setNoTrn($data['trn_date'], $lastTrn, 'STO');
 
         TrnStorage::create($data);
         return redirect()->back()->with('success', 'Success!');

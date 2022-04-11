@@ -12,12 +12,18 @@
             <form action="/trn-storage/{{ $trnStorage->id }}" method="POST" id="formTrnstorage">
                 @csrf
                 @method('PUT')
+                <input type="hidden" name="trn_id" value="{{ $trnStorage->id }}" readonly>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="trn_no">Document No.</label>
-                        <input type="text" class="form-control @error('trn_no') is-invalid @enderror" name="trn_no"
-                            placeholder="Document No." value="{{ old('trn_no', $trnStorage->trn_no) }}" readonly>
+                        <label for="trn_no">No. Document</label>
+                        <input type="text" class="form-control not-allowed" value="{{ $trnStorage->trn_no }}" disabled>
                     </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="trn_no">No ISO</label>
+                        <input type="text" class="form-control not-allowed" value="{{ $trnStorage->storage->no_doc }}"
+                            disabled>
+                    </div>
+
                     <div class="col-md-6 mb-3">
                         <label for="trn_date">Date</label>
                         <input type="date" class="form-control @error('trn_date') is-invalid @enderror" name="trn_date"
@@ -29,8 +35,8 @@
                     @if ($trnStorage->assets()->exists())
                         <div class="col-md-6 mb-3">
                             <label for="asset_id">Assets</label>
-                            <input type="text" class="form-control" value="{{ $trnStorage->assets->asset_name }}"
-                                disabled>
+                            <input type="text" class="form-control not-allowed"
+                                value="{{ $trnStorage->assets->asset_name }}" disabled>
                             </select>
                         </div>
                     @endif
@@ -38,14 +44,15 @@
                     @if ($trnStorage->assetChildren()->exists())
                         <div class="col-md-6 mb-3" id="docsCol">
                             <label for="asset_child_id">Docs</label>
-                            <input type="text" class="form-control" value="{{ $trnStorage->assetChildren->name }}"
-                                disabled>
+                            <input type="text" class="form-control not-allowed"
+                                value="{{ $trnStorage->assetChildren->name }}" disabled>
 
                         </div>
                     @endif
                     <div class="col-md-6 mb-3">
                         <label for="storage_id">Select storage</label>
-                        <input type="text" class="form-control" value="{{ $trnStorage->storage->name }}" disabled>
+                        <input type="text" class="form-control not-allowed" value="{{ $trnStorage->storage->name }}"
+                            disabled>
                     </div>
                 </div>
                 <hr>
@@ -64,7 +71,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="menyetujui">Pemohon</label>
-                        <input type="text" class="form-control" value="{{ auth()->user()->name }}" disabled>
+                        <input type="text" class="form-control not-allowed" value="{{ auth()->user()->name }}" disabled>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="penyetuju">Menyetujui</label>
@@ -83,7 +90,7 @@
                     <textarea class="form-control" id="trn_desc" name="trn_desc" cols="10"
                         rows="5">{{ old('trn_desc', $trnStorage->trn_desc) }}</textarea>
                 </div>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a href="/trn-storage" class="btn btn-secondary">Back</a>
                 <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>
             </form>
         </div>
@@ -112,16 +119,22 @@
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
+                                                <a href="/trn-storage/{{ $trn->id }}" class="btn btn-sm btn-light">
+                                                    <i class="fas fa-search-plus"></i>
+                                                </a>
+                                            </div>
+                                            <div>
                                                 <a href="/trn-storage/{{ $trn->id }}/edit"
-                                                    class="btn btn-info">Edit</a>
+                                                    class="btn btn-sm btn-info">Edit</a>
                                             </div>
                                             <div>
                                                 <form action="/trn-storage/{{ $trn->id }}" method="post"
                                                     id="deleteForm">
                                                     @csrf
                                                     @method('delete')
-                                                    <button title="Hapus Data" class="btn btn-danger" onclick="return false"
-                                                        id="deleteButton" data-id="{{ $trn->id }}">
+                                                    <button title="Hapus Data" class="btn btn-sm btn-danger"
+                                                        onclick="return false" id="deleteButton"
+                                                        data-id="{{ $trn->id }}">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
                                                 </form>

@@ -26,7 +26,8 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item {{ request()->is('asset-group*') || request()->is('asset-parent*') ? 'active' : '' }}">
+            <li
+                class="nav-item tes {{ request()->is('asset-group*') || request()->is('asset-parent*') ? 'active' : '' }}">
                 <a class="nav-link {{ request()->is('asset-group*') || request()->is('asset-parent*') ? '' : 'collapsed' }}"
                     href="#" data-toggle="collapse" data-target="#collapseAsset" aria-expanded="true"
                     aria-controls="collapseAsset">
