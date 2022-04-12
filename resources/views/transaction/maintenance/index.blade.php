@@ -33,7 +33,7 @@
                             @foreach ($trnMaintenances as $trn)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $trn->no_doc }}</td>
+                                    <td>{{ $trn->trn_no }}</td>
                                     <td>{{ createDate($trn->trn_date)->format('d-m-Y') }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
@@ -79,24 +79,6 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="no_doc">Document No.</label>
-                                <input type="text" class="form-control @error('no_doc') is-invalid @enderror" name="no_doc"
-                                    placeholder="Document No." value="{{ old('no_doc', $no_doc) }}">
-                                @error('no_doc')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="trn_date">Date</label>
-                                <input type="date" class="form-control @error('trn_date') is-invalid @enderror"
-                                    name="trn_date" value="{{ old('trn_date') }}">
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
                                 <label for="asset_id">Assets</label>
                                 <select class="form-control @error('asset_id') is-invalid @enderror" id="asset_id"
                                     name="asset_id">
@@ -108,17 +90,19 @@
                                     @endforeach
                                 </select>
                             </div>
+
                             <div class="col-md-6 mb-3" id="docsCol">
                                 <label for="asset_child_id">Docs</label>
-                                <select name="asset_child_id" id="mySelect" class="form-control" placeholder="Select Docs"
-                                    disabled>
+                                <select name="asset_child_id" id="assetChildren" class="form-control"
+                                    placeholder="Select Docs" disabled>
                                     <option value="">Select Docs</option>
                                 </select>
                             </div>
+
                             <div class="col-md-6 mb-3">
                                 <label for="maintenance_id">Select Maintenance</label>
-                                <select class="form-control @error('maintenance_id') is-invalid @enderror" id="select-child"
-                                    name="maintenance_id">
+                                <select class="form-control @error('maintenance_id') is-invalid @enderror"
+                                    id="maintenance_id" name="maintenance_id">
                                     <option value="">Select Maintenance</option>
                                     @foreach ($maintenances as $maintenance)
                                         <option value="{{ $maintenance->id }}"
@@ -127,12 +111,19 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="trn_date">Date</label>
+                                <input type="date" class="form-control @error('trn_date') is-invalid @enderror"
+                                    name="trn_date" value="{{ old('trn_date') }}">
+                            </div>
                         </div>
                         <hr>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="pelaksana">Pelaksana</label>
-                                <select class="form-control @error('pelaksana') is-invalid @enderror" name="pelaksana">
+                                <select class="form-control @error('pelaksana') is-invalid @enderror" name="pelaksana"
+                                    id="pelaksana">
                                     <option value="">Pelaksana</option>
                                     @foreach ($employees as $pelaksana)
                                         <option value="{{ $pelaksana->name }}"
@@ -147,7 +138,8 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="penyetuju">Menyetujui</label>
-                                <select class="form-control @error('penyetuju') is-invalid @enderror" name="penyetuju">
+                                <select class="form-control @error('penyetuju') is-invalid @enderror" name="penyetuju"
+                                    id="penyetuju">
                                     <option value="">Select Employees</option>
                                     @foreach ($employees as $penyetuju)
                                         <option value="{{ $penyetuju->name }}"
@@ -180,13 +172,28 @@
             $('#dataTable').DataTable();
         });
 
-        let mySelect = $('#mySelect'),
+        let assetChildren = $('#assetChildren'),
             appendDocs = $('#docsCol'),
             checkDocs = $('#check'),
             form = $('#formTrnmaintenance'),
             btnSubmit = $('#btnSubmit');
 
         let $parentSelect = $("#asset_id").selectize({
+            create: false,
+            sortField: "text",
+        });
+
+        $("#asset_id").selectize({
+            create: false,
+            sortField: "text",
+        });
+
+        $("#pelaksana").selectize({
+            create: false,
+            sortField: "text",
+        });
+
+        $("#penyetuju").selectize({
             create: false,
             sortField: "text",
         });
@@ -200,15 +207,15 @@
             let id = $(this).val();
             if (id) {
                 await $.getJSON(`/api/asset-parent/get-data/${id}`, function(res) {
-                    mySelect.prop('disabled', false);
-                    mySelect.empty().append($('<option>').text('Select Docs').val(''));
+                    assetChildren.prop('disabled', false);
+                    assetChildren.empty().append($('<option>').text('Select Docs').val(''));
 
                     $.each(res, function(index, item) {
-                        mySelect.append($('<option>').text(item.name).val(item.id));
+                        assetChildren.append($('<option>').text(item.name).val(item.id));
                     });
                 });
 
-                $(mySelect).change(function() {
+                $(assetChildren).change(function() {
                     if ($(this).val() === "")
                         checkDocs.val(1)
                     else
@@ -217,8 +224,8 @@
 
             } else {
                 checkDocs.val(1)
-                mySelect.prop('disabled', true);
-                mySelect.empty().append($('<option>').text('Select Docs').val(''));
+                assetChildren.prop('disabled', true);
+                assetChildren.empty().append($('<option>').text('Select Docs').val(''));
             }
         });
 

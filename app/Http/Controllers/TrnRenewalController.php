@@ -7,17 +7,18 @@ use App\Models\Renewal;
 use App\Models\Employee;
 use App\Models\AssetChild;
 use App\Models\TrnRenewal;
+use Illuminate\Http\Request;
 use App\Http\Requests\TrnRenewalRequest;
 
 class TrnRenewalController extends Controller
 {
     public function index()
     {
-        $trnRenewals = TrnRenewal::get();
+        $trnRenewals = TrnRenewal::orderBy('trn_date', 'desc')->get();
         $renewals = Renewal::get();
-        $assets = Asset::get();
-        $assetChild = AssetChild::get();
-        $employees = Employee::get();
+        $assets = Asset::orderBy('asset_name', 'asc')->get();
+        $assetChild = AssetChild::orderBy('name', 'asc')->get();
+        $employees = Employee::orderBy('name', 'asc')->get();
 
         return view('transaction.renewal.index', compact(
             'trnRenewals',
@@ -40,8 +41,12 @@ class TrnRenewalController extends Controller
             unset($data['asset_id']);
         }
 
-        $lastTrn = TrnRenewal::orderBy('trn_date', 'desc')->first();
-        $data['trn_no'] = setNoTrn($data['trn_date'], $lastTrn, 'REN');
+        $date = createDate($data['trn_date']);
+        $count = TrnRenewal::whereMonth('trn_date', $date->month)
+            ->whereYear('trn_date', $date->year)
+            ->count();
+
+        $data['trn_no'] = setNoTrn($data['trn_date'], $count ?? null, 'REN');
 
         TrnRenewal::create($data);
         return redirect()->back()->with('success', 'Success!');
@@ -56,7 +61,7 @@ class TrnRenewalController extends Controller
     public function edit(TrnRenewal $trnRenewal)
     {
         $trnRenewals = TrnRenewal::get();
-        $employees = Employee::get();
+        $employees = Employee::orderBy('name', 'asc')->get();
 
         return view('transaction.renewal.edit', compact(
             'trnRenewal',

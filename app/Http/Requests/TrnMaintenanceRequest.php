@@ -2,28 +2,36 @@
 
 namespace App\Http\Requests;
 
-// use App\Rules\DocumentFormat;
 use Illuminate\Foundation\Http\FormRequest;
-// use Illuminate\Validation\Rule;
 
-class TrnRenewalRequest extends FormRequest
+class TrnMaintenanceRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
     public function authorize()
     {
         return true;
     }
 
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
     public function rules()
     {
         $validate = [
             'asset_id' => 'required',
-            'renewal_id' => 'required',
+            'maintenance_id' => 'required',
             'check' => 'required|boolean',
         ];
 
-        if (TrnRenewalRequest::isMethod('PUT')) {
+        if (TrnMaintenanceRequest::isMethod('PUT')) {
             $validate['asset_id'] = '';
-            $validate['renewal_id'] = '';
+            $validate['maintenance_id'] = '';
             $validate['check'] = '';
         }
 
@@ -35,7 +43,7 @@ class TrnRenewalRequest extends FormRequest
             // ],
             'trn_date' => 'required|date',
             'asset_id' => $validate['asset_id'],
-            'renewal_id' =>  $validate['renewal_id'],
+            'maintenance_id' =>  $validate['maintenance_id'],
             'pelaksana' => 'required',
             'penyetuju' => 'required',
             'check' =>  $validate['check'],

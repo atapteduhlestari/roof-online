@@ -8,6 +8,7 @@ use App\Models\AssetChild;
 use App\Models\Storage;
 use App\Models\TrnStorage;
 use Illuminate\Http\Request;
+use App\Http\Requests\TrnStorageRequest;
 
 class TrnStorageController extends Controller
 {
@@ -15,20 +16,16 @@ class TrnStorageController extends Controller
     {
         $trnStorages = TrnStorage::get();
         $storages = Storage::get();
-        $assets = Asset::get();
-        $assetChild = AssetChild::get();
-        $employees = Employee::get();
-
-        $lastNoDoc = TrnStorage::latest()->first();
-        $no_doc = setNoDoc($lastNoDoc->trn_no ?? "ATL-HO-SOP-GAN-01-00");
+        $assets = Asset::orderBy('asset_name', 'asc')->get();
+        $assetChild = AssetChild::orderBy('name', 'asc')->get();
+        $employees = Employee::orderBy('name', 'asc')->get();
 
         return view('transaction.storage.index', compact(
             'trnStorages',
             'storages',
             'assets',
             'assetChild',
-            'employees',
-            'no_doc'
+            'employees'
         ));
     }
 
@@ -37,18 +34,8 @@ class TrnStorageController extends Controller
         //
     }
 
-    public function store(Request $request)
+    public function store(TrnStorageRequest $request)
     {
-        $request->validate([
-            'trn_date' => 'required',
-            'asset_id' => 'required',
-            'storage_id' => 'required',
-            'pelaksana' => 'required',
-            'penyetuju' => 'required',
-            'check' => 'required|boolean',
-        ]);
-
-
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
 
@@ -57,8 +44,12 @@ class TrnStorageController extends Controller
             unset($data['asset_id']);
         }
 
-        $lastTrn = TrnStorage::orderBy('trn_date', 'desc')->first();
-        $data['trn_no'] = setNoTrn($data['trn_date'], $lastTrn, 'STO');
+        $date = createDate($data['trn_date']);
+        $count = TrnStorage::whereMonth('trn_date', $date->month)
+            ->whereYear('trn_date', $date->year)
+            ->count();
+
+        $data['trn_no'] = setNoTrn($data['trn_date'], $count ?? null, 'STO');
 
         TrnStorage::create($data);
         return redirect()->back()->with('success', 'Success!');
@@ -72,18 +63,17 @@ class TrnStorageController extends Controller
     public function edit(TrnStorage $trnStorage)
     {
         $trnStorages = TrnStorage::get();
-        $employees = Employee::get();
-        return view('transaction.storage.edit', compact('trnStorage', 'trnStorages', 'employees'));
+        $employees = Employee::orderBy('name', 'asc')->get();
+
+        return view('transaction.storage.edit', compact(
+            'trnStorage',
+            'trnStorages',
+            'employees'
+        ));
     }
 
-    public function update(Request $request, TrnStorage $trnStorage)
+    public function update(TrnStorageRequest $request, TrnStorage $trnStorage)
     {
-        $request->validate([
-            'trn_date' => 'required',
-            'pelaksana' => 'required',
-            'penyetuju' => 'required'
-        ]);
-
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
         $data['storage_id'] = $trnStorage->storage_id;

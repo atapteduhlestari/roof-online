@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TrnMaintenance;
 use App\Models\Asset;
 use App\Models\Employee;
 use App\Models\AssetChild;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
-use App\Models\TrnMaintenance;
+use App\Http\Requests\TrnMaintenanceRequest;
 
 class TrnMaintenanceController extends Controller
 {
@@ -16,20 +17,16 @@ class TrnMaintenanceController extends Controller
     {
         $trnMaintenances = TrnMaintenance::get();
         $maintenances = Maintenance::get();
-        $assets = Asset::get();
-        $assetChild = AssetChild::get();
-        $employees = Employee::get();
-
-        $lastNoDoc = TrnMaintenance::latest()->first();
-        $no_doc = setNoDoc($lastNoDoc->trn_no ?? "ATL-HO-SOP-GAN-01-00");
+        $assets = Asset::orderBy('asset_name', 'asc')->get();
+        $assetChild = AssetChild::orderBy('name', 'asc')->get();
+        $employees = Employee::orderBy('name', 'asc')->get();
 
         return view('transaction.maintenance.index', compact(
             'trnMaintenances',
             'maintenances',
             'assets',
             'assetChild',
-            'employees',
-            'no_doc'
+            'employees'
         ));
     }
 
@@ -38,18 +35,8 @@ class TrnMaintenanceController extends Controller
         //
     }
 
-    public function store(Request $request)
+    public function store(TrnMaintenanceRequest $request)
     {
-        $request->validate([
-            'trn_no' => 'required',
-            'trn_date' => 'required',
-            'asset_id' => 'required',
-            'maintenance_id' => 'required',
-            'pelaksana' => 'required',
-            'penyetuju' => 'required',
-            'check' => 'required|boolean',
-        ]);
-
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
 
@@ -58,6 +45,12 @@ class TrnMaintenanceController extends Controller
             unset($data['asset_id']);
         }
 
+        $date = createDate($data['trn_date']);
+        $count = TrnMaintenance::whereMonth('trn_date', $date->month)
+            ->whereYear('trn_date', $date->year)
+            ->count();
+
+        $data['trn_no'] = setNoTrn($data['trn_date'], $count ?? null, 'MAI');
         TrnMaintenance::create($data);
         return redirect()->back()->with('success', 'Success!');
     }
@@ -70,18 +63,17 @@ class TrnMaintenanceController extends Controller
     public function edit(TrnMaintenance $trnMaintenance)
     {
         $trnMaintenances = TrnMaintenance::get();
-        $employees = Employee::get();
-        return view('transaction.maintenance.edit', compact('trnMaintenance', 'trnMaintenances', 'employees'));
+        $employees = Employee::orderBy('name', 'asc')->get();
+
+        return view('transaction.maintenance.edit', compact(
+            'trnMaintenance',
+            'trnMaintenances',
+            'employees'
+        ));
     }
 
-    public function update(Request $request, TrnMaintenance $trnMaintenance)
+    public function update(TrnMaintenanceRequest $request, TrnMaintenance $trnMaintenance)
     {
-        $request->validate([
-            'trn_date' => 'required',
-            'pelaksana' => 'required',
-            'penyetuju' => 'required',
-        ]);
-
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
         $data['maintenance_id'] = $trnMaintenance->maintenance_id;

@@ -26,6 +26,7 @@
             timer: 1500,
             showConfirmButton: false,
             timerProgressBar: true,
+            allowOutsideClick: true,
         });
     </script>
 @endif
@@ -42,7 +43,7 @@
             didOpen: (swal) => {
                 swal.addEventListener('mouseenter', Swal.stopTimer)
                 swal.addEventListener('mouseleave', Swal.resumeTimer)
-            }
+            },
         });
     </script>
 @endif
@@ -56,6 +57,7 @@
             timer: 1500,
             showConfirmButton: false,
             timerProgressBar: true,
+            allowOutsideClick: true,
         });
     </script>
 @endif

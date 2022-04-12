@@ -40,16 +40,37 @@ function setNoDoc($no_doc)
     return $no_doc;
 }
 
-function setNoTrn($date, $no_doc = null, $code)
+function setNoTrn($date, $count, $code)
 {
-    $name = "ATL-{$code}";
-    $date = createDate($date)->format('dmy');
+    $name = "ATL-GA-{$code}";
+    $newDate = createDate($date)->format('my');
 
-    $arrNoDoc = explode('/',  $no_doc);
-    $count = (int) end($arrNoDoc) + 1;
+    if (!$count)
+        return noDocIsEmpty($name, $newDate);
+
+    return getNoDoc($count += 1, $name, $newDate);
+}
+
+function getNoDoc($count, $name, $newDate)
+{
     $no = sprintf('%02d', $count);
+    $array = array($name, $newDate, $no);
+    $no_doc = implode('-', $array);
 
-    $array = array($name, $date, $no);
+    return $no_doc;
+}
+
+function checkLastTrn($date, $latestDate)
+{
+    if ($date != $latestDate)
+        return false;
+
+    return true;
+}
+
+function noDocIsEmpty($name, $date)
+{
+    $array = array($name, $date, '01');
     $no_doc = implode('-', $array);
 
     return $no_doc;
