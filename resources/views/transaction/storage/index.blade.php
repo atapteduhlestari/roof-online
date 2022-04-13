@@ -1,7 +1,11 @@
-@extends('layouts.master')@push('styles')
+@extends('layouts.master')
+@push('styles')
     <link href="/assets/template/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="/assets/template/vendor/selectize/selectize.css" rel="stylesheet">
-    @endpush@section('title', 'GA | Storage Transaction')@section('container') <div class="container-fluid">
+@endpush
+@section('title', 'GA | Storage Transaction')
+@section('container')
+    <div class="container-fluid">
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Transaction | Storage</h1>
         <div class="d-flex">
@@ -148,89 +152,109 @@
                                     @endforeach
                                 </select> </div>
                         </div>
-                        <div class="form-group mb-3"> <label for="trn_desc">Description</label>
+                        <div class="form-group mb-3">
+                            <label for="trn_desc">Description</label>
                             <textarea class="form-control" id="trn_desc" name="trn_desc" cols="10" rows="5">{{ old('trn_desc') }}</textarea>
-                        </div> <input type="hidden" value="1" name="check" id="check"> <button type="button"
-                            class="btn btn-secondary" data-dismiss="modal">Close</button> <button type="button"
-                            id="btnSubmit" class="btn btn-primary">Submit</button>
+                        </div>
+                        <input type="hidden" value="1" name="check" id="check">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
             </div>
         </div>
-</div>@endsection@push('scripts')
-<!-- Page level plugins -->
-<script src="/assets/template/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/assets/template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script src="/assets/template/vendor/selectize/selectize.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#dataTable').DataTable();
-    });
-    let assetChildren = $('#assetChildren'),
-        appendDocs = $('#docsCol'),
-        checkDocs = $('#check'),
-        form = $('#formTrnStorage'),
-        btnSubmit = $('#btnSubmit');
-    $("#asset_id").selectize({
-        create: false,
-        sortField: "text",
-    });
-    $("#pelaksana").selectize({
-        create: false,
-        sortField: "text",
-    });
-    $("#penyetuju").selectize({
-        create: false,
-        sortField: "text",
-    });
-    $("#storage_id").selectize({
-        create: false,
-        sortField: "text",
-    });
-    $(document).on('change', '#asset_id', async function() {
-        let id = $(this).val();
-        if (id) {
-            await $.getJSON(`/api/asset-parent/get-data/${id}`, function(res) {
-                assetChildren.prop('disabled', false);
-                assetChildren.empty().append($('<option>').text('Select Docs').val(''));
-                $.each(res, function(index, item) {
-                    assetChildren.append($('<option>').text(item.name).val(item.id));
-                });
-            });
-            $(assetChildren).change(function() {
-                if ($(this).val() === "") checkDocs.val(1)
-                else checkDocs.val(0)
-            })
-        } else {
-            checkDocs.val(1) assetChildren.prop('disabled', true);
-            assetChildren.empty().append($('<option>').text('Select Docs').val(''));
-        }
-    });
-    btnSubmit.click(function() {
-        $(this).prop('disabled', true);
-        form.submit();
-    });
-    let formDelete = $('#deleteForm');
-    $(document).on('click', '#deleteButton', function(e) {
-        e.preventDefault();
-        let id = $(this).data('id');
-        formDelete.attr('action', `/trn-storage/${id}`) Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                formDelete.submit();
-            }
-        })
-    });
-</script>
-@if ($errors->any())
+    </div>
+@endsection
+@push('scripts')
+    <!-- Page level plugins -->
+    <script src="/assets/template/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="/assets/template/vendor/selectize/selectize.js"></script>
     <script>
-        $('#addNewRecord').modal('show');
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        });
+
+        let assetChildren = $('#assetChildren'),
+            appendDocs = $('#docsCol'),
+            checkDocs = $('#check'),
+            form = $('#formTrnStorage'),
+            btnSubmit = $('#btnSubmit');
+
+        $("#asset_id").selectize({
+            create: false,
+            sortField: "text",
+        });
+
+        $("#pelaksana").selectize({
+            create: false,
+            sortField: "text",
+        });
+
+        $("#penyetuju").selectize({
+            create: false,
+            sortField: "text",
+        });
+
+        $("#storage_id").selectize({
+            create: false,
+            sortField: "text",
+        });
+
+        $(document).on('change', '#asset_id', async function() {
+            let id = $(this).val();
+            if (id) {
+                await $.getJSON(`/api/asset-parent/get-data/${id}`, function(res) {
+                    assetChildren.prop('disabled', false);
+                    assetChildren.empty().append($('<option>').text('Select Docs').val(''));
+                    $.each(res, function(index, item) {
+                        assetChildren.append($('<option>').text(item.name).val(item.id));
+                    });
+                });
+
+                $(assetChildren).change(function() {
+                    if ($(this).val() === "")
+                        checkDocs.val(1);
+                    else
+                        checkDocs.val(0);
+                });
+            } else {
+                checkDocs.val(1);
+                assetChildren.prop('disabled', true);
+                assetChildren.empty().append($('<option>').text('Select Docs').val(''));
+            }
+        });
+
+        btnSubmit.click(function() {
+            $(this).prop('disabled', true);
+            form.submit();
+        });
+
+        let formDelete = $('#deleteForm');
+
+        $(document).on('click', '#deleteButton', function(e) {
+            e.preventDefault();
+            let id = $(this).data('id');
+            formDelete.attr('action', `/trn-storage/${id}`);
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    formDelete.submit();
+                }
+            })
+        });
     </script>
-@endif@endpush
+    @if ($errors->any())
+        <script>
+            $('#addNewRecord').modal('show');
+        </script>
+    @endif
+@endpush
