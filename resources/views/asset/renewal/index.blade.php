@@ -94,15 +94,16 @@
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
-                                                <a href="/renewal/{{ $renewal->id }}/edit"
-                                                    class="btn btn-info">Edit</a>
+                                                <a title="Edit Data" href="/renewal/{{ $renewal->id }}/edit"
+                                                    class="btn btn-outline-dark text-xs">Edit</a>
                                             </div>
                                             <div>
                                                 <form action="/renewal/{{ $renewal->id }}" method="post" id="deleteForm">
                                                     @csrf
                                                     @method('delete')
-                                                    <button title="Hapus Data" class="btn btn-danger" onclick="return false"
-                                                        id="deleteButton" data-id="{{ $renewal->id }}">
+                                                    <button title="Delete Data" class="btn btn-outline-danger text-xs"
+                                                        onclick="return false" id="deleteButton"
+                                                        data-id="{{ $renewal->id }}">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
                                                 </form>

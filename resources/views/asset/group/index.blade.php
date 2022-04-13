@@ -60,16 +60,17 @@
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
-                                                <a href="/asset-group/{{ $group->id }}/edit"
-                                                    class="btn btn-info">Edit</a>
+                                                <a title="Edit Data" href="/asset-group/{{ $group->id }}/edit"
+                                                    class="btn btn-outline-dark text-xs">Edit</a>
                                             </div>
                                             <div>
                                                 <form action="/asset-group/{{ $group->id }}" method="post"
                                                     id="deleteForm">
                                                     @csrf
                                                     @method('delete')
-                                                    <button title="Hapus Data" class="btn btn-danger" onclick="return false"
-                                                        id="deleteButton" data-id="{{ $group->id }}">
+                                                    <button title="Delete Data" class="btn btn-outline-danger text-xs"
+                                                        onclick="return false" id="deleteButton"
+                                                        data-id="{{ $group->id }}">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
                                                 </form>

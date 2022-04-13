@@ -16,7 +16,7 @@
     <!-- Custom fonts for this template-->
     <link href="/assets/template/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template-->
-    <link href="/assets/template/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/assets/template/css/sb-admin-2.css" rel="stylesheet">
     <link href="/assets/app/css/styles.css" rel="stylesheet">
 
     @stack('styles')

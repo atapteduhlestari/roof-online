@@ -51,7 +51,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/storage', StorageController::class)->except(['create']);
 
     Route::resource('/trn-renewal', TrnRenewalController::class)->except(['create']);
+    Route::post('/trn-renewal/search', [TrnRenewalController::class, 'search']);
+
     Route::resource('/trn-maintenance', TrnMaintenanceController::class)->except(['create']);
+
     Route::resource('/trn-storage', TrnStorageController::class)->except(['create']);
 
     Route::resource('/cycle', CycleController::class)->except(['create']);

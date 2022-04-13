@@ -7,8 +7,17 @@
                     General Affair
                 </div>
             </a>
+
+            <!-- Sidebar Message -->
+            <div class="d-none d-lg-flex mx-auto my-3">
+                <img height="100" class="mb-2" src="/assets/template/img/undraw_team_collaboration_re_ow29.svg"
+                    alt="...">
+            </div>
+            {{-- <div class="sidebar-card d-none d-lg-flex">
+                <img height="50" class="mb-2" src="/assets/app/images/logo/logo.png" alt="...">
+            </div> --}}
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+            <hr class="sidebar-divider">
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item {{ request()->is('/') || request()->is('/home') ? 'active' : '' }}">
@@ -17,12 +26,9 @@
                     <span>Dashboard</span></a>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Functional
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -90,22 +96,10 @@
                 </div>
             </li>
 
-            {{-- <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Item</span></a>
-            </li> --}}
-            <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
-
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-            <!-- Sidebar Message -->
-            <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2 col" src="/assets/app/images/logo/logo_.png" alt="...">
             </div>
 
         </ul>

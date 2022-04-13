@@ -90,60 +90,69 @@
                         rows="5">{{ old('trn_desc', $trnRenewal->trn_desc) }}</textarea>
                 </div>
                 <a href="/trn-renewal" class="btn btn-secondary">Back</a>
-                <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>
+                <button type="button" id="btnSubmit" class="btn btn-primary">Save Changes</button>
             </form>
         </div>
+        <div class="mt-5 mb-3">
+            <button id="collapseBtn" class="btn btn-outline-dark text-xs rounded-pill" type="button" data-toggle="collapse"
+                data-target="#collapseTable" aria-expanded="false" aria-controls="collapseTable">
+                Show Table
+            </button>
+        </div>
 
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">List Transaction</h6>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Document No.</th>
-                                <th>Date</th>
-                                <th class="text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($trnRenewals as $trn)
+        <div class="collapse" id="collapseTable">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">List Transaction</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $trn->trn_no }}</td>
-                                    <td>{{ createDate($trn->trn_date)->format('d-m-Y') }}</td>
-                                    <td>
-                                        <div class="d-flex justify-content-around">
-                                            <div>
-                                                <a href="/trn-renewal/{{ $trn->id }}" class="btn btn-sm btn-light">
-                                                    <i class="fas fa-search-plus"></i>
-                                                </a>
-                                            </div>
-                                            <div>
-                                                <a href="/trn-renewal/{{ $trn->id }}/edit"
-                                                    class="btn btn-sm btn-info">Edit</a>
-                                            </div>
-                                            <div>
-                                                <form action="/trn-renewal/{{ $trn->id }}" method="post"
-                                                    id="deleteForm">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button title="Hapus Data" class="btn btn-sm btn-danger"
-                                                        onclick="return false" id="deleteButton"
-                                                        data-id="{{ $trn->id }}">
-                                                        <i class="fas fa-trash-alt"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </td>
+                                    <th>#</th>
+                                    <th>Document No.</th>
+                                    <th>Date</th>
+                                    <th class="text-center">Actions</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($trnRenewals as $trn)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $trn->trn_no }}</td>
+                                        <td>{{ createDate($trn->trn_date)->format('d-m-Y') }}</td>
+                                        <td>
+                                            <div class="d-flex justify-content-around">
+                                                <div>
+                                                    <a title="Detail Data" href="/trn-renewal/{{ $trn->id }}"
+                                                        class="btn btn-outline-dark text-xs">
+                                                        <i class="fas fa-search-plus"></i>
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <a title="Edit Data" href="/trn-renewal/{{ $trn->id }}/edit"
+                                                        class="btn btn-outline-dark text-xs">Edit</a>
+                                                </div>
+                                                <div>
+                                                    <form action="/trn-renewal/{{ $trn->id }}" method="post"
+                                                        id="deleteForm">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button title="Delete Data" class="btn btn-outline-danger text-xs"
+                                                            onclick="return false" id="deleteButton"
+                                                            data-id="{{ $trn->id }}">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -154,11 +163,8 @@
     <script src="/assets/template/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/assets/template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="/assets/template/vendor/selectize/selectize.js"></script>
+    <script src="/assets/app/js/table.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#dataTable').DataTable();
-        });
-
         let mySelect = $('#mySelect'),
             appendDocs = $('#docsCol'),
             checkDocs = $('#check'),

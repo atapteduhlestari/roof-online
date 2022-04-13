@@ -87,4 +87,10 @@ class TrnRenewalController extends Controller
         $trnRenewal->delete();
         return redirect('/trn-renewal')->with('success', 'Success!');
     }
+
+    public function search(Request $request)
+    {
+        $data = TrnRenewal::filter($request)->orderBy('trn_date', 'desc')->get();
+        return $data;
+    }
 }

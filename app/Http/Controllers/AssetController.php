@@ -11,7 +11,7 @@ class AssetController extends Controller
 {
     public function index()
     {
-        $assets = Asset::get()->sortBy('group.asset_group_name');
+        $assets = Asset::orderBy('asset_name', 'asc')->get();
         $assetGroup = AssetGroup::get();
         return view('asset.parent.index', compact('assets', 'assetGroup'));
     }
@@ -39,7 +39,7 @@ class AssetController extends Controller
     public function edit(Asset $asset)
     {
         $assetGroup = AssetGroup::get();
-        $assets = Asset::where('id', '!=', $asset->id)->get();
+        $assets = Asset::get();
         return view('asset.parent.edit', compact('asset', 'assets', 'assetGroup'));
     }
 

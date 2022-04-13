@@ -81,19 +81,19 @@
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
-                                                <a href="/asset-parent/docs/{{ $parent->id }}"
-                                                    class="btn btn-light text-xs">Documents</a>
+                                                <a title="Asset Documents" href="/asset-parent/docs/{{ $parent->id }}"
+                                                    class="btn btn-outline-dark text-xs">Documents</a>
                                             </div>
                                             <div>
-                                                <a href="/asset-parent/{{ $parent->id }}/edit"
-                                                    class="btn btn-info text-xs">Edit</a>
+                                                <a title="Edit Data" href="/asset-parent/{{ $parent->id }}/edit"
+                                                    class="btn btn-outline-dark text-xs">Edit</a>
                                             </div>
                                             <div>
                                                 <form action="/asset-parent/{{ $parent->id }}" method="post"
                                                     id="deleteForm">
                                                     @csrf
                                                     @method('delete')
-                                                    <button title="Hapus Data" class="btn btn-danger text-xs"
+                                                    <button title="Delete Data" class="btn btn-outline-danger text-xs"
                                                         onclick="return false" id="deleteButton"
                                                         data-id="{{ $parent->id }}">
                                                         <i class="fas fa-trash-alt"></i>
@@ -110,7 +110,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <!-- /.container-fluid -->
 @endsection
@@ -122,7 +121,6 @@
         $(document).ready(function() {
             $('#dataTable').DataTable();
         });
-
 
         let formDelete = $('form#deleteForm');
 

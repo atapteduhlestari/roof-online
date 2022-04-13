@@ -8,16 +8,65 @@
     <div class="container-fluid">
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Transaction | Renewal</h1>
-        <div class="my-3">
-            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalAssetsParent">
-                Add <i class="fas fa-plus-circle"></i>
-            </button>
+        <div class="d-flex">
+            <div class="my-3 flex-grow-1">
+                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addNewRecord">
+                    Add <i class="fas fa-plus-circle"></i>
+                </button>
+            </div>
+            <div class="my-3">
+                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseSearch"
+                    aria-expanded="false" aria-controls="collapseSearch">
+                    Filter Search
+                </button>
+            </div>
+        </div>
+        <div class="collapse mb-5" id="collapseSearch">
+            <form action="/trn-renewal/search" method="POST">
+                @csrf
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="trn_date">Date</label>
+                        <div class="form-group d-flex">
+                            <input type="month" class="form-control" id="trn_date" name="trn_date" value="">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="asset_id">Assets</label>
+                        <select class="form-control @error('asset_id') is-invalid @enderror" id="asset_id" name="asset_id">
+                            <option value="">Select Assets</option>
+                            @foreach ($assets as $a)
+                                <option value="{{ $a->id }}" {{ old('asset_id') == $a->id ? 'selected' : '' }}>
+                                    {{ $a->asset_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="asset_child_id">Assets Docs</label>
+                        <select class="form-control @error('asset_child_id') is-invalid @enderror" id="asset_child_id"
+                            name="asset_child_id">
+                            <option value="">Select Assets Docs</option>
+                            @foreach ($assetChild as $ac)
+                                <option value="{{ $ac->id }}"
+                                    {{ old('asset_child_id') == $ac->id ? 'selected' : '' }}>
+                                    {{ $ac->asset_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-outline-dark ml-1 rounded text-xs">
+                    Find <i class="fas fa-search"></i>
+                </button>
+            </form>
         </div>
 
-        <div class="card shadow mb-4">
+        <div class="card shadow mt-3">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">List Transaction</h6>
             </div>
+
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
@@ -38,20 +87,21 @@
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
-                                                <a href="/trn-renewal/{{ $trn->id }}" class="btn btn-sm btn-light">
+                                                <a title="Detail Data" href="/trn-renewal/{{ $trn->id }}"
+                                                    class="btn btn-outline-dark text-xs">
                                                     <i class="fas fa-search-plus"></i>
                                                 </a>
                                             </div>
                                             <div>
-                                                <a href="/trn-renewal/{{ $trn->id }}/edit"
-                                                    class="btn btn-sm btn-info">Edit</a>
+                                                <a title="Edit Data" href="/trn-renewal/{{ $trn->id }}/edit"
+                                                    class="btn btn-outline-dark text-xs">Edit</a>
                                             </div>
                                             <div>
                                                 <form action="/trn-renewal/{{ $trn->id }}" method="post"
                                                     id="deleteForm">
                                                     @csrf
                                                     @method('delete')
-                                                    <button title="Hapus Data" class="btn btn-sm btn-danger"
+                                                    <button title="Delete Data" class="btn btn-outline-danger text-xs"
                                                         onclick="return false" id="deleteButton"
                                                         data-id="{{ $trn->id }}">
                                                         <i class="fas fa-trash-alt"></i>
@@ -70,14 +120,14 @@
     </div>
 
     <!-- Modal Assets Parent -->
-    <div class="modal fade" id="modalAssetsParent" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="modalAssetsParentLabel" aria-hidden="true">
+    <div class="modal fade" id="addNewRecord" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="addNewRecordLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalAssetsParentLabel">Form Transaction</h5>
+                <div class="modal-header bg-gradient-dark">
+                    <h5 class="modal-title text-white" id="addNewRecordLabel">Form Transaction</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span class="text-white" aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -259,7 +309,7 @@
 
     @if ($errors->any())
         <script>
-            $('#modalAssetsParent').modal('show');
+            $('#addNewRecord').modal('show');
         </script>
     @endif
 @endpush
