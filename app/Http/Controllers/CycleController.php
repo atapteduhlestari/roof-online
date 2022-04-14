@@ -52,7 +52,7 @@ class CycleController extends Controller
         $data = $request->all();
 
         $cycle->update($data);
-        return redirect('/cycle')->with('success', 'Success!');
+        return redirect()->back()->with('success', 'Success!');
     }
 
     public function destroy(Cycle $cycle)

@@ -19,6 +19,7 @@ class CreateAssetTable extends Migration
             $table->foreignId('user_id');
             $table->string('asset_name');
             $table->boolean('asset_is_exist')->default(1);
+            $table->text('desc')->nullable();
             $table->timestamps();
         });
     }

@@ -44,7 +44,7 @@ class TrnMaintenanceRequest extends FormRequest
             'trn_date' => 'required|date',
             'asset_id' => $validate['asset_id'],
             'maintenance_id' =>  $validate['maintenance_id'],
-            'pelaksana' => 'required',
+            'pemohon' => 'required',
             'penyetuju' => 'required',
             'check' =>  $validate['check'],
         ];

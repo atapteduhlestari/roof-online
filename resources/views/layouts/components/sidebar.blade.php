@@ -44,10 +44,11 @@
                     class="collapse  {{ request()->is('asset-group*') || request()->is('asset-parent*') ? 'show' : '' }}"
                     aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item  {{ request()->is('asset-group*') ? 'active' : '' }}"
+                            href="/asset-group">Group</a>
                         <a class="collapse-item  {{ request()->is('asset-parent*') ? 'active' : '' }}"
                             href="/asset-parent">Assets</a>
-                        <a class="collapse-item  {{ request()->is('asset-group*') ? 'active' : '' }}"
-                            href="/asset-group">Asset's Group</a>
+
                     </div>
                 </div>
             </li>

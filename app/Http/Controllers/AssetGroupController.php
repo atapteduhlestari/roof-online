@@ -41,7 +41,7 @@ class AssetGroupController extends Controller
         $data = $request->all();
         $assetGroup->update($data);
 
-        return redirect('/asset-group')->with('success', 'Success!');
+        return redirect()->back()->with('success', 'Success!');
     }
 
     public function destroy(AssetGroup $assetGroup)

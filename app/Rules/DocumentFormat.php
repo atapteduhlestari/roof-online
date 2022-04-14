@@ -13,12 +13,16 @@ class DocumentFormat implements Rule
 
     public function passes($attribute, $value)
     {
-        $words = array('ATL', 'SOP', 'GAN');
+        $words = array('ATL', 'HOJ', 'SOP', 'GAN');
+
+        if (str_contains($value, '#'))
+            return false;
 
         foreach ($words as $word) {
             if (!str_contains($value, $word))
                 return false;
         }
+
         return true;
     }
 

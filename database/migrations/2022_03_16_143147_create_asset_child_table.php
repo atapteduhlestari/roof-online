@@ -17,6 +17,7 @@ class CreateAssetChildTable extends Migration
             $table->id();
             $table->foreignId('asset_id');
             $table->string('name');
+            $table->text('desc')->nullable();
             $table->timestamps();
         });
     }

@@ -24,7 +24,7 @@
                     <div class="card-body">
                         <div class="text-center">
                             <img class="img-fluid px-3 px-sm-4 mt-3 mb-4"
-                                src="{{ asset('/assets/template/img/undraw_moving_re_pipp.svg') }}" alt="...">
+                                src="{{ asset('/assets/template/img/undraw_moving_re_pipp.svg') }}">
                         </div>
                     </div>
                 </div>

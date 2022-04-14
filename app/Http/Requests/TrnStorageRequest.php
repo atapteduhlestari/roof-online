@@ -44,7 +44,7 @@ class TrnStorageRequest extends FormRequest
             'trn_date' => 'required|date',
             'asset_id' => $validate['asset_id'],
             'storage_id' =>  $validate['storage_id'],
-            'pelaksana' => 'required',
+            'pemohon' => 'required',
             'penyetuju' => 'required',
             'check' =>  $validate['check'],
         ];

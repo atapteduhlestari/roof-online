@@ -7,26 +7,33 @@ use Illuminate\Database\Seeder;
 
 class MaintenanceSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         $data = [
             [
-                'name' => 'Perbaikan Mobil',
-                'cycle_id' => 3,
-                'no_doc' => 'ATL-HO-SOP-GAN-01-01',
+                'name' => 'Perbaikan Kendaraan',
+                'cycle_id' => 5,
+                'no_doc' => 'ATL-HOJ-SOP-GAN-01-03',
                 'created_at' => now()
             ],
             [
-                'name' => 'Perawatan Rumah',
-                'cycle_id' => 4,
-                'no_doc' => 'ATL-HO-SOP-GAN-01-02',
+                'name' => 'Perawatan Kendaraan',
+                'cycle_id' => 3,
+                'no_doc' => 'ATL-HOJ-SOP-GAN-01-03',
                 'created_at' => now()
-            ]
+            ],
+            [
+                'name' => 'Renovasi Rumah',
+                'cycle_id' => 5,
+                'no_doc' => 'ATL-HOJ-SOP-GAN-02-02',
+                'created_at' => now()
+            ],
+            [
+                'name' => 'Renovasi Kantor',
+                'cycle_id' => 5,
+                'no_doc' => 'ATL-HOJ-SOP-GAN-02-02',
+                'created_at' => now()
+            ],
         ];
 
         Maintenance::insert($data);

@@ -54,7 +54,6 @@ class TrnRenewalController extends Controller
 
     public function show(TrnRenewal $trnRenewal)
     {
-        return $trnRenewal;
         return view('transaction.renewal.show', compact('trnRenewal'));
     }
 

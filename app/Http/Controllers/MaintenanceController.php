@@ -15,7 +15,7 @@ class MaintenanceController extends Controller
         $maintenances = Maintenance::get();
 
         $lastNoDoc = $maintenances->last();
-        $no_doc = setNoDoc($lastNoDoc->no_doc ?? "ATL-HO-SOP-GAN-01-00");
+        $no_doc = "ATL-HOJ-SOP-GAN-0#-##";
 
         return view('asset.maintenance.index', compact(
             'maintenances',
@@ -34,11 +34,12 @@ class MaintenanceController extends Controller
         $request->validate([
             'name' => 'required',
             'cycle_id' => 'required',
-            'no_doc' =>  ['nullable', 'unique:asset_storage', new DocumentFormat],
+            'no_doc' =>  ['nullable', new DocumentFormat],
         ]);
 
         $data = $request->all();
         Maintenance::create($data);
+
         return redirect()->back()->with('success', 'Success!');
     }
 
@@ -64,7 +65,7 @@ class MaintenanceController extends Controller
 
         $data = $request->all();
         $maintenance->update($data);
-        return redirect('/maintenance')->with('success', 'Success!');
+        return redirect()->back()->with('success', 'Success!');
     }
 
     public function destroy(Maintenance $maintenance)

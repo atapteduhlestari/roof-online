@@ -58,23 +58,24 @@
                 <hr>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="pelaksana">Pelaksana</label>
-                        <select class="form-control @error('pelaksana') is-invalid @enderror" name="pelaksana">
-                            <option value="">Pelaksana</option>
-                            @foreach ($employees as $pelaksana)
-                                <option value="{{ $pelaksana->name }}"
-                                    {{ old('pelaksana', $trnMaintenance->pelaksana) == $pelaksana->name ? 'selected' : '' }}>
-                                    {{ $pelaksana->name }}</option>
+                        <label for="pemohon">Pemohon</label>
+                        <select class="form-control @error('pemohon') is-invalid @enderror" name="pemohon" id="pemohon">
+                            <option value="">Pemohon</option>
+                            @foreach ($employees as $pemohon)
+                                <option value="{{ $pemohon->name }}"
+                                    {{ old('pemohon', $trnMaintenance->pemohon) == $pemohon->name ? 'selected' : '' }}>
+                                    {{ $pemohon->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="pemohon">Pemohon</label>
+                        <label for="pembuat">Pembuat</label>
                         <input type="text" class="form-control not-allowed" value="{{ auth()->user()->name }}" disabled>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="penyetuju">Menyetujui</label>
-                        <select class="form-control @error('penyetuju') is-invalid @enderror" name="penyetuju">
+                        <select class="form-control @error('penyetuju') is-invalid @enderror" name="penyetuju"
+                            id="penyetuju">
                             <option value="">Select Employees</option>
                             @foreach ($employees as $penyetuju)
                                 <option value="{{ $penyetuju->name }}"
@@ -112,7 +113,9 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Document No.</th>
-                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Due Date</th>
+                                    <th>Created</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
@@ -121,7 +124,9 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $trn->trn_no }}</td>
+                                        <td>{{ $trn->maintenance->name }}</td>
                                         <td>{{ createDate($trn->trn_date)->format('d-m-Y') }}</td>
+                                        <td>{{ $trn->created_at->format('d-m-Y') }}</td>
                                         <td>
                                             <div class="d-flex justify-content-around">
                                                 <div>
@@ -165,21 +170,19 @@
     <script src="/assets/template/vendor/selectize/selectize.js"></script>
     <script src="/assets/app/js/table.js"></script>
     <script>
-        let mySelect = $('#mySelect'),
-            appendDocs = $('#docsCol'),
-            checkDocs = $('#check'),
-            form = $('#formtrnMaintenance'),
+        let form = $('#formTrnRenewal'),
             btnSubmit = $('#btnSubmit');
 
-        let $parentSelect = $("#asset_id").selectize({
+        $("#pemohon").selectize({
             create: false,
             sortField: "text",
         });
 
-        $("#maintenance_id").selectize({
+        $("#penyetuju").selectize({
             create: false,
             sortField: "text",
         });
+
 
         $(document).on('change', '#asset_id', async function() {
             let id = $(this).val();

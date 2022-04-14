@@ -29,6 +29,7 @@
                             @enderror
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <select class="form-control @error('asset_group_id') is-invalid @enderror" name="asset_group_id"
@@ -47,6 +48,21 @@
                             @enderror
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <textarea class="form-control" name="desc" id="desc" cols="30" rows="5"
+                                placeholder="Description">{{ old('desc') }}</textarea>
+                            @error('desc')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-6">
                         <button type="submit" class="btn btn-primary">
                             Submit
@@ -69,6 +85,7 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Group</th>
+                                <th>Description</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
@@ -78,6 +95,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $parent->asset_name }}</td>
                                     <td>{{ $parent->group->asset_group_name }}</td>
+                                    <td>{{ $parent->desc }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>

@@ -54,7 +54,7 @@ class AssetController extends Controller
         $data['user_id'] = auth()->user()->id;
         $asset->update($data);
 
-        return redirect('/asset-parent')->with('success', 'Success!');
+        return redirect()->back()->with('success', 'Success!');
     }
 
     public function destroy(Asset $asset)
@@ -99,16 +99,20 @@ class AssetController extends Controller
 
         $data = $request->all();
 
-        $asset->children()->where('id', $id)->update([
-            'name' => $data['name'],
-        ]);
-        return redirect('/asset-parent')->with('success', 'Success!');
+        $asset->children()
+            ->where('id', $id)
+            ->update([
+                'name' => $data['name'],
+                'desc' => $data['desc'],
+            ]);
+
+        return redirect()->back()->with('success', 'Success!');
     }
 
     public function deleteDocuments(Asset $asset, $childId)
     {
         $asset->children()->where('id', $childId)->delete();
-        return redirect('/asset-parent')->with('success', 'Success!');
+        return redirect('/asset-parent/docs/' . $asset->id)->with('success', 'Success!');
     }
 
     public function getData($id)

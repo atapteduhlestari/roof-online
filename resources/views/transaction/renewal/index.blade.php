@@ -8,6 +8,7 @@
     <div class="container-fluid">
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Transaction | Renewal</h1>
+
         <div class="d-flex">
             <div class="my-3 flex-grow-1">
                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addNewRecord">
@@ -21,7 +22,8 @@
                 </button>
             </div>
         </div>
-        <div class="collapse mb-5" id="collapseSearch">
+
+        <div class="collapse" id="collapseSearch">
             <form action="/trn-renewal/search" method="POST">
                 @csrf
                 <div class="row">
@@ -34,7 +36,8 @@
 
                     <div class="col-md-6 mb-3">
                         <label for="asset_id">Assets</label>
-                        <select class="form-control @error('asset_id') is-invalid @enderror" id="asset_id" name="asset_id">
+                        <select class="form-control @error('asset_id') is-invalid @enderror" id="asset_search"
+                            name="asset_id">
                             <option value="">Select Assets</option>
                             @foreach ($assets as $a)
                                 <option value="{{ $a->id }}" {{ old('asset_id') == $a->id ? 'selected' : '' }}>
@@ -56,11 +59,13 @@
                         </select>
                     </div>
                 </div>
+
                 <button type="submit" class="btn btn-outline-dark ml-1 rounded text-xs">
                     Find <i class="fas fa-search"></i>
                 </button>
             </form>
         </div>
+
 
         <div class="card shadow mt-3">
             <div class="card-header py-3">
@@ -74,7 +79,9 @@
                             <tr>
                                 <th>#</th>
                                 <th>Document No.</th>
-                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Due Date</th>
+                                <th>Created</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
@@ -83,7 +90,9 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $trn->trn_no }}</td>
+                                    <td>{{ $trn->renewal->name }}</td>
                                     <td>{{ createDate($trn->trn_date)->format('d-m-Y') }}</td>
+                                    <td>{{ $trn->created_at->format('d-m-Y') }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
@@ -177,19 +186,19 @@
                         <hr>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="pelaksana">Pelaksana</label>
-                                <select class="form-control @error('pelaksana') is-invalid @enderror" name="pelaksana"
-                                    id="pelaksana">
-                                    <option value="">Pelaksana</option>
-                                    @foreach ($employees as $pelaksana)
-                                        <option value="{{ $pelaksana->name }}"
-                                            {{ old('pelaksana') == $pelaksana->name ? 'selected' : '' }}>
-                                            {{ $pelaksana->name }}</option>
+                                <label for="pemohon">Pemohon</label>
+                                <select class="form-control @error('pemohon') is-invalid @enderror" name="pemohon"
+                                    id="pemohon">
+                                    <option value="">Pemohon</option>
+                                    @foreach ($employees as $pemohon)
+                                        <option value="{{ $pemohon->name }}"
+                                            {{ old('pemohon') == $pemohon->name ? 'selected' : '' }}>
+                                            {{ $pemohon->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="pemohon">Pemohon</label>
+                                <label for="pembuat">Pembuat</label>
                                 <input type="text" class="form-control" value="{{ auth()->user()->name }}" disabled>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -234,12 +243,17 @@
             form = $('#formTrnRenewal'),
             btnSubmit = $('#btnSubmit');
 
+        $("#asset_search").selectize({
+            create: false,
+            sortField: "text",
+        });
+
         $("#asset_id").selectize({
             create: false,
             sortField: "text",
         });
 
-        $("#pelaksana").selectize({
+        $("#pemohon").selectize({
             create: false,
             sortField: "text",
         });

@@ -6,7 +6,6 @@
 @section('container')
     <!-- Begin Page Content -->
     <div class="container-fluid">
-
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Assets | {{ $asset->asset_name }}</h1>
 
@@ -28,6 +27,23 @@
                             @enderror
                         </div>
                     </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <textarea class="form-control" name="desc" id="desc" cols="30" rows="5"
+                                placeholder="Description">{{ old('desc') }}</textarea>
+                            @error('desc')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-6">
                         <button type="submit" class="btn btn-primary">
                             Submit
@@ -49,6 +65,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
+                                <th>Description</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
@@ -57,6 +74,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $child->name }}</td>
+                                    <td>{{ $child->desc }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>

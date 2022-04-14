@@ -31,7 +31,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <input type="text" class="form-control @error('no_doc') is-invalid @enderror" name="no_doc"
-                                placeholder="{{ $no_doc }}" value="{{ old('no_doc') }}">
+                                placeholder="Document No." value="{{ old('no_doc', $no_doc) }}">
                             @error('no_doc')
                                 <div class="invalid-feedback">
                                     {{ $message }}

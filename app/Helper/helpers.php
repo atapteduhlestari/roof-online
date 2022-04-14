@@ -42,7 +42,7 @@ function setNoDoc($no_doc)
 
 function setNoTrn($date, $count, $code)
 {
-    $name = "ATL-GA-{$code}";
+    $name = "ATL-GAN-{$code}";
     $newDate = createDate($date)->format('my');
 
     if (!$count)

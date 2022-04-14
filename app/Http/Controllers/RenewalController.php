@@ -15,7 +15,7 @@ class RenewalController extends Controller
         $renewals = Renewal::get();
 
         $lastNoDoc = $renewals->last();
-        $no_doc = setNoDoc($lastNoDoc->no_doc ?? "ATL-HO-SOP-GAN-01-00");
+        $no_doc = "ATL-HOJ-SOP-GAN-0#-##";
 
         return view('asset.renewal.index', compact(
             'renewals',
@@ -34,7 +34,7 @@ class RenewalController extends Controller
         $request->validate([
             'name' => 'required',
             'cycle_id' => 'required',
-            'no_doc' =>  ['nullable', 'unique:asset_renewal', new DocumentFormat],
+            'no_doc' =>  ['nullable', new DocumentFormat],
         ]);
 
         $data = $request->all();
@@ -66,7 +66,7 @@ class RenewalController extends Controller
         $data = $request->all();
         $renewal->update($data);
 
-        return redirect('/renewal')->with('success', 'Success!');
+        return redirect()->back()->with('success', 'Success!');
     }
 
     public function destroy(Renewal $renewal)

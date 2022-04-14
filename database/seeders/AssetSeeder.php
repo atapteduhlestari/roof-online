@@ -501,6 +501,12 @@ class AssetSeeder extends Seeder
                 'asset_name' => 'TANAH TAM 20',
                 'created_at' => now()
             ],
+            [
+                'asset_group_id' => 2,
+                'user_id' => 2,
+                'asset_name' => 'Emas',
+                'created_at' => now()
+            ],
         ];
         Asset::insert($data);
     }
