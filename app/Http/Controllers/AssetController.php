@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asset;
+use App\Models\Employee;
 use App\Models\AssetChild;
 use App\Models\AssetGroup;
 use Illuminate\Http\Request;
+use App\Http\Requests\AssetRequest;
+use Illuminate\Support\Facades\Storage;
 
 class AssetController extends Controller
 {
@@ -13,47 +16,69 @@ class AssetController extends Controller
     {
         $assets = Asset::orderBy('asset_name', 'asc')->get();
         $assetGroup = AssetGroup::get();
-        return view('asset.parent.index', compact('assets', 'assetGroup'));
+        $employees = Employee::orderBy('name', 'asc')->get();
+
+        return view('asset.parent.index', compact(
+            'assets',
+            'assetGroup',
+            'employees',
+        ));
     }
 
-
-    public function store(Request $request)
+    public function store(AssetRequest $request)
     {
-        $request->validate([
-            'asset_name' => 'required',
-            'asset_group_id' => 'required',
-        ]);
-
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
-        Asset::create($data);
+        $data['pcs_value'] = removeDots($request->pcs_value);
+        $data['apr_value'] = removeDots($request->apr_value);
 
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $imageUrl = $image->storeAs('uploads/images/assets',  $image->hashName());
+            $data['image'] = $imageUrl;
+        }
+
+        Asset::create($data);
         return redirect()->back()->with('success', 'Success!');
     }
 
     public function show(Asset $asset)
     {
-        //
+        return $asset;
     }
 
     public function edit(Asset $asset)
     {
         $assetGroup = AssetGroup::get();
         $assets = Asset::get();
-        return view('asset.parent.edit', compact('asset', 'assets', 'assetGroup'));
+        $employees = Employee::orderBy('name', 'asc')->get();
+
+        return view('asset.parent.edit', compact(
+            'asset',
+            'assets',
+            'assetGroup',
+            'employees',
+        ));
     }
 
-    public function update(Request $request, Asset $asset)
+    public function update(AssetRequest $request, Asset $asset)
     {
-        $request->validate([
-            'asset_name' => 'required',
-            'asset_group_id' => 'required',
-        ]);
-
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
-        $asset->update($data);
+        $data['pcs_value'] = removeDots($request->pcs_value);
+        $data['apr_value'] = removeDots($request->apr_value);
 
+        if ($request->file('image')) {
+
+            Storage::delete($asset->image);
+            $image = $request->file('image');
+            $imageUrl = $image->storeAs('uploads/images/assets',  $image->hashName());
+            $data['image'] = $imageUrl;
+        } else {
+            $data['image'] = $asset->image;
+        }
+
+        $asset->update($data);
         return redirect()->back()->with('success', 'Success!');
     }
 
@@ -62,6 +87,8 @@ class AssetController extends Controller
         if ($asset->children()->exists()) {
             return redirect('/asset-parent')->with('warning', 'Cannot delete assets that have documents!');
         }
+
+        Storage::delete($asset->image);
         $asset->delete();
         return redirect('/asset-parent')->with('success', 'Success!');
     }
@@ -74,7 +101,10 @@ class AssetController extends Controller
     public function addDocuments(Request $request, Asset $asset)
     {
         $request->validate([
-            'name' => 'required',
+            'doc_name' => 'required',
+            'doc_no' => 'required',
+            'due_date' => 'required|date',
+            'desc' => 'required',
         ]);
 
         $data = $request->all();
@@ -94,7 +124,10 @@ class AssetController extends Controller
     public function updateDocuments(Request $request, Asset $asset, $id)
     {
         $request->validate([
-            'name' => 'required',
+            'doc_name' => 'required',
+            'doc_no' => 'required',
+            'due_date' => 'required|date',
+            'desc' => 'required',
         ]);
 
         $data = $request->all();
@@ -102,7 +135,9 @@ class AssetController extends Controller
         $asset->children()
             ->where('id', $id)
             ->update([
-                'name' => $data['name'],
+                'doc_name' => $data['doc_name'],
+                'doc_no' => $data['doc_no'],
+                'due_date' => $data['due_date'],
                 'desc' => $data['desc'],
             ]);
 
@@ -111,6 +146,7 @@ class AssetController extends Controller
 
     public function deleteDocuments(Asset $asset, $childId)
     {
+        Storage::delete($asset->image);
         $asset->children()->where('id', $childId)->delete();
         return redirect('/asset-parent/docs/' . $asset->id)->with('success', 'Success!');
     }

@@ -12,6 +12,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('index');
+        $groups = AssetGroup::get();
+        return view('index', compact('groups'));
     }
 }

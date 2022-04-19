@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cycle;
 use App\Models\Renewal;
+use App\Rules\ISOFormatRule;
 use Illuminate\Http\Request;
 use App\Rules\DocumentFormat;
 
@@ -34,7 +35,7 @@ class RenewalController extends Controller
         $request->validate([
             'name' => 'required',
             'cycle_id' => 'required',
-            'no_doc' =>  ['nullable', new DocumentFormat],
+            'no_doc' =>  ['nullable', new DocumentFormat, new ISOFormatRule],
         ]);
 
         $data = $request->all();
@@ -60,7 +61,12 @@ class RenewalController extends Controller
         $request->validate([
             'name' => 'required',
             'cycle_id' => 'required',
-            'no_doc' =>  ['nullable', "unique:asset_renewal,no_doc,{$renewal->id}", new DocumentFormat],
+            'no_doc' =>  [
+                'nullable',
+                "unique:asset_renewal,no_doc,{$renewal->id}",
+                new DocumentFormat,
+                new ISOFormatRule
+            ],
         ]);
 
         $data = $request->all();

@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class DocumentFormat implements Rule
+class ISOFormatRule implements Rule
 {
     public function __construct()
     {
@@ -13,14 +13,18 @@ class DocumentFormat implements Rule
 
     public function passes($attribute, $value)
     {
-        if (str_contains($value, '#'))
-            return false;
+        $words = array('ATL', 'HOJ', 'SOP', 'GAN');
+
+        foreach ($words as $word) {
+            if (!str_contains($value, $word))
+                return false;
+        }
 
         return true;
     }
 
     public function message()
     {
-        return "Change '#' with number";
+        return 'False document format';
     }
 }

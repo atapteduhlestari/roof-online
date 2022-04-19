@@ -23,10 +23,6 @@ class AssetGroupSeeder extends Seeder
                 'asset_group_name' => 'Tidak Bergerak',
                 'created_at' => now()
             ],
-            [
-                'asset_group_name' => 'Aplikasi / Software',
-                'created_at' => now()
-            ],
         ];
 
         AssetGroup::insert($data);

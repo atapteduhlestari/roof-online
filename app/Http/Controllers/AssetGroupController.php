@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AssetGroup;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class AssetGroupController extends Controller
@@ -29,6 +30,12 @@ class AssetGroupController extends Controller
     {
         $asset_group = AssetGroup::where('id', '!=', $assetGroup->id)->get();
         return view('asset.group.edit', compact('assetGroup', 'asset_group'));
+    }
+
+    public function show(AssetGroup $assetGroup)
+    {
+        $employees = Employee::orderBy('name', 'asc')->get();
+        return view('asset.group.show', compact('assetGroup', 'employees'));
     }
 
     public function update(Request $request, AssetGroup $assetGroup)

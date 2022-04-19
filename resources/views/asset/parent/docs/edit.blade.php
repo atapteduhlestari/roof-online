@@ -7,110 +7,57 @@
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
+        <div class="d-flex align-items-center mb-3">
+            <div class="flex-grow-1">
+                <h1 class="h3 mb-2 text-gray-800">Assets Edit | {{ $asset->asset_name }}</h1>
+            </div>
+            <a href="/asset-parent/docs/{{ $asset->id }}" class="btn btn-secondary btn-sm" data-dismiss="modal">
+                <i class="fas fa-arrow-left"></i> {{ $asset->asset_name }}
+            </a>
+        </div>
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Assets Edit | {{ $asset->asset_name }}</h1>
-
         <div class="my-4">
-            <form action="/asset-parent/docs/update/{{ $asset->id }}/{{ $child->id }}" method="POST">
+            <form id="formAdd" action="/asset-parent/docs/update/{{ $asset->id }}/{{ $child->id }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="name">Document Name</label>
                         <div class="form-group">
-                            <input name="name" id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                placeholder="Document Name" value="{{ old('name', $child->name) }}" autocomplete="off"
-                                autofocus>
-                            @error('name')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <label for="doc_name">Document Name</label>
+                            <input name="doc_name" id="doc_name" type="text"
+                                class="form-control @error('doc_name') is-invalid @enderror"
+                                value="{{ old('doc_name', $child->doc_name) }}" autocomplete="off" autofocus>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="doc_no">Document No</label>
+                            <input name="doc_no" id="doc_no" type="text"
+                                class="form-control @error('doc_no') is-invalid @enderror"
+                                value="{{ old('doc_no', $child->doc_no) }}" autocomplete="off" autofocus>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="due_date">Due Date</label>
+                            <input name="due_date" id="due_date" type="date"
+                                class="form-control @error('due_date') is-invalid @enderror"
+                                value="{{ old('due_date', $child->due_date) }}" autocomplete="off" autofocus>
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <textarea class="form-control" name="desc" id="desc" rows="5"
-                                placeholder="Description">{{ old('desc', $child->desc) }}</textarea>
-                            @error('desc')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <label for="desc">Description</label>
+                            <textarea class="form-control  @error('desc') is-invalid @enderror" name="desc" id="desc" cols="30"
+                                rows="5">{{ old('desc', $child->desc) }}</textarea>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-6">
-                        <button type="submit" class="btn btn-primary">
-                            Save Changes
-                        </button>
-                    </div>
-                </div>
+                <button type="button" id="btnSubmit" class="btn btn-primary">Save Changes</button>
             </form>
-        </div>
-        <div class="mt-5 mb-3">
-            <button id="collapseBtn" class="btn btn-outline-dark text-xs rounded-pill" type="button" data-toggle="collapse"
-                data-target="#collapseTable" aria-expanded="false" aria-controls="collapseTable">
-                Show Table
-            </button>
-        </div>
-
-        <div class="collapse" id="collapseTable">
-            <!-- DataTales Example -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">List documents</h6>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th class="text-center">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($children as $child)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $child->name }}</td>
-                                        <td>{{ $child->desc }}</td>
-                                        <td>
-                                            <div class="d-flex justify-content-around">
-                                                <div>
-                                                    <a title="Edit Data"
-                                                        href="/asset-parent/docs/edit/{{ $asset->id }}/{{ $child->id }}"
-                                                        class="btn btn-outline-dark text-xs">Edit</a>
-                                                </div>
-                                                <div>
-                                                    <form
-                                                        action="/asset-parent/docs/delete/{{ $asset->id }}/{{ $child->id }}"
-                                                        method="POST" id="deleteForm">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button title="Delete Data" class="btn btn-outline-danger text-xs"
-                                                            onclick="return false" id="deleteButton"
-                                                            data-id="{{ $child->id }}"
-                                                            data-asset_id="{{ $asset->id }}">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <!-- /.container-fluid -->
@@ -121,26 +68,12 @@
     <script src="/assets/template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="/assets/app/js/table.js"></script>
     <script>
-        let formDelete = $('form#deleteForm');
+        let btnSubmit = $('#btnSubmit'),
+            form = $('#formAdd');
 
-        $(document).on('click', '#deleteButton', function(e) {
-            e.preventDefault();
-            let assetId = $(this).data('asset_id');
-            let id = $(this).data('id');
-            formDelete.attr('action', `/asset-parent/docs/delete/${assetId}/${id}`)
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    formDelete.submit();
-                }
-            })
+        btnSubmit.click(function() {
+            $(this).prop('disabled', true);
+            form.submit();
         });
     </script>
 @endpush

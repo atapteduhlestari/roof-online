@@ -33,8 +33,18 @@ class Asset extends Model
         return $this->hasMany(TrnStorage::class, 'asset_id');
     }
 
-    public function trnMaintanencae()
+    public function trnMaintenance()
     {
         return $this->hasMany(TrnMaintenance::class, 'asset_id');
+    }
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class, 'emp_id');
+    }
+
+    public function getTakeImageAttribute()
+    {
+        return "/storage/" . $this->image;
     }
 }

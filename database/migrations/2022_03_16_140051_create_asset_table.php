@@ -17,9 +17,18 @@ class CreateAssetTable extends Migration
             $table->id();
             $table->foreignId('asset_group_id');
             $table->foreignId('user_id');
+            $table->foreignId('emp_id');
+            $table->string('asset_code');
+            $table->string('asset_no')->nullable();
             $table->string('asset_name');
+            $table->date('pcs_date');
+            $table->double('pcs_value', 2);
+            $table->date('apr_date')->nullable();
+            $table->double('apr_value', 2)->nullable();
+            $table->string('position')->nullable();
+            $table->text('desc');
+            $table->text('image')->nullable();
             $table->boolean('asset_is_exist')->default(1);
-            $table->text('desc')->nullable();
             $table->timestamps();
         });
     }

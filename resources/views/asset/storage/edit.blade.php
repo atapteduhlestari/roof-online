@@ -11,7 +11,7 @@
         <h1 class="h3 mb-2 text-gray-800">Storage Edit | {{ $storage->name }}</h1>
 
         <div class="my-4">
-            <form action="/storage/{{ $storage->id }}" method="POST">
+            <form action="/mst-storage/{{ $storage->id }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="row">
@@ -102,11 +102,11 @@
                                         <td>
                                             <div class="d-flex justify-content-around">
                                                 <div>
-                                                    <a title="Edit Data" href="/storage/{{ $storage->id }}/edit"
+                                                    <a title="Edit Data" href="/mst-storage/{{ $storage->id }}/edit"
                                                         class="btn btn-outline-dark text-xs">Edit</a>
                                                 </div>
                                                 <div>
-                                                    <form action="/storage/{{ $storage->id }}" method="post"
+                                                    <form action="/mst-storage/{{ $storage->id }}" method="post"
                                                         id="deleteForm">
                                                         @csrf
                                                         @method('delete')
@@ -141,7 +141,7 @@
         $(document).on('click', '#deleteButton', function(e) {
             e.preventDefault();
             let id = $(this).data('id');
-            formDelete.attr('action', `/storage/${id}`)
+            formDelete.attr('action', `/mst-storage/${id}`)
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",

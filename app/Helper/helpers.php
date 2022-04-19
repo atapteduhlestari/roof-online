@@ -15,6 +15,24 @@ function test($param)
     return date_diff($dt, $next)->format('%y years, %m months and %d days');
 }
 
+function rupiah($param)
+{
+    $val = !$param ? null : 'Rp. ' . number_format($param);
+    return $val;
+}
+
+function currency($param)
+{
+    $val = !$param ? null : number_format($param);
+    return $val;
+}
+
+function removeDots($param)
+{
+    $val = !$param ? null : (float) str_replace('.', '', $param);
+    return $val;
+}
+
 function setNoDoc($no_doc)
 {
     $name = "ATL-HO-SOP-GAN";

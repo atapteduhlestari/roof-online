@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cycle;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
+use App\Rules\ISOFormatRule;
 use App\Rules\DocumentFormat;
 
 class MaintenanceController extends Controller
@@ -60,7 +61,12 @@ class MaintenanceController extends Controller
         $request->validate([
             'name' => 'required',
             'cycle_id' => 'required',
-            'no_doc' =>  ['nullable', "unique:asset_maintenance,no_doc,{$maintenance->id}", new DocumentFormat],
+            'no_doc' =>  [
+                'nullable',
+                "unique:asset_maintenance,no_doc,{$maintenance->id}",
+                new DocumentFormat,
+                new ISOFormatRule
+            ],
         ]);
 
         $data = $request->all();

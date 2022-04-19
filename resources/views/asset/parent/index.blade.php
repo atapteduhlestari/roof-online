@@ -1,77 +1,20 @@
 @extends('layouts.master')
 @push('styles')
     <link href="/assets/template/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="/assets/template/vendor/selectize/selectize.css" rel="stylesheet">
 @endpush
 @section('title', 'GA | Asset')
 @section('container')
     <!-- Begin Page Content -->
     <div class="container-fluid">
-
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Assets</h1>
-
         <div class="my-4">
-            <div class="mb-3">
-                <h6 class="text-muted">Add new record</h6>
-            </div>
-            <form action="/asset-parent" method="POST">
-                @csrf
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <input name="asset_name" id="asset_name" type="text"
-                                class="form-control @error('asset_name') is-invalid @enderror" placeholder="Asset Name"
-                                value="{{ old('asset_name') }}" autocomplete="off" autofocus>
-                            @error('asset_name')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <select class="form-control @error('asset_group_id') is-invalid @enderror" name="asset_group_id"
-                                id="asset_group_id">
-                                <option value="">-Select group-</option>
-                                @foreach ($assetGroup as $group)
-                                    <option value="{{ $group->id }}"
-                                        {{ old('asset_group_id') == $group->id ? 'selected' : '' }}>
-                                        {{ $group->asset_group_name }}</option>
-                                @endforeach
-                            </select>
-                            @error('asset_group_id')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <textarea class="form-control" name="desc" id="desc" cols="30" rows="5"
-                                placeholder="Description">{{ old('desc') }}</textarea>
-                            @error('desc')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <button type="submit" class="btn btn-primary">
-                            Submit
-                        </button>
-                    </div>
-                </div>
-            </form>
+            <!-- Button trigger modal -->
+            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addNewRecord">
+                Add <i class="fas fa-plus-circle"></i>
+            </button>
         </div>
-
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -83,37 +26,45 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Group</th>
-                                <th>Description</th>
+                                <th>Asset Name</th>
+                                <th>Asset Code</th>
+                                <th>Purchase Date</th>
+                                <th>Purchase Value</th>
+                                <th>Penanggung Jawab</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($assets as $parent)
+                            @foreach ($assets as $asset)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $parent->asset_name }}</td>
-                                    <td>{{ $parent->group->asset_group_name }}</td>
-                                    <td>{{ $parent->desc }}</td>
+                                    <td>
+                                        <a href="/asset-parent/{{ $asset->id }}">
+                                            {{ $asset->asset_name }}
+                                        </a>
+                                    </td>
+                                    <td>{{ $asset->asset_code }}</td>
+                                    <td>{{ $asset->pcs_date }}</td>
+                                    <td>{{ rupiah($asset->pcs_value) }}</td>
+                                    <td>{{ $asset->employee->name }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
-                                                <a title="Asset Documents" href="/asset-parent/docs/{{ $parent->id }}"
+                                                <a title="Asset Documents" href="/asset-parent/docs/{{ $asset->id }}"
                                                     class="btn btn-outline-dark text-xs">Documents</a>
                                             </div>
                                             <div>
-                                                <a title="Edit Data" href="/asset-parent/{{ $parent->id }}/edit"
+                                                <a title="Edit Data" href="/asset-parent/{{ $asset->id }}/edit"
                                                     class="btn btn-outline-dark text-xs">Edit</a>
                                             </div>
                                             <div>
-                                                <form action="/asset-parent/{{ $parent->id }}" method="post"
+                                                <form action="/asset-parent/{{ $asset->id }}" method="post"
                                                     id="deleteForm">
                                                     @csrf
                                                     @method('delete')
                                                     <button title="Delete Data" class="btn btn-outline-danger text-xs"
                                                         onclick="return false" id="deleteButton"
-                                                        data-id="{{ $parent->id }}">
+                                                        data-id="{{ $asset->id }}">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
                                                 </form>
@@ -130,17 +81,160 @@
         </div>
     </div>
     <!-- /.container-fluid -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="addNewRecord" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="addNewRecordLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-gradient-dark">
+                    <h5 class="modal-title text-white" id="addNewRecordLabel">Form - Add New Assets</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="text-white" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/asset-parent" method="POST" id="formAdd" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="asset_name">Asset Name</label>
+                                <input type="text" class="form-control @error('asset_name') is-invalid @enderror"
+                                    name="asset_name" id="asset_name" value="{{ old('asset_name') }}">
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="asset_group_id">Group</label>
+                                <select class="form-control @error('asset_group_id') is-invalid @enderror"
+                                    name="asset_group_id" id="asset_group_id">
+                                    <option value=""></option>
+                                    @foreach ($assetGroup as $group)
+                                        <option value="{{ $group->id }}"
+                                            {{ old('asset_group_id') == $group->id ? 'selected' : '' }}>
+                                            {{ $group->asset_group_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="asset_code">Asset Code</label>
+                                <input type="text" class="form-control @error('asset_code') is-invalid @enderror"
+                                    name="asset_code" id="asset_code" value="{{ old('asset_code') }}">
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="position">Asset Position</label>
+                                <input type="text" class="form-control @error('position') is-invalid @enderror"
+                                    name="position" value="{{ old('position') }}">
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="asset_no">No. (Pol/Rumah/Seri)</label>
+                                <input type="text" class="form-control @error('asset_no') is-invalid @enderror"
+                                    name="asset_no" id="asset_no" value="{{ old('asset_no') }}">
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="emp_id">Penanggung Jawab</label>
+                                <select class="form-control @error('emp_id') is-invalid @enderror" name="emp_id"
+                                    id="emp_id">
+                                    <option value=""></option>
+                                    @foreach ($employees as $emp)
+                                        <option value="{{ $emp->id }}"
+                                            {{ old('emp_id') == $emp->id ? 'selected' : '' }}>
+                                            {{ $emp->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="pcs_date">Purchase Date</label>
+                                <input type="date" class="form-control @error('pcs_date') is-invalid @enderror"
+                                    name="pcs_date" id="pcs_date" value="{{ old('pcs_date') }}">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="pcs_value">Purchase Value</label>
+                                <input type="text" class="form-control currency @error('pcs_value') is-invalid @enderror"
+                                    name="pcs_value" id="pcs_value" value="{{ old('pcs_value') }}">
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="apr_date">Aprraisal Date</label>
+                                <input type="date" class="form-control @error('apr_date') is-invalid @enderror"
+                                    name="apr_date" id="apr_date" value="{{ old('apr_date') }}">
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="apr_value">Aprraisal Value</label>
+                                <input type="text" class="form-control currency @error('apr_value') is-invalid @enderror"
+                                    name="apr_value" value="{{ old('apr_value') }}">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="desc">Description</label>
+                                <textarea class="form-control @error('desc') is-invalid @enderror" id="desc" name="desc" cols="10"
+                                    rows="5">{{ old('desc') }}</textarea>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="">Asset Image</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input  @error('image') is-invalid @enderror"
+                                        name="image" id="imageFileInput" accept="image/*">
+                                    <label class="custom-file-label" for="image">Choose file</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <input type="hidden" value="1" name="check" id="check">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('scripts')
     <!-- Page level plugins -->
     <script src="/assets/template/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/assets/template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="/assets/template/vendor/selectize/selectize.js"></script>
+    <script src="/js/jquery.mask.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#dataTable').DataTable();
         });
 
-        let formDelete = $('form#deleteForm');
+        let btnSubmit = $('#btnSubmit'),
+            form = $('#formAdd'),
+            formDelete = $('#deleteForm');
+
+        $("#emp_id").selectize({
+            create: false,
+            sortField: "text",
+        });
+
+        $('.currency').mask('000.000.000.000', {
+            reverse: true
+        });
+
+        $('#imageFileInput').on('change', function(e) {
+            var fileName = $(this).val();
+            $(this).next('.custom-file-label').html(e.target.files[0].name);
+        })
+
+        btnSubmit.click(function() {
+            $(this).prop('disabled', true);
+            form.submit();
+        });
 
         $(document).on('click', '#deleteButton', function(e) {
             e.preventDefault();
@@ -161,4 +255,10 @@
             })
         });
     </script>
+
+    @if ($errors->any())
+        <script>
+            $('#addNewRecord').modal('show');
+        </script>
+    @endif
 @endpush

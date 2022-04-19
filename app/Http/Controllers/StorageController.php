@@ -6,6 +6,7 @@ use App\Models\Cycle;
 use App\Models\Storage;
 use Illuminate\Http\Request;
 use App\Rules\DocumentFormat;
+use App\Rules\ISOFormatRule;
 use Illuminate\Validation\Rule;
 
 class StorageController extends Controller
@@ -34,7 +35,7 @@ class StorageController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'no_doc' =>  ['nullable', new DocumentFormat],
+            'no_doc' =>  ['nullable', new DocumentFormat, new ISOFormatRule],
         ]);
 
         $data = $request->all();
@@ -59,7 +60,11 @@ class StorageController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'no_doc' =>  ['nullable', "unique:asset_storage,no_doc,{$storage->id}", new DocumentFormat],
+            'no_doc' =>  [
+                'nullable',
+                "unique:asset_storage,no_doc,{$storage->id}",
+                new DocumentFormat, new ISOFormatRule
+            ],
         ]);
 
         $data = $request->all();
@@ -71,6 +76,6 @@ class StorageController extends Controller
     public function destroy(Storage $storage)
     {
         $storage->delete();
-        return redirect('/storage')->with('success', 'Success!');
+        return redirect('/mst-storage')->with('success', 'Success!');
     }
 }

@@ -95,11 +95,12 @@
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
-                                                <a title="Edit Data" href="/storage/{{ $storage->id }}/edit"
+                                                <a title="Edit Data" href="/mst-storage/{{ $storage->id }}/edit"
                                                     class="btn btn-outline-dark text-xs">Edit</a>
                                             </div>
                                             <div>
-                                                <form action="/storage/{{ $storage->id }}" method="post" id="deleteForm">
+                                                <form action="/mst-storage/{{ $storage->id }}" method="post"
+                                                    id="deleteForm">
                                                     @csrf
                                                     @method('delete')
                                                     <button title="Delete Data" class="btn btn-outline-danger text-xs"
@@ -137,7 +138,7 @@
         $(document).on('click', '#deleteButton', function(e) {
             e.preventDefault();
             let id = $(this).data('id');
-            formDelete.attr('action', `/storage/${id}`)
+            formDelete.attr('action', `/mst-storage/${id}`)
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",

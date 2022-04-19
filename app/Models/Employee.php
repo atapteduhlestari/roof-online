@@ -10,4 +10,9 @@ class Employee extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function assets()
+    {
+        return $this->belongsTo(Asset::class, 'emp_id');
+    }
 }

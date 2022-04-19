@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(CycleSeeder::class);
         $this->call(AssetGroupSeeder::class);
-        $this->call(AssetSeeder::class);
+        // $this->call(AssetSeeder::class);
         $this->call(RenewalSeeder::class);
         $this->call(StorageSeeder::class);
         $this->call(MaintenanceSeeder::class);

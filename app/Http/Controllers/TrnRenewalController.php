@@ -17,7 +17,7 @@ class TrnRenewalController extends Controller
         $trnRenewals = TrnRenewal::orderBy('trn_date', 'desc')->get();
         $renewals = Renewal::get();
         $assets = Asset::orderBy('asset_name', 'asc')->get();
-        $assetChild = AssetChild::orderBy('name', 'asc')->get();
+        $assetChild = AssetChild::orderBy('doc_name', 'asc')->get();
         $employees = Employee::orderBy('name', 'asc')->get();
 
         return view('transaction.renewal.index', compact(

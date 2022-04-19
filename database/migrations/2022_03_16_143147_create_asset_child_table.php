@@ -16,7 +16,9 @@ class CreateAssetChildTable extends Migration
         Schema::create('asset_child', function (Blueprint $table) {
             $table->id();
             $table->foreignId('asset_id');
-            $table->string('name');
+            $table->string('doc_name');
+            $table->string('doc_no');
+            $table->string('due_date');
             $table->text('desc')->nullable();
             $table->timestamps();
         });
