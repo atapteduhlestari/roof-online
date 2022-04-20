@@ -29,11 +29,12 @@ class AssetRequest extends FormRequest
             'asset_code' => 'required',
             'asset_no' => 'nullable',
             'asset_name' => 'required',
-            'position' => 'required',
             'pcs_date' => 'required|date',
             'pcs_value' => 'required',
             'apr_date' => 'nullable|date',
             'apr_value' => 'nullable',
+            'location' => 'required',
+            'condition' => 'required',
             'desc' => 'required',
             'image' => 'nullable',
         ];

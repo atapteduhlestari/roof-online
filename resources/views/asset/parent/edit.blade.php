@@ -14,10 +14,10 @@
                 <h1 class="h3text-gray-800 flex-grow-1">Edit Assets | {{ $asset->asset_name }}</h1>
             </div>
 
-            <a href="/asset-parent" class="btn btn-secondary btn-sm mr-2" data-dismiss="modal">
+            <a href="/asset-parent" class="btn btn-secondary btn-sm mr-2">
                 <i class="fas fa-arrow-left"></i> Asset
             </a>
-            <a href="/asset-group/{{ $asset->asset_group_id }}" class="btn btn-dark btn-sm" data-dismiss="modal">
+            <a href="/asset-group/{{ $asset->asset_group_id }}" class="btn btn-dark btn-sm">
                 <i class="fas fa-external-link-square-alt"></i> Group
             </a>
         </div>
@@ -43,20 +43,38 @@
                         <label for="asset_code">Asset Code</label>
                         <input type="text" class="form-control @error('asset_code') is-invalid @enderror" name="asset_code"
                             id="asset_code" value="{{ old('asset_code', $asset->asset_code) }}">
-                        </select>
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="position">Asset Position</label>
-                        <input type="text" class="form-control @error('position') is-invalid @enderror" name="position"
-                            value="{{ old('position', $asset->position) }}">
+                        <label for="location">Asset Location</label>
+                        <input type="text" class="form-control @error('location') is-invalid @enderror" name="location"
+                            value="{{ old('location', $asset->location) }}">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="condition">Asset Condition</label>
+                        <select class="form-control @error('condition') is-invalid @enderror" name="condition"
+                            id="condition">
+                            <option value=""></option>
+                            <option class="text-success" value="1"
+                                {{ old('condition', $asset->condition) == 1 ? 'selected' : '' }}>
+                                Baik
+                            </option>
+                            <option class="text-warning" value="2"
+                                {{ old('condition', $asset->condition) == 2 ? 'selected' : '' }}>
+                                Kurang
+                            </option>
+                            <option class="text-danger" value="3"
+                                {{ old('condition', $asset->condition) == 3 ? 'selected' : '' }}>
+                                Rusak
+                            </option>
+                        </select>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label for="asset_no">No. (Pol/Rumah/Seri)</label>
                         <input type="text" class="form-control @error('asset_no') is-invalid @enderror" name="asset_no"
                             id="asset_no" value="{{ old('asset_no', $asset->asset_no) }}">
-                        </select>
                     </div>
 
                     <div class="col-md-6 mb-3">
@@ -117,71 +135,6 @@
                 </div>
                 <button type="button" id="btnSubmit" class="btn btn-primary">Save Changes</button>
             </form>
-        </div>
-        <div class="mt-5 mb-3">
-            <button id="collapseBtn" class="btn btn-outline-dark text-xs rounded-pill" type="button" data-toggle="collapse"
-                data-target="#collapseTable" aria-expanded="false" aria-controls="collapseTable">
-                Show Table
-            </button>
-        </div>
-
-        <div class="collapse" id="collapseTable">
-            <!-- DataTales Example -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">List assets</h6>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Group</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th class="text-center">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($assets as $parent)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $parent->group->asset_group_name }}</td>
-                                        <td>{{ $parent->asset_name }}</td>
-                                        <td>{{ $parent->desc }}</td>
-                                        <td>
-                                            <div class="d-flex justify-content-around">
-                                                <div>
-                                                    <a title="Asset Documents"
-                                                        href="/asset-parent/docs/{{ $parent->id }}"
-                                                        class="btn btn-outline-dark text-xs">Documents</a>
-                                                </div>
-                                                <div>
-                                                    <a title="Edit Data" href="/asset-parent/{{ $parent->id }}/edit"
-                                                        class="btn btn-outline-dark text-xs">Edit</a>
-                                                </div>
-                                                <div>
-                                                    <form action="/asset-parent/{{ $parent->id }}" method="post"
-                                                        id="deleteForm">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button title="Delete Data" class="btn btn-outline-danger text-xs"
-                                                            onclick="return false" id="deleteButton"
-                                                            data-id="{{ $parent->id }}">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <!-- /.container-fluid -->

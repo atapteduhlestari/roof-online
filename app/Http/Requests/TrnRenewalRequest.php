@@ -16,15 +16,13 @@ class TrnRenewalRequest extends FormRequest
     public function rules()
     {
         $validate = [
-            'asset_id' => 'required',
+            'asset_child_id' => 'required',
             'renewal_id' => 'required',
-            'check' => 'required|boolean',
         ];
 
         if (TrnRenewalRequest::isMethod('PUT')) {
-            $validate['asset_id'] = '';
+            $validate['asset_child_id'] = '';
             $validate['renewal_id'] = '';
-            $validate['check'] = '';
         }
 
         return [
@@ -33,12 +31,12 @@ class TrnRenewalRequest extends FormRequest
             //     Rule::unique('trn_renewal')->ignore($this->trn_id),
             //     new DocumentFormat()
             // ],
+            'asset_child_id' => $validate['asset_child_id'],
             'trn_date' => 'required|date',
-            'asset_id' => $validate['asset_id'],
             'renewal_id' =>  $validate['renewal_id'],
             'pemohon' => 'required',
             'penyetuju' => 'required',
-            'check' =>  $validate['check'],
+            'trn_desc' => 'required'
         ];
     }
 }

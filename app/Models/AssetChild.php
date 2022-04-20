@@ -27,7 +27,7 @@ class AssetChild extends Model
         return $this->hasMany(TrnStorage::class, 'asset_child_id');
     }
 
-    public function trnMaintanencae()
+    public function trnMaintenance()
     {
         return $this->hasMany(TrnMaintenance::class, 'asset_child_id');
     }

@@ -12,12 +12,7 @@ class TrnRenewal extends Model
     protected $table = 'trn_renewal';
     protected $guarded = ['id'];
 
-    public function assets()
-    {
-        return $this->belongsTo(Asset::class, 'asset_id');
-    }
-
-    public function assetChildren()
+    public function document()
     {
         return $this->belongsTo(AssetChild::class, 'asset_child_id');
     }

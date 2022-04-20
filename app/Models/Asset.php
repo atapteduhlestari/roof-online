@@ -23,11 +23,6 @@ class Asset extends Model
         return $this->hasMany(AssetChild::class, 'asset_id');
     }
 
-    public function trnRenewal()
-    {
-        return $this->hasMany(TrnRenewal::class, 'asset_id');
-    }
-
     public function trnStorage()
     {
         return $this->hasMany(TrnStorage::class, 'asset_id');

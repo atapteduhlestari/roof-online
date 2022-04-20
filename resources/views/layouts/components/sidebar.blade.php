@@ -53,21 +53,21 @@
                 </div>
             </li> --}}
             <li
-                class="nav-item {{ request()->is('asset-group*') ||request()->is('mst-storage*') ||request()->is('renewal*') ||request()->is('maintenance*') ||request()->is('cycle*')? 'active': '' }}">
-                <a class="nav-link {{ request()->is('asset-group*') ||request()->is('mst-storage*') ||request()->is('renewal*') ||request()->is('maintenance*') ||request()->is('cycle*')? '': 'collapsed' }}"
+                class="nav-item {{ request()->is('asset-parent*') ||request()->is('asset-group*') ||request()->is('renewal*') ||request()->is('maintenance*') ||request()->is('cycle*')? 'active': '' }}">
+                <a class="nav-link {{ request()->is('asset-parent*') ||request()->is('asset-group*') ||request()->is('renewal*') ||request()->is('maintenance*') ||request()->is('cycle*')? '': 'collapsed' }}"
                     href="#" data-toggle="collapse" data-target="#collapseData" aria-expanded="true"
                     aria-controls="collapseData">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Data</span>
                 </a>
                 <div id="collapseData"
-                    class="collapse {{ request()->is('asset-group*') ||request()->is('mst-storage*') ||request()->is('renewal*') ||request()->is('maintenance*') ||request()->is('cycle*')? 'show': '' }}"
+                    class="collapse {{ request()->is('asset-parent*') ||request()->is('asset-group*') ||request()->is('renewal*') ||request()->is('maintenance*') ||request()->is('cycle*')? 'show': '' }}"
                     aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item  {{ request()->is('asset-parent*') ? 'active' : '' }}"
+                            href="/asset-parent">Asset</a>
                         <a class="collapse-item  {{ request()->is('asset-group*') ? 'active' : '' }}"
                             href="/asset-group">Group</a>
-                        <a class="collapse-item {{ request()->is('mst-storage*') ? 'active' : '' }}"
-                            href="/mst-storage">Storage</a>
                         <a class="collapse-item {{ request()->is('renewal*') ? 'active' : '' }}"
                             href="/renewal">Renewal</a>
                         <a class="collapse-item {{ request()->is('maintenance*') ? 'active' : '' }}"
@@ -77,19 +77,17 @@
                 </div>
             </li>
             <li
-                class="nav-item {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') || request()->is('trn-storage*')? 'active': '' }}">
-                <a class="nav-link {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') || request()->is('trn-storage*')? '': 'collapsed' }}"
+                class="nav-item {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') ? 'active' : '' }}">
+                <a class="nav-link {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') ? '' : 'collapsed' }}"
                     href="#" data-toggle="collapse" data-target="#collapseTransaction" aria-expanded="true"
                     aria-controls="collapseTransaction">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Transaction</span>
                 </a>
                 <div id="collapseTransaction"
-                    class="collapse {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') || request()->is('trn-storage*')? 'show': '' }}"
+                    class="collapse {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') ? 'show' : '' }}"
                     aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item {{ request()->is('trn-storage*') ? 'active' : '' }}"
-                            href="/trn-storage">Storage</a>
                         <a class="collapse-item {{ request()->is('trn-renewal*') ? 'active' : '' }}"
                             href="/trn-renewal">Renewal</a>
                         <a class="collapse-item {{ request()->is('trn-maintenance*') ? 'active' : '' }}"

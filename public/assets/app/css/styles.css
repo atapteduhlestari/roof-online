@@ -74,6 +74,10 @@ input[type=date] {
 
 table td,
 table th,
+th a,
+td a,
+th button,
+td button,
 .pagination {
     font-size: 2vh !important;
 }

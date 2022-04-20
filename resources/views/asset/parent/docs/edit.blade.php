@@ -11,7 +11,7 @@
             <div class="flex-grow-1">
                 <h1 class="h3 mb-2 text-gray-800">Assets Edit | {{ $asset->asset_name }}</h1>
             </div>
-            <a href="/asset-parent/docs/{{ $asset->id }}" class="btn btn-secondary btn-sm" data-dismiss="modal">
+            <a href="/asset-parent/docs/{{ $asset->id }}" class="btn btn-secondary btn-sm">
                 <i class="fas fa-arrow-left"></i> {{ $asset->asset_name }}
             </a>
         </div>

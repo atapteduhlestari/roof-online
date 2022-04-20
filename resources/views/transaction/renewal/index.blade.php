@@ -35,26 +35,14 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="asset_id">Assets</label>
-                        <select class="form-control @error('asset_id') is-invalid @enderror" id="asset_search"
-                            name="asset_id">
-                            <option value="">Select Assets</option>
-                            @foreach ($assets as $a)
-                                <option value="{{ $a->id }}" {{ old('asset_id') == $a->id ? 'selected' : '' }}>
-                                    {{ $a->asset_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label for="asset_child_id">Assets Docs</label>
-                        <select class="form-control @error('asset_child_id') is-invalid @enderror" id="asset_child_id"
-                            name="asset_child_id">
+                        <label for="asset_search">Documents</label>
+                        <select class="form-control @error('asset_search') is-invalid @enderror" id="asset_search"
+                            name="asset_search">
                             <option value="">Select Assets Docs</option>
                             @foreach ($assetChild as $ac)
                                 <option value="{{ $ac->id }}"
-                                    {{ old('asset_child_id') == $ac->id ? 'selected' : '' }}>
-                                    {{ $ac->asset_name }}</option>
+                                    {{ old('asset_search') == $ac->id ? 'selected' : '' }}>
+                                    {{ $ac->doc_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -91,8 +79,8 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $trn->trn_no }}</td>
                                     <td>{{ $trn->renewal->name }}</td>
-                                    <td>{{ createDate($trn->trn_date)->format('d-m-Y') }}</td>
-                                    <td>{{ $trn->created_at->format('d-m-Y') }}</td>
+                                    <td>{{ createDate($trn->trn_date)->format('d F Y') }}</td>
+                                    <td>{{ $trn->created_at->format('d F Y') }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
@@ -144,23 +132,15 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="asset_id">Assets</label>
-                                <select class="form-control @error('asset_id') is-invalid @enderror" id="asset_id"
-                                    name="asset_id">
-                                    <option value="">Select Assets</option>
-                                    @foreach ($assets as $asset)
-                                        <option value="{{ $asset->id }}"
-                                            {{ old('asset_id') == $asset->id ? 'selected' : '' }}>
-                                            {{ $asset->asset_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="col-md-6 mb-3" id="docsCol">
                                 <label for="asset_child_id">Docs</label>
-                                <select name="asset_child_id" id="assetChildren" class="form-control"
-                                    placeholder="Select Docs" disabled>
-                                    <option value="">Select Docs</option>
+                                <select class="form-control @error('asset_child_id') is-invalid @enderror"
+                                    id="asset_child_id" name="asset_child_id">
+                                    <option value=""></option>
+                                    @foreach ($assetChild as $doc)
+                                        <option value="{{ $doc->id }}"
+                                            {{ old('asset_child_id') == $doc->id ? 'selected' : '' }}>
+                                            {{ $doc->doc_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
@@ -168,7 +148,7 @@
                                 <label for="renewal_id">Select Renewal</label>
                                 <select class="form-control @error('renewal_id') is-invalid @enderror" id="renewal_id"
                                     name="renewal_id">
-                                    <option value="">Select Renewal</option>
+                                    <option value=""></option>
                                     @foreach ($renewals as $renewal)
                                         <option value="{{ $renewal->id }}"
                                             {{ old('renewal_id') == $renewal->id ? 'selected' : '' }}>
@@ -218,7 +198,7 @@
                             <label for="trn_desc">Description</label>
                             <textarea class="form-control" id="trn_desc" name="trn_desc" cols="10" rows="5">{{ old('trn_desc') }}</textarea>
                         </div>
-                        <input type="hidden" value="1" name="check" id="check">
+
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>
                     </form>
@@ -237,10 +217,7 @@
             $('#dataTable').DataTable();
         });
 
-        let assetChildren = $('#assetChildren'),
-            appendDocs = $('#docsCol'),
-            checkDocs = $('#check'),
-            form = $('#formTrnRenewal'),
+        let form = $('#formTrnRenewal'),
             btnSubmit = $('#btnSubmit');
 
         $("#asset_search").selectize({
@@ -248,7 +225,7 @@
             sortField: "text",
         });
 
-        $("#asset_id").selectize({
+        $("#asset_child_id").selectize({
             create: false,
             sortField: "text",
         });
@@ -266,32 +243,6 @@
         $("#renewal_id").selectize({
             create: false,
             sortField: "text",
-        });
-
-        $(document).on('change', '#asset_id', async function() {
-            let id = $(this).val();
-            if (id) {
-                await $.getJSON(`/api/asset-parent/get-data/${id}`, function(res) {
-                    assetChildren.prop('disabled', false);
-                    assetChildren.empty().append($('<option>').text('Select Docs').val(''));
-
-                    $.each(res, function(index, item) {
-                        assetChildren.append($('<option>').text(item.name).val(item.id));
-                    });
-                });
-
-                $(assetChildren).change(function() {
-                    if ($(this).val() === "")
-                        checkDocs.val(1)
-                    else
-                        checkDocs.val(0)
-                })
-
-            } else {
-                checkDocs.val(1)
-                assetChildren.prop('disabled', true);
-                assetChildren.empty().append($('<option>').text('Select Docs').val(''));
-            }
         });
 
         btnSubmit.click(function() {

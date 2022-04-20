@@ -53,8 +53,8 @@
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
-                                                <a title="Asset Documents" href="/asset-parent/docs/{{ $asset->id }}"
-                                                    class="btn btn-outline-dark text-xs">Documents</a>
+                                                <a title="Asset Detail" href="/asset-parent/docs/{{ $asset->id }}"
+                                                    class="btn btn-outline-dark text-xs">Detail</a>
                                             </div>
                                             <div>
                                                 <a title="Edit Data" href="/asset-parent/{{ $asset->id }}/edit"
@@ -120,9 +120,29 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="position">Asset Position</label>
-                                <input type="text" class="form-control @error('position') is-invalid @enderror"
-                                    name="position" value="{{ old('position') }}">
+                                <label for="location">Asset Location</label>
+                                <input type="text" class="form-control @error('location') is-invalid @enderror"
+                                    name="location" value="{{ old('location') }}">
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="condition">Asset Condition</label>
+                                <select class="form-control @error('condition') is-invalid @enderror" name="condition"
+                                    id="condition">
+                                    <option value=""></option>
+                                    <option class="text-success" value="1"
+                                        {{ old('condition') == 1 ? 'selected' : '' }}>
+                                        Baik
+                                    </option>
+                                    <option class="text-warning" value="2"
+                                        {{ old('condition') == 2 ? 'selected' : '' }}>
+                                        Kurang
+                                    </option>
+                                    <option class="text-danger" value="3"
+                                        {{ old('condition') == 3 ? 'selected' : '' }}>
+                                        Rusak
+                                    </option>
+                                </select>
                             </div>
 
                             <div class="col-md-6 mb-3">

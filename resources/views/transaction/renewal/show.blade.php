@@ -20,18 +20,19 @@
                     </tr>
                     <tr>
                         <th>Due Date</th>
-                        <td>{{ createDate($trnRenewal->trn_date)->format('d-m-Y') }}</td>
+                        <td>{{ createDate($trnRenewal->trn_date)->format('d F Y') }}</td>
                     </tr>
                     <tr>
-                        <th>{{ $trnRenewal->assets ? 'Asset' : 'Docs' }}
-                        </th>
-                        <td>{{ $trnRenewal->assets ? $trnRenewal->assets->asset_name : $trnRenewal->assetChildren->name }}
-                        </td>
+                        <th>Document</th>
+                        <td>{{ $trnRenewal->document->doc_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Asset</th>
+                        <td>{{ $trnRenewal->document->parent->asset_name }}</td>
                     </tr>
                     <tr>
                         <th>Group</th>
-                        <td> {{ $trnRenewal->assets? $trnRenewal->assets->group->asset_group_name: $trnRenewal->assetChildren->parent->group->asset_group_name }}
-                        </td>
+                        <td>{{ $trnRenewal->document->parent->group->asset_group_name }}</td>
                     </tr>
                     <tr>
                         <th>Description</th>
@@ -47,7 +48,7 @@
                     </tr>
                     <tr>
                         <th>Created</th>
-                        <td>{{ $trnRenewal->created_at->format('d-m-Y') }}</td>
+                        <td>{{ $trnRenewal->created_at->format('d F Y') }}</td>
                     </tr>
                     <tr>
                         <th>REN</th>

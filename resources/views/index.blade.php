@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-lg-6 mb-4">
                 <!-- Earnings (Monthly) Card Example -->
                 <div class="mb-4">
@@ -114,7 +114,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
     <!-- /.container-fluid -->
 @endsection

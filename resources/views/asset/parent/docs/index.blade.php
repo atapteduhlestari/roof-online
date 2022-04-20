@@ -26,11 +26,22 @@
                     <div class="col-lg-6">
                         <img class="img-fluid px-3 px-sm-4 my-5" src="{{ $asset->takeImage }}">
                         <div class="d-flex justify-content-center">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
+                                <form action="/trn-maintenance/create">
+                                    <input type="hidden" name="id" value="{{ $asset->id }}" readonly>
+                                    <input type="hidden" name="check" value="document" readonly>
+                                    <button type="submit" class="btn btn-outline-dark btn-sm btn-block">
+                                        <i class="fas fa-tools"></i> Maintenance
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div class="col-md-4">
                                 <a title="Edit Data" href="/asset-parent/{{ $asset->id }}/edit"
                                     class="btn btn-info btn-sm btn-block">Edit</a>
                             </div>
-                            <div class="col-md-3">
+
+                            <div class="col-md-4">
                                 <form action="/asset-parent/{{ $asset->id }}" method="post" id="deleteForm">
                                     @csrf
                                     @method('delete')
@@ -46,20 +57,27 @@
                         <div class="table-responsive">
                             <table class="table table-borderless">
                                 <tr>
-                                    <th>Asset Name</th>
+                                    <th>Name</th>
                                     <td>{{ $asset->asset_name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Asset Code</th>
+                                    <th>Code</th>
                                     <td>{{ $asset->asset_code }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Asset No. (Pol/Rumah/Seri)</th>
+                                    <th>No. (Pol/Rumah/Seri)</th>
                                     <td>{{ $asset->asset_no }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Asset Position</th>
-                                    <td>{{ $asset->position }}</td>
+                                    <th>Location</th>
+                                    <td>{{ $asset->location }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Condition</th>
+                                    <td
+                                        class="{{ ($asset->condition == 1 ? 'text-success' : $asset->condition == 2) ? 'text-warning' : 'text-danger' }}">
+                                        {{ ($asset->condition == 1 ? 'Baik' : $asset->condition == 2) ? 'Kurang' : 'Rusak' }}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>
@@ -94,18 +112,21 @@
                     </div>
                 </div>
 
-                <div class="col-md-2 mx-auto mt-5">
-                    <button class="btn btn-dark btn-sm btn-block border-0" type="button" data-toggle="collapse"
-                        data-target="#collapseDocuments" aria-expanded="false" aria-controls="collapseDocuments"
-                        id="collapseButton">
-                        <span>Documents</span> <i id="toggler" class="fas fa-angle-right"></i>
-                    </button>
+                <div class="row">
+                    <div class="col-md-2 mt-5">
+                        <button class="btn btn-dark btn-sm btn-block border-0" type="button" data-toggle="collapse"
+                            data-target="#collapseDocuments" aria-expanded="false" aria-controls="collapseDocuments"
+                            id="collapseButton">
+                            <span>Documents</span> <i id="toggler" class="fas fa-angle-right"></i>
+                        </button>
+                    </div>
+
                 </div>
 
 
                 <div class="collapse pb-3" id="collapseDocuments">
                     <div class="">
-                        <div class="d-flex align-items-end my-4">
+                        <div class="d-flex align-items-end mb-4">
                             <div class="flex-grow-1">
                                 <button title="add new document" class="btn btn-primary btn-sm" type="button"
                                     data-toggle="modal" data-target="#addNewRecord">
@@ -136,10 +157,17 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $child->doc_name }}</td>
                                             <td>{{ $child->doc_no }}</td>
-                                            <td>{{ $child->due_date }}</td>
+                                            <td>{{ createDate($child->due_date)->format('d F Y') }}</td>
                                             <td>{{ $child->desc }}</td>
                                             <td>
                                                 <div class="d-flex justify-content-around">
+                                                    <form action="/trn-renewal/create">
+                                                        <input type="hidden" name="id" value="{{ $child->id }}"
+                                                            readonly>
+                                                        <button type="submit" class="btn btn-outline-dark btn-sm">
+                                                            <i class="fas fa-file-signature"></i> Renewal
+                                                        </button>
+                                                    </form>
                                                     <div>
                                                         <a title="Edit Data"
                                                             href="/asset-parent/docs/edit/{{ $asset->id }}/{{ $child->id }}"

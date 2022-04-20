@@ -8,7 +8,7 @@
     <!-- Begin Page Content -->
     <div class="container-fluid">
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Assets</h1>
+        <h1 class="h3 mb-2 text-gray-800">All Assets</h1>
         <div class="my-4">
             <!-- Button trigger modal -->
             <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addNewRecord">
@@ -44,25 +44,25 @@
                                         </a>
                                     </td>
                                     <td>{{ $asset->asset_code }}</td>
-                                    <td>{{ $asset->pcs_date }}</td>
+                                    <td>{{ createDate($asset->pcs_date)->format('d F Y') }}</td>
                                     <td>{{ rupiah($asset->pcs_value) }}</td>
                                     <td>{{ $asset->employee->name }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
-                                                <a title="Asset Documents" href="/asset-parent/docs/{{ $asset->id }}"
-                                                    class="btn btn-outline-dark text-xs">Documents</a>
+                                                <a title="Asset Detail" href="/asset-parent/docs/{{ $asset->id }}"
+                                                    class="btn btn-outline-dark btn-sm">Detail</a>
                                             </div>
                                             <div>
                                                 <a title="Edit Data" href="/asset-parent/{{ $asset->id }}/edit"
-                                                    class="btn btn-outline-dark text-xs">Edit</a>
+                                                    class="btn btn-outline-dark btn-sm">Edit</a>
                                             </div>
                                             <div>
                                                 <form action="/asset-parent/{{ $asset->id }}" method="post"
                                                     id="deleteForm">
                                                     @csrf
                                                     @method('delete')
-                                                    <button title="Delete Data" class="btn btn-outline-danger text-xs"
+                                                    <button title="Delete Data" class="btn btn-outline-danger btn-sm"
                                                         onclick="return false" id="deleteButton"
                                                         data-id="{{ $asset->id }}">
                                                         <i class="fas fa-trash-alt"></i>
@@ -120,20 +120,39 @@
                                 <label for="asset_code">Asset Code</label>
                                 <input type="text" class="form-control @error('asset_code') is-invalid @enderror"
                                     name="asset_code" id="asset_code" value="{{ old('asset_code') }}">
-                                </select>
+
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="position">Asset Position</label>
-                                <input type="text" class="form-control @error('position') is-invalid @enderror"
-                                    name="position" value="{{ old('position') }}">
+                                <label for="location">Asset Location</label>
+                                <input type="text" class="form-control @error('location') is-invalid @enderror"
+                                    name="location" value="{{ old('location') }}">
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="condition">Asset Condition</label>
+                                <select class="form-control @error('condition') is-invalid @enderror" name="condition"
+                                    id="condition">
+                                    <option value=""></option>
+                                    <option class="text-success" value="1"
+                                        {{ old('condition') == 1 ? 'selected' : '' }}>
+                                        Baik
+                                    </option>
+                                    <option class="text-warning" value="2"
+                                        {{ old('condition') == 2 ? 'selected' : '' }}>
+                                        Kurang
+                                    </option>
+                                    <option class="text-danger" value="3"
+                                        {{ old('condition') == 3 ? 'selected' : '' }}>
+                                        Rusak
+                                    </option>
+                                </select>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label for="asset_no">No. (Pol/Rumah/Seri)</label>
                                 <input type="text" class="form-control @error('asset_no') is-invalid @enderror"
                                     name="asset_no" id="asset_no" value="{{ old('asset_no') }}">
-                                </select>
                             </div>
 
                             <div class="col-md-6 mb-3">

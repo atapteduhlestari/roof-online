@@ -52,12 +52,15 @@ Route::middleware(['auth'])->group(function () {
         'mst-storage' => 'storage',
     ]);
 
-    Route::resource('/trn-renewal', TrnRenewalController::class)->except(['create']);
+    Route::resource('/trn-renewal', TrnRenewalController::class);
     Route::post('/trn-renewal/search', [TrnRenewalController::class, 'search']);
+    Route::post('/trn-renewal/store-asset', [TrnRenewalController::class, 'storeAsset']);
+    Route::post('/trn-renewal/store-doc', [TrnRenewalController::class, 'storeDocument']);
 
-    Route::resource('/trn-maintenance', TrnMaintenanceController::class)->except(['create']);
-
-    Route::resource('/trn-storage', TrnStorageController::class)->except(['create']);
+    Route::resource('/trn-maintenance', TrnMaintenanceController::class);
+    Route::post('/trn-maintenance/search', [TrnMaintenanceController::class, 'search']);
+    Route::post('/trn-maintenance/store-asset', [TrnMaintenanceController::class, 'storeAsset']);
+    Route::post('/trn-maintenance/store-doc', [TrnMaintenanceController::class, 'storeDocument']);
 
     Route::resource('/cycle', CycleController::class)->except(['create']);
     Route::resource('/employee', EmployeeController::class)->except(['create']);

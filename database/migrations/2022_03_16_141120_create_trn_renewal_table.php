@@ -15,8 +15,7 @@ class CreateTrnRenewalTable extends Migration
     {
         Schema::create('trn_renewal', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('asset_id')->nullable();
-            $table->foreignId('asset_child_id')->nullable();
+            $table->foreignId('asset_child_id');
             $table->foreignId('renewal_id');
             $table->foreignId('user_id');
             $table->string('pemohon')->nullable();
