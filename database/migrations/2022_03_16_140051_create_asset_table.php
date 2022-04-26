@@ -17,6 +17,7 @@ class CreateAssetTable extends Migration
             $table->id();
             $table->foreignId('asset_group_id');
             $table->foreignId('user_id');
+            $table->foreignId('sdb_id')->nullable();
             $table->foreignId('emp_id');
             $table->string('asset_code');
             $table->string('asset_no')->nullable();

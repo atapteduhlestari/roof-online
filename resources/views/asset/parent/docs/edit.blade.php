@@ -9,7 +9,7 @@
 
         <div class="d-flex align-items-center mb-3">
             <div class="flex-grow-1">
-                <h1 class="h3 mb-2 text-gray-800">Assets Edit | {{ $asset->asset_name }}</h1>
+                <h1 class="h3 mb-2 text-gray-800">Document Edit</h1>
             </div>
             <a href="/asset-parent/docs/{{ $asset->id }}" class="btn btn-secondary btn-sm">
                 <i class="fas fa-arrow-left"></i> {{ $asset->asset_name }}
@@ -17,7 +17,7 @@
         </div>
         <!-- Page Heading -->
         <div class="my-4">
-            <form id="formAdd" action="/asset-parent/docs/update/{{ $asset->id }}/{{ $child->id }}" method="POST">
+            <form id="formAdd" action="/asset-child/{{ $child->id }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="row">
@@ -34,7 +34,7 @@
                             <label for="doc_no">Document No</label>
                             <input name="doc_no" id="doc_no" type="text"
                                 class="form-control @error('doc_no') is-invalid @enderror"
-                                value="{{ old('doc_no', $child->doc_no) }}" autocomplete="off" autofocus>
+                                value="{{ old('doc_no', $child->doc_no) }}">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -42,7 +42,27 @@
                             <label for="due_date">Due Date</label>
                             <input name="due_date" id="due_date" type="date"
                                 class="form-control @error('due_date') is-invalid @enderror"
-                                value="{{ old('due_date', $child->due_date) }}" autocomplete="off" autofocus>
+                                value="{{ old('due_date', $child->due_date) }}">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Asset</label>
+                            <input type="text" class="form-control not-allowed" value="{{ $child->parent->asset_name }}"
+                                disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="sdb_id">SDB</label>
+                            <select class="form-control @error('sdb_id') is-invalid @enderror" name="sdb_id" id="sdb_id">
+                                <option value=""></option>
+                                @foreach ($SDBs as $sdb)
+                                    <option value="{{ $sdb->id }}"
+                                        {{ old('sdb_id', $child->sdb_id) == $sdb->id ? 'selected' : '' }}>
+                                        {{ $sdb->sdb_name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>

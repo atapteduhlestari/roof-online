@@ -23,17 +23,7 @@ class TrnMaintenanceRequest extends FormRequest
      */
     public function rules()
     {
-        $validate = [
-            'asset_id' => 'required',
-            'maintenance_id' => 'required',
-            'check' => 'required|boolean',
-        ];
 
-        if (TrnMaintenanceRequest::isMethod('PUT')) {
-            $validate['asset_id'] = '';
-            $validate['maintenance_id'] = '';
-            $validate['check'] = '';
-        }
 
         return [
             // 'trn_no' => [
@@ -42,11 +32,10 @@ class TrnMaintenanceRequest extends FormRequest
             //     new DocumentFormat()
             // ],
             'trn_date' => 'required|date',
-            'asset_id' => $validate['asset_id'],
-            'maintenance_id' =>  $validate['maintenance_id'],
+            'asset_id' => 'required',
+            'maintenance_id' => 'required',
             'pemohon' => 'required',
-            'penyetuju' => 'required',
-            'check' =>  $validate['check'],
+            'penyetuju' => 'required'
         ];
     }
 }

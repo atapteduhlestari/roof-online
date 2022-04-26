@@ -132,7 +132,7 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="asset_child_id">Docs</label>
+                                <label for="asset_child_id">Select Document</label>
                                 <select class="form-control @error('asset_child_id') is-invalid @enderror"
                                     id="asset_child_id" name="asset_child_id">
                                     <option value=""></option>

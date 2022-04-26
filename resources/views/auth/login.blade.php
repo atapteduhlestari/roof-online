@@ -35,8 +35,13 @@
         }
 
         .card {
-            height: 100vh !important;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 85%;
+            transform: translate(-50%, -50%)
         }
+
 
         .bg-login {
             background: #4DA0B0;
@@ -50,11 +55,11 @@
     </style>
 </head>
 
-<body class="bg-login">
+<body class="">
     <div class="container">
 
         <!-- Outer Row -->
-        <div class="card border-0 shadow h-100">
+        <div class="card border-0 shadow">
             <div class="card-body">
                 <h3 class="text-center font-weight-bolder">General Affair</h3>
 

@@ -3,13 +3,13 @@
     <link href="/assets/template/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="/assets/template/vendor/selectize/selectize.css" rel="stylesheet">
 @endpush
-@section('title', 'GA | Asset Group')
+@section('title', 'GA | SDB')
 @section('container')
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Asset Group | {{ $assetGroup->asset_group_name }}</h1>
+        <h1 class="h3 mb-2 text-gray-800">SDB | {{ $sdb->sdb_name }}</h1>
 
         <div class="my-4">
             <!-- Button trigger modal -->
@@ -102,12 +102,11 @@
                             <div class="col-md-6 mb-3">
                                 <label for="asset_name">Asset Name</label>
                                 <input type="text" class="form-control @error('asset_name') is-invalid @enderror"
-                                    name="asset_name" id="asset_name" value="{{ old('asset_name') }}" autofocus
-                                    autocomplete="off">
+                                    name="asset_name" id="asset_name" value="{{ old('asset_name') }}">
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="">Asset Group</label>
+                                <label for="">SDB</label>
                                 <input type="hidden" name="asset_group_id" value="{{ $assetGroup->id }}" readonly>
                                 <input type="text" class="form-control not-allowed"
                                     value="{{ $assetGroup->asset_group_name }}" disabled>

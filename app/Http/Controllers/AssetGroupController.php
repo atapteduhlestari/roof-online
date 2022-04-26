@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AssetGroup;
+use App\Models\SDB;
 use App\Models\Employee;
+use App\Models\AssetGroup;
 use Illuminate\Http\Request;
 
 class AssetGroupController extends Controller
@@ -35,7 +36,13 @@ class AssetGroupController extends Controller
     public function show(AssetGroup $assetGroup)
     {
         $employees = Employee::orderBy('name', 'asc')->get();
-        return view('asset.group.show', compact('assetGroup', 'employees'));
+        $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
+
+        return view('asset.group.show', compact(
+            'assetGroup',
+            'employees',
+            'SDBs'
+        ));
     }
 
     public function update(Request $request, AssetGroup $assetGroup)

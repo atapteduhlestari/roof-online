@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAssetStorageTable extends Migration
+class CreateSDBTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateAssetStorageTable extends Migration
      */
     public function up()
     {
-        Schema::create('asset_storage', function (Blueprint $table) {
+        Schema::create('sdb', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cycle_id')->nullable();
-            $table->string('no_doc')->nullable();
-            $table->string('name');
+            $table->string('sdb_name');
+            $table->date('pcs_date');
+            $table->string('pcs_value');
+            $table->date('due_date', 2);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateAssetStorageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('asset_storage');
+        Schema::dropIfExists('sdb');
     }
 }

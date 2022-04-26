@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\TrnMaintenance;
 use App\Models\Asset;
 use App\Models\Employee;
-use App\Models\AssetChild;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
 use App\Http\Requests\TrnMaintenanceRequest;
@@ -18,86 +17,34 @@ class TrnMaintenanceController extends Controller
         $trnMaintenances = TrnMaintenance::get();
         $maintenances = Maintenance::get();
         $assets = Asset::orderBy('asset_name', 'asc')->get();
-        $assetChild = AssetChild::orderBy('doc_name', 'asc')->get();
         $employees = Employee::orderBy('name', 'asc')->get();
 
         return view('transaction.maintenance.index', compact(
             'trnMaintenances',
             'maintenances',
             'assets',
-            'assetChild',
             'employees'
         ));
     }
 
     public function create(Request $request)
     {
-        $check = $request->check;
         $maintenances = Maintenance::orderBy('name', 'asc')->get();
         $employees = Employee::orderBy('name', 'asc')->get();
-        $assets = null;
+        $asset = Asset::findOrFail($request->id);
 
-        switch ($check) {
-            case 'document':
-                $asset = AssetChild::find($request->id);
-                return view('transaction.maintenance.docs.create', compact('asset', 'maintenances', 'employees'));
-                break;
-
-            case 'asset':
-                $asset = Asset::find($request->id);
-                return view('transaction.maintenance.create', compact('asset', 'maintenances', 'employees'));
-                break;
-
-            default:
-                return redirect()->back()->with('warning', 'Oops something wrong, try again!');
-                break;
-        }
+        return view('transaction.maintenance.create', compact(
+            'asset',
+            'maintenances',
+            'employees'
+        ));
     }
 
     public function store(TrnMaintenanceRequest $request)
-    {
-        $data = $request->all();
+    {;
 
-        if ($data['check'] == 0) {
-            $data['asset_child_id'] = $data['asset_id'];
-            unset($data['asset_id']);
-        }
-
-        $this->storeTrnData($data);
+        $data = $this->storeTrnData($request->all());
         TrnMaintenance::create($data);
-
-        return redirect()->back()->with('success', 'Success!');
-    }
-
-    public function storeAsset(Request $request)
-    {
-        $request->validate([
-            'trn_date' => 'required|date',
-            'asset_id' => 'required',
-            'maintenance_id' => 'required',
-            'pemohon' => 'required',
-            'penyetuju' => 'required',
-        ]);
-
-        $data = $request->all();
-        $this->storeTrnData($data);
-
-        return redirect()->back()->with('success', 'Success!');
-    }
-
-
-    public function storeDoc(Request $request)
-    {
-        $request->validate([
-            'trn_date' => 'required|date',
-            'asset_child_id' => 'required',
-            'maintenance_id' => 'required',
-            'pemohon' => 'required',
-            'penyetuju' => 'required',
-        ]);
-
-        $data = $request->all();
-        $this->storeTrnData($data);
 
         return redirect()->back()->with('success', 'Success!');
     }
@@ -111,23 +58,22 @@ class TrnMaintenanceController extends Controller
             ->count();
         $data['trn_no'] = setNoTrn($data['trn_date'], $count ?? null, 'MAI');
 
-        TrnMaintenance::create($data);
-        return;
+        return $data;
     }
 
     public function show(TrnMaintenance $trnMaintenance)
     {
-        //
+        return view('transaction.maintenance.show', compact('trnMaintenance'));
     }
 
     public function edit(TrnMaintenance $trnMaintenance)
     {
-        $trnMaintenances = TrnMaintenance::get();
+        $maintenances = Maintenance::get();
         $employees = Employee::orderBy('name', 'asc')->get();
 
         return view('transaction.maintenance.edit', compact(
+            'maintenances',
             'trnMaintenance',
-            'trnMaintenances',
             'employees'
         ));
     }
@@ -137,8 +83,6 @@ class TrnMaintenanceController extends Controller
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
         $data['maintenance_id'] = $trnMaintenance->maintenance_id;
-        $data['asset_id'] = $trnMaintenance->assets()->exists() ? $trnMaintenance->asset_id : null;
-        $data['asset_child_id'] = $trnMaintenance->assetChildren()->exists() ? $trnMaintenance->asset_child_id : null;
 
         $trnMaintenance->update($data);
         return redirect()->back()->with('success', 'Success!');

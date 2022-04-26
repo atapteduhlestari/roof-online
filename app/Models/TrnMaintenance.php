@@ -12,14 +12,9 @@ class TrnMaintenance extends Model
     protected $table = 'trn_maintenance';
     protected $guarded = ['id'];
 
-    public function assets()
+    public function asset()
     {
         return $this->belongsTo(Asset::class, 'asset_id');
-    }
-
-    public function assetChildren()
-    {
-        return $this->belongsTo(AssetChild::class, 'asset_child_id');
     }
 
     public function maintenance()

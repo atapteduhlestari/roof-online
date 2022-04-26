@@ -61,6 +61,9 @@
 
                 <div class="row">
                     <div class="col-md-6">
+                        <a href="/renewal" class="btn btn-secondary btn-sm mr-2">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </a>
                         <button type="submit" class="btn btn-primary">
                             Save Changes
                         </button>

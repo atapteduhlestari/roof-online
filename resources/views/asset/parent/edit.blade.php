@@ -11,7 +11,7 @@
         <!-- Page Heading -->
         <div class="d-flex align-items-center mb-3">
             <div class="flex-grow-1">
-                <h1 class="h3text-gray-800 flex-grow-1">Edit Assets | {{ $asset->asset_name }}</h1>
+                <h1 class="h3 text-gray-800 flex-grow-1">Edit Assets | {{ $asset->asset_name }}</h1>
             </div>
 
             <a href="/asset-parent" class="btn btn-secondary btn-sm mr-2">
@@ -30,7 +30,8 @@
                     <div class="col-md-6 mb-3">
                         <label for="asset_name">Asset Name</label>
                         <input type="text" class="form-control @error('asset_name') is-invalid @enderror" name="asset_name"
-                            id="asset_name" value="{{ old('asset_name', $asset->asset_name) }}">
+                            id="asset_name" value="{{ old('asset_name', $asset->asset_name) }}" autocomplete="off"
+                            autofocus>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Asset Group</label>
@@ -71,10 +72,18 @@
                         </select>
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <label for="asset_no">No. (Pol/Rumah/Seri)</label>
-                        <input type="text" class="form-control @error('asset_no') is-invalid @enderror" name="asset_no"
-                            id="asset_no" value="{{ old('asset_no', $asset->asset_no) }}">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="sdb_id">SDB</label>
+                            <select class="form-control @error('sdb_id') is-invalid @enderror" name="sdb_id" id="sdb_id">
+                                <option value=""></option>
+                                @foreach ($SDBs as $sdb)
+                                    <option value="{{ $sdb->id }}"
+                                        {{ old('sdb_id', $asset->sdb_id) == $sdb->id ? 'selected' : '' }}>
+                                        {{ $sdb->sdb_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
                     <div class="col-md-6 mb-3">
@@ -88,6 +97,13 @@
                             @endforeach
                         </select>
                     </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="asset_no">No. (Pol/Rumah/Seri)</label>
+                        <input type="text" class="form-control @error('asset_no') is-invalid @enderror" name="asset_no"
+                            id="asset_no" value="{{ old('asset_no', $asset->asset_no) }}">
+                    </div>
+
                 </div>
 
                 <hr>
@@ -133,7 +149,11 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" id="btnSubmit" class="btn btn-primary">Save Changes</button>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="button" id="btnSubmit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

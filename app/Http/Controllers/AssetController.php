@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SDB;
 use App\Models\Asset;
 use App\Models\Employee;
 use App\Models\AssetChild;
@@ -17,11 +18,13 @@ class AssetController extends Controller
         $assets = Asset::orderBy('asset_name', 'asc')->get();
         $assetGroup = AssetGroup::get();
         $employees = Employee::orderBy('name', 'asc')->get();
+        $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
 
         return view('asset.parent.index', compact(
             'assets',
             'assetGroup',
             'employees',
+            'SDBs'
         ));
     }
 
@@ -52,12 +55,14 @@ class AssetController extends Controller
         $assetGroup = AssetGroup::get();
         $assets = Asset::get();
         $employees = Employee::orderBy('name', 'asc')->get();
+        $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
 
         return view('asset.parent.edit', compact(
             'asset',
             'assets',
             'assetGroup',
             'employees',
+            'SDBs'
         ));
     }
 
@@ -88,6 +93,10 @@ class AssetController extends Controller
             return redirect('/asset-parent')->with('warning', 'Cannot delete assets that have documents!');
         }
 
+        if ($asset->trnMaintenance()->exists()) {
+            return redirect('/asset')->with('warning', 'Cannot delete asset that have transactions!');
+        }
+
         Storage::delete($asset->image);
         $asset->delete();
         return redirect('/asset-parent')->with('success', 'Success!');
@@ -95,7 +104,8 @@ class AssetController extends Controller
 
     public function documents(Asset $asset)
     {
-        return view('asset.parent.docs.index', compact('asset'));
+        $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
+        return view('asset.parent.docs.index', compact('asset', 'SDBs'));
     }
 
     public function addDocuments(Request $request, Asset $asset)
@@ -118,7 +128,14 @@ class AssetController extends Controller
     {
         $child = $asset->children()->where('id', $childId)->first();
         $children = AssetChild::where('id', '!=', $childId)->get();
-        return view('asset.parent.docs.edit', compact('asset', 'child', 'children'));
+        $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
+
+        return view('asset.parent.docs.edit', compact(
+            'asset',
+            'child',
+            'children',
+            'SDBs'
+        ));
     }
 
     public function updateDocuments(Request $request, Asset $asset, $id)
@@ -146,7 +163,10 @@ class AssetController extends Controller
 
     public function deleteDocuments(Asset $asset, $childId)
     {
-        Storage::delete($asset->image);
+        if ($asset->children()->where('id', $childId)->trnRenewal()->exists()) {
+            return redirect('/asset-parent/docs/' . $asset->id)->with('warning', 'Cannot delete document that have transactions!');
+        }
+
         $asset->children()->where('id', $childId)->delete();
         return redirect('/asset-parent/docs/' . $asset->id)->with('success', 'Success!');
     }

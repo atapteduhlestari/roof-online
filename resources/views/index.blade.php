@@ -36,13 +36,13 @@
                                 </div>
                             @endforeach
                             <div class="col-md-12 mb-3">
-                                <a href="" class="btn btn-outline-dark btn-block">
+                                <a href="/asset-child" class="btn btn-outline-dark btn-block">
                                     Documents
                                 </a>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <hr>
-                                <a href="" class="btn btn-outline-dark btn-block">
+                                <a href="/sdb" class="btn btn-outline-dark btn-block">
                                     SDB
                                 </a>
                             </div>

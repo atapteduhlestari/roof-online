@@ -24,7 +24,7 @@
         </div>
 
         <div class="collapse" id="collapseSearch">
-            <form action="/trn-renewal/search" method="POST">
+            <form action="/trn-maintenance/search" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col-md-6">
@@ -35,40 +35,31 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="asset_id">Assets</label>
-                        <select class="form-control @error('asset_id') is-invalid @enderror" id="asset_search"
-                            name="asset_id">
+                        <label for="asset_search">Assets</label>
+                        <select class="form-control @error('asset_search') is-invalid @enderror" id="asset_search"
+                            name="asset_search">
                             <option value="">Select Assets</option>
-                            @foreach ($assets as $a)
-                                <option value="{{ $a->id }}" {{ old('asset_id') == $a->id ? 'selected' : '' }}>
-                                    {{ $a->asset_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label for="asset_child_id">Assets Docs</label>
-                        <select class="form-control @error('asset_child_id') is-invalid @enderror" id="asset_child_id"
-                            name="asset_child_id">
-                            <option value="">Select Assets Docs</option>
-                            @foreach ($assetChild as $ac)
+                            @foreach ($assets as $ac)
                                 <option value="{{ $ac->id }}"
-                                    {{ old('asset_child_id') == $ac->id ? 'selected' : '' }}>
+                                    {{ old('asset_search') == $ac->id ? 'selected' : '' }}>
                                     {{ $ac->asset_name }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
+
                 <button type="submit" class="btn btn-outline-dark ml-1 rounded text-xs">
                     Find <i class="fas fa-search"></i>
                 </button>
             </form>
         </div>
 
+
         <div class="card shadow mt-3">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">List Transaction</h6>
             </div>
+
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
@@ -88,8 +79,8 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $trn->trn_no }}</td>
                                     <td>{{ $trn->maintenance->name }}</td>
-                                    <td>{{ createDate($trn->trn_date)->format('d-m-Y') }}</td>
-                                    <td>{{ $trn->created_at->format('d-m-Y') }}</td>
+                                    <td>{{ createDate($trn->trn_date)->format('d F Y') }}</td>
+                                    <td>{{ $trn->created_at->format('d F Y') }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
@@ -137,14 +128,14 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="/trn-maintenance" method="POST" id="formTrnMaintenance">
+                    <form action="/trn-maintenance" method="POST" id="formTrnmaintenance">
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="asset_id">Assets</label>
+                                <label for="asset_id">Select Asset</label>
                                 <select class="form-control @error('asset_id') is-invalid @enderror" id="asset_id"
                                     name="asset_id">
-                                    <option value="">Select Assets</option>
+                                    <option value=""></option>
                                     @foreach ($assets as $asset)
                                         <option value="{{ $asset->id }}"
                                             {{ old('asset_id') == $asset->id ? 'selected' : '' }}>
@@ -153,19 +144,11 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-6 mb-3" id="docsCol">
-                                <label for="asset_child_id">Docs</label>
-                                <select name="asset_child_id" id="assetChildren" class="form-control"
-                                    placeholder="Select Docs" disabled>
-                                    <option value="">Select Docs</option>
-                                </select>
-                            </div>
-
                             <div class="col-md-6 mb-3">
-                                <label for="maintenance_id">Select Maintenance</label>
+                                <label for="maintenance_id">Select maintenance</label>
                                 <select class="form-control @error('maintenance_id') is-invalid @enderror"
                                     id="maintenance_id" name="maintenance_id">
-                                    <option value="">Select Maintenance</option>
+                                    <option value=""></option>
                                     @foreach ($maintenances as $maintenance)
                                         <option value="{{ $maintenance->id }}"
                                             {{ old('maintenance_id') == $maintenance->id ? 'selected' : '' }}>
@@ -215,7 +198,7 @@
                             <label for="trn_desc">Description</label>
                             <textarea class="form-control" id="trn_desc" name="trn_desc" cols="10" rows="5">{{ old('trn_desc') }}</textarea>
                         </div>
-                        <input type="hidden" value="1" name="check" id="check">
+
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>
                     </form>
@@ -234,10 +217,7 @@
             $('#dataTable').DataTable();
         });
 
-        let assetChildren = $('#assetChildren'),
-            appendDocs = $('#docsCol'),
-            checkDocs = $('#check'),
-            form = $('#formTrnMaintenance'),
+        let form = $('#formTrnmaintenance'),
             btnSubmit = $('#btnSubmit');
 
         $("#asset_search").selectize({
@@ -263,32 +243,6 @@
         $("#maintenance_id").selectize({
             create: false,
             sortField: "text",
-        });
-
-        $(document).on('change', '#asset_id', async function() {
-            let id = $(this).val();
-            if (id) {
-                await $.getJSON(`/api/asset-parent/get-data/${id}`, function(res) {
-                    assetChildren.prop('disabled', false);
-                    assetChildren.empty().append($('<option>').text('Select Docs').val(''));
-
-                    $.each(res, function(index, item) {
-                        assetChildren.append($('<option>').text(item.name).val(item.id));
-                    });
-                });
-
-                $(assetChildren).change(function() {
-                    if ($(this).val() === "")
-                        checkDocs.val(1)
-                    else
-                        checkDocs.val(0)
-                })
-
-            } else {
-                checkDocs.val(1)
-                assetChildren.prop('disabled', true);
-                assetChildren.empty().append($('<option>').text('Select Docs').val(''));
-            }
         });
 
         btnSubmit.click(function() {

@@ -207,7 +207,7 @@
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header bg-gradient-dark">
-                    <h5 class="modal-title text-white" id="addNewRecordLabel">Form - Add New Assets</h5>
+                    <h5 class="modal-title text-white" id="addNewRecordLabel">Form - Add New Documents</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span class="text-white" aria-hidden="true">&times;</span>
                     </button>
@@ -229,7 +229,7 @@
                                     <label for="doc_no">Document No</label>
                                     <input name="doc_no" id="doc_no" type="text"
                                         class="form-control @error('doc_no') is-invalid @enderror"
-                                        value="{{ old('doc_no') }}" autocomplete="off" autofocus>
+                                        value="{{ old('doc_no') }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -237,8 +237,29 @@
                                     <label for="due_date">Due Date</label>
                                     <input name="due_date" id="due_date" type="date"
                                         class="form-control @error('due_date') is-invalid @enderror"
-                                        value="{{ old('due_date') }}" autocomplete="off" autofocus>
+                                        value="{{ old('due_date') }}">
                                 </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Asset Name</label>
+                                    <input type="text" class="form-control not-allowed" value="{{ $asset->asset_name }}"
+                                        disabled>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="sdb_id">SDB</label>
+                                <select class="form-control @error('sdb_id') is-invalid @enderror" name="sdb_id"
+                                    id="sdb_id">
+                                    <option value=""></option>
+                                    @foreach ($SDBs as $sdb)
+                                        <option value="{{ $sdb->id }}"
+                                            {{ old('sdb_id') == $sdb->id ? 'selected' : '' }}>
+                                            {{ $sdb->sdb_name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 

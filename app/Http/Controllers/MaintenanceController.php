@@ -76,6 +76,10 @@ class MaintenanceController extends Controller
 
     public function destroy(Maintenance $maintenance)
     {
+        if ($maintenance->transactions()->exists()) {
+            return redirect('/maintenance')->with('warning', 'Cannot delete maintenance that have transactions!');
+        }
+
         $maintenance->delete();
         return redirect('/maintenance')->with('success', 'Success!');
     }

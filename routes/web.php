@@ -2,15 +2,16 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SDBController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\CycleController;
+use App\Http\Controllers\TrnSDBController;
 use App\Http\Controllers\RenewalController;
-use App\Http\Controllers\StorageController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AssetChildController;
 use App\Http\Controllers\AssetGroupController;
 use App\Http\Controllers\TrnRenewalController;
-use App\Http\Controllers\TrnStorageController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\TrnMaintenanceController;
 
@@ -31,6 +32,8 @@ Route::middleware(['auth'])->group(function () {
             'asset-parent' => 'asset',
         ])->except(['create']);
 
+    Route::resource('/asset-child', AssetChildController::class)->except(['create']);
+
     Route::get('/asset-parent/docs/{asset}', [AssetController::class, 'documents'])
         ->name('assetDocuments');
 
@@ -46,21 +49,19 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/asset-parent/docs/delete/{asset}/{id}', [AssetController::class, 'deleteDocuments'])
         ->name('assetDeleteDocuments');
 
+    Route::resource('/sdb', SDBController::class)->except(['create']);
+
     Route::resource('/maintenance', MaintenanceController::class)->except(['create']);
     Route::resource('/renewal', RenewalController::class)->except(['create']);
-    Route::resource('/mst-storage', StorageController::class)->except(['create'])->parameters([
-        'mst-storage' => 'storage',
-    ]);
 
     Route::resource('/trn-renewal', TrnRenewalController::class);
     Route::post('/trn-renewal/search', [TrnRenewalController::class, 'search']);
-    Route::post('/trn-renewal/store-asset', [TrnRenewalController::class, 'storeAsset']);
-    Route::post('/trn-renewal/store-doc', [TrnRenewalController::class, 'storeDocument']);
 
     Route::resource('/trn-maintenance', TrnMaintenanceController::class);
     Route::post('/trn-maintenance/search', [TrnMaintenanceController::class, 'search']);
-    Route::post('/trn-maintenance/store-asset', [TrnMaintenanceController::class, 'storeAsset']);
-    Route::post('/trn-maintenance/store-doc', [TrnMaintenanceController::class, 'storeDocument']);
+
+    Route::resource('/trn-sdb', TrnSDBController::class);
+    Route::post('/trn-sdb/search', [TrnSDBController::class, 'search']);
 
     Route::resource('/cycle', CycleController::class)->except(['create']);
     Route::resource('/employee', EmployeeController::class)->except(['create']);

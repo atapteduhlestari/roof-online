@@ -100,7 +100,8 @@
                             <div class="col-md-6 mb-3">
                                 <label for="asset_name">Asset Name</label>
                                 <input type="text" class="form-control @error('asset_name') is-invalid @enderror"
-                                    name="asset_name" id="asset_name" value="{{ old('asset_name') }}">
+                                    name="asset_name" id="asset_name" value="{{ old('asset_name') }}" autocomplete="off"
+                                    autofocus>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -150,9 +151,16 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="asset_no">No. (Pol/Rumah/Seri)</label>
-                                <input type="text" class="form-control @error('asset_no') is-invalid @enderror"
-                                    name="asset_no" id="asset_no" value="{{ old('asset_no') }}">
+                                <label for="sdb_id">SDB</label>
+                                <select class="form-control @error('sdb_id') is-invalid @enderror" name="sdb_id"
+                                    id="sdb_id">
+                                    <option value=""></option>
+                                    @foreach ($SDBs as $sdb)
+                                        <option value="{{ $sdb->id }}"
+                                            {{ old('sdb_id') == $sdb->id ? 'selected' : '' }}>
+                                            {{ $sdb->sdb_name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="col-md-6 mb-3">
@@ -166,6 +174,12 @@
                                             {{ $emp->name }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="asset_no">No. (Pol/Rumah/Seri)</label>
+                                <input type="text" class="form-control @error('asset_no') is-invalid @enderror"
+                                    name="asset_no" id="asset_no" value="{{ old('asset_no') }}">
                             </div>
                         </div>
 
@@ -210,9 +224,7 @@
                                     <label class="custom-file-label" for="image">Choose file</label>
                                 </div>
                             </div>
-
                         </div>
-                        <input type="hidden" value="1" name="check" id="check">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>
                     </form>

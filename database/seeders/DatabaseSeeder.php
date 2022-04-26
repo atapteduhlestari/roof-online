@@ -18,12 +18,11 @@ class DatabaseSeeder extends Seeder
         $this->call(AssetGroupSeeder::class);
         // $this->call(AssetSeeder::class);
         $this->call(RenewalSeeder::class);
-        $this->call(StorageSeeder::class);
         $this->call(MaintenanceSeeder::class);
+        $this->call(SDBSeeder::class);
 
         \App\Models\Employee::factory(25)->create();
 
         // \App\Models\User::factory(10)->create();
-        // \App\Models\Cycle::factory(10000)->create();
     }
 }

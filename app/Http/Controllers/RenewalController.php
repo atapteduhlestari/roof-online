@@ -77,6 +77,10 @@ class RenewalController extends Controller
 
     public function destroy(Renewal $renewal)
     {
+        if ($renewal->transactions()->exists()) {
+            return redirect('/renewal')->with('warning', 'Cannot delete renewal that have transactions!');
+        }
+
         $renewal->delete();
         return redirect('/renewal')->with('success', 'Success!');
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTransactionControllersTable extends Migration
+class CreateTrnSDBTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,14 @@ class CreateTransactionControllersTable extends Migration
      */
     public function up()
     {
-        Schema::create('transaction_controllers', function (Blueprint $table) {
+        Schema::create('trn_sdb', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->foreignId('sdb_id');
+            $table->string('trn_no');
+            $table->string('ren_date');
+            $table->string('ren_value');
+            $table->date('due_date', 2);
             $table->timestamps();
         });
     }
@@ -26,6 +32,6 @@ class CreateTransactionControllersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transaction_controllers');
+        Schema::dropIfExists('trn_sdb');
     }
 }
