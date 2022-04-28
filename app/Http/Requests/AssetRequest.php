@@ -25,7 +25,7 @@ class AssetRequest extends FormRequest
     {
         return [
             'asset_group_id' => 'required',
-            'emp_id' => 'required',
+            'emp_id' => 'nullable',
             'asset_code' => 'required',
             'asset_no' => 'nullable',
             'asset_name' => 'required',
@@ -33,7 +33,7 @@ class AssetRequest extends FormRequest
             'pcs_value' => 'required',
             'apr_date' => 'nullable|date',
             'apr_value' => 'nullable',
-            'location' => 'required',
+            'location' => 'nullable',
             'condition' => 'required',
             'desc' => 'required',
             'image' => 'nullable',

@@ -57,13 +57,13 @@
                                             </div>
                                             <div>
                                                 <a title="Edit Data" href="/sdb/{{ $sdb->id }}/edit"
-                                                    class="btn btn-outline-dark text-xs">Edit</a>
+                                                    class="btn btn-outline-dark btn-sm">Edit</a>
                                             </div>
                                             <div>
                                                 <form action="/sdb/{{ $sdb->id }}" method="post" id="deleteForm">
                                                     @csrf
                                                     @method('delete')
-                                                    <button title="Delete Data" class="btn btn-outline-danger text-xs"
+                                                    <button title="Delete Data" class="btn btn-outline-danger btn-sm"
                                                         onclick="return false" id="deleteButton"
                                                         data-id="{{ $sdb->id }}">
                                                         <i class="fas fa-trash-alt"></i>
@@ -87,7 +87,7 @@
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header bg-gradient-dark">
-                    <h5 class="modal-title text-white" id="addNewRecordLabel">Form - Add New Assets</h5>
+                    <h5 class="modal-title text-white" id="addNewRecordLabel">Form - Add SDB</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span class="text-white" aria-hidden="true">&times;</span>
                     </button>

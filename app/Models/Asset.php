@@ -38,8 +38,13 @@ class Asset extends Model
         return $this->belongsTo(SDB::class, 'sdb_id');
     }
 
+    public function trnSDBDetail()
+    {
+        return $this->hasOne(TrnSDBDetail::class, 'asset_id');
+    }
+
     public function getTakeImageAttribute()
     {
-        return "/storage/" . $this->image;
+        return "/storage/{$this->image}";
     }
 }

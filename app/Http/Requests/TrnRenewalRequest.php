@@ -15,28 +15,18 @@ class TrnRenewalRequest extends FormRequest
 
     public function rules()
     {
-        $validate = [
-            'asset_child_id' => 'required',
-            'renewal_id' => 'required',
-        ];
-
-        if (TrnRenewalRequest::isMethod('PUT')) {
-            $validate['asset_child_id'] = '';
-            $validate['renewal_id'] = '';
-        }
-
         return [
             // 'trn_no' => [
             //     'required',
             //     Rule::unique('trn_renewal')->ignore($this->trn_id),
             //     new DocumentFormat()
             // ],
-            'asset_child_id' => $validate['asset_child_id'],
+            'asset_child_id' => 'required',
             'trn_date' => 'required|date',
-            'renewal_id' =>  $validate['renewal_id'],
+            'trn_value' => 'required',
+            'renewal_id' =>  'required',
             'pemohon' => 'required',
             'penyetuju' => 'required',
-            'trn_desc' => 'required'
         ];
     }
 }

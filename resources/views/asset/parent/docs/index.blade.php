@@ -74,9 +74,12 @@
                                 </tr>
                                 <tr>
                                     <th>Condition</th>
+                                    @php
+                                        $foo = 1;
+                                    @endphp
                                     <td
-                                        class="{{ ($asset->condition == 1 ? 'text-success' : $asset->condition == 2) ? 'text-warning' : 'text-danger' }}">
-                                        {{ ($asset->condition == 1 ? 'Baik' : $asset->condition == 2) ? 'Kurang' : 'Rusak' }}
+                                        class="{{ $asset->condition == 1 ? 'text-success' : ($asset->condition == 2 ? 'text-warning' : 'text-danger') }}">
+                                        {{ $asset->condition == 1 ? 'Baik' : ($asset->condition == 2 ? 'Kurang' : 'Buruk') }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -307,13 +310,11 @@
         $('#collapseDocuments').on('shown.bs.collapse', function() {
             toggler.addClass('fa-angle-down')
             toggler.removeClass('fa-angle-right')
-            collapseBtn.children('span').text('Hide')
         });
 
         $('#collapseDocuments').on('hidden.bs.collapse', function() {
             toggler.addClass('fa-angle-right')
             toggler.removeClass('fa-angle-down')
-            collapseBtn.children('span').text('Documents')
         });
 
         $(document).on('click', '#deleteButton', function(e) {

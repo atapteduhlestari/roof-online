@@ -50,12 +50,13 @@ class TrnRenewalController extends Controller
 
     public function storeTrnData($data)
     {
-        $data['user_id'] = auth()->user()->id;
         $date = createDate($data['trn_date']);
         $count = TrnRenewal::whereMonth('trn_date', $date->month)
             ->whereYear('trn_date', $date->year)
             ->count();
+        $data['user_id'] = auth()->user()->id;
         $data['trn_no'] = setNoTrn($data['trn_date'], $count ?? null, 'REN');
+        $data['trn_value'] = removeDots($data['trn_value']);
 
         return $data;
     }
@@ -82,6 +83,7 @@ class TrnRenewalController extends Controller
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
         $data['renewal_id'] = $trnRenewal->renewal_id;
+        $data['trn_value'] = removeDots($data['trn_value']);
 
         $trnRenewal->update($data);
         return redirect()->back()->with('success', 'Success!');

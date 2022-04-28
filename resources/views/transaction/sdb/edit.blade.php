@@ -9,7 +9,7 @@
         <!-- Page Heading -->
         <div class="d-flex align-items-center mb-3">
             <div class="flex-grow-1">
-                <h1 class="h3 mb-2 text-gray-800">Renewal | {{ $sdb->sdb_name }}</h1>
+                <h1 class="h3 mb-2 text-gray-800">Renewal | {{ $trnSDB->sdb->sdb_name }}</h1>
             </div>
             <a href="/sdb" class="btn btn-secondary btn-sm mr-2">
                 <i class="fas fa-arrow-left"></i> Back
@@ -19,31 +19,32 @@
             </a>
         </div>
         <div class="mb-5">
-            <form action="/trn-sdb" method="POST" id="formTrnSDB">
+            <form action="/trn-sdb/{{ $trnSDB->id }}" method="POST" id="formTrnSDB">
                 @csrf
+                @method('PUT')
                 <div class="row">
-                    <input type="hidden" name="sdb_id" value="{{ $sdb->id }}">
+                    <input type="hidden" name="sdb_id" value="{{ $trnSDB->sdb->id }}">
                     <div class="col-md-6 mb-3">
                         <label>Document</label>
-                        <input type="text" class="form-control not-allowed" value="{{ $sdb->sdb_name }}" readonly>
+                        <input type="text" class="form-control not-allowed" value="{{ $trnSDB->sdb->sdb_name }}" readonly>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label for="ren_date">Renewal Date</label>
                         <input type="date" class="form-control @error('ren_date') is-invalid @enderror" name="ren_date"
-                            value="{{ old('ren_date') }}">
+                            value="{{ old('ren_date', $trnSDB->ren_date) }}">
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label for="ren_value">Renewal Value</label>
                         <input type="text" class="form-control currency @error('ren_value') is-invalid @enderror"
-                            name="ren_value" value="{{ old('ren_value') }}" autocomplete="off">
+                            name="ren_value" value="{{ old('ren_value', $trnSDB->ren_value) }}" autocomplete="off">
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label for="due_date">Due Date</label>
                         <input type="date" class="form-control @error('due_date') is-invalid @enderror" name="due_date"
-                            value="{{ old('due_date') }}">
+                            value="{{ old('due_date', $trnSDB->due_date) }}">
                     </div>
                 </div>
                 <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>

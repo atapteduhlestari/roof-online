@@ -22,6 +22,7 @@ class CreateTrnMaintenanceTable extends Migration
             $table->string('penyetuju')->nullable();
             $table->string('trn_no');
             $table->date('trn_date');
+            $table->double('trn_value');
             $table->longText('trn_desc');
             $table->timestamps();
         });

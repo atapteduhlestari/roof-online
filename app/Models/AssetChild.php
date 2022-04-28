@@ -26,4 +26,9 @@ class AssetChild extends Model
     {
         return $this->belongsTo(SDB::class, 'sdb_id');
     }
+
+    public function trnSDBDetail()
+    {
+        return $this->hasOne(TrnSDBDetail::class, 'asset_child_id');
+    }
 }

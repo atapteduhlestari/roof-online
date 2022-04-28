@@ -162,6 +162,12 @@
                                 <input type="date" class="form-control @error('trn_date') is-invalid @enderror"
                                     name="trn_date" value="{{ old('trn_date') }}">
                             </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="trn_value">Cost</label>
+                                <input type="text" class="form-control currency @error('trn_value') is-invalid @enderror"
+                                    name="trn_value" value="{{ old('trn_value') }}" autocomplete="off">
+                            </div>
                         </div>
                         <hr>
                         <div class="row">
@@ -212,9 +218,14 @@
     <script src="/assets/template/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/assets/template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="/assets/template/vendor/selectize/selectize.js"></script>
+    <script src="/js/jquery.mask.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#dataTable').DataTable();
+        });
+
+        $('.currency').mask('000.000.000.000', {
+            reverse: true
         });
 
         let form = $('#formTrnRenewal'),

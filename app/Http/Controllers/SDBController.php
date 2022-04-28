@@ -61,6 +61,10 @@ class SDBController extends Controller
             return redirect('/sdb')->with('warning', 'Cannot delete sdb that have transactions!');
         }
 
+        if ($sdb->trnSDBDetail()->exists()) {
+            return redirect('/sdb')->with('warning', 'Cannot delete sdb that have items!');
+        }
+
         $sdb->delete();
         return redirect()->back()->with('success', 'Success!');
     }

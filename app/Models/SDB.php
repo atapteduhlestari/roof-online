@@ -11,7 +11,7 @@ class SDB extends Model
 
     protected $table = 'sdb';
     protected $guarded = ['id'];
-    protected $with = ['trnSDB'];
+    protected $with = ['trnSDB', 'docs', 'assets'];
 
     public function assets()
     {
@@ -26,5 +26,10 @@ class SDB extends Model
     public function trnSDB()
     {
         return $this->hasMany(TrnSDB::class, 'sdb_id');
+    }
+
+    public function trnSDBDetail()
+    {
+        return $this->hasOne(TrnSDBDetail::class, 'sdb_id');
     }
 }

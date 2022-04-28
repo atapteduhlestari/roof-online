@@ -60,8 +60,19 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/trn-maintenance', TrnMaintenanceController::class);
     Route::post('/trn-maintenance/search', [TrnMaintenanceController::class, 'search']);
 
-    Route::resource('/trn-sdb', TrnSDBController::class);
+    Route::resource('/trn-sdb', TrnSDBController::class)->parameters([
+        'trn-sdb' => 'trnSDB',
+    ]);
+
     Route::post('/trn-sdb/search', [TrnSDBController::class, 'search']);
+
+    Route::get('/trn-sdb/asset/{id}', [TrnSDBController::class, 'formAsset']);
+    Route::post('/trn-sdb/asset/store', [TrnSDBController::class, 'storeAsset']);
+    Route::delete('/trn-sdb/asset/{id}', [TrnSDBController::class, 'deleteAsset']);
+
+    Route::get('/trn-sdb/doc/{id}', [TrnSDBController::class, 'formDoc']);
+    Route::post('/trn-sdb/doc/store', [TrnSDBController::class, 'storeDoc']);
+    Route::delete('/trn-sdb/doc/{id}', [TrnSDBController::class, 'deleteDoc']);
 
     Route::resource('/cycle', CycleController::class)->except(['create']);
     Route::resource('/employee', EmployeeController::class)->except(['create']);

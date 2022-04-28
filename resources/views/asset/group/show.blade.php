@@ -31,6 +31,7 @@
                                 <th>#</th>
                                 <th>Asset Name</th>
                                 <th>Asset Code</th>
+                                <th>Asset No.</th>
                                 <th>Purchase Date</th>
                                 <th>Purchase Value</th>
                                 <th>Penanggung Jawab</th>
@@ -47,9 +48,10 @@
                                         </a>
                                     </td>
                                     <td>{{ $asset->asset_code }}</td>
+                                    <td>{{ $asset->asset_no ?? '-' }}</td>
                                     <td>{{ $asset->pcs_date }}</td>
                                     <td>{{ rupiah($asset->pcs_value) }}</td>
-                                    <td>{{ $asset->employee->name }}</td>
+                                    <td>{{ $asset->employee->name ?? '-' }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>

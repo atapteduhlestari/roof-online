@@ -31,8 +31,9 @@ class TrnMaintenanceRequest extends FormRequest
             //     Rule::unique('trn_renewal')->ignore($this->trn_id),
             //     new DocumentFormat()
             // ],
-            'trn_date' => 'required|date',
             'asset_id' => 'required',
+            'trn_date' => 'required|date',
+            'trn_value' => 'required',
             'maintenance_id' => 'required',
             'pemohon' => 'required',
             'penyetuju' => 'required'
