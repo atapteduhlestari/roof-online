@@ -4,15 +4,36 @@ use Carbon\Carbon;
 
 function createDate($param)
 {
-    return Carbon::parse($param);
+    return Carbon::create($param);
 }
 
 function test($param)
 {
-    $dt = Carbon::parse($param);
-    $next = Carbon::parse('2023-03-11');
+    $dt = Carbon::create($param);
+    $now = now();
+    $weekend =  $dt->format('w');
+    $dt = checkWeekend($dt, $weekend);
+    $dueDate = $now->diffInDays($dt);
 
-    return date_diff($dt, $next)->format('%y years, %m months and %d days');
+    if ($dueDate > 30) {
+        return $now->longRelativeDiffForHumans($dt, 2);
+    }
+
+    return $now->diffInDays($dt, false);
+
+    // return date_diff($dt, $now)->format('%y years, %m months, and %d days');
+}
+
+function checkWeekend($date, $weekend)
+{
+    if ($weekend == '0')
+        return $date->subDays(2);
+
+
+    if ($weekend == '6')
+        return $date->subDay(1);
+
+    return $date;
 }
 
 function rupiah($param)

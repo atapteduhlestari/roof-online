@@ -51,11 +51,14 @@ class TrnMaintenanceController extends Controller
 
     public function storeTrnData($data)
     {
-        $data['user_id'] = auth()->user()->id;
+
         $date = createDate($data['trn_date']);
         $count = TrnMaintenance::whereMonth('trn_date', $date->month)
             ->whereYear('trn_date', $date->year)
             ->count();
+
+        $data['user_id'] = auth()->user()->id;
+        $data['trn_value'] = removeDots($data['trn_value']);
         $data['trn_no'] = setNoTrn($data['trn_date'], $count ?? null, 'MAI');
 
         return $data;
@@ -82,6 +85,7 @@ class TrnMaintenanceController extends Controller
     {
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
+        $data['trn_value'] = removeDots($data['trn_value']);
         $data['maintenance_id'] = $trnMaintenance->maintenance_id;
 
         $trnMaintenance->update($data);

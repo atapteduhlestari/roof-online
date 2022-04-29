@@ -11,7 +11,7 @@ class Asset extends Model
 
     protected $table = 'asset';
     protected $guarded = ['id'];
-    protected $with = ['children'];
+    protected $with = ['children', 'trnMaintenance'];
 
     public function group()
     {

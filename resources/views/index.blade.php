@@ -11,7 +11,8 @@
         </div>
 
         <!-- Content Row -->
-        {{-- {{ test('2025-03-21') }} --}}
+
+        {{-- {{ test('2022-06-01') }} --}}
 
         <!-- Content Row -->
         <div class="row align-items-center">
@@ -51,6 +52,36 @@
                 </div>
             </div>
         </div>
+
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>Asset</th>
+                <th>No. Asset</th>
+                <th>Maintenance Name</th>
+                <th>Due Date</th>
+                <th>Remaining Days</th>
+            </tr>
+            @foreach ($assets as $asset)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $asset->asset_name }}</td>
+                    <td>
+                        {{ $asset->asset_no ?? '-' }}
+                    </td>
+                    <td>
+                        {{ $asset->trnMaintenance->last()->maintenance->name }}
+                    </td>
+                    <td>
+                        {{ $asset->trnMaintenance->last()->trn_date }}
+                    </td>
+                    <td>
+                        {{ test($asset->trnMaintenance->last()->trn_date) . ' days' }}
+                    </td>
+                </tr>
+            @endforeach
+
+        </table>
         {{-- <div class="row">
             <div class="col-lg-6 mb-4">
                 <!-- Earnings (Monthly) Card Example -->
