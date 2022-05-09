@@ -7,19 +7,25 @@ function createDate($param)
     return Carbon::create($param);
 }
 
-function test($param)
+function remaining($param)
 {
-    $dt = Carbon::create($param);
+    $dt = createDate($param);
     $now = now();
-    $weekend =  $dt->format('w');
-    $dt = checkWeekend($dt, $weekend);
-    $dueDate = $now->diffInDays($dt);
+    $weekend =  $dt->dayOfWeek;
+    $newDate = checkWeekend($dt, $weekend);
+    $dueDate = $now->diffInDays($newDate);
 
     if ($dueDate > 30) {
-        return $now->longRelativeDiffForHumans($dt, 2);
+        return;
     }
 
-    return $now->diffInDays($dt, false);
+    $date = $now->diffInDays($newDate, false);
+
+    if ($date < 0) {
+        return "<span class='text-danger'>Out of date</span>";
+    }
+
+    return $date;
 
     // return date_diff($dt, $now)->format('%y years, %m months, and %d days');
 }

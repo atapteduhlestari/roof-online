@@ -1,4 +1,7 @@
 @extends('layouts.master')
+@push('styles')
+    <link rel="stylesheet" href="/assets/app/vendor/fullcalendar/main.min.css">
+@endpush
 @section('container')
     <!-- Begin Page Content -->
     <div class="container-fluid">
@@ -52,36 +55,55 @@
                 </div>
             </div>
         </div>
-
-        <table class="table">
-            <tr>
-                <th>#</th>
-                <th>Asset</th>
-                <th>No. Asset</th>
-                <th>Maintenance Name</th>
-                <th>Due Date</th>
-                <th>Remaining Days</th>
-            </tr>
-            @foreach ($assets as $asset)
+        @if ($assets->count() > 0)
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Alert!</strong> assets need to be maintained.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <table class="table">
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $asset->asset_name }}</td>
-                    <td>
-                        {{ $asset->asset_no ?? '-' }}
-                    </td>
-                    <td>
-                        {{ $asset->trnMaintenance->last()->maintenance->name }}
-                    </td>
-                    <td>
-                        {{ $asset->trnMaintenance->last()->trn_date }}
-                    </td>
-                    <td>
-                        {{ test($asset->trnMaintenance->last()->trn_date) . ' days' }}
-                    </td>
+                    <th>#</th>
+                    <th>Asset</th>
+                    <th>No. Asset</th>
+                    <th>Maintenance Name</th>
+                    <th>Due Date</th>
+                    <th>Remaining Days</th>
+                    <th>Action</th>
                 </tr>
-            @endforeach
+                @foreach ($assets as $asset)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $asset->asset_name }}</td>
+                        <td>
+                            {{ $asset->asset_no ?? '-' }}
+                        </td>
+                        <td>
+                            {{ $asset->name }}
+                        </td>
+                        <td>
+                            {{ createDate($asset->trn_date)->format('d M Y') }}
+                        </td>
+                        <td>
+                            {!! remaining($asset->trn_date) !!}
+                        </td>
+                        <td>
+                            <form action="/trn-maintenance/create">
+                                <input type="hidden" name="id" value="{{ $asset->id }}" readonly>
+                                <input type="hidden" name="check" value="document" readonly>
+                                <button type="submit" class="btn btn-outline-dark btn-sm btn-block">
+                                    <i class="fas fa-tools"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
 
-        </table>
+            </table>
+        @endif
+        {!! $calendar !!}
+        <div id='calendar'></div>
         {{-- <div class="row">
             <div class="col-lg-6 mb-4">
                 <!-- Earnings (Monthly) Card Example -->
@@ -153,8 +175,28 @@
 @push('scripts')
     {{-- <!-- Page level plugins -->
     <script src="/assets/template/vendor/chart.js/Chart.min.js"></script>
-
+    
     <!-- Page level custom scripts -->
     <script src="/assets/template/js/demo/chart-area-demo.js"></script>
     <script src="/assets/template/js/demo/chart-pie-demo.js"></script> --}}
+
+    <script src="/assets/app/vendor/fullcalendar/main.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,listYear',
+                },
+                events: '/full-calendar',
+            });
+
+            calendar.render();
+        });
+    </script>
 @endpush

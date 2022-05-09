@@ -43,6 +43,11 @@ class Asset extends Model
         return $this->hasOne(TrnSDBDetail::class, 'asset_id');
     }
 
+    public function lastTransaction()
+    {
+        return $this->hasOne(TrnMaintenance::class, 'asset_id')->latest();
+    }
+
     public function getTakeImageAttribute()
     {
         return "/storage/{$this->image}";
