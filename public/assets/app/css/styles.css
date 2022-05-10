@@ -110,14 +110,14 @@ td button,
 
 .calendar .days .day_name {
     width: calc(100% / 7);
-    border-right: 1px solid #2c7aca;
+    border-right: 1px solid #e6e9ea;
     padding: 20px;
     text-transform: uppercase;
     font-size: 12px;
     font-weight: bold;
     color: #818589;
     color: #fff;
-    background-color: #448cd6;
+    background-color: #222831;
 }
 
 .calendar .days .day_name:nth-child(7) {
@@ -146,10 +146,10 @@ td button,
 .calendar .days .day_num .event {
     margin-top: 10px;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 9px;
     padding: 3px 6px;
     border-radius: 4px;
-    background-color: #f7c30d;
+    background-color: #FF2E63;
     color: #fff;
     word-wrap: break-word;
 }
@@ -171,7 +171,8 @@ td button,
 }
 
 .calendar .days .day_num:hover {
-    background-color: #fdfdfd;
+    color: #FF2E63;
+    background-color: #222831;
 }
 
 .calendar .days .day_num.ignore {

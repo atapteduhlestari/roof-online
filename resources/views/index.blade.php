@@ -102,8 +102,23 @@
 
             </table>
         @endif
-        {!! $calendar !!}
-        <div id='calendar'></div>
+        <hr>
+        <div>
+            <form action="/">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="date">Filter Search</label>
+                            <input type="month" class="form-control" name="date" value="{{ now()->format('Y-m') }}">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+            </form>
+        </div>
+        <div id="calendar">
+            {!! $calendar !!}
+        </div>
         {{-- <div class="row">
             <div class="col-lg-6 mb-4">
                 <!-- Earnings (Monthly) Card Example -->
@@ -182,7 +197,7 @@
 
     <script src="/assets/app/vendor/fullcalendar/main.min.js"></script>
 
-    <script>
+    {{-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
 
@@ -198,5 +213,5 @@
 
             calendar.render();
         });
-    </script>
+    </script> --}}
 @endpush
