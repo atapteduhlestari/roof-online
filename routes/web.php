@@ -78,6 +78,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/employee', EmployeeController::class)->except(['create']);
 
     Route::get('/full-calendar', [DashboardController::class, 'fullCalendar']);
+
+    Route::get('/timeline', [DashboardController::class, 'timeline']);
 });
 
 // Route::get('/get-api', function () {

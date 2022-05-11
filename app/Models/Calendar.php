@@ -33,7 +33,7 @@ class Calendar extends Model
         $first_day_of_week = array_search(date('D', strtotime($this->active_year . '-' . $this->active_month . '-1')), $days);
         $html = '<div class="calendar">';
         $html .= '<div class="header">';
-        $html .= '<div class="month-year text-center">';
+        $html .= '<div class="month-year">';
         $html .= date('F Y', strtotime($this->active_year . '-' . $this->active_month . '-' . $this->active_day));
         $html .= '</div>';
         $html .= '</div>';

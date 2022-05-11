@@ -45,9 +45,13 @@
                                 </a>
                             </div>
                             <div class="col-md-12 mb-3">
-                                <hr>
                                 <a href="/sdb" class="btn btn-outline-dark btn-block">
                                     SDB
+                                </a>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <a href="/timeline" class="btn btn-outline-dark btn-block">
+                                    Transaction Timeline
                                 </a>
                             </div>
                         </div>

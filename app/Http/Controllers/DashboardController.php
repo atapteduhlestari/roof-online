@@ -6,12 +6,13 @@ use App\Models\Asset;
 use App\Models\AssetChild;
 use App\Models\AssetGroup;
 use App\Models\Calendar as ModelsCalendar;
+use App\Models\TrnMaintenance;
+use App\Models\TrnRenewal;
 use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
-    public $calendar;
-    public $date;
+    public $calendar, $date;
 
     public function __construct()
     {
@@ -73,6 +74,23 @@ class DashboardController extends Controller
         }
 
         return $calendar;
+    }
+
+    public function timeline()
+    {
+        $trn_maintenance = TrnMaintenance::get();
+        $trn_renewal = TrnRenewal::get();
+        $calendar = $this->calendar;
+
+        foreach ($trn_maintenance as $m) {
+            $calendar->add_event($m->maintenance->name, $m->created_at->format('Y-m-d'));
+        }
+
+        foreach ($trn_renewal as $r) {
+            $calendar->add_event($r->renewal->name, $r->created_at->format('Y-m-d'));
+        }
+
+        return view('timeline', compact('calendar'));
     }
 
     public function fullCalendar()
