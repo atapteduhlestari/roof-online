@@ -107,7 +107,7 @@
             </table>
         @endif
         <hr>
-        <div>
+        <div class="mt-5">
             <form action="/">
                 <div class="row">
                     <div class="col-md-6">

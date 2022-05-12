@@ -29,7 +29,6 @@
                             <div class="col-md-4">
                                 <form action="/trn-maintenance/create">
                                     <input type="hidden" name="id" value="{{ $asset->id }}" readonly>
-                                    <input type="hidden" name="check" value="document" readonly>
                                     <button type="submit" class="btn btn-outline-dark btn-sm btn-block">
                                         <i class="fas fa-tools"></i> Maintenance
                                     </button>
@@ -86,7 +85,7 @@
                                     <th>
                                         Penanggung Jawab
                                     </th>
-                                    <td>{{ $asset->employee->name }}</td>
+                                    <td>{{ $asset->employee->name ?? '' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Purchase Date</th>

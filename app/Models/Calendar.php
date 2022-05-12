@@ -9,8 +9,8 @@ class Calendar extends Model
 {
     use HasFactory;
 
-    private $active_year, $active_month, $active_day;
-    private $events = [];
+    public $active_year, $active_month, $active_day;
+    public $events = [];
 
     public function __construct($date = null)
     {
@@ -19,10 +19,10 @@ class Calendar extends Model
         $this->active_day = $date != null ? date('d', strtotime($date)) : date('d');
     }
 
-    public function add_event($txt, $date, $days = 1, $color = '')
+    public function add_event($txt, $date, $days = 1, $link = '')
     {
-        $color = $color ? ' ' . $color : $color;
-        $this->events[] = [$txt, $date, $days, $color];
+        $link = $link ? ' ' . $link : $link;
+        $this->events[] = [$txt, $date, $days, $link];
     }
 
     public function __toString()
@@ -63,8 +63,9 @@ class Calendar extends Model
                 for ($d = 0; $d <= ($event[2] - 1); $d++) {
                     if (date('y-m-d', strtotime($this->active_year . '-' . $this->active_month . '-' . $i . ' -' . $d . ' day')) == date('y-m-d', strtotime($event[1]))) {
                         $html .= '<div class="event' . $event[3] . '">';
+                        $html .= '<a href="' . $event[3] . '">';
                         $html .= $event[0];
-                        $html .= '</div>';
+                        $html .= '</a></div>';
                     }
                 }
             }

@@ -13,7 +13,7 @@ function remaining($param)
     $now = now();
     $weekend =  $dt->dayOfWeek;
     $newDate = checkWeekend($dt, $weekend);
-    $dueDate = $now->diffInDays($newDate);
+    $dueDate = $now->diffInDays($newDate, false);
 
     if ($dueDate > 30) {
         return;

@@ -66,11 +66,19 @@ class DashboardController extends Controller
     public function calendarItems($calendar, $assets, $docs)
     {
         foreach ($assets as $asset) {
-            $calendar->add_event($asset->name, $asset->trn_date);
+            $calendar->add_event(
+                $asset->name,
+                $asset->trn_date,
+                1,
+            );
         }
 
         foreach ($docs as $doc) {
-            $calendar->add_event($doc->name, $doc->trn_date);
+            $calendar->add_event(
+                $doc->name,
+                $doc->trn_date,
+                1,
+            );
         }
 
         return $calendar;
@@ -83,11 +91,21 @@ class DashboardController extends Controller
         $calendar = $this->calendar;
 
         foreach ($trn_maintenance as $m) {
-            $calendar->add_event($m->maintenance->name, $m->created_at->format('Y-m-d'));
+            $calendar->add_event(
+                $m->maintenance->name,
+                $m->created_at->format('Y-m-d'),
+                1,
+                "/trn-maintenance/{$m->id}",
+            );
         }
 
         foreach ($trn_renewal as $r) {
-            $calendar->add_event($r->renewal->name, $r->created_at->format('Y-m-d'));
+            $calendar->add_event(
+                $r->renewal->name,
+                $r->created_at->format('Y-m-d'),
+                1,
+                "/trn-renewal/{$r->id}",
+            );
         }
 
         return view('timeline', compact('calendar'));
