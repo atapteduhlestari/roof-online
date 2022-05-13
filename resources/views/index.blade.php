@@ -113,7 +113,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="date">Filter Search</label>
-                            <input type="month" class="form-control" name="date" value="{{ now()->format('Y-m') }}">
+                            <input type="month" class="form-control" name="date" value="">
                         </div>
                     </div>
                 </div>

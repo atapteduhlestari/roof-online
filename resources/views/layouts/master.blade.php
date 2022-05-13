@@ -32,7 +32,7 @@
 
             <!-- Main Content -->
             <div id="content">
-                @include('layouts.header')
+                @include('layouts.header', $alerts ?? [])
                 @yield('container')
                 <br>
                 <br>

@@ -30,8 +30,8 @@ class DashboardController extends Controller
 
         $now = now()->addDays(30)->format('Y-m-d');
         $groups = AssetGroup::get();
-        $assets = $this->getAssets($now);
-        $docs = $this->getDocs($now);
+        $assets =  Asset::getLastTransaction($now);
+        $docs = AssetChild::getLastTransaction($now);
         $calendar = $this->calendarItems($this->calendar, $assets, $docs);
 
         return view('index', compact(
@@ -41,26 +41,6 @@ class DashboardController extends Controller
             'now',
             'calendar'
         ));
-    }
-
-    public function getAssets($time)
-    {
-        return Asset::join(
-            'trn_maintenance',
-            fn ($q) => $q->on('asset.id', '=', 'trn_maintenance.asset_id')
-                ->whereRaw('trn_maintenance.id IN (select MAX(a2.id) from trn_maintenance as a2 join asset as u2 on u2.id = a2.asset_id group by u2.id)')
-                ->whereDate('trn_maintenance.trn_date', '<=', $time)
-        )->join('asset_maintenance', 'trn_maintenance.maintenance_id', '=', 'asset_maintenance.id')->get();
-    }
-
-    public function getDocs($time)
-    {
-        return AssetChild::join(
-            'trn_renewal',
-            fn ($q) => $q->on('asset_child.id', '=', 'trn_renewal.asset_child_id')
-                ->whereRaw('trn_renewal.id IN (select MAX(a2.id) from trn_renewal as a2 join asset_child as u2 on u2.id = a2.asset_child_id group by u2.id)')
-                ->whereDate('trn_renewal.trn_date', '<=', $time)
-        )->join('asset_renewal', 'trn_renewal.renewal_id', '=', 'asset_renewal.id')->get();
     }
 
     public function calendarItems($calendar, $assets, $docs)

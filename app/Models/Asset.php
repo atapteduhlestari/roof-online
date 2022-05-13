@@ -52,4 +52,14 @@ class Asset extends Model
     {
         return "/storage/{$this->image}";
     }
+
+    public function getLastTransaction($time)
+    {
+        return Asset::join(
+            'trn_maintenance',
+            fn ($q) => $q->on('asset.id', '=', 'trn_maintenance.asset_id')
+                ->whereRaw('trn_maintenance.id IN (select MAX(a2.id) from trn_maintenance as a2 join asset as u2 on u2.id = a2.asset_id group by u2.id)')
+                ->whereDate('trn_maintenance.trn_date', '<=', $time)
+        )->join('asset_maintenance', 'trn_maintenance.maintenance_id', '=', 'asset_maintenance.id')->get();
+    }
 }

@@ -120,3 +120,27 @@ function noDocIsEmpty($name, $date)
 
     return $no_doc;
 }
+
+function FillAlertsData($assets, $docs)
+{
+    $events = collect();
+    foreach ($assets as $asset) {
+        $events[] = [
+            'name' => $asset->name,
+            'date' => $asset->trn_date,
+            'asset_name' => $asset->asset_name,
+            'type' => 'Asset',
+        ];
+    }
+
+    foreach ($docs as $doc) {
+        $events[] = [
+            'name' => $doc->name,
+            'date' => $doc->trn_date,
+            'asset_name' => $doc->doc_name,
+            'type' => 'Document',
+        ];
+    }
+
+    return $events;
+}
