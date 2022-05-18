@@ -31,6 +31,11 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="trn_start_date">Start Date</label>
+                        <input type="date" class="form-control @error('trn_start_date') is-invalid @enderror"
+                            name="trn_start_date" value="{{ old('trn_start_date', $trnRenewal->trn_start_date) }}">
+                    </div>
 
                     <div class="col-md-6 mb-3">
                         <label for="trn_date">Due Date</label>

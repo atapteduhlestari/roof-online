@@ -6,7 +6,6 @@ use App\Models\Asset;
 use App\Models\AssetChild;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 

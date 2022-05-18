@@ -87,10 +87,14 @@
                             {{ $asset->name }}
                         </td>
                         <td>
-                            {{ createDate($asset->trn_date)->format('d M Y') }}
+                            {{ createDate($asset->trn_start_date)->format('d M Y') }}
                         </td>
                         <td>
-                            {!! remaining($asset->trn_date) !!}
+
+                            {!! remaining($asset->trn_start_date) !!}
+
+                            <br>
+                            {{-- {{ $asset->trnMaintenance->maintenance->cycle->qty }} --}}
                         </td>
                         <td>
                             <form action="/trn-maintenance/create">
@@ -107,7 +111,7 @@
             </table>
         @endif
         <hr>
-        <div class="mt-5">
+        {{-- <div class="mt-5">
             <form action="/">
                 <div class="row">
                     <div class="col-md-6">
@@ -122,70 +126,6 @@
         </div>
         <div id="calendar">
             {!! $calendar !!}
-        </div>
-        {{-- <div class="row">
-            <div class="col-lg-6 mb-4">
-                <!-- Earnings (Monthly) Card Example -->
-                <div class="mb-4">
-                    <div class="card border-left-success border-0 h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                        Assets</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                        Tidak Bergerak
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-lg-6 mb-4">
-                <div class="mb-4">
-                    <div class="card border-left-warning border-0 h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                        Assets</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                        Bergerak
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-folder fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 mb-4">
-                <div class="mb-4">
-                    <div class="card border-left-danger border-0 h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                        Assets</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Lorem, ipsum.</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-search fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div> --}}
     </div>
     <!-- /.container-fluid -->

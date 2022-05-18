@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Asset extends Model
 {
@@ -55,11 +56,13 @@ class Asset extends Model
 
     public function getLastTransaction($time)
     {
-        return Asset::join(
-            'trn_maintenance',
-            fn ($q) => $q->on('asset.id', '=', 'trn_maintenance.asset_id')
-                ->whereRaw('trn_maintenance.id IN (select MAX(a2.id) from trn_maintenance as a2 join asset as u2 on u2.id = a2.asset_id group by u2.id)')
-                ->whereDate('trn_maintenance.trn_date', '<=', $time)
-        )->join('asset_maintenance', 'trn_maintenance.maintenance_id', '=', 'asset_maintenance.id')->get();
+        DB::statement("SET SQL_MODE=''");
+        return DB::table('trn_maintenance')
+            ->select(['trn_maintenance.*', DB::raw('MAX(trn_maintenance.trn_start_date) as trn_start_date'), 'asset.*', 'asset_maintenance.*'])
+            ->leftJoin('asset', 'trn_maintenance.asset_id', 'asset.id')
+            ->leftJoin('asset_maintenance', 'trn_maintenance.maintenance_id', 'asset_maintenance.id')
+            ->groupBy('asset_maintenance.name', 'asset.asset_name')
+            ->where('trn_maintenance.trn_start_date', '<=', $time)
+            ->get();
     }
 }

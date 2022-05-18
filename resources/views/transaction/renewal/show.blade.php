@@ -19,6 +19,10 @@
                         <td>{{ $trnRenewal->trn_no }}</td>
                     </tr>
                     <tr>
+                        <th>Start Date</th>
+                        <td>{{ createDate($trnRenewal->trn_start_date)->format('d F Y') }}</td>
+                    </tr>
+                    <tr>
                         <th>Due Date</th>
                         <td>{{ createDate($trnRenewal->trn_date)->format('d F Y') }}</td>
                     </tr>

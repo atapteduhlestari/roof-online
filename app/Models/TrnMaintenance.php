@@ -11,6 +11,7 @@ class TrnMaintenance extends Model
 
     protected $table = 'trn_maintenance';
     protected $guarded = ['id'];
+    // protected $with = ['maintenance'];
 
     public function asset()
     {

@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-// use App\Rules\DocumentFormat;
 use Illuminate\Foundation\Http\FormRequest;
-// use Illuminate\Validation\Rule;
 
 class TrnRenewalRequest extends FormRequest
 {
@@ -22,6 +20,7 @@ class TrnRenewalRequest extends FormRequest
             //     new DocumentFormat()
             // ],
             'asset_child_id' => 'required',
+            'trn_start_date' => 'required|date',
             'trn_date' => 'required|date',
             'trn_value' => 'required',
             'renewal_id' =>  'required',

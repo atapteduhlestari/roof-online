@@ -21,6 +21,7 @@ class CreateTrnMaintenanceTable extends Migration
             $table->string('pemohon')->nullable();
             $table->string('penyetuju')->nullable();
             $table->string('trn_no');
+            $table->date('trn_start_date');
             $table->date('trn_date');
             $table->double('trn_value');
             $table->longText('trn_desc');

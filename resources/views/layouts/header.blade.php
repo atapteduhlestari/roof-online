@@ -74,7 +74,7 @@
                             </div>
                         </div>
                         <div>
-                            <table class="table text-xs table-borderless">
+                            <table class="table table-sm text-xs table-borderless">
                                 <tr>
                                     <td class="text-danger">
                                         {{ createDate($v['date'])->format('d F Y') }}

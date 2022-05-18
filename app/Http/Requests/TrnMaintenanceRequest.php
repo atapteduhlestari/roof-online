@@ -6,21 +6,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class TrnMaintenanceRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
 
@@ -32,6 +22,7 @@ class TrnMaintenanceRequest extends FormRequest
             //     new DocumentFormat()
             // ],
             'asset_id' => 'required',
+            'trn_start_date' => 'required|date',
             'trn_date' => 'required|date',
             'trn_value' => 'required',
             'maintenance_id' => 'required',

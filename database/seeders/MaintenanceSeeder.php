@@ -11,13 +11,13 @@ class MaintenanceSeeder extends Seeder
     {
         $data = [
             [
-                'name' => 'Perbaikan Kendaraan',
+                'name' => 'Ganti Oli',
                 'cycle_id' => 5,
                 'no_doc' => 'ATL-HOJ-SOP-GAN-01-03',
                 'created_at' => now()
             ],
             [
-                'name' => 'Perawatan Kendaraan',
+                'name' => 'Turun Mesin',
                 'cycle_id' => 3,
                 'no_doc' => 'ATL-HOJ-SOP-GAN-01-03',
                 'created_at' => now()
