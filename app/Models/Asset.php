@@ -61,7 +61,6 @@ class Asset extends Model
             ->select(['trn_maintenance.*', DB::raw('MAX(trn_maintenance.trn_start_date) as trn_start_date'), 'asset.*', 'asset_maintenance.*'])
             ->leftJoin('asset', 'trn_maintenance.asset_id', 'asset.id')
             ->leftJoin('asset_maintenance', 'trn_maintenance.maintenance_id', 'asset_maintenance.id')
-            ->groupBy('asset_maintenance.name', 'asset.asset_name')
-            ->where('trn_maintenance.trn_start_date', '<=', $time);
+            ->groupBy('asset_maintenance.name', 'asset.asset_name');
     }
 }

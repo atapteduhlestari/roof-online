@@ -30,17 +30,11 @@ class DashboardController extends Controller
 
         $now = now()->addDays(30)->format('Y-m-d');
         $groups = AssetGroup::get();
-        $assets =  Asset::getLastTransaction($now)->get()->sortByDesc('trn_start_date');
-        $docs = AssetChild::getLastTransaction($now)->get()->sortByDesc('trn_start_date');
-        $calendar = $this->calendarItems($this->calendar, $assets, $docs);
 
         // return $docs;
         return view('index', compact(
             'groups',
-            'assets',
-            'docs',
             'now',
-            'calendar'
         ));
     }
 
@@ -70,7 +64,7 @@ class DashboardController extends Controller
         $now = now()->addDays(30)->format('Y-m-d');
         $assets =  Asset::getLastTransaction($now)->get()->sortByDesc('trn_start_date');
         $docs = AssetChild::getLastTransaction($now)->get()->sortByDesc('trn_start_date');
-        $data = timelineReminders($assets, $docs);
+        $data = timelineReminders($assets, $docs)->sortBy('trn_start_date')->reverse();
 
         $trn_maintenance = TrnMaintenance::get();
         $trn_renewal = TrnRenewal::get();
