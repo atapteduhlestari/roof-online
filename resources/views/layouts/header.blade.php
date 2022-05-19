@@ -63,8 +63,8 @@
             <!-- Dropdown - Alerts -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="alertsDropdown">
-                <h6 class="dropdown-header">
-                    Alerts Center
+                <h6 class="dropdown-header bg-danger border-0">
+                    Assets need to Maintain / Renew
                 </h6>
                 @foreach ($alerts as $alert => $v)
                     <a class="dropdown-item d-flex align-items-center" href="#">
@@ -97,7 +97,7 @@
                         </div>
                     </a>
                 @endforeach
-                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                <a href="/timeline" class="dropdown-item text-center small text-gray-500">Show All Alerts</a>
 
             </div>
         </li>

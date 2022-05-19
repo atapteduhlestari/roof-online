@@ -8,7 +8,6 @@ use App\Models\AssetChild;
 use App\Models\AssetGroup;
 use App\Models\TrnRenewal;
 use App\Models\TrnMaintenance;
-use Illuminate\Support\Facades\DB;
 use App\Models\Calendar as ModelsCalendar;
 
 class DashboardController extends Controller
@@ -30,16 +29,12 @@ class DashboardController extends Controller
         //     ->get()->sortBy(fn ($q) => $q->trn_date);
 
         $now = now()->addDays(30)->format('Y-m-d');
-
-
-
-
         $groups = AssetGroup::get();
-        $assets =  Asset::getLastTransaction($now);
-        $docs = AssetChild::getLastTransaction($now);
+        $assets =  Asset::getLastTransaction($now)->get()->sortByDesc('trn_start_date');
+        $docs = AssetChild::getLastTransaction($now)->get()->sortByDesc('trn_start_date');
         $calendar = $this->calendarItems($this->calendar, $assets, $docs);
 
-
+        // return $docs;
         return view('index', compact(
             'groups',
             'assets',
@@ -72,10 +67,20 @@ class DashboardController extends Controller
 
     public function timeline()
     {
+        $now = now()->addDays(30)->format('Y-m-d');
+        $assets =  Asset::getLastTransaction($now)->get()->sortByDesc('trn_start_date');
+        $docs = AssetChild::getLastTransaction($now)->get()->sortByDesc('trn_start_date');
+        $data = timelineReminders($assets, $docs);
+
         $trn_maintenance = TrnMaintenance::get();
         $trn_renewal = TrnRenewal::get();
-        $calendar = $this->calendar;
+        $calendar = $this->timelineCalendar($this->calendar, $trn_maintenance, $trn_renewal);
 
+        return view('timeline', compact('calendar', 'data'));
+    }
+
+    public function timelineCalendar($calendar, $trn_maintenance, $trn_renewal)
+    {
         foreach ($trn_maintenance as $m) {
             $calendar->add_event(
                 $m->maintenance->name,
@@ -94,7 +99,7 @@ class DashboardController extends Controller
             );
         }
 
-        return view('timeline', compact('calendar'));
+        return $calendar;
     }
 
     public function fullCalendar()

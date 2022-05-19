@@ -49,84 +49,11 @@
                                     SDB
                                 </a>
                             </div>
-                            <div class="col-md-12 mb-3">
-                                <a href="/timeline" class="btn btn-outline-dark btn-block">
-                                    Transaction Timeline
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        @if ($assets->count() > 0)
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Alert!</strong> assets need to be maintained.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <table class="table">
-                <tr>
-                    <th>#</th>
-                    <th>Asset</th>
-                    <th>No. Asset</th>
-                    <th>Maintenance Name</th>
-                    <th>Due Date</th>
-                    <th>Remaining Days</th>
-                    <th>Action</th>
-                </tr>
-                @foreach ($assets as $asset)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $asset->asset_name }}</td>
-                        <td>
-                            {{ $asset->asset_no ?? '-' }}
-                        </td>
-                        <td>
-                            {{ $asset->name }}
-                        </td>
-                        <td>
-                            {{ createDate($asset->trn_start_date)->format('d M Y') }}
-                        </td>
-                        <td>
-
-                            {!! remaining($asset->trn_start_date) !!}
-
-                            <br>
-                            {{-- {{ $asset->trnMaintenance->maintenance->cycle->qty }} --}}
-                        </td>
-                        <td>
-                            <form action="/trn-maintenance/create">
-                                <input type="hidden" name="id" value="{{ $asset->id }}" readonly>
-                                <input type="hidden" name="check" value="document" readonly>
-                                <button type="submit" class="btn btn-outline-dark btn-sm btn-block">
-                                    <i class="fas fa-tools"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-
-            </table>
-        @endif
-        <hr>
-        {{-- <div class="mt-5">
-            <form action="/">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="date">Filter Search</label>
-                            <input type="month" class="form-control" name="date" value="">
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary btn-sm">Submit</button>
-            </form>
-        </div>
-        <div id="calendar">
-            {!! $calendar !!}
-        </div> --}}
     </div>
     <!-- /.container-fluid -->
 @endsection

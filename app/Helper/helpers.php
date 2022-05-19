@@ -121,10 +121,10 @@ function noDocIsEmpty($name, $date)
     return $no_doc;
 }
 
-function FillAlertsData($data, $docs)
+function FillAlertsData($assets, $docs)
 {
     $events = collect();
-    foreach ($data as $asset) {
+    foreach ($assets as $asset) {
         $events[] = [
             'name' => $asset->name,
             'date' => $asset->trn_start_date,
@@ -142,5 +142,32 @@ function FillAlertsData($data, $docs)
         ];
     }
 
-    return $events;
+    return $events->sortBy('date')->take(3);
+}
+
+function timelineReminders($assets, $docs)
+{
+    $data = collect();
+
+    foreach ($assets as $asset) {
+        $data[] = [
+            'id' => $asset->id,
+            'name' => $asset->name,
+            'date' => $asset->trn_start_date,
+            'asset_name' => $asset->asset_name,
+            'type' => 'Asset',
+        ];
+    }
+
+    foreach ($docs as $doc) {
+        $data[] = [
+            'id' => $doc->id,
+            'name' => $doc->name,
+            'date' => $doc->trn_start_date,
+            'asset_name' => $doc->doc_name,
+            'type' => 'Document',
+        ];
+    }
+
+    return $data;
 }

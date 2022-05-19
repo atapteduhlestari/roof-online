@@ -39,11 +39,7 @@
                             @foreach ($assets as $asset)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>
-                                        <a href="/asset-parent/{{ $asset->id }}">
-                                            {{ $asset->asset_name }}
-                                        </a>
-                                    </td>
+                                    <td>{{ $asset->asset_name }}</td>
                                     <td>{{ $asset->asset_code }}</td>
                                     <td>{{ $asset->asset_no ?? '-' }}</td>
                                     <td>{{ createDate($asset->pcs_date)->format('d F Y') }}</td>

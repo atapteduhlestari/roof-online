@@ -28,10 +28,9 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        $this->assets = Asset::getLastTransaction($now);
-        $this->docs = AssetChild::getLastTransaction($now);
+        $this->assets = Asset::getLastTransaction($now)->get();
+        $this->docs = AssetChild::getLastTransaction($now)->get();
         $this->alerts = FillAlertsData($this->assets, $this->docs);
-        // dd($this->alerts);
 
         view()->composer(
             'layouts.master',

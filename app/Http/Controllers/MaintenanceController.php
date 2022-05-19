@@ -63,7 +63,6 @@ class MaintenanceController extends Controller
             'cycle_id' => 'required',
             'no_doc' =>  [
                 'nullable',
-                "unique:asset_maintenance,no_doc,{$maintenance->id}",
                 new DocumentFormat,
                 new ISOFormatRule
             ],

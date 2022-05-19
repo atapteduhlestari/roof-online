@@ -63,7 +63,6 @@ class RenewalController extends Controller
             'cycle_id' => 'required',
             'no_doc' =>  [
                 'nullable',
-                "unique:asset_renewal,no_doc,{$renewal->id}",
                 new DocumentFormat,
                 new ISOFormatRule
             ],

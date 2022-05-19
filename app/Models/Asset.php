@@ -62,7 +62,6 @@ class Asset extends Model
             ->leftJoin('asset', 'trn_maintenance.asset_id', 'asset.id')
             ->leftJoin('asset_maintenance', 'trn_maintenance.maintenance_id', 'asset_maintenance.id')
             ->groupBy('asset_maintenance.name', 'asset.asset_name')
-            ->where('trn_maintenance.trn_start_date', '<=', $time)
-            ->get();
+            ->where('trn_maintenance.trn_start_date', '<=', $time);
     }
 }
