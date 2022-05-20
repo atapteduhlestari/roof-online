@@ -24,7 +24,8 @@
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-lg-6">
-                        <img class="img-fluid px-3 px-sm-4 my-5" src="{{ $asset->takeImage }}">
+                        <img class="img-fluid px-3 px-sm-4 my-5"
+                            src="{{ $asset->image ? $asset->takeImage : asset('/assets/img/empty-img.jpeg') }}">
                         <div class="d-flex justify-content-center">
                             <div class="col-md-4">
                                 <form action="/trn-maintenance/create">
