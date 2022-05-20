@@ -12,10 +12,12 @@ use App\Models\Calendar as ModelsCalendar;
 
 class DashboardController extends Controller
 {
-    public $calendar, $date;
+    public $calendar, $date, $now, $reqDays;
 
     public function __construct()
     {
+        $this->reqDays = request()->days ?? 30;
+        $this->now = now()->addDays($this->reqDays)->format('Y-m-d');
         $this->date = Carbon::createFromDate(request()->date);
         $this->calendar = new ModelsCalendar($this->date);
     }
@@ -28,14 +30,8 @@ class DashboardController extends Controller
         //     ->whereHas('trnMaintenance', fn ($q) => $q->whereDate('trn_date', '<=', $now))
         //     ->get()->sortBy(fn ($q) => $q->trn_date);
 
-        $now = now()->addDays(30)->format('Y-m-d');
         $groups = AssetGroup::get();
-
-        // return $docs;
-        return view('index', compact(
-            'groups',
-            'now',
-        ));
+        return view('index', compact('groups'));
     }
 
     public function calendarItems($calendar, $assets, $docs)
@@ -61,9 +57,8 @@ class DashboardController extends Controller
 
     public function timeline()
     {
-        $now = now()->addDays(30)->format('Y-m-d');
-        $assets =  Asset::getLastTransaction($now)->get()->sortByDesc('trn_start_date');
-        $docs = AssetChild::getLastTransaction($now)->get()->sortByDesc('trn_start_date');
+        $assets =  Asset::getLastTransaction($this->now)->get()->sortByDesc('trn_start_date');
+        $docs = AssetChild::getLastTransaction($this->now)->get()->sortByDesc('trn_start_date');
         $data = timelineReminders($assets, $docs)->sortBy('trn_start_date')->reverse();
 
         $trn_maintenance = TrnMaintenance::get();
@@ -81,6 +76,7 @@ class DashboardController extends Controller
                 $m->trn_start_date,
                 1,
                 "/trn-maintenance/{$m->id}",
+                $m->trn_status ? "bg-primary" : '',
             );
         }
 
@@ -90,17 +86,10 @@ class DashboardController extends Controller
                 $r->trn_start_date,
                 1,
                 "/trn-renewal/{$r->id}",
+                $r->trn_status ? "bg-primary" : '',
             );
         }
 
         return $calendar;
-    }
-
-    public function fullCalendar()
-    {
-        // $data = TrnMaintenance::get();
-        // return response()->json([
-        //     'title' => $data['title']
-        // ]);
     }
 }

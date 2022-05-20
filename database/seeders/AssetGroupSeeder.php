@@ -16,11 +16,11 @@ class AssetGroupSeeder extends Seeder
     {
         $data = [
             [
-                'asset_group_name' => 'Bergerak',
+                'asset_group_name' => 'Aktiva Tetap',
                 'created_at' => now()
             ],
             [
-                'asset_group_name' => 'Tidak Bergerak',
+                'asset_group_name' => 'Aktiva Lancar',
                 'created_at' => now()
             ],
         ];

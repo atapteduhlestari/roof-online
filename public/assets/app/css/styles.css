@@ -170,7 +170,8 @@ td button,
     border-left: 1px solid #e6e9ea;
 }
 
-.calendar .days .day_num:hover {
+.calendar .days .day_num:hover,
+.calendar .days .day_num.selected:hover {
     color: #FF2E63;
     background-color: #222831;
 }
@@ -182,8 +183,7 @@ td button,
 }
 
 .calendar .days .day_num.selected {
-    background-color: #f1f2f3;
-    cursor: inherit;
+    background-color: #e7e7e7;
 }
 
 .calendar .event a {

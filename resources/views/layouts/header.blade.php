@@ -58,47 +58,52 @@
                 aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter">{{ count($alerts) }}</span>
+                <span class="badge badge-danger badge-counter">{{ $alerts->isEmpty() ? '' : count($alerts) }}</span>
             </a>
             <!-- Dropdown - Alerts -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="alertsDropdown">
-                <h6 class="dropdown-header bg-danger border-0">
-                    Assets need to Maintain / Renew
-                </h6>
-                @foreach ($alerts as $alert => $v)
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                        <div class="mr-3">
-                            <div class="icon-circle bg-warning">
-                                <i class="fas fa-exclamation text-white"></i>
+                @if (count($alerts) > 0)
+                    <h6 class="dropdown-header bg-danger border-0">
+                        Assets need to Maintain / Renew
+                    </h6>
+                    @foreach ($alerts as $alert => $v)
+                        <a class="dropdown-item d-flex align-items-center" href="{{ $v['link'] }}">
+                            <div class="mr-3">
+                                <div class="icon-circle bg-warning">
+                                    <i class="fas fa-exclamation text-white"></i>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <table class="table table-sm text-xs table-borderless">
-                                <tr>
-                                    <td class="text-danger">
-                                        {{ createDate($v['date'])->format('d F Y') }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        {{ $v['asset_name'] }} |
-                                        <span class="text-gray-500">
-                                            {{ $v['type'] }}
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        {{ $v['name'] }}
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </a>
-                @endforeach
-                <a href="/timeline" class="dropdown-item text-center small text-gray-500">Show All Alerts</a>
-
+                            <div>
+                                <table class="table table-sm text-xs table-borderless">
+                                    <tr>
+                                        <td class="text-danger">
+                                            {{ createDate($v['date'])->format('d F Y') }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ $v['asset_name'] }} |
+                                            <span class="text-gray-500">
+                                                {{ $v['type'] }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ $v['name'] }}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </a>
+                    @endforeach
+                @else
+                    <h6 class="dropdown-header bg-primary border-0">
+                        No Reminder <i class="fas fa-thumbs-up"></i>
+                    </h6>
+                @endif
+                <a href="/timeline" class="dropdown-item text-center small text-gray-500">Show Timelines</a>
             </div>
         </li>
 

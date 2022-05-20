@@ -29,6 +29,11 @@ class Asset extends Model
         return $this->hasMany(TrnMaintenance::class, 'asset_id');
     }
 
+    public function sbu()
+    {
+        return $this->belongsTo(SBU::class, 'sbu_id');
+    }
+
     public function employee()
     {
         return $this->belongsTo(Employee::class, 'emp_id');
@@ -61,6 +66,7 @@ class Asset extends Model
             ->select(['trn_maintenance.*', DB::raw('MAX(trn_maintenance.trn_start_date) as trn_start_date'), 'asset.*', 'asset_maintenance.*'])
             ->leftJoin('asset', 'trn_maintenance.asset_id', 'asset.id')
             ->leftJoin('asset_maintenance', 'trn_maintenance.maintenance_id', 'asset_maintenance.id')
-            ->groupBy('asset_maintenance.name', 'asset.asset_name');
+            ->groupBy('asset_maintenance.name', 'asset.asset_name')
+            ->where('trn_start_date', '<=', $time);
     }
 }

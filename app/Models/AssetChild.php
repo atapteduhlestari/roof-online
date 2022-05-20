@@ -28,6 +28,11 @@ class AssetChild extends Model
         return $this->belongsTo(SDB::class, 'sdb_id');
     }
 
+    public function sbu()
+    {
+        return $this->belongsTo(SBU::class, 'sbu_id');
+    }
+
     public function trnSDBDetail()
     {
         return $this->hasOne(TrnSDBDetail::class, 'asset_child_id');
@@ -46,6 +51,7 @@ class AssetChild extends Model
             ->select(['trn_renewal.*', DB::raw('MAX(trn_renewal.trn_start_date) as trn_start_date'), 'asset_child.*', 'asset_renewal.*'])
             ->leftJoin('asset_child', 'trn_renewal.asset_child_id', 'asset_child.id')
             ->leftJoin('asset_renewal', 'trn_renewal.renewal_id', 'asset_renewal.id')
-            ->groupBy('asset_renewal.name', 'asset_child.doc_name');
+            ->groupBy('asset_renewal.name', 'asset_child.doc_name')
+            ->where('trn_start_date', '<=', $time);
     }
 }

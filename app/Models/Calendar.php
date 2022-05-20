@@ -19,10 +19,11 @@ class Calendar extends Model
         $this->active_day = $date != null ? date('d', strtotime($date)) : date('d');
     }
 
-    public function add_event($txt, $date, $days = 1, $link = '')
+    public function add_event($txt, $date, $days = 1, $link = '', $color = '')
     {
         $link = $link ? ' ' . $link : $link;
-        $this->events[] = [$txt, $date, $days, $link];
+        $color = $color ? ' ' . $color : $color;
+        $this->events[] = [$txt, $date, $days, $link, $color];
     }
 
     public function __toString()
@@ -54,15 +55,15 @@ class Calendar extends Model
         }
         for ($i = 1; $i <= $num_days; $i++) {
             $selected = '';
-            // if ($i == $this->active_day) {
-            //     $selected = ' selected';
-            // }
+            if ($i == $this->active_day) {
+                $selected = ' selected';
+            }
             $html .= '<div class="day_num' . $selected . '">';
             $html .= '<span>' . $i . '</span>';
             foreach ($this->events as $event) {
                 for ($d = 0; $d <= ($event[2] - 1); $d++) {
                     if (date('y-m-d', strtotime($this->active_year . '-' . $this->active_month . '-' . $i . ' -' . $d . ' day')) == date('y-m-d', strtotime($event[1]))) {
-                        $html .= '<div class="event' . $event[3] . '">';
+                        $html .= '<div class="event' . $event[4] . '">';
                         $html .= '<a href="' . $event[3] . '">';
                         $html .= $event[0];
                         $html .= '</a></div>';

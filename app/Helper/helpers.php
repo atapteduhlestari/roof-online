@@ -11,21 +11,19 @@ function remaining($param)
 {
     $dt = createDate($param);
     $now = now();
-    $weekend =  $dt->dayOfWeek;
-    $newDate = checkWeekend($dt, $weekend);
+    $day =  $dt->dayOfWeek;
+    $newDate = checkWeekend($dt, $day);
     $dueDate = $now->diffInDays($newDate, false);
 
     if ($dueDate > 30) {
         return;
     }
 
-    $date = $now->diffInDays($newDate, false);
-
-    if ($date < 0) {
+    if ($dueDate < 0) {
         return "<span class='text-danger'>Out of date</span>";
     }
 
-    return $date;
+    return $dueDate += 1;
 
     // return date_diff($dt, $now)->format('%y years, %m months, and %d days');
 }
@@ -130,6 +128,7 @@ function FillAlertsData($assets, $docs)
             'date' => $asset->trn_start_date,
             'asset_name' => $asset->asset_name,
             'type' => 'Asset',
+            'link' => "/trn-maintenance/{$asset->id}"
         ];
     }
 
@@ -139,6 +138,7 @@ function FillAlertsData($assets, $docs)
             'date' => $doc->trn_start_date,
             'asset_name' => $doc->doc_name,
             'type' => 'Document',
+            'link' => "/trn-renewal/{$doc->id}"
         ];
     }
 
