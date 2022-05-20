@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RenewalSeeder::class);
         $this->call(MaintenanceSeeder::class);
         $this->call(SDBSeeder::class);
+        $this->call(SBUSeeder::class);
         $this->call(EmployeeSeeder::class);
 
         // \App\Models\Employee::factory(25)->create();

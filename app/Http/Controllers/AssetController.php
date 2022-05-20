@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SBU;
 use App\Models\SDB;
 use App\Models\Asset;
 use App\Models\Employee;
@@ -19,12 +20,14 @@ class AssetController extends Controller
         $assetGroup = AssetGroup::get();
         $employees = Employee::orderBy('name', 'asc')->get();
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
+        $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
 
         return view('asset.parent.index', compact(
             'assets',
             'assetGroup',
             'employees',
-            'SDBs'
+            'SDBs',
+            'SBUs'
         ));
     }
 
@@ -56,13 +59,15 @@ class AssetController extends Controller
         $assets = Asset::get();
         $employees = Employee::orderBy('name', 'asc')->get();
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
+        $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
 
         return view('asset.parent.edit', compact(
             'asset',
             'assets',
             'assetGroup',
             'employees',
-            'SDBs'
+            'SDBs',
+            'SBUs'
         ));
     }
 
@@ -114,11 +119,11 @@ class AssetController extends Controller
             'doc_name' => 'required',
             'doc_no' => 'required',
             'due_date' => 'required|date',
-            'desc' => 'required',
         ]);
 
         $data = $request->all();
         $data['asset_id'] = $asset->id;
+        $data['sbu_id'] = $request->sbu_id ?? $asset->sbu_id;
 
         $asset->children()->create($data);
         return redirect()->back()->with('success', 'Success!');

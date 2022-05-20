@@ -28,7 +28,7 @@ class AssetChildController extends Controller
             'doc_no' => 'required',
             'due_date' => 'required',
             'asset_id' => 'required',
-            'desc' => 'required',
+            'sbu_id' => 'required',
         ]);
 
         $data = $request->all();

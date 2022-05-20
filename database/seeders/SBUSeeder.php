@@ -12,43 +12,43 @@ class SBUSeeder extends Seeder
         $data = [
             [
                 'sbu_name' => 'Kalimalang',
-                'created_at' => now()
+                'created_at' => now(),
             ],
             [
                 'sbu_name' => 'JDC',
-                'created_at' => now()
+                'created_at' => now(),
             ],
             [
                 'sbu_name' => 'Fatmawati',
-                'created_at' => now()
+                'created_at' => now(),
             ],
             [
                 'sbu_name' => 'Suryawijaya',
-                'created_at' => now()
+                'created_at' => now(),
             ],
             [
                 'sbu_name' => 'Bandung',
-                'created_at' => now()
+                'created_at' => now(),
             ],
             [
                 'sbu_name' => 'Semarang',
-                'created_at' => now()
+                'created_at' => now(),
             ],
             [
                 'sbu_name' => 'Sarah',
-                'created_at' => now()
+                'created_at' => now(),
             ],
             [
                 'sbu_name' => 'Asia',
-                'created_at' => now()
+                'created_at' => now(),
             ],
             [
                 'sbu_name' => 'Bali',
-                'created_at' => now()
+                'created_at' => now(),
             ],
             [
                 'sbu_name' => 'HO/MD',
-                'created_at' => now()
+                'created_at' => now(),
             ],
         ];
 

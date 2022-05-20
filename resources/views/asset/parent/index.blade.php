@@ -123,12 +123,6 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="location">Asset Location</label>
-                                <input type="text" class="form-control @error('location') is-invalid @enderror"
-                                    name="location" value="{{ old('location') }}">
-                            </div>
-
-                            <div class="col-md-6 mb-3">
                                 <label for="condition">Asset Condition</label>
                                 <select class="form-control @error('condition') is-invalid @enderror" name="condition"
                                     id="condition">
@@ -149,16 +143,22 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="sdb_id">SDB</label>
-                                <select class="form-control @error('sdb_id') is-invalid @enderror" name="sdb_id"
-                                    id="sdb_id">
+                                <label for="sbu_id">SBU</label>
+                                <select class="form-control @error('sbu_id') is-invalid @enderror" name="sbu_id"
+                                    id="sbu_id">
                                     <option value=""></option>
-                                    @foreach ($SDBs as $sdb)
-                                        <option value="{{ $sdb->id }}"
-                                            {{ old('sdb_id') == $sdb->id ? 'selected' : '' }}>
-                                            {{ $sdb->sdb_name }}</option>
+                                    @foreach ($SBUs as $sbu)
+                                        <option value="{{ $sbu->id }}"
+                                            {{ old('sbu_id') == $sbu->id ? 'selected' : '' }}>
+                                            {{ $sbu->sbu_name }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="location">Asset Location</label>
+                                <input type="text" class="form-control @error('location') is-invalid @enderror"
+                                    name="location" value="{{ old('location') }}">
                             </div>
 
                             <div class="col-md-6 mb-3">
@@ -178,6 +178,19 @@
                                 <label for="asset_no">No. (Pol/Rumah/Seri)</label>
                                 <input type="text" class="form-control @error('asset_no') is-invalid @enderror"
                                     name="asset_no" id="asset_no" value="{{ old('asset_no') }}">
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="sdb_id">SDB</label>
+                                <select class="form-control @error('sdb_id') is-invalid @enderror" name="sdb_id"
+                                    id="sdb_id">
+                                    <option value=""></option>
+                                    @foreach ($SDBs as $sdb)
+                                        <option value="{{ $sdb->id }}"
+                                            {{ old('sdb_id') == $sdb->id ? 'selected' : '' }}>
+                                            {{ $sdb->sdb_name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
@@ -247,6 +260,11 @@
             formDelete = $('#deleteForm');
 
         $("#emp_id").selectize({
+            create: false,
+            sortField: "text",
+        });
+
+        $("#sbu_id").selectize({
             create: false,
             sortField: "text",
         });

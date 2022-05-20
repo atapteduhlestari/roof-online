@@ -35,7 +35,6 @@ class AssetRequest extends FormRequest
             'apr_value' => 'nullable',
             'location' => 'nullable',
             'condition' => 'required',
-            'desc' => 'required',
             'image' => 'nullable',
         ];
     }

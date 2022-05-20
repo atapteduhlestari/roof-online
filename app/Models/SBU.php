@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SBU extends Model
 {
     use HasFactory;
-    protected $table = ['sbu'];
+    protected $table = 'sbu';
     protected $guarded = 'id';
 
     public function assets()

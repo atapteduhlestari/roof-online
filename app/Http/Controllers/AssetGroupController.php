@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SBU;
 use App\Models\SDB;
 use App\Models\Employee;
 use App\Models\AssetGroup;
@@ -37,11 +38,13 @@ class AssetGroupController extends Controller
     {
         $employees = Employee::orderBy('name', 'asc')->get();
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
+        $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
 
         return view('asset.group.show', compact(
             'assetGroup',
             'employees',
-            'SDBs'
+            'SDBs',
+            'SBUs'
         ));
     }
 
