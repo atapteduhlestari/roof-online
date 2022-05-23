@@ -29,7 +29,7 @@ class CreateAssetTable extends Migration
             $table->double('apr_value', 2)->nullable();
             $table->string('location')->nullable();
             $table->string('condition', 1);
-            $table->text('desc');
+            $table->text('desc')->nullable();
             $table->text('image')->nullable();
             $table->boolean('asset_is_exist')->default(1);
             $table->timestamps();

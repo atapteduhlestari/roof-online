@@ -69,6 +69,10 @@
                                     <td>{{ $asset->asset_no }}</td>
                                 </tr>
                                 <tr>
+                                    <th>SBU</th>
+                                    <td>{{ $asset->sbu->sbu_name }}</td>
+                                </tr>
+                                <tr>
                                     <th>Location</th>
                                     <td>{{ $asset->location }}</td>
                                 </tr>
