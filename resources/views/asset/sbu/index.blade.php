@@ -83,31 +83,19 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="SBU_name">SBU Name</label>
-                                <input type="text" class="form-control @error('SBU_name') is-invalid @enderror"
-                                    name="SBU_name" id="SBU_name" value="{{ old('SBU_name') }}" autocomplete="off"
+                                <label for="sbu_name">SBU Name</label>
+                                <input type="text" class="form-control @error('sbu_name') is-invalid @enderror"
+                                    name="sbu_name" id="sbu_name" value="{{ old('sbu_name') }}" autocomplete="off"
                                     autofocus>
-                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="sbu_address">SBU Address</label>
+                                <input type="text" class="form-control @error('sbu_address') is-invalid @enderror"
+                                    name="sbu_address" id="sbu_address" value="{{ old('sbu_address') }}"
+                                    autocomplete="off">
                             </div>
                         </div>
                         <hr>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="pcs_date">Purchase Date</label>
-                                <input type="date" class="form-control @error('pcs_date') is-invalid @enderror"
-                                    name="pcs_date" id="pcs_date" value="{{ old('pcs_date') }}">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="pcs_value">Purchase Value</label>
-                                <input type="text" class="form-control currency @error('pcs_value') is-invalid @enderror"
-                                    name="pcs_value" id="pcs_value" value="{{ old('pcs_value') }}">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="due_date">Due Date</label>
-                                <input type="date" class="form-control @error('due_date') is-invalid @enderror"
-                                    name="due_date" id="due_date" value="{{ old('due_date') }}">
-                            </div>
-                        </div>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>
                     </form>
