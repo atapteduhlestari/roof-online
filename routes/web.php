@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SBUController;
 use App\Http\Controllers\SDBController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\CycleController;
@@ -50,6 +51,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('assetDeleteDocuments');
 
     Route::resource('/sdb', SDBController::class)->except(['create']);
+    Route::resource('/sbu', SBUController::class)->except(['create']);
 
     Route::resource('/maintenance', MaintenanceController::class)->except(['create']);
     Route::resource('/renewal', RenewalController::class)->except(['create']);

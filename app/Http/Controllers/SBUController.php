@@ -9,7 +9,8 @@ class SBUController extends Controller
 {
     public function index()
     {
-        //
+        $sbus = SBU::orderBy('sbu_name', 'asc')->get();
+        return view('asset.sbu.index', compact('sbus'));
     }
 
     public function create()
@@ -19,26 +20,49 @@ class SBUController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'sbu_name' => 'required',
+        ]);
+
+        $data = $request->all();
+
+        SBU::create($data);
+        return redirect()->back()->with('success', 'Success!');
     }
 
-    public function show(SBU $sBU)
+    public function show(SBU $sbu)
     {
         //
     }
 
-    public function edit(SBU $sBU)
+    public function edit(SBU $sbu)
     {
-        //
+        return view('asset.sbu.edit', compact('sbu'));
     }
 
-    function update(Request $request, SBU $sBU)
+    function update(Request $request, SBU $sbu)
     {
-        //
+        $request->validate([
+            'sbu_name' => 'required',
+        ]);
+
+        $data = $request->all();
+
+        $sbu->update($data);
+        return redirect()->back()->with('success', 'Success!');
     }
 
-    public function destroy(SBU $sBU)
+    public function destroy(SBU $sbu)
     {
-        //
+        if ($sbu->assets()->exists()) {
+            return redirect('/sbu')->with('warning', 'Cannot delete sbu that have assets!');
+        }
+
+        if ($sbu->docs()->exists()) {
+            return redirect('/sbu')->with('warning', 'Cannot delete sbu that have docs!');
+        }
+
+        $sbu->delete();
+        return redirect()->back()->with('success', 'Success!');
     }
 }

@@ -19,7 +19,6 @@
                         <label for="sdb_name">SDB Name</label>
                         <input type="text" class="form-control @error('sdb_name') is-invalid @enderror" name="sdb_name"
                             id="sdb_name" value="{{ old('sdb_name', $sdb->sdb_name) }}" autocomplete="off" autofocus>
-                        </select>
                     </div>
                 </div>
                 <hr>
@@ -56,9 +55,6 @@
     <!-- /.container-fluid -->
 @endsection
 @push('scripts')
-    <!-- Page level plugins -->
-    <script src="/assets/template/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/assets/template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="/js/jquery.mask.min.js"></script>
 
     <script>
