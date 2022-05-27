@@ -46,13 +46,6 @@ class TrnMaintenanceController extends Controller
         $data = $this->storeTrnData($request->all());
         TrnMaintenance::create($data);
 
-        TrnMaintenance::where('asset_id', $data['asset_id'])
-            ->where('maintenance_id',  $data['maintenance_id'])
-            ->latest()->first()
-            ->update([
-                'trn_status' => 1
-            ]);
-
         return redirect()->back()->with('success', 'Success!');
     }
 
@@ -103,5 +96,13 @@ class TrnMaintenanceController extends Controller
     {
         $trnMaintenance->delete();
         return redirect('/trn-maintenance')->with('success', 'Success!');
+    }
+
+    public function updateStatus(TrnMaintenance $trnMaintenance)
+    {
+        $trnMaintenance->update([
+            'trn_status' => 1
+        ]);
+        return redirect()->back()->with('success', 'Success!');
     }
 }

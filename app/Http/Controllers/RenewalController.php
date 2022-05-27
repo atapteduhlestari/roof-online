@@ -12,17 +12,13 @@ class RenewalController extends Controller
 {
     public function index()
     {
-        $cycles = Cycle::get();
+        // $cycles = Cycle::get();
         $renewals = Renewal::get();
 
         $lastNoDoc = $renewals->last();
         $no_doc = "ATL-HOJ-SOP-GAN-0#-##";
 
-        return view('asset.renewal.index', compact(
-            'renewals',
-            'cycles',
-            'no_doc'
-        ));
+        return view('asset.renewal.index', compact('renewals', 'no_doc'));
     }
 
     public function create()
@@ -34,7 +30,6 @@ class RenewalController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'cycle_id' => 'required',
             'no_doc' =>  ['nullable', new DocumentFormat, new ISOFormatRule],
         ]);
 
@@ -51,16 +46,15 @@ class RenewalController extends Controller
 
     public function edit(Renewal $renewal)
     {
-        $cycles = Cycle::get();
+        // $cycles = Cycle::get();
         $renewals = Renewal::get();
-        return view('asset.renewal.edit', compact('renewal', 'renewals', 'cycles'));
+        return view('asset.renewal.edit', compact('renewal', 'renewals'));
     }
 
     public function update(Request $request, Renewal $renewal)
     {
         $request->validate([
             'name' => 'required',
-            'cycle_id' => 'required',
             'no_doc' =>  [
                 'nullable',
                 new DocumentFormat,

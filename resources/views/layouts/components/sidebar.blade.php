@@ -79,9 +79,9 @@
                             href="/maintenance">
                             Maintenance
                         </a>
-                        <a class="collapse-item {{ request()->is('cycle*') ? 'active' : '' }}" href="/cycle">
+                        {{-- <a class="collapse-item {{ request()->is('cycle*') ? 'active' : '' }}" href="/cycle">
                             Cycle
-                        </a>
+                        </a> --}}
                         <a class="collapse-item {{ request()->is('sbu*') ? 'active' : '' }}" href="/sbu">
                             SBU
                         </a>

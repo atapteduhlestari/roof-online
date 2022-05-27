@@ -76,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" id="btnSubmit" class="btn btn-primary">Save Changes</button>
+                <button type="button" id="btnSubmit" class="btn btn-sm btn-primary">Save Changes</button>
             </form>
         </div>
     </div>

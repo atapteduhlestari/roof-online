@@ -69,7 +69,7 @@
                         <a href="/cycle" class="btn btn-secondary btn-sm mr-2">
                             <i class="fas fa-arrow-left"></i> Back
                         </a>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-sm btn-primary">
                             Save Changes
                         </button>
                     </div>

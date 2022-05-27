@@ -1,21 +1,22 @@
 @extends('layouts.master')
 @section('container')
     <div class="container-fluid">
-        <form action="" method="GET">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="days">Cycle (Days)</label>
-                        <input type="text" name="days" class="form-control" autocomplete="off">
+        <div class="pb-5">
+            <form action="" method="GET">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="days">Cycle (Days)</label>
+                            <input type="text" name="days" class="form-control" autocomplete="off">
 
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <button class="btn btn-primary btn-sm" type="submit">Submit</button>
-        </form>
-        <h1 class="h3 mb-2 text-gray-800 text-center">Reminder</h1>
-        <div class="my-3">
+                <button class="btn btn-primary btn-sm" type="submit">Submit</button>
+            </form>
+            <h1 class="h3 mb-2 text-gray-800 text-center">Reminder</h1>
+
             <table class="table">
                 <tr>
                     <th>#</th>
@@ -58,22 +59,23 @@
                     </tr>
                 @endforeach
             </table>
-            <div class="mt-3">
-                <h1 class="h3 mb-2 text-gray-800 text-center">Timeline</h1>
-                <form action="/timeline">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="date">Search</label>
-                                <input type="month" class="form-control" name="date">
-                            </div>
+        </div>
+
+
+        <div class="pt-5">
+            <h1 class="h3 mb-2 text-gray-800 text-center">Timeline</h1>
+            <form action="/timeline">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="month" class="form-control" name="date">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-info btn-sm">Search</button>
-                </form>
-                {!! $calendar !!}
-            </div>
-
+                </div>
+                <button type="submit" class="btn btn-info btn-sm">Search</button>
+            </form>
+            {!! $calendar !!}
         </div>
     </div>
 @endsection

@@ -34,10 +34,6 @@
                         <th>Group</th>
                         <td>{{ $trnMaintenance->asset->group->asset_group_name }}</td>
                     </tr>
-                    <tr>
-                        <th>Description</th>
-                        <td>{{ $trnMaintenance->trn_desc }}</td>
-                    </tr>
                 </table>
             </div>
             <div class="col-md-6 mb-3">
@@ -47,16 +43,39 @@
                         <td>{{ $trnMaintenance->maintenance->no_doc }}</td>
                     </tr>
                     <tr>
-                        <th>Created</th>
-                        <td>{{ $trnMaintenance->created_at->format('d F Y') }}</td>
+                        <th>SBU</th>
+                        <td>{{ $trnMaintenance->asset->sbu->sbu_name }}</td>
                     </tr>
                     <tr>
                         <th>REN</th>
                         <td>{{ $trnMaintenance->maintenance->name }}</td>
                     </tr>
                     <tr>
-                        <th>Cycle</th>
-                        <td>{{ $trnMaintenance->maintenance->cycle->cycle_name }}</td>
+                        <th>Description</th>
+                        <td>{{ $trnMaintenance->trn_desc }}</td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    @if ($trnMaintenance->trn_status)
+                                        <button type="button" class="btn btn-sm btn-success btn-block">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                    @else
+                                        <form action="/trn-maintenance/update-status/{{ $trnMaintenance->id }}"
+                                            method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-sm btn-danger btn-block">
+                                                <i class="fas fa-exclamation"></i>
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 </table>
             </div>

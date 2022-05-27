@@ -28,8 +28,8 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        $this->assets = Asset::getLastTransaction($now)->get();
-        $this->docs = AssetChild::getLastTransaction($now)->get();
+        $this->assets = Asset::getLastTransaction($now)->where('trn_status', false)->get();
+        $this->docs = AssetChild::getLastTransaction($now)->where('trn_status', false)->get();
         $this->alerts = FillAlertsData($this->assets, $this->docs);
 
         view()->composer(

@@ -28,7 +28,10 @@
                         <input type="text" class="form-control not-allowed" value="{{ $assetChild->doc_name }}" readonly>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="renewal_id">Select Renewal</label>
+                        <label for="renewal_id">
+                            Select Renewal
+                            <a href="/renewal" class="text-xs">Add list</a>
+                        </label>
                         <select class="form-control @error('renewal_id') is-invalid @enderror" id="renewal_id"
                             name="renewal_id">
                             <option value=""></option>

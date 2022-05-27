@@ -24,7 +24,7 @@ class CreateTrnMaintenanceTable extends Migration
             $table->date('trn_start_date');
             $table->date('trn_date');
             $table->double('trn_value');
-            $table->longText('trn_desc');
+            $table->longText('trn_desc')->nullable();
             $table->boolean('trn_status')->default(0);
             $table->timestamps();
         });

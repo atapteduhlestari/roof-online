@@ -12,17 +12,13 @@ class MaintenanceController extends Controller
 {
     public function index()
     {
-        $cycles = Cycle::get();
+        // $cycles = Cycle::get();
         $maintenances = Maintenance::get();
 
         $lastNoDoc = $maintenances->last();
         $no_doc = "ATL-HOJ-SOP-GAN-0#-##";
 
-        return view('asset.maintenance.index', compact(
-            'maintenances',
-            'cycles',
-            'no_doc'
-        ));
+        return view('asset.maintenance.index', compact('maintenances', 'no_doc'));
     }
 
     public function create()
@@ -34,7 +30,6 @@ class MaintenanceController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'cycle_id' => 'required',
             'no_doc' =>  ['nullable', new DocumentFormat],
         ]);
 
@@ -51,16 +46,15 @@ class MaintenanceController extends Controller
 
     public function edit(Maintenance $maintenance)
     {
-        $cycles = Cycle::get();
+        // $cycles = Cycle::get();
         $maintenances = Maintenance::get();
-        return view('asset.maintenance.edit', compact('maintenance', 'maintenances', 'cycles'));
+        return view('asset.maintenance.edit', compact('maintenance', 'maintenances'));
     }
 
     public function update(Request $request, Maintenance $maintenance)
     {
         $request->validate([
             'name' => 'required',
-            'cycle_id' => 'required',
             'no_doc' =>  [
                 'nullable',
                 new DocumentFormat,

@@ -38,7 +38,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <div class="form-group">
                             <select class="form-control @error('cycle_id') is-invalid @enderror" name="cycle_id"
                                 id="cycle_id">
@@ -55,7 +55,7 @@
                                 </div>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="row">
                     <div class="col-6">
@@ -80,7 +80,6 @@
                                 <th>#</th>
                                 <th>No</th>
                                 <th>Name</th>
-                                <th>Cycle</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
@@ -90,7 +89,6 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $renewal->no_doc }}</td>
                                     <td>{{ $renewal->name }}</td>
-                                    <td>{{ $renewal->cycle->cycle_name }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>

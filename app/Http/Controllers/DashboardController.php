@@ -57,8 +57,8 @@ class DashboardController extends Controller
 
     public function timeline()
     {
-        $assets =  Asset::getLastTransaction($this->now)->get()->sortByDesc('trn_start_date');
-        $docs = AssetChild::getLastTransaction($this->now)->get()->sortByDesc('trn_start_date');
+        $assets =  Asset::getLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
+        $docs = AssetChild::getLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
         $data = timelineReminders($assets, $docs)->sortBy('trn_start_date')->reverse();
 
         $trn_maintenance = TrnMaintenance::get();

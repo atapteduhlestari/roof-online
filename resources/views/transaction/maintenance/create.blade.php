@@ -28,7 +28,10 @@
                         <input type="text" class="form-control not-allowed" value="{{ $asset->asset_name }}" readonly>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="maintenance_id">Select Maintenance</label>
+                        <label for="maintenance_id">
+                            Select Maintenance
+                            <a href="/maintenance" class="text-xs">Add list</a>
+                        </label>
                         <select class="form-control @error('maintenance_id') is-invalid @enderror" id="maintenance_id"
                             name="maintenance_id">
                             <option value=""></option>
@@ -39,6 +42,8 @@
                             @endforeach
                         </select>
                     </div>
+
+                
 
                     <div class="col-md-6 mb-3">
                         <label for="trn_start_date">Start Date</label>

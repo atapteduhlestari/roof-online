@@ -28,10 +28,10 @@
                 <hr>
                 <div class="row">
                     <div class="col-md-6">
-                        <a href="/sbu" class="btn btn-secondary">
+                        <a href="/sbu" class="btn btn-sm btn-secondary">
                             Back
                         </a>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-sm btn-primary">
                             Save Changes
                         </button>
                     </div>

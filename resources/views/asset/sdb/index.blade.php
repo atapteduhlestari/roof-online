@@ -40,9 +40,9 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $sdb->sdb_name }}</td>
-                                    <td>{{ createDate($sdb->pcs_date)->format('d M Y') }}</td>
+                                    <td>{{ $sdb->pcs_date ? createDate($sdb->pcs_date)->format('d M Y') : '' }}</td>
                                     <td>{{ rupiah($sdb->pcs_value) }}</td>
-                                    <td>{{ createDate($sdb->due_date)->format('d M Y') }}</td>
+                                    <td>{{ $sdb->due_date ? createDate($sdb->due_date)->format('d M Y') : '' }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <form action="/trn-sdb/create">

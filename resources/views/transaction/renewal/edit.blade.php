@@ -90,7 +90,7 @@
                 <a href="/trn-renewal" class="btn btn-secondary btn-sm mr-2">
                     <i class="fas fa-arrow-left"></i> Back
                 </a>
-                <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>
+                <button type="button" id="btnSubmit" class="btn btn-sm btn-primary">Submit</button>
             </form>
         </div>
     </div>

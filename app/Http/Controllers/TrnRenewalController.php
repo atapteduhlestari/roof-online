@@ -101,4 +101,12 @@ class TrnRenewalController extends Controller
         $data = TrnRenewal::filter($request)->orderBy('trn_date', 'desc')->get();
         return $data;
     }
+
+    public function updateStatus(TrnRenewal $trnRenewal)
+    {
+        $trnRenewal->update([
+            'trn_status' => 1
+        ]);
+        return redirect()->back()->with('success', 'Success!');
+    }
 }

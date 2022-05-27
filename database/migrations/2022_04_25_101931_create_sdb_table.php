@@ -16,9 +16,9 @@ class CreateSDBTable extends Migration
         Schema::create('sdb', function (Blueprint $table) {
             $table->id();
             $table->string('sdb_name');
-            $table->date('pcs_date');
-            $table->string('pcs_value');
-            $table->date('due_date', 2);
+            $table->date('pcs_date')->nullable();
+            $table->string('pcs_value')->nullable();
+            $table->date('due_date', 2)->nullable();
             $table->timestamps();
         });
     }

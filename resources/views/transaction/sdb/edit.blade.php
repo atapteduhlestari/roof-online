@@ -47,7 +47,7 @@
                             value="{{ old('due_date', $trnSDB->due_date) }}">
                     </div>
                 </div>
-                <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>
+                <button type="button" id="btnSubmit" class="btn btn-sm btn-primary">Submit</button>
             </form>
         </div>
     </div>

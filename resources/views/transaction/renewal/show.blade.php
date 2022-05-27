@@ -38,10 +38,6 @@
                         <th>Group</th>
                         <td>{{ $trnRenewal->document->parent->group->asset_group_name }}</td>
                     </tr>
-                    <tr>
-                        <th>Description</th>
-                        <td>{{ $trnRenewal->trn_desc }}</td>
-                    </tr>
                 </table>
             </div>
             <div class="col-md-6 mb-3">
@@ -51,16 +47,34 @@
                         <td>{{ $trnRenewal->renewal->no_doc }}</td>
                     </tr>
                     <tr>
-                        <th>Created</th>
-                        <td>{{ $trnRenewal->created_at->format('d F Y') }}</td>
+                        <th>SBU</th>
+                        <td>{{ $trnMaintenance->document->sbu->sbu_name }}</td>
                     </tr>
                     <tr>
                         <th>REN</th>
                         <td>{{ $trnRenewal->renewal->name }}</td>
                     </tr>
                     <tr>
-                        <th>Cycle</th>
-                        <td>{{ $trnRenewal->renewal->cycle->cycle_name }}</td>
+                        <th>Description</th>
+                        <td>{{ $trnRenewal->trn_desc }}</td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>
+                            @if ($trnRenewal->trn_status)
+                                <button type="button" class="btn btn-sm btn-success">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            @else
+                                <form action="/trn-renewal/update-status/{{ $trnRenewal->id }}" method="post">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit" class="btn btn-sm btn-danger btn-block">
+                                        <i class="fas fa-exclamation"></i>
+                                    </button>
+                                </form>
+                            @endif
+                        </td>
                     </tr>
                 </table>
             </div>

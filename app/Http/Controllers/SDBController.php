@@ -17,9 +17,6 @@ class SDBController extends Controller
     {
         $request->validate([
             'sdb_name' => 'required',
-            'pcs_date' => 'required|date',
-            'pcs_value' => 'required',
-            'due_date' => 'required|date',
         ]);
 
         $data = $request->all();
@@ -43,9 +40,6 @@ class SDBController extends Controller
     {
         $request->validate([
             'sdb_name' => 'required',
-            'pcs_date' => 'required|date',
-            'pcs_value' => 'required',
-            'due_date' => 'required|date',
         ]);
 
         $data = $request->all();

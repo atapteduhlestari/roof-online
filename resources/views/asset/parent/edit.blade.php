@@ -163,7 +163,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <button type="button" id="btnSubmit" class="btn btn-primary">Save Changes</button>
+                        <button type="button" id="btnSubmit" class="btn btn-sm btn-primary">Save Changes</button>
                     </div>
                 </div>
             </form>

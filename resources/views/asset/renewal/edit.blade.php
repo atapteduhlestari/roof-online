@@ -38,7 +38,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <div class="form-group">
                             <label for="cycle_id">Cycle</label>
                             <select class="form-control @error('cycle_id') is-invalid @enderror" name="cycle_id"
@@ -56,7 +56,7 @@
                                 </div>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="row">
@@ -64,7 +64,7 @@
                         <a href="/renewal" class="btn btn-secondary btn-sm mr-2">
                             <i class="fas fa-arrow-left"></i> Back
                         </a>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-sm btn-primary">
                             Save Changes
                         </button>
                     </div>
