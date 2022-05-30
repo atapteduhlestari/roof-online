@@ -69,7 +69,7 @@
                                 <th>Document No.</th>
                                 <th>Type</th>
                                 <th>Due Date</th>
-                                <th>Created</th>
+                                <th>File</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
@@ -80,7 +80,16 @@
                                     <td>{{ $trn->trn_no }}</td>
                                     <td>{{ $trn->renewal->name }}</td>
                                     <td>{{ createDate($trn->trn_date)->format('d F Y') }}</td>
-                                    <td>{{ $trn->created_at->format('d F Y') }}</td>
+                                    <td>
+                                        @if ($trn->file)
+                                            <a title="download file" href="/trn-renewal/download/{{ $trn->id }}"
+                                                class="text-dark">
+                                                <i class="fas fa-download"></i>
+                                            </a>
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
@@ -128,7 +137,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="/trn-renewal" method="POST" id="formTrnRenewal">
+                    <form action="/trn-renewal" method="POST" id="formTrnRenewal" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">
@@ -209,11 +218,24 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group mb-3">
-                            <label for="trn_desc">Description</label>
-                            <textarea class="form-control" id="trn_desc" name="trn_desc" cols="10" rows="5">{{ old('trn_desc') }}</textarea>
-                        </div>
 
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="trn_desc">Description</label>
+                                    <textarea class="form-control" id="trn_desc" name="trn_desc" cols="10" rows="5">{{ old('trn_desc') }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="">File</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input  @error('file') is-invalid @enderror"
+                                        name="file" id="fileInput">
+                                    <label class="custom-file-label" for="file">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>
                     </form>
@@ -268,6 +290,11 @@
         btnSubmit.click(function() {
             $(this).prop('disabled', true);
             form.submit();
+        });
+
+        $('#fileInput').on('change', function(e) {
+            var fileName = $(this).val();
+            $(this).next('.custom-file-label').html(e.target.files[0].name);
         });
 
         let formDelete = $('#deleteForm');

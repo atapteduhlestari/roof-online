@@ -33,9 +33,15 @@ class AssetChild extends Model
         return $this->belongsTo(SBU::class, 'sbu_id');
     }
 
+
     public function trnSDBDetail()
     {
         return $this->hasOne(TrnSDBDetail::class, 'asset_child_id');
+    }
+
+    public function getTakeDocAttribute()
+    {
+        return "/storage/{$this->file}";
     }
 
     public function getLastTransaction($time)

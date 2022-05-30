@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SBU;
 use App\Models\SDB;
 use App\Models\Asset;
 use App\Models\AssetChild;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AssetChildController extends Controller
 {
@@ -16,9 +18,15 @@ class AssetChildController extends Controller
         }])->get();
 
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
+        $SBUs = SBU::orderBy('sbu_name', 'desc')->get();
         $assets = Asset::orderBy('asset_name', 'asc')->get();
 
-        return view('asset.child.index', compact('children', 'assets', 'SDBs'));
+        return view('asset.child.index', compact(
+            'children',
+            'assets',
+            'SDBs',
+            'SBUs'
+        ));
     }
 
     public function store(Request $request)
@@ -26,12 +34,18 @@ class AssetChildController extends Controller
         $request->validate([
             'doc_name' => 'required',
             'doc_no' => 'required',
-            'due_date' => 'required',
             'asset_id' => 'required',
             'sbu_id' => 'required',
         ]);
 
         $data = $request->all();
+
+        if ($request->file('file')) {
+            $file = $request->file('file');
+            $fileUrl = $file->storeAs('uploads/files/docs',  $file->hashName());
+            $data['file'] = $fileUrl;
+        }
+
         AssetChild::create($data);
 
         return redirect()->back()->with('success', 'Success!');
@@ -42,12 +56,40 @@ class AssetChildController extends Controller
         $request->validate([
             'doc_name' => 'required',
             'doc_no' => 'required',
-            'due_date' => 'required|date',
-            'desc' => 'required',
         ]);
 
         $data = $request->all();
+
+        if ($request->file('file')) {
+            Storage::delete($assetChild->file);
+            $file = $request->file('file');
+            $fileUrl = $file->storeAs('uploads/files/docs',  $file->hashName());
+            $data['file'] = $fileUrl;
+        } else {
+            $data['file'] = $assetChild->file;
+        }
+
+
         $assetChild->update($data);
         return redirect()->back()->with('success', 'Success!');
+    }
+
+    public function download(AssetChild $assetChild)
+    {
+        $path = public_path() . $assetChild->takeDoc;
+        return response()->download($path);
+    }
+
+    public function destroy(AssetChild $assetChild)
+    {
+
+        if ($assetChild->trnRenewal()->exists()) {
+            return redirect('/asset-child')->with('warning', 'Cannot delete document that have transactions!');
+        }
+
+        Storage::delete($assetChild->file);
+        $assetChild->delete();
+
+        return redirect('/asset-child')->with('success', 'Success!');
     }
 }

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TrnMaintenance;
 use App\Models\Asset;
 use App\Models\Employee;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
+use App\Models\TrnMaintenance;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\TrnMaintenanceRequest;
 
 class TrnMaintenanceController extends Controller
@@ -14,6 +15,9 @@ class TrnMaintenanceController extends Controller
 
     public function index()
     {
+        // $data = request()->all();
+        // $trnMaintenances = TrnMaintenance::filter($data)->get();
+
         $trnMaintenances = TrnMaintenance::get();
         $maintenances = Maintenance::get();
         $assets = Asset::orderBy('asset_name', 'asc')->get();
@@ -44,8 +48,14 @@ class TrnMaintenanceController extends Controller
     {;
 
         $data = $this->storeTrnData($request->all());
-        TrnMaintenance::create($data);
 
+        if ($request->file('file')) {
+            $file = $request->file('file');
+            $fileUrl = $file->storeAs('uploads/files/transactions/maintenance',  $file->hashName());
+            $data['file'] = $fileUrl;
+        }
+
+        TrnMaintenance::create($data);
         return redirect()->back()->with('success', 'Success!');
     }
 
@@ -87,22 +97,46 @@ class TrnMaintenanceController extends Controller
         $data['user_id'] = auth()->user()->id;
         $data['trn_value'] = removeDots($data['trn_value']);
 
-        $trnMaintenance->update($data);
+        if ($request->file('file')) {
+            Storage::delete($trnMaintenance->file);
+            $file = $request->file('file');
+            $fileUrl = $file->storeAs('uploads/files/transactions/maintenance',  $file->hashName());
+            $data['file'] = $fileUrl;
+        } else {
+            $data['file'] = $trnMaintenance->file;
+        }
 
+        $trnMaintenance->update($data);
         return redirect()->back()->with('success', 'Success!');
     }
 
     public function destroy(TrnMaintenance $trnMaintenance)
     {
+        Storage::delete($trnMaintenance->file);
         $trnMaintenance->delete();
         return redirect('/trn-maintenance')->with('success', 'Success!');
     }
 
+    public function search(Request $request)
+    {
+        $data = TrnMaintenance::filter($request)->orderBy('trn_date', 'desc')->get();
+        return;
+    }
+
     public function updateStatus(TrnMaintenance $trnMaintenance)
     {
+        if (!$trnMaintenance->file)
+            return redirect()->back()->with('warning', 'Upload a file to proof!');
+
         $trnMaintenance->update([
             'trn_status' => 1
         ]);
         return redirect()->back()->with('success', 'Success!');
+    }
+
+    public function download(TrnMaintenance $trnMaintenance)
+    {
+        $path = public_path() . $trnMaintenance->takeDoc;
+        return response()->download($path);
     }
 }

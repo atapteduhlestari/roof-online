@@ -24,8 +24,7 @@
         </div>
 
         <div class="collapse" id="collapseSearch">
-            <form action="/trn-maintenance/search" method="POST">
-                @csrf
+            <form action="/trn-maintenance" method="get">
                 <div class="row">
                     <div class="col-md-6">
                         <label for="trn_date">Date</label>
@@ -35,13 +34,13 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="asset_search">Assets</label>
-                        <select class="form-control @error('asset_search') is-invalid @enderror" id="asset_search"
-                            name="asset_search">
+                        <label for="asset_search_id">Assets</label>
+                        <select class="form-control @error('asset_search_id') is-invalid @enderror" id="asset_search_id"
+                            name="asset_search_id">
                             <option value="">Select Assets</option>
                             @foreach ($assets as $ac)
                                 <option value="{{ $ac->id }}"
-                                    {{ old('asset_search') == $ac->id ? 'selected' : '' }}>
+                                    {{ old('asset_search_id') == $ac->id ? 'selected' : '' }}>
                                     {{ $ac->asset_name }}</option>
                             @endforeach
                         </select>
@@ -69,7 +68,7 @@
                                 <th>Document No.</th>
                                 <th>Type</th>
                                 <th>Due Date</th>
-                                <th>Created</th>
+                                <th>File</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
@@ -80,7 +79,16 @@
                                     <td>{{ $trn->trn_no }}</td>
                                     <td>{{ $trn->maintenance->name }}</td>
                                     <td>{{ createDate($trn->trn_date)->format('d F Y') }}</td>
-                                    <td>{{ $trn->created_at->format('d F Y') }}</td>
+                                    <td>
+                                        @if ($trn->file)
+                                            <a title="download file" href="/trn-maintenance/download/{{ $trn->id }}"
+                                                class="text-dark">
+                                                <i class="fas fa-download"></i>
+                                            </a>
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
@@ -128,7 +136,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="/trn-maintenance" method="POST" id="formTrnmaintenance">
+                    <form action="/trn-maintenance" method="POST" id="formTrnmaintenance" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">
@@ -209,9 +217,23 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group mb-3">
-                            <label for="trn_desc">Description</label>
-                            <textarea class="form-control" id="trn_desc" name="trn_desc" cols="10" rows="5">{{ old('trn_desc') }}</textarea>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="trn_desc">Description</label>
+                                    <textarea class="form-control" id="trn_desc" name="trn_desc" cols="10" rows="5">{{ old('trn_desc') }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="">File</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input  @error('file') is-invalid @enderror"
+                                        name="file" id="fileInput">
+                                    <label class="custom-file-label" for="file">Choose file</label>
+                                </div>
+                            </div>
                         </div>
 
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -240,7 +262,7 @@
         let form = $('#formTrnmaintenance'),
             btnSubmit = $('#btnSubmit');
 
-        $("#asset_search").selectize({
+        $("#asset_search_id").selectize({
             create: false,
             sortField: "text",
         });
@@ -263,6 +285,11 @@
         $("#maintenance_id").selectize({
             create: false,
             sortField: "text",
+        });
+
+        $('#fileInput').on('change', function(e) {
+            var fileName = $(this).val();
+            $(this).next('.custom-file-label').html(e.target.files[0].name);
         });
 
         btnSubmit.click(function() {

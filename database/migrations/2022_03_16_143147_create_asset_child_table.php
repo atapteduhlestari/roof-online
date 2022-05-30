@@ -20,7 +20,7 @@ class CreateAssetChildTable extends Migration
             $table->foreignId('sbu_id')->nullable();
             $table->string('doc_name');
             $table->string('doc_no');
-            $table->string('due_date');
+            $table->text('file')->nullable();
             $table->text('desc')->nullable();
             $table->timestamps();
         });

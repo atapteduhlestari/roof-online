@@ -1,12 +1,11 @@
 @extends('layouts.master')
 @push('styles')
-    <link href="/assets/template/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="/assets/template/vendor/selectize/selectize.css" rel="stylesheet">
 @endpush
 @section('title', 'GA | Edit Docs')
 @section('container')
     <!-- Begin Page Content -->
     <div class="container-fluid">
-
         <div class="d-flex align-items-center mb-3">
             <div class="flex-grow-1">
                 <h1 class="h3 mb-2 text-gray-800">Document Edit</h1>
@@ -17,7 +16,7 @@
         </div>
         <!-- Page Heading -->
         <div class="my-4">
-            <form id="formAdd" action="/asset-child/{{ $child->id }}" method="POST">
+            <form id="formAdd" action="/asset-child/{{ $child->id }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row">
@@ -31,27 +30,22 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label for="">Asset Name</label>
+                            <input type="text" class="form-control not-allowed" value="{{ $child->parent->asset_name }}"
+                                disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
                             <label for="doc_no">Document No</label>
                             <input name="doc_no" id="doc_no" type="text"
                                 class="form-control @error('doc_no') is-invalid @enderror"
                                 value="{{ old('doc_no', $child->doc_no) }}">
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="due_date">Due Date</label>
-                            <input name="due_date" id="due_date" type="date"
-                                class="form-control @error('due_date') is-invalid @enderror"
-                                value="{{ old('due_date', $child->due_date) }}">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="">Asset</label>
-                            <input type="text" class="form-control not-allowed" value="{{ $child->parent->asset_name }}"
-                                disabled>
-                        </div>
-                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="sdb_id">SDB</label>
@@ -65,14 +59,35 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="sbu_id">SBU</label>
+                        <select class="form-control @error('sbu_id') is-invalid @enderror" name="sbu_id" id="sbu_id">
+                            <option value=""></option>
+                            @foreach ($SBUs as $sbu)
+                                <option value="{{ $sbu->id }}"
+                                    {{ old('sdb_id', $asset->sbu_id) == $sbu->id ? 'selected' : '' }}>
+                                    {{ $sbu->sbu_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 mb-3">
                         <div class="form-group">
                             <label for="desc">Description</label>
                             <textarea class="form-control  @error('desc') is-invalid @enderror" name="desc" id="desc" cols="30"
                                 rows="5">{{ old('desc', $child->desc) }}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="">File</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input  @error('file') is-invalid @enderror" name="file"
+                                id="fileInput">
+                            <label class="custom-file-label" for="file">Choose file</label>
                         </div>
                     </div>
                 </div>
@@ -86,10 +101,20 @@
     <!-- Page level plugins -->
     <script src="/assets/template/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/assets/template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="/assets/app/js/table.js"></script>
+    <script src="/assets/template/vendor/selectize/selectize.js"></script>
     <script>
         let btnSubmit = $('#btnSubmit'),
             form = $('#formAdd');
+
+        $('#fileInput').on('change', function(e) {
+            var fileName = $(this).val();
+            $(this).next('.custom-file-label').html(e.target.files[0].name);
+        });
+
+        $("#sbu_id").selectize({
+            create: false,
+            sortField: "text",
+        });
 
         btnSubmit.click(function() {
             $(this).prop('disabled', true);

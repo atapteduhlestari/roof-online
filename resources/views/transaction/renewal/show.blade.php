@@ -38,6 +38,19 @@
                         <th>Group</th>
                         <td>{{ $trnRenewal->document->parent->group->asset_group_name }}</td>
                     </tr>
+                    <tr>
+                        <th>File</th>
+                        <td>
+                            @if ($trnRenewal->file)
+                                <a title="download file" href="/trn-maintenance/download/{{ $trnRenewal->id }}"
+                                    class="text-dark">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                            @else
+                                -
+                            @endif
+                        </td>
+                    </tr>
                 </table>
             </div>
             <div class="col-md-6 mb-3">
@@ -48,7 +61,7 @@
                     </tr>
                     <tr>
                         <th>SBU</th>
-                        <td>{{ $trnMaintenance->document->sbu->sbu_name }}</td>
+                        <td>{{ $trnRenewal->document->sbu->sbu_name }}</td>
                     </tr>
                     <tr>
                         <th>REN</th>
@@ -61,19 +74,24 @@
                     <tr>
                         <th>Status</th>
                         <td>
-                            @if ($trnRenewal->trn_status)
-                                <button type="button" class="btn btn-sm btn-success">
-                                    <i class="fas fa-check"></i>
-                                </button>
-                            @else
-                                <form action="/trn-renewal/update-status/{{ $trnRenewal->id }}" method="post">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" class="btn btn-sm btn-danger btn-block">
-                                        <i class="fas fa-exclamation"></i>
-                                    </button>
-                                </form>
-                            @endif
+                            <div class="row">
+                                <div class="col-md-3">
+                                    @if ($trnRenewal->trn_status)
+                                        <button type="button" class="btn btn-sm btn-success">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                    @else
+                                        <form action="/trn-renewal/update-status/{{ $trnRenewal->id }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-sm btn-danger btn-block">
+                                                <i class="fas fa-exclamation"></i>
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
+                            </div>
+
                         </td>
                     </tr>
                 </table>

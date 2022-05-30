@@ -19,7 +19,7 @@
             </a>
         </div>
         <div class="mb-5">
-            <form action="/trn-renewal" method="POST" id="formTrnRenewal">
+            <form action="/trn-renewal" method="POST" id="formTrnRenewal" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <input type="hidden" name="asset_child_id" value="{{ $assetChild->id }}">
@@ -91,11 +91,25 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group mb-3">
-                    <label for="trn_desc">Description</label>
-                    <textarea class="form-control @error('trn_desc') is-invalid @enderror" id="trn_desc" name="trn_desc" cols="10"
-                        rows="5">{{ old('trn_desc') }}</textarea>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="trn_desc">Description</label>
+                            <textarea class="form-control @error('trn_desc') is-invalid @enderror" id="trn_desc" name="trn_desc" cols="10"
+                                rows="5">{{ old('trn_desc') }}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="">File</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input  @error('file') is-invalid @enderror" name="file"
+                                id="fileInput">
+                            <label class="custom-file-label" for="file">Choose file</label>
+                        </div>
+                    </div>
                 </div>
+
                 <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>
             </form>
         </div>
@@ -129,6 +143,11 @@
         $("#penyetuju").selectize({
             create: false,
             sortField: "text",
+        });
+
+        $('#fileInput').on('change', function(e) {
+            var fileName = $(this).val();
+            $(this).next('.custom-file-label').html(e.target.files[0].name);
         });
 
         btnSubmit.click(function() {

@@ -27,6 +27,11 @@ class TrnRenewal extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getTakeDocAttribute()
+    {
+        return "/storage/{$this->file}";
+    }
+
     public function scopeFilter($query, $filters)
     {
     }

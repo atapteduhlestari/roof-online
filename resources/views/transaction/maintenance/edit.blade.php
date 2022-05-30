@@ -9,7 +9,8 @@
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Transaction | Edit Maintenance</h1>
         <div class="mb-5">
-            <form action="/trn-maintenance/{{ $trnMaintenance->id }}" method="POST" id="formTrnmaintenance">
+            <form action="/trn-maintenance/{{ $trnMaintenance->id }}" method="POST" id="formTrnmaintenance"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row">
@@ -84,11 +85,25 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group mb-3">
-                    <label for="trn_desc">Description</label>
-                    <textarea class="form-control  @error('trn_desc') is-invalid @enderror" id="trn_desc" name="trn_desc" cols="10"
-                        rows="5">{{ old('trn_desc', $trnMaintenance->trn_desc) }}</textarea>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="trn_desc">Description</label>
+                            <textarea class="form-control  @error('trn_desc') is-invalid @enderror" id="trn_desc" name="trn_desc" cols="10"
+                                rows="5">{{ old('trn_desc', $trnMaintenance->trn_desc) }}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="">File</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input  @error('file') is-invalid @enderror" name="file"
+                                id="fileInput">
+                            <label class="custom-file-label" for="file">Choose file</label>
+                        </div>
+                    </div>
                 </div>
+
                 <a href="/trn-maintenance" class="btn btn-secondary btn-sm mr-2">
                     <i class="fas fa-arrow-left"></i> Back
                 </a>
@@ -125,6 +140,11 @@
         $("#penyetuju").selectize({
             create: false,
             sortField: "text",
+        });
+
+        $('#fileInput').on('change', function(e) {
+            var fileName = $(this).val();
+            $(this).next('.custom-file-label').html(e.target.files[0].name);
         });
 
         btnSubmit.click(function() {

@@ -109,8 +109,9 @@ class AssetController extends Controller
 
     public function documents(Asset $asset)
     {
+        $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
-        return view('asset.parent.docs.index', compact('asset', 'SDBs'));
+        return view('asset.parent.docs.index', compact('asset', 'SDBs', 'SBUs'));
     }
 
     public function addDocuments(Request $request, Asset $asset)
@@ -118,12 +119,17 @@ class AssetController extends Controller
         $request->validate([
             'doc_name' => 'required',
             'doc_no' => 'required',
-            'due_date' => 'required|date',
         ]);
 
         $data = $request->all();
         $data['asset_id'] = $asset->id;
         $data['sbu_id'] = $request->sbu_id ?? $asset->sbu_id;
+
+        if ($request->file('file')) {
+            $file = $request->file('file');
+            $fileUrl = $file->storeAs('uploads/files/docs',  $file->hashName());
+            $data['file'] = $fileUrl;
+        }
 
         $asset->children()->create($data);
         return redirect()->back()->with('success', 'Success!');
@@ -131,50 +137,18 @@ class AssetController extends Controller
 
     public function editDocuments(Asset $asset, $childId)
     {
-        $child = $asset->children()->where('id', $childId)->first();
-        $children = AssetChild::where('id', '!=', $childId)->get();
+        $child = AssetChild::find($childId);
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
+        $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
 
         return view('asset.parent.docs.edit', compact(
             'asset',
             'child',
-            'children',
-            'SDBs'
+            'SDBs',
+            'SBUs'
         ));
     }
 
-    public function updateDocuments(Request $request, Asset $asset, $id)
-    {
-        $request->validate([
-            'doc_name' => 'required',
-            'doc_no' => 'required',
-            'due_date' => 'required|date',
-            'desc' => 'required',
-        ]);
-
-        $data = $request->all();
-
-        $asset->children()
-            ->where('id', $id)
-            ->update([
-                'doc_name' => $data['doc_name'],
-                'doc_no' => $data['doc_no'],
-                'due_date' => $data['due_date'],
-                'desc' => $data['desc'],
-            ]);
-
-        return redirect()->back()->with('success', 'Success!');
-    }
-
-    public function deleteDocuments(Asset $asset, $childId)
-    {
-        if ($asset->children()->where('id', $childId)->trnRenewal()->exists()) {
-            return redirect('/asset-parent/docs/' . $asset->id)->with('warning', 'Cannot delete document that have transactions!');
-        }
-
-        $asset->children()->where('id', $childId)->delete();
-        return redirect('/asset-parent/docs/' . $asset->id)->with('success', 'Success!');
-    }
 
     public function getData($id)
     {

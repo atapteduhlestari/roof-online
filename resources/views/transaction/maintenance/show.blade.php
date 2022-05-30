@@ -34,6 +34,19 @@
                         <th>Group</th>
                         <td>{{ $trnMaintenance->asset->group->asset_group_name }}</td>
                     </tr>
+                    <tr>
+                        <th>File</th>
+                        <td>
+                            @if ($trnMaintenance->file)
+                                <a title="download file" href="/trn-maintenance/download/{{ $trnMaintenance->id }}"
+                                    class="text-dark">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                            @else
+                                -
+                            @endif
+                        </td>
+                    </tr>
                 </table>
             </div>
             <div class="col-md-6 mb-3">
@@ -93,6 +106,5 @@
             </div>
         </div>
         <!-- End Row-->
-
     </div>
 @endsection

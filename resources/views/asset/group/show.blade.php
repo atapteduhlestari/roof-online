@@ -30,8 +30,8 @@
                             <tr>
                                 <th>#</th>
                                 <th>Asset Name</th>
-                                <th>Asset Code</th>
                                 <th>Asset No.</th>
+                                <th>SBU</th>
                                 <th>Purchase Date</th>
                                 <th>Purchase Value</th>
                                 <th>Penanggung Jawab</th>
@@ -42,32 +42,28 @@
                             @foreach ($assetGroup->assets as $asset)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>
-                                        <a href="/asset-parent/{{ $asset->id }}">
-                                            {{ $asset->asset_name }}
-                                        </a>
-                                    </td>
-                                    <td>{{ $asset->asset_code }}</td>
-                                    <td>{{ $asset->asset_no ?? '-' }}</td>
-                                    <td>{{ $asset->pcs_date }}</td>
+                                    <td> {{ $asset->asset_name }}</td>
+                                    <td>{{ $asset->asset_no ?? '' }}</td>
+                                    <td>{{ $asset->sbu->sbu_name }}</td>
+                                    <td>{{ createDate($asset->pcs_date)->format('d F Y') }}</td>
                                     <td>{{ rupiah($asset->pcs_value) }}</td>
                                     <td>{{ $asset->employee->name ?? '-' }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
                                                 <a title="Asset Detail" href="/asset-parent/docs/{{ $asset->id }}"
-                                                    class="btn btn-outline-dark text-xs">Detail</a>
+                                                    class="btn btn-outline-dark btn-sm">Detail</a>
                                             </div>
                                             <div>
                                                 <a title="Edit Data" href="/asset-parent/{{ $asset->id }}/edit"
-                                                    class="btn btn-outline-dark text-xs">Edit</a>
+                                                    class="btn btn-outline-dark btn-sm">Edit</a>
                                             </div>
                                             <div>
                                                 <form action="/asset-parent/{{ $asset->id }}" method="post"
                                                     id="deleteForm">
                                                     @csrf
                                                     @method('delete')
-                                                    <button title="Delete Data" class="btn btn-outline-danger text-xs"
+                                                    <button title="Delete Data" class="btn btn-outline-danger btn-sm"
                                                         onclick="return false" id="deleteButton"
                                                         data-id="{{ $asset->id }}">
                                                         <i class="fas fa-trash-alt"></i>

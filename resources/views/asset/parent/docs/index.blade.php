@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @push('styles')
     <link href="/assets/template/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="/assets/template/vendor/selectize/selectize.css" rel="stylesheet">
 @endpush
 @section('title', 'GA | Asset - ' . $asset->asset_name)
 @section('container')
@@ -153,7 +154,7 @@
                                         <th>#</th>
                                         <th>Doc Name</th>
                                         <th>Doc No</th>
-                                        <th>Due Date</th>
+                                        <th>File</th>
                                         <th>Description</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
@@ -164,7 +165,17 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $child->doc_name }}</td>
                                             <td>{{ $child->doc_no }}</td>
-                                            <td>{{ createDate($child->due_date)->format('d F Y') }}</td>
+                                            <td>
+                                                @if ($child->file)
+                                                    <a title="download file"
+                                                        href="/asset-child/download/{{ $child->id }}"
+                                                        class="text-dark">
+                                                        <i class="fas fa-download"></i>
+                                                    </a>
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
                                             <td>{{ $child->desc }}</td>
                                             <td>
                                                 <div class="d-flex justify-content-around">
@@ -181,16 +192,14 @@
                                                             class="btn btn-outline-dark text-xs">Edit</a>
                                                     </div>
                                                     <div>
-                                                        <form
-                                                            action="/asset-parent/docs/delete/{{ $asset->id }}/{{ $child->id }}"
-                                                            method="POST" id="deleteDocForm">
+                                                        <form action="/asset-child/{{ $child->id }}" method="POST"
+                                                            id="deleteDocForm">
                                                             @csrf
                                                             @method('delete')
                                                             <button title="Delete Data"
                                                                 class="btn btn-outline-danger text-xs"
                                                                 onclick="return false" id="deleteDocButton"
-                                                                data-id="{{ $child->id }}"
-                                                                data-asset_id="{{ $asset->id }}">
+                                                                data-id="{{ $child->id }}">
                                                                 <i class="fas fa-trash-alt"></i>
                                                             </button>
                                                         </form>
@@ -220,7 +229,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="formAdd" action="/asset-parent/docs/add/{{ $asset->id }}" method="POST">
+                    <form id="formAdd" action="/asset-parent/docs/add/{{ $asset->id }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
@@ -229,22 +239,6 @@
                                     <input name="doc_name" id="doc_name" type="text"
                                         class="form-control @error('doc_name') is-invalid @enderror"
                                         value="{{ old('doc_name') }}" autocomplete="off" autofocus>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="doc_no">Document No</label>
-                                    <input name="doc_no" id="doc_no" type="text"
-                                        class="form-control @error('doc_no') is-invalid @enderror"
-                                        value="{{ old('doc_no') }}">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="due_date">Due Date</label>
-                                    <input name="due_date" id="due_date" type="date"
-                                        class="form-control @error('due_date') is-invalid @enderror"
-                                        value="{{ old('due_date') }}">
                                 </div>
                             </div>
 
@@ -256,6 +250,17 @@
                                 </div>
                             </div>
 
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="doc_no">Document No</label>
+                                    <input name="doc_no" id="doc_no" type="text"
+                                        class="form-control @error('doc_no') is-invalid @enderror"
+                                        value="{{ old('doc_no') }}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="sdb_id">SDB</label>
                                 <select class="form-control @error('sdb_id') is-invalid @enderror" name="sdb_id"
@@ -268,14 +273,36 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="sbu_id">SBU</label>
+                                <select class="form-control @error('sbu_id') is-invalid @enderror" name="sbu_id"
+                                    id="sbu_id">
+                                    <option value=""></option>
+                                    @foreach ($SBUs as $sbu)
+                                        <option value="{{ $sbu->id }}"
+                                            {{ old('sbu_id', $asset->sbu_id) == $sbu->id ? 'selected' : '' }}>
+                                            {{ $sbu->sbu_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label for="desc">Description</label>
                                     <textarea class="form-control  @error('desc') is-invalid @enderror" name="desc" id="desc" cols="30"
                                         rows="5">{{ old('desc') }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="">File</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input  @error('file') is-invalid @enderror"
+                                        name="file" id="fileInput">
+                                    <label class="custom-file-label" for="file">Choose file</label>
                                 </div>
                             </div>
                         </div>
@@ -293,9 +320,15 @@
     <!-- Page level plugins -->
     <script src="/assets/template/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/assets/template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="/assets/template/vendor/selectize/selectize.js"></script>
     <script>
         $(document).ready(function() {
             $('#dataTable').DataTable();
+        });
+
+        $('#fileInput').on('change', function(e) {
+            var fileName = $(this).val();
+            $(this).next('.custom-file-label').html(e.target.files[0].name);
         });
 
         let btnSubmit = $('#btnSubmit'),
@@ -307,6 +340,11 @@
         btnSubmit.click(function() {
             $(this).prop('disabled', true);
             form.submit();
+        });
+
+        $("#sbu_id").selectize({
+            create: false,
+            sortField: "text",
         });
 
         let collapseBtn = $('#collapseButton');
@@ -345,7 +383,7 @@
             e.preventDefault();
             let assetId = $(this).data('asset_id');
             let id = $(this).data('id');
-            formDeleteDoc.attr('action', `/asset-parent/docs/delete/${assetId}/${id}`)
+            formDeleteDoc.attr('action', `/asset-child/${id}`)
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",

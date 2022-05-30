@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
         ])->except(['create']);
 
     Route::resource('/asset-child', AssetChildController::class)->except(['create']);
+    Route::get('/asset-child/download/{assetChild}', [AssetChildController::class, 'download']);
 
     Route::get('/asset-parent/docs/{asset}', [AssetController::class, 'documents'])
         ->name('assetDocuments');
@@ -60,10 +61,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/trn-renewal', TrnRenewalController::class);
     Route::post('/trn-renewal/search', [TrnRenewalController::class, 'search']);
     Route::put('/trn-renewal/update-status/{trnRenewal}', [TrnRenewalController::class, 'updateStatus']);
+    Route::put('/trn-renewal/download/{trnRenewal}', [TrnRenewalController::class, 'download']);
 
     Route::resource('/trn-maintenance', TrnMaintenanceController::class);
     Route::post('/trn-maintenance/search', [TrnMaintenanceController::class, 'search']);
     Route::put('/trn-maintenance/update-status/{trnMaintenance}', [TrnMaintenanceController::class, 'updateStatus']);
+    Route::get('/trn-maintenance/download/{trnMaintenance}', [TrnMaintenanceController::class, 'download']);
 
     Route::resource('/trn-sdb', TrnSDBController::class)->parameters([
         'trn-sdb' => 'trnSDB',

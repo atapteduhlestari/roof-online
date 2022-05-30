@@ -8,6 +8,7 @@ use App\Models\Employee;
 use App\Models\AssetChild;
 use App\Models\TrnRenewal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\TrnRenewalRequest;
 
 class TrnRenewalController extends Controller
@@ -43,8 +44,14 @@ class TrnRenewalController extends Controller
     public function store(TrnRenewalRequest $request)
     {
         $data = $this->storeTrnData($request->all());
-        TrnRenewal::create($data);
 
+        if ($request->file('file')) {
+            $file = $request->file('file');
+            $fileUrl = $file->storeAs('uploads/files/transactions/renewal',  $file->hashName());
+            $data['file'] = $fileUrl;
+        }
+
+        TrnRenewal::create($data);
         return redirect()->back()->with('success', 'Success!');
     }
 
@@ -86,12 +93,22 @@ class TrnRenewalController extends Controller
         $data['trn_value'] = removeDots($data['trn_value']);
         $data['renewal_id'] = $trnRenewal->renewal_id;
 
+        if ($request->file('file')) {
+            Storage::delete($trnRenewal->file);
+            $file = $request->file('file');
+            $fileUrl = $file->storeAs('uploads/files/transactions/renewal',  $file->hashName());
+            $data['file'] = $fileUrl;
+        } else {
+            $data['file'] = $trnRenewal->file;
+        }
+
         $trnRenewal->update($data);
         return redirect()->back()->with('success', 'Success!');
     }
 
     public function destroy(TrnRenewal $trnRenewal)
     {
+        Storage::delete($trnRenewal->file);
         $trnRenewal->delete();
         return redirect('/trn-renewal')->with('success', 'Success!');
     }
@@ -104,9 +121,18 @@ class TrnRenewalController extends Controller
 
     public function updateStatus(TrnRenewal $trnRenewal)
     {
+        if (!$trnRenewal->file)
+            return redirect()->back()->with('warning', 'Upload a file to proof!');
+
         $trnRenewal->update([
             'trn_status' => 1
         ]);
         return redirect()->back()->with('success', 'Success!');
+    }
+
+    public function download(TrnRenewal $trnRenewal)
+    {
+        $path = public_path() . $trnRenewal->takeDoc;
+        return response()->download($path);
     }
 }

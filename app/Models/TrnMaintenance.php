@@ -27,4 +27,16 @@ class TrnMaintenance extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getTakeDocAttribute()
+    {
+        return "/storage/{$this->file}";
+    }
+
+    public function scopeFilter($query, $filters)
+    {
+        $query->when($filters['trn_date'] ?? false, function ($query, $trn_date) {
+            return $query->where('created_at', $trn_date->month)->whereYear('created_at', $trn_date->year);
+        });
+    }
 }
