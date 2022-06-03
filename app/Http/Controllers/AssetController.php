@@ -9,26 +9,74 @@ use App\Models\Employee;
 use App\Models\AssetChild;
 use App\Models\AssetGroup;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 use App\Http\Requests\AssetRequest;
 use Illuminate\Support\Facades\Storage;
+
 
 class AssetController extends Controller
 {
     public function index()
     {
-        $assets = Asset::orderBy('asset_name', 'asc')->get();
+        // $assets = Asset::orderBy('asset_name', 'asc')->get(); 
         $assetGroup = AssetGroup::get();
         $employees = Employee::orderBy('name', 'asc')->get();
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
         $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
 
         return view('asset.parent.index', compact(
-            'assets',
             'assetGroup',
             'employees',
             'SDBs',
             'SBUs'
         ));
+    }
+
+    public function getData()
+    {
+        $query = Asset::query();
+        $dt = DataTables::eloquent($query);
+
+        $dt->addIndexColumn()
+            ->editColumn('pcs_date', function ($row) {
+                return createDate($row->pcs_date)->format('d F Y');
+            })
+            ->editColumn('pcs_value', function ($row) {
+                return rupiah($row->pcs_value);
+            })
+            ->addColumn('sbu', function (Asset $asset) {
+                return $asset->sbu ? $asset->sbu->sbu_name : '';
+            })
+            ->addColumn('employee', function (Asset $asset) {
+                return $asset->employee ? $asset->employee->name : '';
+            })
+            ->addColumn('action', function ($row) {
+                return
+                    '<div class="d-flex justify-content-around">
+                <div>
+                    <a title="Asset Detail" href="/asset-parent/docs/' . $row->id . '"
+                        class="btn btn-outline-dark btn-sm">Detail</a>
+                </div>
+                <div>
+                    <a title="Edit Data" href="/asset-parent/' . $row->id . '/edit"
+                        class="btn btn-outline-dark btn-sm">Edit</a>
+                </div>
+                <div>
+                    <form action="/asset-parent/' . $row->id . '" method="post"
+                        id="deleteForm">
+                       ' . csrf_field() . '
+                       ' . method_field("DELETE") . '
+                        <button title="Delete Data" class="btn btn-outline-danger btn-sm"
+                            onclick="return false" id="deleteButton"
+                            data-id="' . $row->id . '">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>';
+            })->rawColumns(['action']);
+
+        return $dt->toJson();
     }
 
     public function store(AssetRequest $request)
@@ -147,16 +195,5 @@ class AssetController extends Controller
             'SDBs',
             'SBUs'
         ));
-    }
-
-
-    public function getData($id)
-    {
-        $data = Asset::find($id);
-        $child = $data->children;
-
-        return response()->json(
-            $child,
-        );
     }
 }

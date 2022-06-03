@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(TrnRenewal::class);
     }
+
+    public function trnMaintenance()
+    {
+        return $this->hasMany(TrnMaintenance::class);
+    }
 }

@@ -80,8 +80,8 @@
                                 <div class="form-group">
                                     <input type="text" name="username"
                                         class="form-control form-control-user @error('username') is-invalid @enderror"
-                                        id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Username"
-                                        value="{{ old('username') }}" autofocus>
+                                        id="exampleInputEmail" placeholder="Username" value="{{ old('username') }}"
+                                        autofocus>
                                     @error('username')
                                         <span class="invalid-feedback text-xs" role="alert">
                                             <strong>{{ $message }}</strong>

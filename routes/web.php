@@ -34,6 +34,8 @@ Route::middleware(['auth'])->group(function () {
             'asset-parent' => 'asset',
         ])->except(['create']);
 
+    Route::get('/api/getData', [AssetController::class, 'getData'])->name('getData.asset');
+
     Route::resource('/asset-child', AssetChildController::class)->except(['create']);
     Route::get('/asset-child/download/{assetChild}', [AssetChildController::class, 'download']);
 

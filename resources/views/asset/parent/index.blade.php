@@ -35,7 +35,8 @@
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody></tbody>
+                        {{-- <tbody>
                             @foreach ($assets as $asset)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
@@ -72,7 +73,7 @@
 
                                 </tr>
                             @endforeach
-                        </tbody>
+                        </tbody> --}}
                     </table>
                 </div>
             </div>
@@ -251,13 +252,55 @@
     <script src="/assets/template/vendor/selectize/selectize.js"></script>
     <script src="/js/jquery.mask.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#dataTable').DataTable();
+        var table = $('#dataTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('getData.asset') }}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'asset_name',
+                    name: 'asset.asset_name'
+                },
+                {
+                    data: 'asset_no',
+                    name: 'asset.asset_no',
+                },
+                {
+                    data: 'sbu',
+                    name: 'sbu.sbu_name',
+                },
+                {
+                    data: 'pcs_date',
+                    name: 'asset.pcs_date',
+                },
+                {
+                    data: 'pcs_value',
+                    name: 'asset.pcs_value',
+                },
+                {
+                    data: 'employee',
+                    name: 'employee.name',
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: true,
+                    searchable: true
+                },
+            ]
         });
 
+        // $(document).ready(function() {
+        //     $('#dataTable').DataTable();
+        // });
+
         let btnSubmit = $('#btnSubmit'),
-            form = $('#formAdd'),
-            formDelete = $('#deleteForm');
+            form = $('#formAdd');
 
         $("#emp_id").selectize({
             create: false,
@@ -283,10 +326,11 @@
             form.submit();
         });
 
+
         $(document).on('click', '#deleteButton', function(e) {
             e.preventDefault();
             let id = $(this).data('id');
-            formDelete.attr('action', `/asset-parent/${id}`)
+            $('form#deleteForm').attr('action', `/asset-parent/${id}`)
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -297,7 +341,7 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    formDelete.submit();
+                    $('form#deleteForm').submit();
                 }
             })
         });

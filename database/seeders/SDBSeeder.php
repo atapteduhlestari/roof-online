@@ -22,6 +22,12 @@ class SDBSeeder extends Seeder
                 'pcs_value' => 1000000,
                 'due_date' => now()->addYears(5),
             ],
+            [
+                'sdb_name' => 'SDB Brankas HO',
+                'pcs_date' => now(),
+                'pcs_value' => null,
+                'due_date' => null,
+            ],
         ];
 
         SDB::insert($data);
