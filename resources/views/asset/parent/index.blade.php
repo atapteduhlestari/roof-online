@@ -206,7 +206,7 @@
                             <div class="col-md-6 mb-3">
                                 <label for="pcs_value">Purchase Value</label>
                                 <input type="text" class="form-control currency @error('pcs_value') is-invalid @enderror"
-                                    name="pcs_value" id="pcs_value" value="{{ old('pcs_value') }}">
+                                    name="pcs_value" id="pcs_value" value="{{ old('pcs_value') }}" autocomplete="off">
                             </div>
 
                             <div class="col-md-6 mb-3">
@@ -218,7 +218,7 @@
                             <div class="col-md-6 mb-3">
                                 <label for="apr_value">Aprraisal Value</label>
                                 <input type="text" class="form-control currency @error('apr_value') is-invalid @enderror"
-                                    name="apr_value" value="{{ old('apr_value') }}">
+                                    name="apr_value" value="{{ old('apr_value') }}" autocomplete="off">
                             </div>
                         </div>
                         <hr>
