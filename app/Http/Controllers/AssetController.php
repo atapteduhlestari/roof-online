@@ -103,12 +103,11 @@ class AssetController extends Controller
         return $asset;
     }
 
-    public function export($param = null)
+    public function export($param)
     {
-        $data = $param ? Asset::with('sbu', 'employee')->where('asset_group_id', $param)->get() : Asset::with('sbu', 'employee')->get();
-
+        $data = $param == 'all' ? Asset::with('sbu', 'employee')->get() : Asset::with('sbu', 'employee')->where('asset_group_id', $param)->get();
         $name = 'asset.xlsx';
-        return $data;
+
         return Excel::download(new AssetExport($data), $name);
     }
 
