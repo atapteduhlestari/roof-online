@@ -34,7 +34,7 @@ Route::middleware(['auth'])->group(function () {
             'asset-parent' => 'asset',
         ])->except(['create']);
 
-    Route::get('/asset-export', [AssetController::class, 'export'])->name('asset-export');
+    Route::get('/asset-export/{param}', [AssetController::class, 'export'])->name('asset-export');
     Route::get('/api/getData', [AssetController::class, 'getData'])->name('getData.asset');
 
     Route::resource('/asset-child', AssetChildController::class)->except(['create']);

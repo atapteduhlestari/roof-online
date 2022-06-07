@@ -16,6 +16,9 @@
             <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addNewRecord">
                 Add <i class="fas fa-plus-circle"></i>
             </button>
+            <a href="/asset-export/{{ $assetGroup->id }}" class="btn btn-success">
+                Export <i class="fas fa-file-excel"></i>
+            </a>
         </div>
 
         <!-- DataTales Example -->

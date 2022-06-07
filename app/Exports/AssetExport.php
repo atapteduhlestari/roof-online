@@ -9,9 +9,17 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 
 class AssetExport implements FromCollection, WithHeadings, WithMapping
 {
+
+    protected $data;
+
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
+
     public function collection()
     {
-        return Asset::with('sbu', 'employee')->get();
+        return collect($this->data);
     }
 
     public function map($assets): array
