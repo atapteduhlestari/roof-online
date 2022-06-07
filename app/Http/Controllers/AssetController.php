@@ -8,9 +8,11 @@ use App\Models\Asset;
 use App\Models\Employee;
 use App\Models\AssetChild;
 use App\Models\AssetGroup;
+use App\Exports\AssetExport;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\AssetRequest;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -99,6 +101,11 @@ class AssetController extends Controller
     public function show(Asset $asset)
     {
         return $asset;
+    }
+
+    public function export()
+    {
+        return Excel::download(new AssetExport(), 'Assets.xlsx');
     }
 
     public function edit(Asset $asset)
