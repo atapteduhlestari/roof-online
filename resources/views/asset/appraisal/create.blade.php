@@ -9,7 +9,10 @@
         <!-- Page Heading -->
         <div class="d-flex align-items-center mb-3">
             <div class="flex-grow-1">
-                <h1 class="h3 mb-2 text-gray-800">Appraisal | {{ $asset->asset_name }}</h1>
+                <h1 class="h3 mb-2 text-gray-800">Appraisal |
+                    <a href="/asset-parent/docs/{{ $asset->id }}">
+                        {{ $asset->asset_name }}</a>
+                </h1>
             </div>
             <a href="/appraisal" class="btn btn-secondary btn-sm mr-2">
                 <i class="fas fa-arrow-left"></i> Table Appraisal
@@ -68,7 +71,11 @@
                                 @foreach ($asset->appraisals as $appraisal)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $appraisal->asset->asset_name }}</td>
+                                        <td>
+                                            <a href="/asset-parent/docs/{{ $asset->id }}">
+                                                {{ $appraisal->asset->asset_name }}
+                                            </a>
+                                        </td>
                                         <td>{{ createDate($appraisal->apr_date)->format('d M Y') }}
                                         </td>
                                         <td>
