@@ -106,7 +106,7 @@ class AssetController extends Controller
     {
         $data = $param == 'all' ? Asset::with('sbu', 'employee')->get() : Asset::with('sbu', 'employee')->where('asset_group_id', $param)->get();
         $time = now()->format('dmY');
-        $name = "ATL-GA-ASSET-LIST-{$time}.xlsx";
+        $name = "ATL-GAN-ASSET-LIST-{$time}.xlsx";
 
         return Excel::download(new AssetExport($data), $name);
     }

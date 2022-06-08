@@ -128,7 +128,7 @@ function FillAlertsData($assets, $docs)
             'date' => $asset->trn_start_date,
             'asset_name' => $asset->asset_name,
             'type' => 'Asset',
-            'link' => "/trn-maintenance/{$asset->id}"
+            'link' => "/trn-maintenance/{$asset->trn_id}"
         ];
     }
 
@@ -138,7 +138,7 @@ function FillAlertsData($assets, $docs)
             'date' => $doc->trn_start_date,
             'asset_name' => $doc->doc_name,
             'type' => 'Document',
-            'link' => "/trn-renewal/{$doc->id}"
+            'link' => "/trn-renewal/{$doc->trn_id}"
         ];
     }
 

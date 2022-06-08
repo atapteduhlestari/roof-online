@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\RenewalExport;
 use App\Models\Asset;
 use App\Models\Renewal;
 use App\Models\Employee;
 use App\Models\AssetChild;
 use App\Models\TrnRenewal;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\TrnRenewalRequest;
 
@@ -73,6 +75,15 @@ class TrnRenewalController extends Controller
     public function show(TrnRenewal $trnRenewal)
     {
         return view('transaction.renewal.show', compact('trnRenewal'));
+    }
+
+    public function export()
+    {
+        $data =  TrnRenewal::get();
+        $time = now()->format('dmY');
+        $name = "ATL-GAN-REN-{$time}.xlsx";
+
+        return Excel::download(new RenewalExport($data), $name);
     }
 
     public function edit(TrnRenewal $trnRenewal)

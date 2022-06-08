@@ -5,11 +5,11 @@
         <div class="col-12 mb-3 text-center">
             <img height="100px" class="" src="{{ asset('/assets/template/img/undraw_moving_re_pipp.svg') }}">
         </div>
-        <div class="d-flex flex-md-row mb-3">
+        {{-- <div class="d-flex flex-md-row mb-3">
             <a title="Show as PDF" href="/trn-renewal/print" class="btn btn-light btn-w-100">
                 <i class="fas fa-print"></i>
             </a>
-        </div>
+        </div> --}}
 
         <div class="row">
             <div class="col-md-6 mb-3">
@@ -17,6 +17,14 @@
                     <tr>
                         <th>No.</th>
                         <td>{{ $trnRenewal->trn_no }}</td>
+                    </tr>
+                    <tr>
+                        <th>Cost Plan</th>
+                        <td>{{ rupiah($trnRenewal->trn_value_plan) }}</td>
+                    </tr>
+                    <tr>
+                        <th>Cost Realization</th>
+                        <td>{{ rupiah($trnRenewal->trn_value) }}</td>
                     </tr>
                     <tr>
                         <th>Start Date</th>
@@ -31,25 +39,8 @@
                         <td>{{ $trnRenewal->document->doc_name }}</td>
                     </tr>
                     <tr>
-                        <th>Asset</th>
-                        <td>{{ $trnRenewal->document->parent->asset_name }}</td>
-                    </tr>
-                    <tr>
                         <th>Group</th>
                         <td>{{ $trnRenewal->document->parent->group->asset_group_name }}</td>
-                    </tr>
-                    <tr>
-                        <th>File</th>
-                        <td>
-                            @if ($trnRenewal->file)
-                                <a title="download file" href="/trn-maintenance/download/{{ $trnRenewal->id }}"
-                                    class="text-dark">
-                                    <i class="fas fa-download"></i>
-                                </a>
-                            @else
-                                -
-                            @endif
-                        </td>
                     </tr>
                 </table>
             </div>
@@ -64,8 +55,12 @@
                         <td>{{ $trnRenewal->document->sbu->sbu_name }}</td>
                     </tr>
                     <tr>
-                        <th>REN</th>
+                        <th>TYPE</th>
                         <td>{{ $trnRenewal->renewal->name }}</td>
+                    </tr>
+                    <tr>
+                        <th>SDB</th>
+                        <td>{{ $trnRenewal->document->sdb->sdb_name ?? '' }}</td>
                     </tr>
                     <tr>
                         <th>Description</th>
@@ -77,7 +72,7 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     @if ($trnRenewal->trn_status)
-                                        <button type="button" class="btn btn-sm btn-success">
+                                        <button type="button" class="btn btn-sm btn-success btn-block">
                                             <i class="fas fa-check"></i>
                                         </button>
                                     @else
@@ -91,7 +86,19 @@
                                     @endif
                                 </div>
                             </div>
-
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>File</th>
+                        <td>
+                            @if ($trnRenewal->file)
+                                <a title="download file" href="/trn-renewal/download/{{ $trnRenewal->id }}"
+                                    class="text-dark">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                            @else
+                                <a href="/trn-renewal/{{ $trnRenewal->id }}/edit">Add File</a>
+                            @endif
                         </td>
                     </tr>
                 </table>

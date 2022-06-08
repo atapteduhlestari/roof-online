@@ -14,6 +14,9 @@
                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addNewRecord">
                     Add <i class="fas fa-plus-circle"></i>
                 </button>
+                <a href="/trn-maintenance-export" class="btn btn-success">
+                    Export <i class="fas fa-file-excel"></i>
+                </a>
             </div>
             <div class="my-3">
                 <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseSearch"

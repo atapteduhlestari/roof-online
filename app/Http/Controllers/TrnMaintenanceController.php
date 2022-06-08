@@ -7,6 +7,8 @@ use App\Models\Employee;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
 use App\Models\TrnMaintenance;
+use App\Exports\MaintenanceExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\TrnMaintenanceRequest;
 
@@ -78,6 +80,16 @@ class TrnMaintenanceController extends Controller
     public function show(TrnMaintenance $trnMaintenance)
     {
         return view('transaction.maintenance.show', compact('trnMaintenance'));
+    }
+
+    public function export()
+    {
+
+        $data =  TrnMaintenance::get();
+        $time = now()->format('dmY');
+        $name = "ATL-GAN-MAI-{$time}.xlsx";
+
+        return Excel::download(new MaintenanceExport($data), $name);
     }
 
     public function edit(TrnMaintenance $trnMaintenance)
