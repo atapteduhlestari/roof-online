@@ -86,7 +86,6 @@ class AssetController extends Controller
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
         $data['pcs_value'] = removeDots($request->pcs_value);
-        $data['apr_value'] = removeDots($request->apr_value);
 
         if ($request->file('image')) {
             $image = $request->file('image');
@@ -106,7 +105,8 @@ class AssetController extends Controller
     public function export($param)
     {
         $data = $param == 'all' ? Asset::with('sbu', 'employee')->get() : Asset::with('sbu', 'employee')->where('asset_group_id', $param)->get();
-        $name = 'asset.xlsx';
+        $time = now()->format('dmY');
+        $name = "asset-{$time}.xlsx";
 
         return Excel::download(new AssetExport($data), $name);
     }
@@ -134,7 +134,6 @@ class AssetController extends Controller
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
         $data['pcs_value'] = removeDots($request->pcs_value);
-        $data['apr_value'] = removeDots($request->apr_value);
 
         if ($request->file('image')) {
 

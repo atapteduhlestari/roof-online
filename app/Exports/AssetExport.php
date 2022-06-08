@@ -2,12 +2,22 @@
 
 namespace App\Exports;
 
-use App\Models\Asset;
+use Maatwebsite\Excel\Events\AfterSheet;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithProperties;
 
-class AssetExport implements FromCollection, WithHeadings, WithMapping
+class AssetExport implements
+    FromCollection,
+    WithHeadings,
+    WithMapping,
+    WithEvents,
+    WithProperties,
+    ShouldAutoSize
 {
 
     protected $data;
@@ -22,30 +32,29 @@ class AssetExport implements FromCollection, WithHeadings, WithMapping
         return collect($this->data);
     }
 
-    public function map($assets): array
+    public function map($asset): array
     {
         return [
-            $assets->id,
-            $assets->asset_name,
-            $assets->asset_code,
-            $assets->asset_no,
-            $assets->sbu->sbu_name,
-            $assets->location,
-            $assets->condition,
-            $assets->employee->name ?? '',
-            createDate($assets->pcs_date)->format('d F Y'),
-            rupiah($assets->pcs_value),
-            $assets->apr_date ? createDate($assets->apr_date)->format('d F Y') : null,
-            rupiah($assets->apr_value),
-            $assets->desc,
-
+            $asset->id,
+            $asset->asset_name,
+            $asset->asset_code,
+            $asset->asset_no,
+            $asset->sbu->sbu_name,
+            $asset->location,
+            $asset->condition == 1 ? 'Baik' : ($asset->condition == 2 ? 'Kurang' : 'Buruk'),
+            $asset->employee->name ?? '',
+            createDate($asset->pcs_date)->format('d F Y'),
+            rupiah($asset->pcs_value),
+            $asset->appraisals()->exists() ? createDate($asset->appraisals->last()->apr_date)->format('d F Y') : null,
+            rupiah($asset->appraisals->last()->apr_value ?? ''),
+            $asset->desc,
         ];
     }
 
     public function headings(): array
     {
         return [
-            'id',
+            'No.',
             'Name',
             'Code',
             'No.',
@@ -58,6 +67,41 @@ class AssetExport implements FromCollection, WithHeadings, WithMapping
             'Aprraisal Date',
             'Aprraisal Value',
             'Description',
+        ];
+    }
+
+    public function properties(): array
+    {
+        return [
+            'creator'        => 'Edward Evbert',
+            'title'          => 'Asset Export',
+            'description'    => 'Latest Asset',
+            'subject'        => 'Asset Report',
+            'company'        => 'Atap Teduh Lestari',
+        ];
+    }
+
+    public function registerEvents(): array
+    {
+
+
+        return [
+            AfterSheet::class => function (AfterSheet $event) {
+                $event->sheet->getStyle('A1:M1')->applyFromArray([
+                    'font' => [
+                        'bold' => true
+                    ],
+                    'alignment' => [
+                        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    ],
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ],
+                ]);
+            }
         ];
     }
 }

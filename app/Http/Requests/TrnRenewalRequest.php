@@ -22,6 +22,7 @@ class TrnRenewalRequest extends FormRequest
             'asset_child_id' => 'required',
             'trn_start_date' => 'required|date',
             'trn_date' => 'required|date',
+            'trn_value_plan' => 'nullable|required',
             'trn_value' => 'required',
             'renewal_id' =>  'required',
             'pemohon' => 'required',

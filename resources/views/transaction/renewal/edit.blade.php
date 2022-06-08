@@ -45,9 +45,17 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
+                        <label for="trn_value_plan">Cost</label>
+                        <input type="text" class="form-control currency @error('trn_value_plan') is-invalid @enderror"
+                            name="trn_value_plan" value="{{ old('trn_value_plan', $trnMaintenance->trn_value_plan) }}"
+                            autocomplete="off">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
                         <label for="trn_value">Cost</label>
                         <input type="text" class="form-control currency @error('trn_value') is-invalid @enderror"
-                            name="trn_value" value="{{ old('trn_value', $trnRenewal->trn_value) }}" autocomplete="off">
+                            name="trn_value" value="{{ old('trn_value', $trnMaintenance->trn_value) }}"
+                            autocomplete="off">
                     </div>
                 </div>
                 <hr>

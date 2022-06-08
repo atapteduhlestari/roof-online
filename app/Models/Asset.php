@@ -12,7 +12,7 @@ class Asset extends Model
 
     protected $table = 'asset';
     protected $guarded = ['id'];
-    protected $with = ['children', 'trnMaintenance'];
+    protected $with = ['children', 'trnMaintenance', 'appraisals'];
 
     public function group()
     {
@@ -22,6 +22,11 @@ class Asset extends Model
     public function children()
     {
         return $this->hasMany(AssetChild::class, 'asset_id');
+    }
+
+    public function appraisals()
+    {
+        return $this->hasMany(Appraisal::class, 'asset_id');
     }
 
     public function trnMaintenance()

@@ -206,25 +206,12 @@
                                 <input type="text" class="form-control currency @error('pcs_value') is-invalid @enderror"
                                     name="pcs_value" id="pcs_value" value="{{ old('pcs_value') }}" autocomplete="off">
                             </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="apr_date">Aprraisal Date</label>
-                                <input type="date" class="form-control @error('apr_date') is-invalid @enderror"
-                                    name="apr_date" id="apr_date" value="{{ old('apr_date') }}">
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="apr_value">Aprraisal Value</label>
-                                <input type="text" class="form-control currency @error('apr_value') is-invalid @enderror"
-                                    name="apr_value" value="{{ old('apr_value') }}" autocomplete="off">
-                            </div>
                         </div>
                         <hr>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="desc">Description</label>
-                                <textarea class="form-control @error('desc') is-invalid @enderror" id="desc" name="desc" cols="10"
-                                    rows="5">{{ old('desc') }}</textarea>
+                                <textarea class="form-control @error('desc') is-invalid @enderror" id="desc" name="desc" cols="10" rows="5">{{ old('desc') }}</textarea>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="">Asset Image</label>

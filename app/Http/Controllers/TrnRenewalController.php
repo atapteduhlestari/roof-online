@@ -64,6 +64,7 @@ class TrnRenewalController extends Controller
 
         $data['user_id'] = auth()->user()->id;
         $data['trn_no'] = setNoTrn($data['trn_date'], $count ?? null, 'REN');
+        $data['trn_value_plan'] = removeDots($data['trn_value_plan']);
         $data['trn_value'] = removeDots($data['trn_value']);
 
         return $data;
@@ -90,6 +91,7 @@ class TrnRenewalController extends Controller
     {
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
+        $data['trn_value_plan'] = removeDots($data['trn_value_plan']);
         $data['trn_value'] = removeDots($data['trn_value']);
         $data['renewal_id'] = $trnRenewal->renewal_id;
 

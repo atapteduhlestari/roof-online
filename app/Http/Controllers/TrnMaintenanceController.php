@@ -68,6 +68,7 @@ class TrnMaintenanceController extends Controller
             ->count();
 
         $data['user_id'] = auth()->user()->id;
+        $data['trn_value_plan'] = removeDots($data['trn_value_plan']);
         $data['trn_value'] = removeDots($data['trn_value']);
         $data['trn_no'] = setNoTrn($data['trn_date'], $count ?? null, 'MAI');
 
@@ -95,6 +96,7 @@ class TrnMaintenanceController extends Controller
     {
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
+        $data['trn_value_plan'] = removeDots($data['trn_value_plan']);
         $data['trn_value'] = removeDots($data['trn_value']);
 
         if ($request->file('file')) {

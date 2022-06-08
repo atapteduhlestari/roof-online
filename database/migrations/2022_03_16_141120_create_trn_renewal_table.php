@@ -23,7 +23,8 @@ class CreateTrnRenewalTable extends Migration
             $table->string('trn_no');
             $table->date('trn_start_date');
             $table->date('trn_date');
-            $table->double('trn_value');
+            $table->double('trn_value_plan', 2);
+            $table->double('trn_value', 2);
             $table->longText('trn_desc')->nullable();
             $table->text('file')->nullable();
             $table->boolean('trn_status')->default(0);

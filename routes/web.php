@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppraisalController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -34,12 +35,6 @@ Route::middleware(['auth'])->group(function () {
             'asset-parent' => 'asset',
         ])->except(['create']);
 
-    Route::get('/asset-export/{param}', [AssetController::class, 'export'])->name('asset-export');
-    Route::get('/api/getData', [AssetController::class, 'getData'])->name('getData.asset');
-
-    Route::resource('/asset-child', AssetChildController::class)->except(['create']);
-    Route::get('/asset-child/download/{assetChild}', [AssetChildController::class, 'download']);
-
     Route::get('/asset-parent/docs/{asset}', [AssetController::class, 'documents'])
         ->name('assetDocuments');
 
@@ -54,6 +49,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('/asset-parent/docs/delete/{asset}/{id}', [AssetController::class, 'deleteDocuments'])
         ->name('assetDeleteDocuments');
+    Route::get('/asset-export/{param}', [AssetController::class, 'export'])->name('asset-export');
+    Route::get('/api/getData', [AssetController::class, 'getData'])->name('getData.asset');
+
+    Route::resource('/asset-child', AssetChildController::class)->except(['create']);
+    Route::get('/asset-child/download/{assetChild}', [AssetChildController::class, 'download']);
+
+    Route::resource('/appraisal', AppraisalController::class);
 
     Route::resource('/sdb', SDBController::class)->except(['create']);
     Route::resource('/sbu', SBUController::class)->except(['create']);

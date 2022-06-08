@@ -27,8 +27,8 @@
                     <div class="col-lg-6">
                         <img class="img-fluid px-3 px-sm-4 my-5"
                             src="{{ $asset->image ? $asset->takeImage : asset('/assets/img/empty-img.jpeg') }}">
-                        <div class="d-flex justify-content-center">
-                            <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
                                 <form action="/trn-maintenance/create">
                                     <input type="hidden" name="id" value="{{ $asset->id }}" readonly>
                                     <button type="submit" class="btn btn-outline-dark btn-sm btn-block">
@@ -37,18 +37,28 @@
                                 </form>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 mb-3">
+                                <form action="/appraisal/create">
+                                    <input type="hidden" name="asset_id" value="{{ $asset->id }}" readonly>
+                                    <button type="submit" class="btn btn-outline-dark btn-sm btn-block">
+                                        <i class="fas fa-chart-line"></i> Appraisal
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
                                 <a title="Edit Data" href="/asset-parent/{{ $asset->id }}/edit"
                                     class="btn btn-info btn-sm btn-block">Edit</a>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 mb-3">
                                 <form action="/asset-parent/{{ $asset->id }}" method="post" id="deleteForm">
                                     @csrf
                                     @method('delete')
                                     <button title="Delete Data" class="btn btn-danger btn-sm btn-block"
                                         onclick="return false" id="deleteButton" data-id="{{ $asset->id }}">
-                                        <i class="fas fa-trash-alt"></i>
+                                        Delete
                                     </button>
                                 </form>
                             </div>
@@ -102,14 +112,15 @@
                                     <td>{{ rupiah($asset->pcs_value) }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Aprraisal Date</th>
+                                    <th>Appraisal Date</th>
                                     <td>
-                                        {{ $asset->apr_date ? createDate($asset->apr_date)->format('d F Y') : null }}
+                                        {{ $asset->appraisals()->exists() ? createDate($asset->appraisals->last()->apr_date)->format('d F Y') : null }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Aprraisal Value</th>
-                                    <td>{{ rupiah($asset->apr_value) }}</td>
+                                    <th>Appraisal Value</th>
+                                    <td>{{ rupiah($asset->appraisals->last()->apr_value ?? '') }}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Description</th>
@@ -292,8 +303,7 @@
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label for="desc">Description</label>
-                                    <textarea class="form-control  @error('desc') is-invalid @enderror" name="desc" id="desc" cols="30"
-                                        rows="5">{{ old('desc') }}</textarea>
+                                    <textarea class="form-control  @error('desc') is-invalid @enderror" name="desc" id="desc" cols="30" rows="5">{{ old('desc') }}</textarea>
                                 </div>
                             </div>
 
