@@ -19,7 +19,7 @@ class CreateTrnSDBTable extends Migration
             $table->foreignId('sdb_id');
             $table->string('trn_no');
             $table->string('ren_date');
-            $table->double('ren_value_plan', 2);
+            $table->double('ren_value_plan', 2)->nullable();
             $table->double('ren_value', 2);
             $table->date('due_date', 2);
             $table->timestamps();
