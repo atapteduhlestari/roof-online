@@ -86,8 +86,8 @@
                     <td>{{ $asset->asset_code }}</td>
                     <td>{{ $asset->asset_no }}</td>
                     <td>{{ $asset->asset_name }}</td>
-                    <td>{{ $asset->sbu->sbu_name }}</td>
-                    <td>{{ $asset->location }}</td>
+                    <td>{{ $asset->sbu->sbu_name ?? '' }}</td>
+                    <td>{{ $asset->location ?? '' }}</td>
                     <td>{{ $asset->condition == 1 ? 'Baik' : ($asset->condition == 2 ? 'Kurang' : 'Buruk') }}</td>
                     <td>{{ $asset->employee->name ?? '' }}</td>
                     <td>{{ createDate($asset->pcs_date)->format('d/m/Y') }}</td>
