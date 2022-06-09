@@ -2,7 +2,6 @@
 
 namespace App\Exports;
 
-use App\Models\Asset;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithDrawings;
@@ -12,9 +11,16 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 class AssetExportView implements FromView, WithDrawings, ShouldAutoSize
 {
 
+    protected $data;
+
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
+
     public function view(): View
     {
-        $assets = Asset::get();
+        $assets = $this->data;
         return view('export.asset', compact('assets'));
     }
 

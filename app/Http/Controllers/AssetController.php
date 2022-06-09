@@ -104,11 +104,13 @@ class AssetController extends Controller
 
     public function export($param)
     {
-        $data = $param == 'all' ? Asset::with('sbu', 'employee')->get() : Asset::with('sbu', 'employee')->where('asset_group_id', $param)->get();
+        $assets = $param == 'all' ? Asset::with('sbu', 'employee')->get() : Asset::with('sbu', 'employee')->where('asset_group_id', $param)->get();
         $time = now()->format('dmY');
         $name = "ATL-GAN-ASSET-LIST-{$time}.xlsx";
 
-        return Excel::download(new AssetExportView($data), $name);
+        // return view('export.asset', compact('assets'));
+
+        return Excel::download(new AssetExportView($assets), $name);
     }
 
     public function edit(Asset $asset)

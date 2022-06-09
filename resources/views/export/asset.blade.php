@@ -28,7 +28,7 @@
                 <th colspan="4" rowspan="5">
 
                 </th>
-                <td colspan="7" style="text-align:center; font-size:14;">
+                <td colspan="7" style="text-align:center; font-size:14; vertical-align: middle;">
                     <strong>PT ATAP TEDUH LESTARI</strong>
                 </td>
                 <td>
@@ -48,7 +48,7 @@
                 <td>{{ now()->format('d/m/Y') }}</td>
             </tr>
             <tr>
-                <td colspan="7" rowspan="2" style="text-align:center; font-size:14;">
+                <td colspan="7" rowspan="2" style="text-align:center; font-size:14; vertical-align: middle;">
                     <strong>KARTU INVENTARISASI ASSET</strong>
                 </td>
                 <td>Department</td>
