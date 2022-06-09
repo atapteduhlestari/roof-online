@@ -8,7 +8,7 @@ use App\Models\Asset;
 use App\Models\Employee;
 use App\Models\AssetChild;
 use App\Models\AssetGroup;
-use App\Exports\AssetExport;
+use App\Exports\AssetExportView;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\AssetRequest;
@@ -108,7 +108,7 @@ class AssetController extends Controller
         $time = now()->format('dmY');
         $name = "ATL-GAN-ASSET-LIST-{$time}.xlsx";
 
-        return Excel::download(new AssetExport($data), $name);
+        return Excel::download(new AssetExportView($data), $name);
     }
 
     public function edit(Asset $asset)
@@ -205,4 +205,11 @@ class AssetController extends Controller
             'SBUs'
         ));
     }
+
+    // public function exportView()
+    // {
+    //     $assets = Asset::get();
+    //     return view('export.asset', compact('assets'));
+    //     return Excel::download(new AssetExportView, 'tes.xlsx');
+    // }
 }

@@ -42,9 +42,9 @@ class AssetExport implements
             $asset->location,
             $asset->condition == 1 ? 'Baik' : ($asset->condition == 2 ? 'Kurang' : 'Buruk'),
             $asset->employee->name ?? '',
-            createDate($asset->pcs_date)->format('d F Y'),
+            createDate($asset->pcs_date)->format('d/m/Y'),
             rupiah($asset->pcs_value),
-            $asset->appraisals()->exists() ? createDate($asset->appraisals->last()->apr_date)->format('d F Y') : null,
+            $asset->appraisals()->exists() ? createDate($asset->appraisals->last()->apr_date)->format('d/m/Y') : null,
             rupiah($asset->appraisals->last()->apr_value ?? ''),
             $asset->desc,
         ];
