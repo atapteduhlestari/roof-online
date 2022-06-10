@@ -64,7 +64,7 @@ class Asset extends Model
         return "/storage/{$this->image}";
     }
 
-    public function getLastTransaction($time)
+    public static function getLastTransaction($time)
     {
         DB::statement("SET SQL_MODE=''");
         return DB::table('trn_maintenance')
@@ -73,5 +73,41 @@ class Asset extends Model
             ->leftJoin('asset_maintenance', 'trn_maintenance.maintenance_id', 'asset_maintenance.id')
             ->groupBy('asset_maintenance.name', 'asset.asset_name')
             ->where('trn_start_date', '<=', $time);
+    }
+
+    public static function generateButton($row)
+    {
+        '<div class="d-flex justify-content-around">
+            <div>
+                <a title="Asset Detail" href="/asset-parent/docs/' . $row->id . '" class="btn btn-outline-dark btn-sm">Detail</a>
+            </div>
+            <div>
+                <a title="Edit Data" href="/asset-parent/' . $row->id . '/edit" class="btn btn-outline-dark btn-sm">Edit</a>
+            </div>
+            <div>
+                <form action="/asset-parent/' . $row->id . '" method="post" id="deleteForm">
+                ' . csrf_field() . '
+                ' . method_field("DELETE") . '
+                    <button title="Delete Data" class="btn btn-outline-danger btn-sm" onclick="return false" id="deleteButton" data-id="' . $row->id . '"><i class="fas fa-trash-alt"></i></button>
+                </form>
+            </div>
+        </div>';
+    }
+
+    public function scopeFilter($query, $filters)
+    {
+        $query->when($filters['date_before']  ?? false, function ($query, $from) {
+            return $query->whereDate('pcs_date', '>=', $from);
+        });
+
+        $query->when($filters['date_after']  ?? false, function ($query, $to) {
+            return $query->whereDate('pcs_date', '<=', $to);
+        });
+
+        $query->when($filters['sbu'] ?? false, function ($query, $sbu) {
+            return $query->whereHas('SBU', function ($q) use ($sbu) {
+                $q->where('sbu_id', $sbu);
+            });
+        });
     }
 }

@@ -14,9 +14,52 @@
             <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addNewRecord">
                 Add <i class="fas fa-plus-circle"></i>
             </button>
-            <a href="/asset-export/all" class="btn btn-success">
+            {{-- <a href="/asset-export/all" class="btn btn-success">
                 Export <i class="fas fa-file-excel"></i>
-            </a>
+            </a> --}}
+
+            <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseExample"
+                aria-expanded="false" aria-controls="collapseExample">
+                Export <i class="fas fa-file-export"></i>
+            </button>
+
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body mt-3">
+                    <form action="/asset-export/all" method="get">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="date_before">Date</label>
+                                <div class="form-group d-flex">
+                                    <input type="date" class="form-control form-control-sm" id="date_before"
+                                        name="date_before" value="">
+                                </div>
+                                <div class="form-group d-flex">
+                                    <input type="date" class="form-control form-control-sm" id="date_after"
+                                        name="date_after" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="sbu">SBU</label>
+                                <select class="form-control @error('sbu') is-invalid @enderror" name="sbu" id="sbu">
+                                    <option value=""></option>
+                                    @foreach ($SBUs as $sbu_search)
+                                        <option value="{{ $sbu_search->id }}"
+                                            {{ old('sbu') == $sbu_search->id ? 'selected' : '' }}>
+                                            {{ $sbu_search->sbu_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md">
+                                <button type="submit" class="btn btn-success rounded text-xs">
+                                    Generate <i class="fas fa-file-excel"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -310,6 +353,11 @@
         });
 
         $("#sbu_id").selectize({
+            create: false,
+            sortField: "text",
+        });
+
+        $("#sbu").selectize({
             create: false,
             sortField: "text",
         });

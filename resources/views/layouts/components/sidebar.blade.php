@@ -107,11 +107,12 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item {{ request()->is('/export/asset') ? 'active' : '' }}">
+
+            {{-- <li class="nav-item {{ request()->is('/export/asset') ? 'active' : '' }}">
                 <a class="nav-link" href="/export/asset">
                     <i class="fas fa-database"></i>
                     <span>Report</span></a>
-            </li>
+            </li> --}}
 
             <hr class="sidebar-divider d-none d-md-block">
             <!-- Sidebar Toggler (Sidebar) -->

@@ -44,7 +44,7 @@ class AssetChild extends Model
         return "/storage/{$this->file}";
     }
 
-    public function getLastTransaction($time)
+    public static function getLastTransaction($time)
     {
         // return AssetChild::join(
         //     'trn_renewal',
