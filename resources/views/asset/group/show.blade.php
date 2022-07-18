@@ -47,7 +47,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td> {{ $asset->asset_name }}</td>
                                     <td>{{ $asset->asset_no ?? '' }}</td>
-                                    <td>{{ $asset->sbu->sbu_name }}</td>
+                                    <td>{{ $asset->sbu->sbu_name ?? '' }}</td>
                                     <td>{{ createDate($asset->pcs_date)->format('d F Y') }}</td>
                                     <td>{{ rupiah($asset->pcs_value) }}</td>
                                     <td>{{ $asset->employee->name ?? '-' }}</td>
@@ -203,15 +203,18 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="pcs_value">Purchase Value</label>
-                                <input type="text" class="form-control currency @error('pcs_value') is-invalid @enderror"
-                                    name="pcs_value" id="pcs_value" value="{{ old('pcs_value') }}" autocomplete="off">
+                                <input type="text"
+                                    class="form-control currency @error('pcs_value') is-invalid @enderror"
+                                    name="pcs_value" id="pcs_value" value="{{ old('pcs_value') }}"
+                                    autocomplete="off">
                             </div>
                         </div>
                         <hr>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="desc">Description</label>
-                                <textarea class="form-control @error('desc') is-invalid @enderror" id="desc" name="desc" cols="10" rows="5">{{ old('desc') }}</textarea>
+                                <textarea class="form-control @error('desc') is-invalid @enderror" id="desc" name="desc" cols="10"
+                                    rows="5">{{ old('desc') }}</textarea>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="">Asset Image</label>

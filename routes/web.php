@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AppraisalController;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SBUController;
 use App\Http\Controllers\SDBController;
