@@ -40,7 +40,8 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="sbu">SBU</label>
-                                <select class="form-control @error('sbu') is-invalid @enderror" name="sbu" id="sbu">
+                                <select class="form-control @error('sbu') is-invalid @enderror" name="sbu"
+                                    id="sbu">
                                     <option value=""></option>
                                     @foreach ($SBUs as $sbu_search)
                                         <option value="{{ $sbu_search->id }}"
@@ -188,20 +189,20 @@
                                     </option>
                                 </select>
                             </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="sbu_id">SBU</label>
-                                <select class="form-control @error('sbu_id') is-invalid @enderror" name="sbu_id"
-                                    id="sbu_id">
-                                    <option value=""></option>
-                                    @foreach ($SBUs as $sbu)
-                                        <option value="{{ $sbu->id }}"
-                                            {{ old('sbu_id') == $sbu->id ? 'selected' : '' }}>
-                                            {{ $sbu->sbu_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
+                            @can('superadmin')
+                                <div class="col-md-6 mb-3">
+                                    <label for="sbu_id">SBU</label>
+                                    <select class="form-control @error('sbu_id') is-invalid @enderror" name="sbu_id"
+                                        id="sbu_id">
+                                        <option value=""></option>
+                                        @foreach ($SBUs as $sbu)
+                                            <option value="{{ $sbu->id }}"
+                                                {{ old('sbu_id') == $sbu->id ? 'selected' : '' }}>
+                                                {{ $sbu->sbu_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endcan
                             <div class="col-md-6 mb-3">
                                 <label for="location">Asset Location</label>
                                 <input type="text" class="form-control @error('location') is-invalid @enderror"
@@ -251,8 +252,10 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="pcs_value">Purchase Value</label>
-                                <input type="text" class="form-control currency @error('pcs_value') is-invalid @enderror"
-                                    name="pcs_value" id="pcs_value" value="{{ old('pcs_value') }}" autocomplete="off">
+                                <input type="text"
+                                    class="form-control currency @error('pcs_value') is-invalid @enderror"
+                                    name="pcs_value" id="pcs_value" value="{{ old('pcs_value') }}"
+                                    autocomplete="off">
                             </div>
 
                             {{-- <div class="col-md-6 mb-3">
@@ -271,7 +274,8 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="desc">Description</label>
-                                <textarea class="form-control @error('desc') is-invalid @enderror" id="desc" name="desc" cols="10" rows="5">{{ old('desc') }}</textarea>
+                                <textarea class="form-control @error('desc') is-invalid @enderror" id="desc" name="desc" cols="10"
+                                    rows="5">{{ old('desc') }}</textarea>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="">Asset Image</label>

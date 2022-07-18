@@ -59,6 +59,8 @@ class AssetController extends Controller
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
         $data['pcs_value'] = removeDots($request->pcs_value);
+        if (isAdmin())
+            $data['lokasi_id'] = userSBU();
 
         if ($request->file('image')) {
             $image = $request->file('image');
@@ -78,7 +80,11 @@ class AssetController extends Controller
     public function export($param)
     {
         $data = request()->all();
-        $assets = $param == 'all' ? Asset::with('sbu', 'employee')->filter($data)->get() : Asset::with('sbu', 'employee')->where('asset_group_id', $param)->filter($data)->get();
+        if (isSuperadmin())
+            $assets = $param == 'all' ? Asset::with('sbu', 'employee')->filter($data)->get() : Asset::with('sbu', 'employee')->where('asset_group_id', $param)->filter($data)->get();
+        else
+            $assets = $param == 'all' ? Asset::with('sbu', 'employee')->where('sbu_id', userSBU())->filter($data)->get() : Asset::with('sbu', 'employee')->where('asset_group_id', $param)->where('sbu_id', userSBU())->filter($data)->get();
+
         $time = now()->format('dmY');
         $name = "ATL-GAN-ASSET-LIST-{$time}.xlsx";
 
@@ -110,6 +116,9 @@ class AssetController extends Controller
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
         $data['pcs_value'] = removeDots($request->pcs_value);
+
+        if (isAdmin())
+            $data['lokasi_id'] = userSBU();
 
         if ($request->file('image')) {
 

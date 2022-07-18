@@ -11,6 +11,10 @@ class SBUSeeder extends Seeder
     {
         $data = [
             [
+                'sbu_name' => 'HO/MD',
+                'created_at' => now(),
+            ],
+            [
                 'sbu_name' => 'Kalimalang',
                 'created_at' => now(),
             ],
@@ -31,6 +35,10 @@ class SBUSeeder extends Seeder
                 'created_at' => now(),
             ],
             [
+                'sbu_name' => 'Surabaya',
+                'created_at' => now(),
+            ],
+            [
                 'sbu_name' => 'Semarang',
                 'created_at' => now(),
             ],
@@ -47,7 +55,7 @@ class SBUSeeder extends Seeder
                 'created_at' => now(),
             ],
             [
-                'sbu_name' => 'HO/MD',
+                'sbu_name' => 'Jababeka',
                 'created_at' => now(),
             ],
         ];

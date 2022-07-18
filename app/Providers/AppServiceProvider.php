@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Asset;
 use App\Models\AssetChild;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -36,5 +38,13 @@ class AppServiceProvider extends ServiceProvider
             'layouts.master',
             fn ($view) => $view->with(['alerts' => $this->alerts])
         );
+
+        Gate::define('superadmin', function (User $user) {
+            return $user->is_admin == 1;
+        });
+
+        Gate::define('admin', function (User $user) {
+            return $user->is_admin == 2;
+        });
     }
 }
