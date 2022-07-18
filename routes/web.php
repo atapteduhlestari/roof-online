@@ -21,13 +21,7 @@ use App\Http\Controllers\TrnMaintenanceController;
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/', [DashboardController::class, 'index'])->name('home');
-
-    Route::get('/home', function () {
-        return redirect('/');
-    })->name('home');
-
-    Route::resource('/asset-group', AssetGroupController::class)
-        ->except(['create']);
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::resource('/asset-parent', AssetController::class)
         ->parameters([
@@ -60,12 +54,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/appraisal', AppraisalController::class);
 
-    Route::resource('/sdb', SDBController::class)->except(['create']);
-    Route::resource('/sbu', SBUController::class)->except(['create']);
-
-    Route::resource('/maintenance', MaintenanceController::class)->except(['create']);
-    Route::resource('/renewal', RenewalController::class)->except(['create']);
-
     Route::resource('/trn-renewal', TrnRenewalController::class);
     Route::post('/trn-renewal/search', [TrnRenewalController::class, 'search']);
     Route::put('/trn-renewal/update-status/{trnRenewal}', [TrnRenewalController::class, 'updateStatus']);
@@ -81,21 +69,27 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/trn-sdb', TrnSDBController::class)->parameters([
         'trn-sdb' => 'trnSDB',
     ]);
-
     Route::post('/trn-sdb/search', [TrnSDBController::class, 'search']);
-
     Route::get('/trn-sdb/asset/{id}', [TrnSDBController::class, 'formAsset']);
     Route::post('/trn-sdb/asset/store', [TrnSDBController::class, 'storeAsset']);
     Route::delete('/trn-sdb/asset/{id}', [TrnSDBController::class, 'deleteAsset']);
-
     Route::get('/trn-sdb/doc/{id}', [TrnSDBController::class, 'formDoc']);
     Route::post('/trn-sdb/doc/store', [TrnSDBController::class, 'storeDoc']);
     Route::delete('/trn-sdb/doc/{id}', [TrnSDBController::class, 'deleteDoc']);
 
-    Route::resource('/cycle', CycleController::class)->except(['create']);
-    Route::resource('/employee', EmployeeController::class)->except(['create']);
     Route::get('/full-calendar', [DashboardController::class, 'fullCalendar']);
     Route::get('/timeline', [DashboardController::class, 'timeline']);
+});
+
+Route::group(['middleware' => ['auth', 'superadmin']], function () {
+    Route::resource('/asset-group', AssetGroupController::class)
+        ->except(['create']);
+    Route::resource('/maintenance', MaintenanceController::class)->except(['create']);
+    Route::resource('/renewal', RenewalController::class)->except(['create']);
+    Route::resource('/sdb', SDBController::class)->except(['create']);
+    Route::resource('/sbu', SBUController::class)->except(['create']);
+    Route::resource('/employee', EmployeeController::class)->except(['create']);
+    Route::resource('/cycle', CycleController::class)->except(['create']);
 });
 
 // Route::get('/get-api', function () {

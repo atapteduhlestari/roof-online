@@ -11,6 +11,12 @@ class SBU extends Model
     protected $table = 'sbu';
     protected $guarded = ['id'];
 
+
+    public function users()
+    {
+        return $this->hasMany('App\User')->orderBy('nama_lokasi', 'ASC');
+    }
+
     public function assets()
     {
         return $this->hasMany(Asset::class, 'sbu_id');

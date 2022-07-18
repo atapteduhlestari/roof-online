@@ -52,4 +52,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(TrnMaintenance::class);
     }
+
+    public function sbu()
+    {
+        return $this->belongsTo('App\SBU', 'sbu_id');
+    }
+
+    public function isSuperadmin()
+    {
+        return $this->is_admin == 1;
+    }
 }

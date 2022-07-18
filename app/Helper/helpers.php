@@ -171,3 +171,18 @@ function timelineReminders($assets, $docs)
 
     return $data;
 }
+
+function isSuperadmin()
+{
+    return auth()->user()->is_admin == 1;
+}
+
+function isAdmin()
+{
+    return auth()->user()->is_admin == 2;
+}
+
+function userSBU()
+{
+    return auth()->user()->sbu_id;
+}
