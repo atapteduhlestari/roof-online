@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AppraisalController;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SBUController;
 use App\Http\Controllers\SDBController;
@@ -95,9 +94,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/cycle', CycleController::class)->except(['create']);
     Route::resource('/employee', EmployeeController::class)->except(['create']);
-
     Route::get('/full-calendar', [DashboardController::class, 'fullCalendar']);
-
     Route::get('/timeline', [DashboardController::class, 'timeline']);
 });
 
