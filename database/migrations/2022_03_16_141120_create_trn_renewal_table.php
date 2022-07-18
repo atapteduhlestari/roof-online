@@ -17,6 +17,7 @@ class CreateTrnRenewalTable extends Migration
             $table->id();
             $table->foreignId('asset_child_id');
             $table->foreignId('renewal_id');
+            $table->foreignId('sbu_id');
             $table->foreignId('user_id');
             $table->string('pemohon')->nullable();
             $table->string('penyetuju')->nullable();

@@ -42,7 +42,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($assetGroup->assets as $asset)
+                            @foreach ($assetGroup->assets->where('sbu_id', userSBU()) as $asset)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td> {{ $asset->asset_name }}</td>
@@ -141,20 +141,20 @@
                                     </option>
                                 </select>
                             </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="sbu_id">SBU</label>
-                                <select class="form-control @error('sbu_id') is-invalid @enderror" name="sbu_id"
-                                    id="sbu_id">
-                                    <option value=""></option>
-                                    @foreach ($SBUs as $sbu)
-                                        <option value="{{ $sbu->id }}"
-                                            {{ old('sbu_id') == $sbu->id ? 'selected' : '' }}>
-                                            {{ $sbu->sbu_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
+                            @can('superadmin')
+                                <div class="col-md-6 mb-3">
+                                    <label for="sbu_id">SBU</label>
+                                    <select class="form-control @error('sbu_id') is-invalid @enderror" name="sbu_id"
+                                        id="sbu_id">
+                                        <option value=""></option>
+                                        @foreach ($SBUs as $sbu)
+                                            <option value="{{ $sbu->id }}"
+                                                {{ old('sbu_id') == $sbu->id ? 'selected' : '' }}>
+                                                {{ $sbu->sbu_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endcan
                             <div class="col-md-6 mb-3">
                                 <label for="location">Asset Location</label>
                                 <input type="text" class="form-control @error('location') is-invalid @enderror"

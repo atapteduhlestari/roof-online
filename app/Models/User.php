@@ -55,7 +55,7 @@ class User extends Authenticatable
 
     public function sbu()
     {
-        return $this->belongsTo('App\SBU', 'sbu_id');
+        return $this->belongsTo(SBU::class, 'sbu_id');
     }
 
     public function isSuperadmin()

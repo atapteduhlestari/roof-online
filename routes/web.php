@@ -23,6 +23,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::get('/dashboard', [DashboardController::class, 'index']);
 
+    Route::get('/asset-group/{assetGroup}', [AssetGroupController::class, 'show']);
+
     Route::resource('/asset-parent', AssetController::class)
         ->parameters([
             'asset-parent' => 'asset',
@@ -62,7 +64,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/trn-maintenance', TrnMaintenanceController::class);
     Route::post('/trn-maintenance/search', [TrnMaintenanceController::class, 'search']);
-    Route::put('/trn-maintenance/update-status/{trnMaintenance}', [TrnMaintenanceController::class, 'updateStatus']);
+
     Route::get('/trn-maintenance/download/{trnMaintenance}', [TrnMaintenanceController::class, 'download']);
     Route::get('/trn-maintenance-export', [TrnMaintenanceController::class, 'export'])->name('maintenance-export');
 
@@ -82,8 +84,14 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::group(['middleware' => ['auth', 'superadmin']], function () {
-    Route::resource('/asset-group', AssetGroupController::class)
-        ->except(['create']);
+    Route::get('/asset-group', [AssetGroupController::class, 'index']);
+    Route::post('/asset-group', [AssetGroupController::class, 'store']);
+    Route::get('/asset-group/{assetGroup}/edit', [AssetGroupController::class, 'edit']);
+    Route::put('/asset-group/{assetGroup}', [AssetGroupController::class, 'update']);
+    Route::delete('/asset-group/{assetGroup}', [AssetGroupController::class, 'destroy']);
+    // Route::resource('/asset-group', AssetGroupController::class)
+    //     ->except(['create']);
+    Route::put('/trn-maintenance/update-status/{trnMaintenance}', [TrnMaintenanceController::class, 'updateStatus']);
     Route::resource('/maintenance', MaintenanceController::class)->except(['create']);
     Route::resource('/renewal', RenewalController::class)->except(['create']);
     Route::resource('/sdb', SDBController::class)->except(['create']);

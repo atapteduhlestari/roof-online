@@ -28,6 +28,11 @@ class TrnMaintenance extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function sbu()
+    {
+        return $this->belongsTo(SBU::class, 'sbu_id');
+    }
+
     public function getTakeDocAttribute()
     {
         return "/storage/{$this->file}";

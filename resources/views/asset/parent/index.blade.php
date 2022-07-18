@@ -38,18 +38,20 @@
                                         name="date_after" value="">
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <label for="sbu">SBU</label>
-                                <select class="form-control @error('sbu') is-invalid @enderror" name="sbu"
-                                    id="sbu">
-                                    <option value=""></option>
-                                    @foreach ($SBUs as $sbu_search)
-                                        <option value="{{ $sbu_search->id }}"
-                                            {{ old('sbu') == $sbu_search->id ? 'selected' : '' }}>
-                                            {{ $sbu_search->sbu_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            @can('superadmin')
+                                <div class="col-md-6">
+                                    <label for="sbu">SBU</label>
+                                    <select class="form-control @error('sbu') is-invalid @enderror" name="sbu"
+                                        id="sbu">
+                                        <option value=""></option>
+                                        @foreach ($SBUs as $sbu_search)
+                                            <option value="{{ $sbu_search->id }}"
+                                                {{ old('sbu') == $sbu_search->id ? 'selected' : '' }}>
+                                                {{ $sbu_search->sbu_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endcan
                         </div>
                         <div class="row">
                             <div class="col-md">

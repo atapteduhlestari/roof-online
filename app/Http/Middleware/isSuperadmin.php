@@ -10,7 +10,7 @@ class isSuperadmin
     public function handle(Request $request, Closure $next)
     {
         if (!auth()->check() || auth()->user()->is_admin != 1)
-            return redirect('/dashboard')->with('warning', 'Access Denied!');
+            return redirect()->back()->with('warning', 'Access Denied!');
 
         return $next($request);
     }

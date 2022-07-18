@@ -44,11 +44,13 @@
                                     Documents
                                 </a>
                             </div>
-                            <div class="col-md-12 mb-3">
-                                <a href="/sdb" class="btn btn-outline-dark btn-block">
-                                    SDB
-                                </a>
-                            </div>
+                            @can('superadmin')
+                                <div class="col-md-12 mb-3">
+                                    <a href="/sdb" class="btn btn-outline-dark btn-block">
+                                        SDB
+                                    </a>
+                                </div>
+                            @endcan
                         </div>
                     </div>
                 </div>

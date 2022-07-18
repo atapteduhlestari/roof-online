@@ -159,7 +159,9 @@
                             <div class="col-md-6 mb-3">
                                 <label for="renewal_id">
                                     Select Renewal
-                                    <a href="/renewal" class="text-xs">Add list</a>
+                                    @can('superadmin')
+                                        <a href="/renewal" class="text-xs">Add list</a>
+                                    @endcan
                                 </label>
                                 <select class="form-control @error('renewal_id') is-invalid @enderror" id="renewal_id"
                                     name="renewal_id">
@@ -193,7 +195,8 @@
 
                             <div class="col-md-6 mb-3">
                                 <label for="trn_value">Cost Realization</label>
-                                <input type="text" class="form-control currency @error('trn_value') is-invalid @enderror"
+                                <input type="text"
+                                    class="form-control currency @error('trn_value') is-invalid @enderror"
                                     name="trn_value" value="{{ old('trn_value') }}" autocomplete="off">
                             </div>
                         </div>
@@ -213,7 +216,8 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="pembuat">Pembuat</label>
-                                <input type="text" class="form-control" value="{{ auth()->user()->name }}" disabled>
+                                <input type="text" class="form-control" value="{{ auth()->user()->name }}"
+                                    disabled>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="penyetuju">Menyetujui</label>

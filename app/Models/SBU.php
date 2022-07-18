@@ -26,4 +26,14 @@ class SBU extends Model
     {
         return $this->hasMany(AssetChild::class, 'sbu_id');
     }
+
+    public function trnRenewal()
+    {
+        return $this->hasMany(TrnRenewal::class, 'sbu_id');
+    }
+
+    public function trnMaintenance()
+    {
+        return $this->hasMany(TrnMaintenance::class, 'sbu_id');
+    }
 }
