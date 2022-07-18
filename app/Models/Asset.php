@@ -75,25 +75,6 @@ class Asset extends Model
             ->where('trn_start_date', '<=', $time);
     }
 
-    public static function generateButton($row)
-    {
-        '<div class="d-flex justify-content-around">
-            <div>
-                <a title="Asset Detail" href="/asset-parent/docs/' . $row->id . '" class="btn btn-outline-dark btn-sm">Detail</a>
-            </div>
-            <div>
-                <a title="Edit Data" href="/asset-parent/' . $row->id . '/edit" class="btn btn-outline-dark btn-sm">Edit</a>
-            </div>
-            <div>
-                <form action="/asset-parent/' . $row->id . '" method="post" id="deleteForm">
-                ' . csrf_field() . '
-                ' . method_field("DELETE") . '
-                    <button title="Delete Data" class="btn btn-outline-danger btn-sm" onclick="return false" id="deleteButton" data-id="' . $row->id . '"><i class="fas fa-trash-alt"></i></button>
-                </form>
-            </div>
-        </div>';
-    }
-
     public function scopeFilter($query, $filters)
     {
         $query->when($filters['date_before']  ?? false, function ($query, $from) {

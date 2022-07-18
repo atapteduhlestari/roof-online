@@ -29,21 +29,21 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="asset_name">Asset Name</label>
-                        <input type="text" class="form-control @error('asset_name') is-invalid @enderror" name="asset_name"
-                            id="asset_name" value="{{ old('asset_name', $asset->asset_name) }}" autocomplete="off"
-                            autofocus>
+                        <input type="text" class="form-control @error('asset_name') is-invalid @enderror"
+                            name="asset_name" id="asset_name" value="{{ old('asset_name', $asset->asset_name) }}"
+                            autocomplete="off" autofocus>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Asset Group</label>
                         <input type="hidden" name="asset_group_id" value="{{ $asset->asset_group_id }}" readonly>
-                        <input type="text" class="form-control not-allowed" value="{{ $asset->group->asset_group_name }}"
-                            disabled>
+                        <input type="text" class="form-control not-allowed"
+                            value="{{ $asset->group->asset_group_name }}" disabled>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label for="asset_code">Asset Code</label>
-                        <input type="text" class="form-control @error('asset_code') is-invalid @enderror" name="asset_code"
-                            id="asset_code" value="{{ old('asset_code', $asset->asset_code) }}">
+                        <input type="text" class="form-control @error('asset_code') is-invalid @enderror"
+                            name="asset_code" id="asset_code" value="{{ old('asset_code', $asset->asset_code) }}">
                     </div>
 
                     <div class="col-md-6 mb-3">
@@ -65,20 +65,19 @@
                             </option>
                         </select>
                     </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label for="sbu_id">SBU</label>
-                        <select class="form-control @error('sbu_id') is-invalid @enderror" name="sbu_id" id="sbu_id">
-                            <option value=""></option>
-                            @foreach ($SBUs as $sbu)
-                                <option value="{{ $sbu->id }}"
-                                    {{ old('sbu_id', $asset->sbu_id) == $sbu->id ? 'selected' : '' }}>
-                                    {{ $sbu->sbu_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-
+                    @can('superadmin')
+                        <div class="col-md-6 mb-3">
+                            <label for="sbu_id">SBU</label>
+                            <select class="form-control @error('sbu_id') is-invalid @enderror" name="sbu_id" id="sbu_id">
+                                <option value=""></option>
+                                @foreach ($SBUs as $sbu)
+                                    <option value="{{ $sbu->id }}"
+                                        {{ old('sbu_id', $asset->sbu_id) == $sbu->id ? 'selected' : '' }}>
+                                        {{ $sbu->sbu_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endcan
                     <div class="col-md-6 mb-3">
                         <label for="location">Asset Location</label>
                         <input type="text" class="form-control @error('location') is-invalid @enderror" name="location"
@@ -106,7 +105,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="sdb_id">SDB</label>
-                            <select class="form-control @error('sdb_id') is-invalid @enderror" name="sdb_id" id="sdb_id">
+                            <select class="form-control @error('sdb_id') is-invalid @enderror" name="sdb_id"
+                                id="sdb_id">
                                 <option value=""></option>
                                 @foreach ($SDBs as $sdb)
                                     <option value="{{ $sdb->id }}"
@@ -150,13 +150,14 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="desc">Description</label>
-                        <textarea class="form-control @error('desc') is-invalid @enderror" id="desc" name="desc" cols="10" rows="5">{{ old('desc', $asset->desc) }}</textarea>
+                        <textarea class="form-control @error('desc') is-invalid @enderror" id="desc" name="desc" cols="10"
+                            rows="5">{{ old('desc', $asset->desc) }}</textarea>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="">Asset Image</label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input  @error('image') is-invalid @enderror" name="image"
-                                id="imageFileInput" accept="image/*">
+                            <input type="file" class="custom-file-input  @error('image') is-invalid @enderror"
+                                name="image" id="imageFileInput" accept="image/*">
                             <label class="custom-file-label" for="image">Choose file</label>
                         </div>
                     </div>
