@@ -17,7 +17,11 @@ class TrnRenewalController extends Controller
 {
     public function index()
     {
-        $trnRenewals = TrnRenewal::orderBy('trn_date', 'desc')->get();
+        if (isSuperadmin())
+            $trnRenewals = TrnRenewal::get();
+        else
+            $trnRenewals = TrnRenewal::where('sbu_id', userSBU())->get();
+
         $renewals = Renewal::get();
         $assetChild = AssetChild::orderBy('doc_name', 'asc')->get();
         $employees = Employee::orderBy('name', 'asc')->get();
@@ -65,6 +69,7 @@ class TrnRenewalController extends Controller
             ->count();
 
         $data['user_id'] = auth()->user()->id;
+        $data['sbu_id'] = AssetChild::firstWhere('id', $data['asset_child_id'])->sbu_id;
         $data['trn_no'] = setNoTrn($data['trn_date'], $count ?? null, 'REN');
         $data['trn_value_plan'] = removeDots($data['trn_value_plan']);
         $data['trn_value'] = removeDots($data['trn_value']);
@@ -79,7 +84,11 @@ class TrnRenewalController extends Controller
 
     public function export()
     {
-        $data =  TrnRenewal::get();
+        if (isSuperadmin())
+            $data =  TrnRenewal::get();
+        else
+            $data = TrnRenewal::where('sbu_id', userSBU())->get();
+
         $time = now()->format('dmY');
         $name = "ATL-GAN-REN-{$time}.xlsx";
 

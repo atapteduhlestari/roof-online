@@ -20,7 +20,11 @@ class TrnMaintenanceController extends Controller
         // $data = request()->all();
         // $trnMaintenances = TrnMaintenance::filter($data)->get();
 
-        $trnMaintenances = TrnMaintenance::get();
+        if (isSuperadmin())
+            $trnMaintenances = TrnMaintenance::get();
+        else
+            $trnMaintenances = TrnMaintenance::where('sbu_id', userSBU())->get();
+
         $maintenances = Maintenance::get();
         $assets = Asset::orderBy('asset_name', 'asc')->get();
         $employees = Employee::orderBy('name', 'asc')->get();
@@ -70,6 +74,7 @@ class TrnMaintenanceController extends Controller
             ->count();
 
         $data['user_id'] = auth()->user()->id;
+        $data['sbu_id'] = Asset::firstWhere('id', $data['asset_id'])->sbu_id;
         $data['trn_value_plan'] = removeDots($data['trn_value_plan']);
         $data['trn_value'] = removeDots($data['trn_value']);
         $data['trn_no'] = setNoTrn($data['trn_date'], $count ?? null, 'MAI');
@@ -84,8 +89,11 @@ class TrnMaintenanceController extends Controller
 
     public function export()
     {
+        if (isSuperadmin())
+            $data =  TrnMaintenance::get();
+        else
+            $data = TrnMaintenance::where('sbu_id', userSBU())->get();
 
-        $data =  TrnMaintenance::get();
         $time = now()->format('dmY');
         $name = "ATL-GAN-MAI-{$time}.xlsx";
 

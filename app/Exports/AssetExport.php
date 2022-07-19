@@ -34,7 +34,6 @@ class AssetExport implements
     public function map($asset): array
     {
         return [
-            $asset->id,
             $asset->asset_name,
             $asset->asset_code,
             $asset->asset_no,
@@ -53,10 +52,9 @@ class AssetExport implements
     public function headings(): array
     {
         return [
-            'No.',
             'Name',
             'Code',
-            'No.',
+            'No. Asset',
             'SBU',
             'Location',
             'Condition',

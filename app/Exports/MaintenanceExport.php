@@ -34,7 +34,6 @@ class MaintenanceExport implements
     public function map($trn): array
     {
         return [
-            $trn->id,
             $trn->trn_no,
             $trn->maintenance->no_doc,
             $trn->asset->asset_name,
@@ -57,7 +56,6 @@ class MaintenanceExport implements
     public function headings(): array
     {
         return [
-            'No.',
             'Code',
             'ISO',
             'Asset',
