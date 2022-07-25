@@ -8,6 +8,7 @@ use App\Models\AssetChild;
 use App\Models\AssetGroup;
 use App\Models\TrnRenewal;
 use App\Models\TrnMaintenance;
+use Illuminate\Support\Facades\View;
 use App\Models\Calendar as ModelsCalendar;
 
 class DashboardController extends Controller
@@ -57,14 +58,26 @@ class DashboardController extends Controller
 
     public function timeline()
     {
-        $assets =  Asset::getLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
-        $docs = AssetChild::getLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
+
+        if (isSuperadmin()) {
+            $assets = Asset::getAllLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
+            $docs = AssetChild::getAllLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
+        } else {
+            $assets = Asset::getLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
+            $docs = AssetChild::getLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
+        }
+
         $data = timelineReminders($assets, $docs)->sortBy('trn_start_date')->reverse();
 
-        $trn_maintenance = TrnMaintenance::get();
-        $trn_renewal = TrnRenewal::get();
-        $calendar = $this->timelineCalendar($this->calendar, $trn_maintenance, $trn_renewal);
+        if (isSuperadmin()) {
+            $trn_maintenance = TrnMaintenance::get();
+            $trn_renewal = TrnRenewal::get();
+        } else {
+            $trn_maintenance = TrnMaintenance::where('sbu_id', userSBU())->get();
+            $trn_renewal = TrnRenewal::where('sbu_id', userSBU())->get();
+        }
 
+        $calendar = $this->timelineCalendar($this->calendar, $trn_maintenance, $trn_renewal);
         return view('timeline', compact('calendar', 'data'));
     }
 

@@ -18,7 +18,7 @@ use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\TrnMaintenanceController;
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'reminder'])->group(function () {
 
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::get('/dashboard', [DashboardController::class, 'index']);
@@ -83,7 +83,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/timeline', [DashboardController::class, 'timeline']);
 });
 
-Route::group(['middleware' => ['auth', 'superadmin']], function () {
+Route::group(['middleware' => ['auth', 'superadmin', 'reminder']], function () {
     Route::get('/asset-group', [AssetGroupController::class, 'index']);
     Route::post('/asset-group', [AssetGroupController::class, 'store']);
     Route::get('/asset-group/{assetGroup}/edit', [AssetGroupController::class, 'edit']);

@@ -172,7 +172,11 @@ class AssetController extends Controller
     {
         $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
-        return view('asset.parent.docs.index', compact('asset', 'SDBs', 'SBUs'));
+
+        if (isSuperadmin() || $asset->sbu_id == userSBU())
+            return view('asset.parent.docs.index', compact('asset', 'SDBs', 'SBUs'));
+        else
+            return redirect()->back()->with('warning', 'Access Denied!');
     }
 
     public function addDocuments(Request $request, Asset $asset)

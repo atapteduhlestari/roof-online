@@ -79,7 +79,10 @@ class TrnRenewalController extends Controller
 
     public function show(TrnRenewal $trnRenewal)
     {
-        return view('transaction.renewal.show', compact('trnRenewal'));
+        if (isSuperadmin() || $trnRenewal->sbu_id == userSBU())
+            return view('transaction.renewal.show', compact('trnRenewal'));
+        else
+            return redirect()->back()->with('warning', 'Access Denied!');
     }
 
     public function export()

@@ -84,7 +84,10 @@ class TrnMaintenanceController extends Controller
 
     public function show(TrnMaintenance $trnMaintenance)
     {
-        return view('transaction.maintenance.show', compact('trnMaintenance'));
+        if (isSuperadmin() || $trnMaintenance->sbu_id == userSBU())
+            return view('transaction.maintenance.show', compact('trnMaintenance'));
+        else
+            return redirect()->back()->with('warning', 'Access Denied!');
     }
 
     public function export()
