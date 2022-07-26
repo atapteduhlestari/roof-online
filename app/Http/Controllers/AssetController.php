@@ -25,7 +25,31 @@ class AssetController extends Controller
         $employees = Employee::orderBy('name', 'asc')->get();
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
         $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
+
         return view('asset.parent.index', compact(
+            'assetGroup',
+            'employees',
+            'SDBs',
+            'SBUs'
+        ));
+    }
+
+    public function search()
+    {
+        $data = request()->all();
+
+        if (isSuperadmin())
+            $assets = Asset::search($data)->get();
+        else
+            $assets = Asset::search($data)->where('sbu_id', userSBU())->get();
+
+        $assetGroup = AssetGroup::get();
+        $employees = Employee::orderBy('name', 'asc')->get();
+        $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
+        $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
+
+        return view('asset.parent.search', compact(
+            'assets',
             'assetGroup',
             'employees',
             'SDBs',
@@ -40,8 +64,7 @@ class AssetController extends Controller
         else
             $query = Asset::where('sbu_id', userSBU())->get();
 
-
-        $dt = DataTables::collection($query);
+        $dt = DataTables::of($query);
 
         $dt->addIndexColumn()->editColumn('pcs_date', function ($row) {
             return createDate($row->pcs_date)->format('d F Y');

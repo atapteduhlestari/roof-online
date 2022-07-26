@@ -27,37 +27,66 @@
         </div>
 
         <div class="collapse" id="collapseSearch">
-            <form action="/trn-renewal/search" method="POST">
-                @csrf
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="trn_date">Date</label>
-                        <div class="form-group d-flex">
-                            <input type="month" class="form-control" id="trn_date" name="trn_date" value="">
+            <div class="card card-body mt-3">
+                <h6 class="mb-3 font-weight-bold text-primary">Search Filter</h6>
+                <form action="" method="get">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="search_date_before">Start Date</label>
+                            <div class="form-group">
+                                <input type="date" class="form-control form-control-sm" id="search_date_before"
+                                    name="search_date_before" value="{{ request('search_date_before') }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="search_date_after">Due Date</label>
+                            <div class="form-group">
+                                <input type="date" class="form-control form-control-sm" id="search_date_after"
+                                    name="search_date_after" value="{{ request('search_date_after') }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="asset_search">Documents</label>
+                            <select class="form-control form-control-sm @error('asset_search') is-invalid @enderror"
+                                id="asset_search" name="asset_search">
+                                <option value="">Select Assets Docs</option>
+                                @foreach ($assetChild as $ac)
+                                    <option value="{{ $ac->id }}"
+                                        {{ old('asset_search') == $ac->id ? 'selected' : '' }}>
+                                        {{ $ac->doc_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @can('superadmin')
+                            <div class="col-md-6 mb-3">
+                                <label for="sbu_search_id">SBU</label>
+                                <select class="form-control form-control-sm @error('sbu_search_id') is-invalid @enderror"
+                                    id="sbu_search_id" name="sbu_search_id">
+                                    <option value="">Select SBU</option>
+                                    @foreach ($SBUs as $sb)
+                                        <option value="{{ $sb->id }}"
+                                            {{ request('sbu_search_id') == $sb->id ? 'selected' : '' }}>
+                                            {{ $sb->sbu_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endcan
+
+                        <div class="col-md-6">
+                            <label for="status">Status</label>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <button type="submit" class="btn btn-primary rounded text-xs">
+                                Find <i class="fas fa-search"></i>
+                            </button>
                         </div>
                     </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label for="asset_search">Documents</label>
-                        <select class="form-control @error('asset_search') is-invalid @enderror" id="asset_search"
-                            name="asset_search">
-                            <option value="">Select Assets Docs</option>
-                            @foreach ($assetChild as $ac)
-                                <option value="{{ $ac->id }}"
-                                    {{ old('asset_search') == $ac->id ? 'selected' : '' }}>
-                                    {{ $ac->doc_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-outline-dark ml-1 rounded text-xs">
-                    Find <i class="fas fa-search"></i>
-                </button>
-            </form>
+                </form>
+            </div>
         </div>
-
-
         <div class="card shadow mt-3">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">List Transaction</h6>
@@ -282,6 +311,11 @@
         });
 
         $("#asset_child_id").selectize({
+            create: false,
+            sortField: "text",
+        });
+
+        $("#sbu_search_id").selectize({
             create: false,
             sortField: "text",
         });

@@ -98,9 +98,34 @@ class Asset extends Model
         });
 
         $query->when($filters['sbu'] ?? false, function ($query, $sbu) {
-            return $query->whereHas('SBU', function ($q) use ($sbu) {
+            return $query->whereHas('sbu', function ($q) use ($sbu) {
                 $q->where('sbu_id', $sbu);
             });
+        });
+
+        $query->when($filters['condition']  ?? false, function ($query, $condition) {
+            return $query->where('condition', $condition);
+        });
+    }
+
+    public function scopeSearch($query, $filters)
+    {
+        $query->when($filters['search_date_before']  ?? false, function ($query, $from) {
+            return $query->whereDate('pcs_date', '>=', $from);
+        });
+
+        $query->when($filters['search_date_after']  ?? false, function ($query, $to) {
+            return $query->whereDate('pcs_date', '<=', $to);
+        });
+
+        $query->when($filters['sbu_search_id'] ?? false, function ($query, $sbu) {
+            return $query->whereHas('sbu', function ($q) use ($sbu) {
+                $q->where('sbu_id', $sbu);
+            });
+        });
+
+        $query->when($filters['search_condition']  ?? false, function ($query, $condition) {
+            return $query->where('condition', $condition);
         });
     }
 }

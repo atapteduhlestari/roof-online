@@ -76,21 +76,14 @@
                                             <i class="fas fa-check"></i> Done
                                         </button>
                                     @else
-                                        @can('superadmin')
-                                            <form action="/trn-maintenance/update-status/{{ $trnRenewal->id }}"
-                                                method="post">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit" class="btn btn-sm btn-danger btn-block">
-                                                    <i class="fas fa-exclamation"></i> Waiting Approval
-                                                </button>
-                                            </form>
-                                        @endcan
-                                        @can('admin')
-                                            <button type="button" class="btn btn-danger btn-block" disabled>
-                                                <i class="fas fa-times"></i> Waiting Approval
+                                        <form action="/trn-maintenance/update-status/{{ $trnRenewal->id }}"
+                                            method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-sm btn-danger btn-block">
+                                                <i class="fas fa-exclamation"></i> Waiting Approval
                                             </button>
-                                        @endcan
+                                        </form>
                                     @endif
                                 </div>
                             </div>

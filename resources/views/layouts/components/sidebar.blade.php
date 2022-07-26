@@ -103,7 +103,7 @@
                 <a class="nav-link {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') ? '' : 'collapsed' }}"
                     href="#" data-toggle="collapse" data-target="#collapseTransaction" aria-expanded="true"
                     aria-controls="collapseTransaction">
-                    <i class="fas fa-fw fa-cog"></i>
+                    <i class="fas fa-hand-holding-usd"></i>
                     <span>Transaction</span>
                 </a>
                 <div id="collapseTransaction"

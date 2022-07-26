@@ -121,20 +121,20 @@
                             </div>
                         @endcan
                         <div class="col-md-6 mb-3">
-                            <label for="export_condition">Condition</label>
-                            <select class="form-control form-control-sm @error('export_condition') is-invalid @enderror"
-                                name="export_condition" id="export_condition">
+                            <label for="condition">Condition</label>
+                            <select class="form-control form-control-sm @error('condition') is-invalid @enderror"
+                                name="condition" id="condition">
                                 <option value=""></option>
                                 <option class="text-success" value="1"
-                                    {{ request('export_condition') == 1 ? 'selected' : '' }}>
+                                    {{ request('condition') == 1 ? 'selected' : '' }}>
                                     Baik
                                 </option>
                                 <option class="text-warning" value="2"
-                                    {{ request('export_condition') == 2 ? 'selected' : '' }}>
+                                    {{ request('condition') == 2 ? 'selected' : '' }}>
                                     Kurang
                                 </option>
                                 <option class="text-danger" value="3"
-                                    {{ request('export_condition') == 3 ? 'selected' : '' }}>
+                                    {{ request('condition') == 3 ? 'selected' : '' }}>
                                     Rusak
                                 </option>
                             </select>
@@ -150,9 +150,35 @@
                 </form>
             </div>
         </div>
+        @if (request())
+            <div class="alert alert-success text-xs" role="alert">
+                Filtered By =
+                <strong>
+                    {{ auth()->user()->name }}
+                </strong>
+                | Date From =
+                <strong>
+                    {{ createDate(request('search_date_before'))->format('d/m/Y') }}
 
+                </strong>
+                | Date To =
+                <strong>
+                    {{ createDate(request('search_date_after'))->format('d/m/Y') }}
+                </strong>
+
+                | SBU =
+                <strong>
+                    {{ findSBU(request('sbu_search_id')) }}
+                </strong>
+
+                | Total Assets =
+                <strong>
+                    {{ $assets->count() }}
+                </strong>
+            </div>
+        @endif
         <!-- DataTales Example -->
-        <div class="card shadow my-4">
+        <div class="card shadow">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">List assets</h6>
             </div>
@@ -171,8 +197,7 @@
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
-                        <tbody></tbody>
-                        {{-- <tbody>
+                        <tbody>
                             @foreach ($assets as $asset)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
@@ -206,10 +231,9 @@
                                             </div>
                                         </div>
                                     </td>
-
                                 </tr>
                             @endforeach
-                        </tbody> --}}
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -390,55 +414,9 @@
     <script src="/assets/template/vendor/selectize/selectize.js"></script>
     <script src="/js/jquery.mask.min.js"></script>
     <script>
-        var table = $('#dataTable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: "{{ route('getData.asset') }}"
-
-            },
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'asset_name',
-                    name: 'asset.asset_name'
-                },
-                {
-                    data: 'asset_no',
-                    name: 'asset.asset_no',
-                },
-                {
-                    data: 'sbu',
-                    name: 'sbu.sbu_name',
-                },
-                {
-                    data: 'pcs_date',
-                    name: 'asset.pcs_date',
-                },
-                {
-                    data: 'pcs_value',
-                    name: 'asset.pcs_value',
-                },
-                {
-                    data: 'employee',
-                    name: 'employee.name',
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: true,
-                    searchable: true
-                },
-            ]
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
         });
-
-        // $(document).ready(function() {
-        //     $('#dataTable').DataTable();
-        // });
 
         let btnSubmit = $('#btnSubmit'),
             form = $('#formAdd');

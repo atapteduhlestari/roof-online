@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\RenewalExport;
+use App\Models\SBU;
 use App\Models\Asset;
 use App\Models\Renewal;
 use App\Models\Employee;
 use App\Models\AssetChild;
 use App\Models\TrnRenewal;
 use Illuminate\Http\Request;
+use App\Exports\RenewalExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\TrnRenewalRequest;
@@ -17,20 +18,24 @@ class TrnRenewalController extends Controller
 {
     public function index()
     {
+        $data = request()->all();
+
         if (isSuperadmin())
-            $trnRenewals = TrnRenewal::get();
+            $trnRenewals = TrnRenewal::filter($data)->get();
         else
-            $trnRenewals = TrnRenewal::where('sbu_id', userSBU())->get();
+            $trnRenewals = TrnRenewal::filter($data)->where('sbu_id', userSBU())->get();
 
         $renewals = Renewal::get();
         $assetChild = AssetChild::orderBy('doc_name', 'asc')->get();
         $employees = Employee::orderBy('name', 'asc')->get();
+        $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
 
         return view('transaction.renewal.index', compact(
             'trnRenewals',
             'renewals',
             'assetChild',
             'employees',
+            'SBUs'
         ));
     }
 

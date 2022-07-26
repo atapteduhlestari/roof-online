@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\SBU;
 use Carbon\Carbon;
 
 function createDate($param)
@@ -185,4 +186,11 @@ function isAdmin()
 function userSBU()
 {
     return auth()->user()->sbu_id;
+}
+
+function findSBU($id)
+{
+    $sbu = SBU::find($id);
+
+    return $sbu ? $sbu->sbu_name : '';
 }
