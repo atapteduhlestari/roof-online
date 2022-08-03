@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cycle;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
 use App\Rules\ISOFormatRule;
