@@ -39,11 +39,11 @@ class TrnRenewal extends Model
 
     public function scopeFilter($query, $filters)
     {
-        $query->when($filters['search_date_before']  ?? false, function ($query, $from) {
+        $query->when($filters['start_date']  ?? false, function ($query, $from) {
             return $query->whereDate('trn_start_date', '>=', $from);
         });
 
-        $query->when($filters['search_date_after']  ?? false, function ($query, $to) {
+        $query->when($filters['due_date']  ?? false, function ($query, $to) {
             return $query->whereDate('trn_date', '<=', $to);
         });
 
@@ -53,10 +53,8 @@ class TrnRenewal extends Model
             });
         });
 
-        $query->when($filters['asset_search'] ?? false, function ($query, $asset_child_id) {
-            return $query->whereHas('document', function ($q) use ($asset_child_id) {
-                $q->where('asset_child_id', $asset_child_id);
-            });
+        $query->when($filters['status']  ?? false, function ($query, $status) {
+            return $query->where('trn_status', $status);
         });
     }
 }

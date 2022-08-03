@@ -36,6 +36,10 @@ class AssetGroupController extends Controller
 
     public function show(AssetGroup $assetGroup)
     {
+        if (isAdmin()) {
+            $assetGroup = $assetGroup->assets->where('sbu_id', userSBU());
+        }
+
         $employees = Employee::orderBy('name', 'asc')->get();
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
         $SBUs = SBU::orderBy('sbu_name', 'asc')->get();

@@ -19,12 +19,14 @@ class TrnRenewalController extends Controller
     public function index()
     {
         $data = request()->all();
+        // return $trnRenewals = TrnRenewal::where('trn_status', $data['status'])->get();
 
         if (isSuperadmin())
             $trnRenewals = TrnRenewal::filter($data)->get();
+
         else
             $trnRenewals = TrnRenewal::filter($data)->where('sbu_id', userSBU())->get();
-
+        // return $trnRenewals;
         $renewals = Renewal::get();
         $assetChild = AssetChild::orderBy('doc_name', 'asc')->get();
         $employees = Employee::orderBy('name', 'asc')->get();
@@ -151,7 +153,7 @@ class TrnRenewalController extends Controller
 
     public function updateStatus(TrnRenewal $trnRenewal)
     {
-        if (!$trnRenewal->file)
+        if ($trnRenewal->file == 2)
             return redirect()->back()->with('warning', 'Upload a file to proof!');
 
         $trnRenewal->update([

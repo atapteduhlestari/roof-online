@@ -58,16 +58,16 @@
                 aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter">{{ $alerts->isEmpty() ? '' : count($alerts) }}</span>
+                <span class="badge badge-danger badge-counter">{{ $alerts->isEmpty() ? '' : $alerts['count'] }}</span>
             </a>
             <!-- Dropdown - Alerts -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="alertsDropdown">
-                @if (count($alerts) > 0)
+                @if (count($alerts['events']) > 0)
                     <h6 class="dropdown-header bg-danger border-0">
                         Assets need to Maintain / Renew
                     </h6>
-                    @foreach ($alerts as $alert => $v)
+                    @foreach ($alerts['events'] as $alert => $v)
                         <a class="dropdown-item d-flex align-items-center" href="{{ $v['link'] }}">
                             <div class="mr-3">
                                 <div class="icon-circle bg-warning">

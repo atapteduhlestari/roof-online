@@ -123,6 +123,7 @@ function noDocIsEmpty($name, $date)
 function FillAlertsData($assets, $docs)
 {
     $events = collect();
+    $data = collect();
     foreach ($assets as $asset) {
         $events[] = [
             'name' => $asset->name,
@@ -143,7 +144,11 @@ function FillAlertsData($assets, $docs)
         ];
     }
 
-    return $events->sortBy('date')->take(3);
+    $count = $events->count();
+    $data['count'] = $count;
+    $data['events'] = ($events->sortBy('date')->take(3));
+
+    return $data;
 }
 
 function timelineReminders($assets, $docs)

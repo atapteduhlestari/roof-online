@@ -28,7 +28,7 @@ class CreateTrnRenewalTable extends Migration
             $table->double('trn_value', 2);
             $table->longText('trn_desc')->nullable();
             $table->text('file')->nullable();
-            $table->boolean('trn_status')->default(0);
+            $table->boolean('trn_status')->default(2);
             $table->timestamps();
         });
     }

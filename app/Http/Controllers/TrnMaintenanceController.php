@@ -11,29 +11,32 @@ use App\Exports\MaintenanceExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\TrnMaintenanceRequest;
+use App\Models\SBU;
 
 class TrnMaintenanceController extends Controller
 {
 
     public function index()
     {
-        // $data = request()->all();
-        // $trnMaintenances = TrnMaintenance::filter($data)->get();
+        $data = request()->all();
 
         if (isSuperadmin())
-            $trnMaintenances = TrnMaintenance::get();
+            $trnMaintenances = TrnMaintenance::filter($data)->get();
+
         else
-            $trnMaintenances = TrnMaintenance::where('sbu_id', userSBU())->get();
+            $trnMaintenances = TrnMaintenance::filter($data)->where('sbu_id', userSBU())->get();
 
         $maintenances = Maintenance::get();
         $assets = Asset::orderBy('asset_name', 'asc')->get();
         $employees = Employee::orderBy('name', 'asc')->get();
+        $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
 
         return view('transaction.maintenance.index', compact(
             'trnMaintenances',
             'maintenances',
             'assets',
-            'employees'
+            'employees',
+            'SBUs'
         ));
     }
 
@@ -150,7 +153,7 @@ class TrnMaintenanceController extends Controller
 
     public function updateStatus(TrnMaintenance $trnMaintenance)
     {
-        if (!$trnMaintenance->file)
+        if ($trnMaintenance->file == 2)
             return redirect()->back()->with('warning', 'Upload a file to proof!');
 
         $trnMaintenance->update([

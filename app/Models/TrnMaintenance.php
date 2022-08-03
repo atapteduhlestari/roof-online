@@ -40,8 +40,22 @@ class TrnMaintenance extends Model
 
     public function scopeFilter($query, $filters)
     {
-        $query->when($filters['trn_date'] ?? false, function ($query, $trn_date) {
-            return $query->where('created_at', $trn_date->month)->whereYear('created_at', $trn_date->year);
+        $query->when($filters['start_date']  ?? false, function ($query, $from) {
+            return $query->whereDate('trn_start_date', '>=', $from);
+        });
+
+        $query->when($filters['due_date']  ?? false, function ($query, $to) {
+            return $query->whereDate('trn_date', '<=', $to);
+        });
+
+        $query->when($filters['sbu_search_id'] ?? false, function ($query, $sbu) {
+            return $query->whereHas('sbu', function ($q) use ($sbu) {
+                $q->where('sbu_id', $sbu);
+            });
+        });
+
+        $query->when($filters['status']  ?? false, function ($query, $status) {
+            return $query->where('trn_status', $status);
         });
     }
 }

@@ -71,13 +71,12 @@
                         <td>
                             <div class="row">
                                 <div class="col-md">
-                                    @if ($trnRenewal->trn_status)
+                                    @if ($trnRenewal->trn_status == 1)
                                         <button type="button" class="btn btn-sm btn-success btn-block">
                                             <i class="fas fa-check"></i> Done
                                         </button>
                                     @else
-                                        <form action="/trn-maintenance/update-status/{{ $trnRenewal->id }}"
-                                            method="post">
+                                        <form action="/trn-renewal/update-status/{{ $trnRenewal->id }}" method="post">
                                             @csrf
                                             @method('PUT')
                                             <button type="submit" class="btn btn-sm btn-danger btn-block">

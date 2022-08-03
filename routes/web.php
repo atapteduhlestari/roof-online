@@ -25,7 +25,7 @@ Route::middleware(['auth', 'reminder'])->group(function () {
 
     Route::get('/asset-group/{assetGroup}', [AssetGroupController::class, 'show']);
 
-    Route::get('/asset-parent/search', [AssetController::class, 'search'])
+    Route::get('/asset-parent/search/{param}', [AssetController::class, 'search'])
         ->name('assetSearch');
 
     Route::resource('/asset-parent', AssetController::class)

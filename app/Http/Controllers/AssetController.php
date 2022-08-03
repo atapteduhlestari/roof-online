@@ -34,14 +34,14 @@ class AssetController extends Controller
         ));
     }
 
-    public function search()
+    public function search($param)
     {
         $data = request()->all();
 
         if (isSuperadmin())
-            $assets = Asset::search($data)->get();
+            $assets = $param == 'all' ? Asset::filter($data)->get() : Asset::where('asset_group_id', $param)->filter($data)->get();
         else
-            $assets = Asset::search($data)->where('sbu_id', userSBU())->get();
+            $assets = $param == 'all' ? Asset::where('sbu_id', userSBU())->filter($data)->get() : Asset::where('asset_group_id', $param)->where('sbu_id', userSBU())->filter($data)->get();
 
         $assetGroup = AssetGroup::get();
         $employees = Employee::orderBy('name', 'asc')->get();

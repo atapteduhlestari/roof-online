@@ -29,34 +29,23 @@
         <div class="collapse" id="collapseSearch">
             <div class="card card-body mt-3">
                 <h6 class="mb-3 font-weight-bold text-primary">Search Filter</h6>
-                <form action="" method="get">
+                <form action="/trn-renewal" method="get">
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="search_date_before">Start Date</label>
-                            <div class="form-group">
-                                <input type="date" class="form-control form-control-sm" id="search_date_before"
-                                    name="search_date_before" value="{{ request('search_date_before') }}">
+                            <label for="start_date">Start Date</label>
+                            <div class="form-group d-flex">
+                                <input type="date" class="form-control form-control-sm" id="start_date" name="start_date"
+                                    value="{{ request('start_date') }}">
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="search_date_after">Due Date</label>
-                            <div class="form-group">
-                                <input type="date" class="form-control form-control-sm" id="search_date_after"
-                                    name="search_date_after" value="{{ request('search_date_after') }}">
+                            <label for="due_date">Due Date</label>
+                            <div class="form-group d-flex">
+                                <input type="date" class="form-control form-control-sm" id="due_date" name="due_date"
+                                    value="{{ request('due_date') }}">
                             </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="asset_search">Documents</label>
-                            <select class="form-control form-control-sm @error('asset_search') is-invalid @enderror"
-                                id="asset_search" name="asset_search">
-                                <option value="">Select Assets Docs</option>
-                                @foreach ($assetChild as $ac)
-                                    <option value="{{ $ac->id }}"
-                                        {{ old('asset_search') == $ac->id ? 'selected' : '' }}>
-                                        {{ $ac->doc_name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+
                         @can('superadmin')
                             <div class="col-md-6 mb-3">
                                 <label for="sbu_search_id">SBU</label>
@@ -71,11 +60,19 @@
                                 </select>
                             </div>
                         @endcan
-
-                        <div class="col-md-6">
+                        <div class="col-md-6 mb-3">
                             <label for="status">Status</label>
+                            <select class="form-control form-control-sm @error('status') is-invalid @enderror"
+                                name="status" id="status">
+                                <option value=""></option>
+                                <option class="text-success" value="1" {{ request('status') == 1 ? 'selected' : '' }}>
+                                    <i class="fas fa-check"></i> Approved
+                                </option>
+                                <option class="text-danger" value="2" {{ request('status') == 2 ? 'selected' : '' }}>
+                                    <i class="fas fa-exclamation"></i> Waiting Approval
+                                </option>
+                            </select>
                         </div>
-
                     </div>
                     <div class="row">
                         <div class="col-md">
@@ -87,6 +84,7 @@
                 </form>
             </div>
         </div>
+
         <div class="card shadow mt-3">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">List Transaction</h6>
@@ -245,8 +243,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="pembuat">Pembuat</label>
-                                <input type="text" class="form-control" value="{{ auth()->user()->name }}"
-                                    disabled>
+                                <input type="text" class="form-control" value="{{ auth()->user()->name }}" disabled>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="penyetuju">Menyetujui</label>

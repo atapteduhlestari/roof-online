@@ -11,14 +11,147 @@
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Asset Group | {{ $assetGroup->asset_group_name }}</h1>
 
-        <div class="my-4">
-            <!-- Button trigger modal -->
-            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addNewRecord">
-                Add <i class="fas fa-plus-circle"></i>
-            </button>
-            <a href="/asset-export/{{ $assetGroup->id }}" class="btn btn-success">
-                Export <i class="fas fa-file-excel"></i>
-            </a>
+        <div class="d-flex">
+            <div class="my-3 flex-grow-1">
+                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addNewRecord">
+                    Add <i class="fas fa-plus-circle"></i>
+                </button>
+
+                <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    Export <i class="fas fa-file-export"></i>
+                </button>
+            </div>
+
+            <div class="my-3">
+                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseSearch"
+                    aria-expanded="false" aria-controls="collapseSearch">
+                    Filter Search
+                </button>
+            </div>
+        </div>
+
+
+        <div class="collapse" id="collapseSearch">
+            <div class="card card-body mt-3">
+                <h6 class="mb-3 font-weight-bold text-primary">Search Filter</h6>
+                <form action="/asset-parent/search/{{ $assetGroup->id }}" method="get">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="search_date_before">Date</label>
+                            <div class="form-group d-flex">
+                                <input type="date" class="form-control form-control-sm" id="search_date_before"
+                                    name="search_date_before" value="{{ request('search_date_before') }}">
+                            </div>
+                            <div class="form-group d-flex">
+                                <input type="date" class="form-control form-control-sm" id="search_date_after"
+                                    name="search_date_after" value="{{ request('search_date_after') }}">
+                            </div>
+                        </div>
+                        @can('superadmin')
+                            <div class="col-md-6 mb-3">
+                                <label for="sbu_search_id">SBU</label>
+                                <select class="form-control form-control-sm @error('sbu_search_id') is-invalid @enderror"
+                                    id="sbu_search_id" name="sbu_search_id">
+                                    <option value="">Select SBU</option>
+                                    @foreach ($SBUs as $sb)
+                                        <option value="{{ $sb->id }}"
+                                            {{ request('sbu_search_id') == $sb->id ? 'selected' : '' }}>
+                                            {{ $sb->sbu_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endcan
+                        <div class="col-md-6 mb-3">
+                            <label for="search_condition">Condition</label>
+                            <select class="form-control form-control-sm @error('search_condition') is-invalid @enderror"
+                                name="search_condition" id="search_condition">
+                                <option value=""></option>
+                                <option class="text-success" value="1"
+                                    {{ request('search_condition') == 1 ? 'selected' : '' }}>
+                                    Baik
+                                </option>
+                                <option class="text-warning" value="2"
+                                    {{ request('search_condition') == 2 ? 'selected' : '' }}>
+                                    Kurang
+                                </option>
+                                <option class="text-danger" value="3"
+                                    {{ request('search_condition') == 3 ? 'selected' : '' }}>
+                                    Rusak
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <button type="submit" class="btn btn-primary rounded text-xs">
+                                Find <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body mt-3">
+                <h6 class="mb-3 font-weight-bold text-primary">Export Filter</h6>
+                <form action="/asset-export/all" method="get">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="date_before">Date</label>
+                            <div class="form-group d-flex">
+                                <input type="date" class="form-control form-control-sm" id="date_before"
+                                    name="date_before" value="{{ request('date_before') }}">
+                            </div>
+                            <div class="form-group d-flex">
+                                <input type="date" class="form-control form-control-sm" id="date_after" name="date_after"
+                                    value="{{ request('date_after') }}">
+                            </div>
+                        </div>
+                        @can('superadmin')
+                            <div class="col-md-6">
+                                <label for="sbu">SBU</label>
+                                <select class="form-control form-control-sm @error('sbu') is-invalid @enderror" name="sbu"
+                                    id="sbu">
+                                    <option value=""></option>
+                                    @foreach ($SBUs as $sbu_search)
+                                        <option value="{{ $sbu_search->id }}"
+                                            {{ request('sbu') == $sbu_search->id ? 'selected' : '' }}>
+                                            {{ $sbu_search->sbu_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endcan
+                        <div class="col-md-6 mb-3">
+                            <label for="export_condition">Condition</label>
+                            <select class="form-control form-control-sm @error('export_condition') is-invalid @enderror"
+                                name="export_condition" id="export_condition">
+                                <option value=""></option>
+                                <option class="text-success" value="1"
+                                    {{ request('export_condition') == 1 ? 'selected' : '' }}>
+                                    Baik
+                                </option>
+                                <option class="text-warning" value="2"
+                                    {{ request('export_condition') == 2 ? 'selected' : '' }}>
+                                    Kurang
+                                </option>
+                                <option class="text-danger" value="3"
+                                    {{ request('export_condition') == 3 ? 'selected' : '' }}>
+                                    Rusak
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <button type="submit" class="btn btn-success rounded text-xs">
+                                Generate <i class="fas fa-file-excel"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <!-- DataTales Example -->
@@ -42,7 +175,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($assetGroup->assets->where('sbu_id', userSBU()) as $asset)
+                            @foreach ($assetGroup->assets as $asset)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td> {{ $asset->asset_name }}</td>
@@ -103,8 +236,8 @@
                             <div class="col-md-6 mb-3">
                                 <label for="asset_name">Asset Name</label>
                                 <input type="text" class="form-control @error('asset_name') is-invalid @enderror"
-                                    name="asset_name" id="asset_name" value="{{ old('asset_name') }}" autocomplete="off"
-                                    autofocus>
+                                    name="asset_name" id="asset_name" value="{{ old('asset_name') }}"
+                                    autocomplete="off" autofocus>
                                 </select>
                             </div>
 
@@ -205,8 +338,7 @@
                                 <label for="pcs_value">Purchase Value</label>
                                 <input type="text"
                                     class="form-control currency @error('pcs_value') is-invalid @enderror"
-                                    name="pcs_value" id="pcs_value" value="{{ old('pcs_value') }}"
-                                    autocomplete="off">
+                                    name="pcs_value" id="pcs_value" value="{{ old('pcs_value') }}" autocomplete="off">
                             </div>
                         </div>
                         <hr>
