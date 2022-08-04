@@ -32,7 +32,7 @@
         <div class="collapse" id="collapseSearch">
             <div class="card card-body mt-3">
                 <h6 class="mb-3 font-weight-bold text-primary">Search Filter</h6>
-                <form action="/asset-parent/search" method="get">
+                <form action="/asset-parent/search/all" method="get">
                     <div class="row">
                         <div class="col-md-6">
                             <label for="search_date_before">Date</label>
@@ -367,8 +367,7 @@
                                 <label for="pcs_value">Purchase Value</label>
                                 <input type="text"
                                     class="form-control currency @error('pcs_value') is-invalid @enderror"
-                                    name="pcs_value" id="pcs_value" value="{{ old('pcs_value') }}"
-                                    autocomplete="off">
+                                    name="pcs_value" id="pcs_value" value="{{ old('pcs_value') }}" autocomplete="off">
                             </div>
 
                             {{-- <div class="col-md-6 mb-3">
