@@ -32,7 +32,7 @@
         <div class="collapse" id="collapseSearch">
             <div class="card card-body mt-3">
                 <h6 class="mb-3 font-weight-bold text-primary">Search Filter</h6>
-                <form action="/asset-parent/all" method="get">
+                <form action="/asset-parent/search/all" method="get">
                     <div class="row">
                         <div class="col-md-6">
                             <label for="search_date_before">Date</label>
