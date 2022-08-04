@@ -14,6 +14,11 @@
                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addNewRecord">
                     Add <i class="fas fa-plus-circle"></i>
                 </button>
+                <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseExport"
+                    aria-expanded="false" aria-controls="collapseExport">
+                    Export <i class="fas fa-file-export"></i>
+                </button>
+
                 <a href="/trn-renewal-export" class="btn btn-success">
                     Export <i class="fas fa-file-excel"></i>
                 </a>
@@ -78,6 +83,67 @@
                         <div class="col-md">
                             <button type="submit" class="btn btn-primary rounded text-xs">
                                 Find <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="collapse" id="collapseExport">
+            <div class="card card-body mt-3">
+                <h6 class="mb-3 font-weight-bold text-primary">Export Filter</h6>
+                <form action="/trn-renewal-export" method="get">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="start_date">Start Date</label>
+                            <div class="form-group d-flex">
+                                <input type="date" class="form-control form-control-sm" id="start_date" name="start_date"
+                                    value="{{ request('start_date') }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="due_date">Due Date</label>
+                            <div class="form-group d-flex">
+                                <input type="date" class="form-control form-control-sm" id="due_date" name="due_date"
+                                    value="{{ request('due_date') }}">
+                            </div>
+                        </div>
+
+                        @can('superadmin')
+                            <div class="col-md-6 mb-3">
+                                <label for="sbu_search_id">SBU</label>
+                                <select class="form-control form-control-sm @error('sbu_search_id') is-invalid @enderror"
+                                    id="sbu_search_id" name="sbu_search_id">
+                                    <option value="">Select SBU</option>
+                                    @foreach ($SBUs as $sb)
+                                        <option value="{{ $sb->id }}"
+                                            {{ request('sbu_search_id') == $sb->id ? 'selected' : '' }}>
+                                            {{ $sb->sbu_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endcan
+                        <div class="col-md-6 mb-3">
+                            <label for="status">Status</label>
+                            <select class="form-control form-control-sm @error('status') is-invalid @enderror"
+                                name="status" id="status">
+                                <option value=""></option>
+                                <option class="text-success" value="1"
+                                    {{ request('status') == 1 ? 'selected' : '' }}>
+                                    <i class="fas fa-check"></i> Approved
+                                </option>
+                                <option class="text-danger" value="2"
+                                    {{ request('status') == 2 ? 'selected' : '' }}>
+                                    <i class="fas fa-exclamation"></i> Waiting Approval
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <button type="submit" class="btn btn-success rounded text-xs">
+                                Generate <i class="fas fa-file-excel"></i>
                             </button>
                         </div>
                     </div>

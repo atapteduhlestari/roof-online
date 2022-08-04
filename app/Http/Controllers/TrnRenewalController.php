@@ -19,12 +19,11 @@ class TrnRenewalController extends Controller
     {
         $data = request()->all();
         // return $trnRenewals = TrnRenewal::where('trn_status', $data['status'])->get();
-
         if (isSuperadmin())
             $trnRenewals = TrnRenewal::filter($data)->get();
-
         else
             $trnRenewals = TrnRenewal::filter($data)->where('sbu_id', userSBU())->get();
+
         // return $trnRenewals;
         $renewals = Renewal::get();
         $assetChild = AssetChild::orderBy('doc_name', 'asc')->get();
@@ -93,10 +92,12 @@ class TrnRenewalController extends Controller
 
     public function export()
     {
+        $data = request()->all();
+
         if (isSuperadmin())
-            $data =  TrnRenewal::get();
+            $data =  TrnRenewal::filter($data)->get();
         else
-            $data = TrnRenewal::where('sbu_id', userSBU())->get();
+            $data = TrnRenewal::filter($data)->where('sbu_id', userSBU())->get();
 
         $time = now()->format('dmY');
         $name = "ATL-GAN-REN-{$time}.xlsx";

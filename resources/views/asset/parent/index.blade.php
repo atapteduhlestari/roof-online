@@ -121,20 +121,20 @@
                             </div>
                         @endcan
                         <div class="col-md-6 mb-3">
-                            <label for="export_condition">Condition</label>
-                            <select class="form-control form-control-sm @error('export_condition') is-invalid @enderror"
-                                name="export_condition" id="export_condition">
+                            <label for="condition">Condition</label>
+                            <select class="form-control form-control-sm @error('condition') is-invalid @enderror"
+                                name="condition" id="condition">
                                 <option value=""></option>
                                 <option class="text-success" value="1"
-                                    {{ request('export_condition') == 1 ? 'selected' : '' }}>
+                                    {{ request('condition') == 1 ? 'selected' : '' }}>
                                     Baik
                                 </option>
                                 <option class="text-warning" value="2"
-                                    {{ request('export_condition') == 2 ? 'selected' : '' }}>
+                                    {{ request('condition') == 2 ? 'selected' : '' }}>
                                     Kurang
                                 </option>
                                 <option class="text-danger" value="3"
-                                    {{ request('export_condition') == 3 ? 'selected' : '' }}>
+                                    {{ request('condition') == 3 ? 'selected' : '' }}>
                                     Rusak
                                 </option>
                             </select>

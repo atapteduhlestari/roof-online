@@ -39,9 +39,9 @@ class AssetController extends Controller
         $data = request()->all();
 
         if (isSuperadmin())
-            $assets = $param == 'all' ? Asset::filter($data)->get() : Asset::where('asset_group_id', $param)->filter($data)->get();
+            $assets = $param == 'all' ? Asset::search($data)->get() : Asset::where('asset_group_id', $param)->search($data)->get();
         else
-            $assets = $param == 'all' ? Asset::where('sbu_id', userSBU())->filter($data)->get() : Asset::where('asset_group_id', $param)->where('sbu_id', userSBU())->filter($data)->get();
+            $assets = $param == 'all' ? Asset::where('sbu_id', userSBU())->search($data)->get() : Asset::where('asset_group_id', $param)->where('sbu_id', userSBU())->search($data)->get();
 
         $assetGroup = AssetGroup::get();
         $employees = Employee::orderBy('name', 'asc')->get();

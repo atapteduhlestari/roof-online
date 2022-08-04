@@ -52,7 +52,7 @@
                     </tr>
                     <tr>
                         <th>SBU</th>
-                        <td>{{ $trnMaintenance->asset->sbu->sbu_name }}</td>
+                        <td>{{ $trnMaintenance->sbu->sbu_name }}</td>
                     </tr>
                     <tr>
                         <th>TYPE</th>
