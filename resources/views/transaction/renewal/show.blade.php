@@ -52,7 +52,7 @@
                     </tr>
                     <tr>
                         <th>SBU</th>
-                        <td>{{ $trnRenewal->document->sbu->sbu_name }}</td>
+                        <td>{{ $trnRenewal->sbu->sbu_name }}</td>
                     </tr>
                     <tr>
                         <th>TYPE</th>
