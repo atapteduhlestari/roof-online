@@ -13,18 +13,12 @@
         </div>
 
         <!-- Content Row -->
-
-        {{-- {{ test('2022-06-01') }} --}}
-
-        <!-- Content Row -->
         <div class="row align-items-center">
             <div class="col-lg-6 mb-4">
                 <img class="img-fluid px-3 px-sm-4 mt-3 mb-4"
                     src="{{ asset('/assets/template/img/undraw_moving_re_pipp.svg') }}">
-                <!-- Illustrations -->
             </div>
             <div class="col-lg-6 mb-4">
-                <!-- Illustrations -->
                 <div class="card shadow mb-4 h-100">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Group</h6>

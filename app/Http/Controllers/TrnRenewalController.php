@@ -20,9 +20,9 @@ class TrnRenewalController extends Controller
         $data = request()->all();
         // return $trnRenewals = TrnRenewal::where('trn_status', $data['status'])->get();
         if (isSuperadmin())
-            $trnRenewals = TrnRenewal::filter($data)->get();
+            $trnRenewals = TrnRenewal::search($data)->get();
         else
-            $trnRenewals = TrnRenewal::filter($data)->where('sbu_id', userSBU())->get();
+            $trnRenewals = TrnRenewal::search($data)->where('sbu_id', userSBU())->get();
 
         // return $trnRenewals;
         $renewals = Renewal::get();
@@ -147,7 +147,7 @@ class TrnRenewalController extends Controller
 
     public function search(Request $request)
     {
-        $data = TrnRenewal::filter($request)->orderBy('trn_date', 'desc')->get();
+        $data = TrnRenewal::search($request)->orderBy('trn_date', 'desc')->get();
         return $data;
     }
 

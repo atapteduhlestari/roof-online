@@ -117,6 +117,12 @@
                     </div>
                 </div>
             </li>
+            <li class="nav-item  {{ request()->is('form*') ? 'active' : '' }}">
+                <a class="nav-link" href="/form">
+                    <i class="far fa-file-alt"></i>
+                    <span>Forms</span>
+                </a>
+            </li>
 
             {{-- <li class="nav-item {{ request()->is('/export/asset') ? 'active' : '' }}">
                 <a class="nav-link" href="/export/asset">

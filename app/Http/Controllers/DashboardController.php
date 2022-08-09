@@ -8,6 +8,7 @@ use App\Models\AssetChild;
 use App\Models\AssetGroup;
 use App\Models\TrnRenewal;
 use App\Models\TrnMaintenance;
+use Illuminate\Support\Facades\File;
 use App\Models\Calendar as ModelsCalendar;
 
 class DashboardController extends Controller
@@ -103,5 +104,24 @@ class DashboardController extends Controller
         }
 
         return $calendar;
+    }
+
+    public function formISO()
+    {
+        $path = public_path('assets/form');
+        $allFiles = File::allFiles($path);
+        $files = collect();
+
+        foreach ($allFiles as $path) {
+            $files->push(pathinfo($path));
+        }
+
+        return view('form', compact('files'));
+    }
+
+    public function downloadFormISO($param)
+    {
+        $path =  public_path('assets/form/') . $param;
+        return response()->download($path);
     }
 }

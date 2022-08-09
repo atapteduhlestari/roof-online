@@ -15,8 +15,8 @@
                     Add <i class="fas fa-plus-circle"></i>
                 </button>
 
-                <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseExample"
-                    aria-expanded="false" aria-controls="collapseExample">
+                <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseExport"
+                    aria-expanded="false" aria-controls="collapseExport">
                     Export <i class="fas fa-file-export"></i>
                 </button>
             </div>
@@ -90,7 +90,7 @@
             </div>
         </div>
 
-        <div class="collapse" id="collapseExample">
+        <div class="collapse" id="collapseExport">
             <div class="card card-body mt-3">
                 <h6 class="mb-3 font-weight-bold text-primary">Export Filter</h6>
                 <form action="/asset-export/all" method="get">

@@ -21,10 +21,10 @@ class TrnMaintenanceController extends Controller
         $data = request()->all();
 
         if (isSuperadmin())
-            $trnMaintenances = TrnMaintenance::filter($data)->get();
+            $trnMaintenances = TrnMaintenance::search($data)->get();
 
         else
-            $trnMaintenances = TrnMaintenance::filter($data)->where('sbu_id', userSBU())->get();
+            $trnMaintenances = TrnMaintenance::search($data)->where('sbu_id', userSBU())->get();
 
         $maintenances = Maintenance::get();
         $assets = Asset::orderBy('asset_name', 'asc')->get();
@@ -95,10 +95,12 @@ class TrnMaintenanceController extends Controller
 
     public function export()
     {
+        $data = request()->all();
+
         if (isSuperadmin())
-            $data =  TrnMaintenance::get();
+            $data =  TrnMaintenance::filter($data)->get();
         else
-            $data = TrnMaintenance::where('sbu_id', userSBU())->get();
+            $data = TrnMaintenance::filter($data)->where('sbu_id', userSBU())->get();
 
         $time = now()->format('dmY');
         $name = "ATL-GAN-MAI-{$time}.xlsx";
@@ -147,8 +149,8 @@ class TrnMaintenanceController extends Controller
 
     public function search(Request $request)
     {
-        $data = TrnMaintenance::filter($request)->orderBy('trn_date', 'desc')->get();
-        return;
+        $data = TrnMaintenance::search($request)->orderBy('trn_date', 'desc')->get();
+        return $data;
     }
 
     public function updateStatus(TrnMaintenance $trnMaintenance)

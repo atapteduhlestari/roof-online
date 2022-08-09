@@ -64,12 +64,22 @@ class AssetChild extends Model
         //         ->whereDate('trn_renewal.trn_date', '<=', $time)
         // )->join('asset_renewal', 'trn_renewal.renewal_id', '=', 'asset_renewal.id')->get();
         DB::statement("SET SQL_MODE=''");
-        return DB::table('trn_renewal')
-            ->select(['trn_renewal.*', 'trn_renewal.id as trn_id', DB::raw('MAX(trn_renewal.trn_start_date) as trn_start_date'), 'asset_child.*', 'asset_renewal.*'])
-            ->leftJoin('asset_child', 'trn_renewal.asset_child_id', 'asset_child.id')
-            ->leftJoin('asset_renewal', 'trn_renewal.renewal_id', 'asset_renewal.id')
-            ->groupBy('asset_renewal.name', 'asset_child.doc_name')
-            ->where('trn_start_date', '<=', $time)
-            ->where('trn_renewal.sbu_id', userSBU());
+
+        if (isSuperadmin()) {
+            return DB::table('trn_renewal')
+                ->select(['trn_renewal.*', 'trn_renewal.id as trn_id', DB::raw('MAX(trn_renewal.trn_start_date) as trn_start_date'), 'asset_child.*', 'asset_renewal.*'])
+                ->leftJoin('asset_child', 'trn_renewal.asset_child_id', 'asset_child.id')
+                ->leftJoin('asset_renewal', 'trn_renewal.renewal_id', 'asset_renewal.id')
+                ->groupBy('asset_renewal.name', 'asset_child.doc_name')
+                ->where('trn_start_date', '<=', $time);
+        } else {
+            return DB::table('trn_renewal')
+                ->select(['trn_renewal.*', 'trn_renewal.id as trn_id', DB::raw('MAX(trn_renewal.trn_start_date) as trn_start_date'), 'asset_child.*', 'asset_renewal.*'])
+                ->leftJoin('asset_child', 'trn_renewal.asset_child_id', 'asset_child.id')
+                ->leftJoin('asset_renewal', 'trn_renewal.renewal_id', 'asset_renewal.id')
+                ->groupBy('asset_renewal.name', 'asset_child.doc_name')
+                ->where('trn_start_date', '<=', $time)
+                ->where('trn_renewal.sbu_id', userSBU());
+        }
     }
 }
