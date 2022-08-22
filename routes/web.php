@@ -23,7 +23,9 @@ Route::middleware(['auth', 'reminder'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/form', [DashboardController::class, 'formISO']);
+    Route::post('/form', [DashboardController::class, 'createForm']);
     Route::get('/form/{param}', [DashboardController::class, 'downloadFormISO']);
+    Route::delete('/form/{param}', [DashboardController::class, 'deleteForm']);
 
     Route::get('/asset-group/{assetGroup}', [AssetGroupController::class, 'show']);
 
