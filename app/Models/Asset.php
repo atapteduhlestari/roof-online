@@ -78,13 +78,23 @@ class Asset extends Model
     public static function getLastTransaction($time)
     {
         DB::statement("SET SQL_MODE=''");
-        return DB::table('trn_maintenance')
-            ->select(['trn_maintenance.*', 'trn_maintenance.id as trn_id', DB::raw('MAX(trn_maintenance.trn_start_date) as trn_start_date'), 'asset.*', 'asset_maintenance.*'])
-            ->leftJoin('asset', 'trn_maintenance.asset_id', 'asset.id')
-            ->leftJoin('asset_maintenance', 'trn_maintenance.maintenance_id', 'asset_maintenance.id')
-            ->groupBy('asset_maintenance.name', 'asset.asset_name')
-            ->where('trn_start_date', '<=', $time)
-            ->where('trn_maintenance.sbu_id', userSBU());
+
+        if (isSuperadmin()) {
+            return DB::table('trn_maintenance')
+                ->select(['trn_maintenance.*', 'trn_maintenance.id as trn_id', DB::raw('MAX(trn_maintenance.trn_start_date) as trn_start_date'), 'asset.*', 'asset_maintenance.*'])
+                ->leftJoin('asset', 'trn_maintenance.asset_id', 'asset.id')
+                ->leftJoin('asset_maintenance', 'trn_maintenance.maintenance_id', 'asset_maintenance.id')
+                ->groupBy('asset_maintenance.name', 'asset.asset_name')
+                ->where('trn_start_date', '<=', $time);
+        } else {
+            return DB::table('trn_maintenance')
+                ->select(['trn_maintenance.*', 'trn_maintenance.id as trn_id', DB::raw('MAX(trn_maintenance.trn_start_date) as trn_start_date'), 'asset.*', 'asset_maintenance.*'])
+                ->leftJoin('asset', 'trn_maintenance.asset_id', 'asset.id')
+                ->leftJoin('asset_maintenance', 'trn_maintenance.maintenance_id', 'asset_maintenance.id')
+                ->groupBy('asset_maintenance.name', 'asset.asset_name')
+                ->where('trn_start_date', '<=', $time)
+                ->where('trn_maintenance.sbu_id', userSBU());
+        }
     }
 
     public function scopeFilter($query, $filters)

@@ -7,7 +7,7 @@
 @section('container')
     <div class="container-fluid">
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Transaction | Renewal</h1>
+        <h1 class="h3 mb-0 text-gray-800">Transaction | Renewal</h1>
 
         <div class="d-flex">
             <div class="my-3 flex-grow-1">
@@ -18,10 +18,6 @@
                     aria-expanded="false" aria-controls="collapseExport">
                     Export <i class="fas fa-file-export"></i>
                 </button>
-
-                <a href="/trn-renewal-export" class="btn btn-success">
-                    Export <i class="fas fa-file-excel"></i>
-                </a>
             </div>
             <div class="my-3">
                 <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseSearch"
@@ -73,7 +69,8 @@
                                 <option class="text-success" value="1" {{ request('status') == 1 ? 'selected' : '' }}>
                                     <i class="fas fa-check"></i> Approved
                                 </option>
-                                <option class="text-danger" value="2" {{ request('status') == 2 ? 'selected' : '' }}>
+                                <option class="text-danger" value="false"
+                                    {{ request('status') == false ? 'selected' : '' }}>
                                     <i class="fas fa-exclamation"></i> Waiting Approval
                                 </option>
                             </select>
@@ -112,13 +109,13 @@
 
                         @can('superadmin')
                             <div class="col-md-6 mb-3">
-                                <label for="sbu_search_id">SBU</label>
-                                <select class="form-control form-control-sm @error('sbu_search_id') is-invalid @enderror"
-                                    id="sbu_search_id" name="sbu_search_id">
+                                <label for="sbu_export_id">SBU</label>
+                                <select class="form-control form-control-sm @error('sbu_export_id') is-invalid @enderror"
+                                    id="sbu_export_id" name="sbu_export_id">
                                     <option value="">Select SBU</option>
                                     @foreach ($SBUs as $sb)
                                         <option value="{{ $sb->id }}"
-                                            {{ request('sbu_search_id') == $sb->id ? 'selected' : '' }}>
+                                            {{ request('sbu_export_id') == $sb->id ? 'selected' : '' }}>
                                             {{ $sb->sbu_name }}</option>
                                     @endforeach
                                 </select>
@@ -133,8 +130,8 @@
                                     {{ request('status') == 1 ? 'selected' : '' }}>
                                     <i class="fas fa-check"></i> Approved
                                 </option>
-                                <option class="text-danger" value="2"
-                                    {{ request('status') == 2 ? 'selected' : '' }}>
+                                <option class="text-danger" value="false"
+                                    {{ request('status') == false ? 'selected' : '' }}>
                                     <i class="fas fa-exclamation"></i> Waiting Approval
                                 </option>
                             </select>
@@ -379,6 +376,11 @@
         });
 
         $("#sbu_search_id").selectize({
+            create: false,
+            sortField: "text",
+        });
+
+        $("#sbu_export_id").selectize({
             create: false,
             sortField: "text",
         });

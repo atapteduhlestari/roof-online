@@ -91,8 +91,7 @@
                             <div class="col-md-6 mb-3">
                                 <label for="sbu_address">SBU Address</label>
                                 <input type="text" class="form-control @error('sbu_address') is-invalid @enderror"
-                                    name="sbu_address" id="sbu_address" value="{{ old('sbu_address') }}"
-                                    autocomplete="off">
+                                    name="sbu_address" id="sbu_address" value="{{ old('sbu_address') }}" autocomplete="off">
                             </div>
                         </div>
                         <hr>
@@ -108,14 +107,9 @@
     <!-- Page level plugins -->
     <script src="/assets/template/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/assets/template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="/js/jquery.mask.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#dataTable').DataTable();
-        });
-
-        $('.currency').mask('000.000.000.000', {
-            reverse: true
         });
 
         let btnSubmit = $('#btnSubmit'),

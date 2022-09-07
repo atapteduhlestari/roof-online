@@ -29,7 +29,6 @@ class Reminder
             $docs = AssetChild::getLastTransaction($now)->where('trn_status', false)->get();
         }
 
-
         $alerts = FillAlertsData($assets, $docs);
 
         View::share('alerts', $alerts);

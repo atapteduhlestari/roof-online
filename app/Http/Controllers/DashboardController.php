@@ -8,7 +8,10 @@ use App\Models\AssetChild;
 use App\Models\AssetGroup;
 use App\Models\TrnRenewal;
 use App\Models\TrnMaintenance;
+use Illuminate\Support\Facades\File;
+use Illuminate\Http\Request;
 use App\Models\Calendar as ModelsCalendar;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -34,26 +37,26 @@ class DashboardController extends Controller
         return view('index', compact('groups'));
     }
 
-    public function calendarItems($calendar, $assets, $docs)
-    {
-        foreach ($assets as $asset) {
-            $calendar->add_event(
-                $asset->name,
-                $asset->trn_date,
-                1,
-            );
-        }
+    // public function calendarItems($calendar, $assets, $docs)
+    // {
+    //     foreach ($assets as $asset) {
+    //         $calendar->add_event(
+    //             $asset->name,
+    //             $asset->trn_date,
+    //             1,
+    //         );
+    //     }
 
-        foreach ($docs as $doc) {
-            $calendar->add_event(
-                $doc->name,
-                $doc->trn_date,
-                1,
-            );
-        }
+    //     foreach ($docs as $doc) {
+    //         $calendar->add_event(
+    //             $doc->name,
+    //             $doc->trn_date,
+    //             1,
+    //         );
+    //     }
 
-        return $calendar;
-    }
+    //     return $calendar;
+    // }
 
     public function timeline()
     {
@@ -103,5 +106,53 @@ class DashboardController extends Controller
         }
 
         return $calendar;
+    }
+
+    public function formISO()
+    {
+        $path = public_path('uploads');
+        $allFiles = File::allFiles($path);
+        $files = collect();
+
+        foreach ($allFiles as $path) {
+            $files->push(pathinfo($path));
+        }
+
+        return view('asset.forms.index', compact('files'));
+    }
+
+    public function downloadFormISO($param)
+    {
+        $path =  public_path('uploads/forms/') . $param;
+        return response()->download($path);
+    }
+
+    public function createForm(Request $request)
+    {
+        $request->validate([
+            'url' => 'required',
+        ]);
+
+        $data = $request->all();
+        $file = $request->file('url');
+
+        $fileName = $file->getClientOriginalName();
+        $fileUrl = $file->storeAs('forms', $fileName, 'uploads');
+        $data['url'] = $fileUrl;
+
+        DB::table('form')->insert([
+            'url' => $data['url'],
+        ]);
+        return redirect()->back()->with('success', 'Success!');
+    }
+
+    public function deleteForm($param)
+    {
+        $path = public_path('uploads/forms/') . $param;
+
+        if (File::exists($path)) {
+            unlink($path);
+        }
+        return redirect()->back()->with('success', 'Success!');
     }
 }

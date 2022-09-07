@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AppraisalController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SBUController;
@@ -10,6 +9,7 @@ use App\Http\Controllers\CycleController;
 use App\Http\Controllers\TrnSDBController;
 use App\Http\Controllers\RenewalController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\AppraisalController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AssetChildController;
 use App\Http\Controllers\AssetGroupController;
@@ -22,19 +22,21 @@ Route::middleware(['auth', 'reminder'])->group(function () {
 
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/form', [DashboardController::class, 'formISO']);
+    Route::post('/form', [DashboardController::class, 'createForm']);
+    Route::get('/form/{param}', [DashboardController::class, 'downloadFormISO']);
+    Route::delete('/form/{param}', [DashboardController::class, 'deleteForm']);
 
     Route::get('/asset-group/{assetGroup}', [AssetGroupController::class, 'show']);
 
     Route::get('/asset-parent/search/{param}', [AssetController::class, 'search'])
         ->name('assetSearch');
 
+
     Route::resource('/asset-parent', AssetController::class)
         ->parameters([
             'asset-parent' => 'asset',
         ])->except(['create']);
-
-
-
 
     Route::get('/asset-parent/docs/{asset}', [AssetController::class, 'documents'])
         ->name('assetDocuments');
