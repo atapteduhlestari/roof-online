@@ -12,7 +12,7 @@ class Asset extends Model
 
     protected $table = 'asset';
     protected $guarded = ['id'];
-    protected $with = ['children', 'trnMaintenance', 'appraisals'];
+    protected $with = ['children', 'trnMaintenance', 'appraisals', 'sbu', 'employee'];
 
     public function group()
     {

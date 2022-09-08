@@ -59,10 +59,11 @@ class AssetController extends Controller
 
     public function getData()
     {
+        $asset = new Asset();
         if (isSuperadmin())
-            $query = Asset::get();
+            $query = $asset;
         else
-            $query = Asset::where('sbu_id', userSBU())->get();
+            $query = $asset->where('sbu_id', userSBU());
 
         $dt = DataTables::of($query);
 
@@ -92,7 +93,7 @@ class AssetController extends Controller
         </div>';
         })->rawColumns(['action']);
 
-        return $dt->toJson();
+        return $dt->make(true);
     }
 
     public function store(AssetRequest $request)
