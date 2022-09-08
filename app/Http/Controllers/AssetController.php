@@ -61,7 +61,7 @@ class AssetController extends Controller
     {
         $asset = new Asset();
         if (isSuperadmin())
-            $query = $asset;
+            $query = $asset->query();
         else
             $query = $asset->where('sbu_id', userSBU());
 
@@ -93,7 +93,7 @@ class AssetController extends Controller
         </div>';
         })->rawColumns(['action']);
 
-        return $dt->make(true);
+        return $dt->toJson();
     }
 
     public function store(AssetRequest $request)

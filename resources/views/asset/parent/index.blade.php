@@ -392,7 +392,6 @@
         var table = $('#dataTable').DataTable({
             processing: true,
             serverSide: true,
-            searchable: false,
             ajax: {
                 url: "{{ route('getData.asset') }}"
 

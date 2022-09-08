@@ -4,8 +4,6 @@ namespace App\Providers;
 
 use Carbon\Carbon;
 use App\Models\User;
-use App\Models\Asset;
-use App\Models\AssetChild;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Schema;
