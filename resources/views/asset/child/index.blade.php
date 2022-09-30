@@ -59,8 +59,7 @@
                                                 </button>
                                             </form>
                                             <div>
-                                                <a title="Edit Data"
-                                                    href="/asset-parent/docs/edit/{{ $child->parent->id }}/{{ $child->id }}"
+                                                <a title="Edit Data" href="/asset-child/{{ $child->id }}/edit"
                                                     class="btn btn-outline-dark text-xs">Edit</a>
                                             </div>
                                             <div>
@@ -70,8 +69,7 @@
                                                     @method('delete')
                                                     <button title="Delete Data" class="btn btn-outline-danger text-xs"
                                                         onclick="return false" id="deleteDocButton"
-                                                        data-id="{{ $child->id }}"
-                                                        data-asset_id="{{ $child->parent->id }}">
+                                                        data-id="{{ $child->id }}">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
                                                 </form>

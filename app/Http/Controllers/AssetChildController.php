@@ -13,10 +13,11 @@ class AssetChildController extends Controller
 {
     public function index()
     {
-        $children = AssetChild::with(['parent' => function ($q) {
-            $q->orderBy('asset_name');
-        }])->get();
+        $children = AssetChild::with([
+            'parent' => fn ($q) => $q->orderBy('asset_name')
+        ]);
 
+        $children = isSuperadmin() ? $children->get() : $children->where('sbu_id', userSBU())->get();
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
         $SBUs = SBU::orderBy('sbu_name', 'desc')->get();
         $assets = Asset::orderBy('asset_name', 'asc')->get();
@@ -34,7 +35,6 @@ class AssetChildController extends Controller
         $request->validate([
             'doc_name' => 'required',
             'doc_no' => 'required',
-            'asset_id' => 'required',
             'sbu_id' => 'required',
         ]);
 
@@ -49,6 +49,19 @@ class AssetChildController extends Controller
         AssetChild::create($data);
 
         return redirect()->back()->with('success', 'Success!');
+    }
+
+    public function edit(AssetChild $assetChild)
+    {
+        $child = $assetChild;
+        $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
+        $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
+
+        return view('asset.child.edit', compact(
+            'child',
+            'SDBs',
+            'SBUs'
+        ));
     }
 
     public function update(AssetChild $assetChild, Request $request)
