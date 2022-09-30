@@ -58,55 +58,55 @@ class DashboardController extends Controller
     //     return $calendar;
     // }
 
-    // public function timeline()
-    // {
+    public function timeline()
+    {
 
-    //     if (isSuperadmin()) {
-    //         $assets = Asset::getAllLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
-    //         $docs = AssetChild::getAllLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
-    //     } else {
-    //         $assets = Asset::getLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
-    //         $docs = AssetChild::getLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
-    //     }
+        if (isSuperadmin()) {
+            $assets = Asset::getAllLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
+            $docs = AssetChild::getAllLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
+        } else {
+            $assets = Asset::getLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
+            $docs = AssetChild::getLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
+        }
 
-    //     $data = timelineReminders($assets, $docs)->sortBy('trn_start_date')->reverse();
+        $data = timelineReminders($assets, $docs)->sortBy('trn_start_date')->reverse();
 
-    //     if (isSuperadmin()) {
-    //         $trn_maintenance = TrnMaintenance::get();
-    //         $trn_renewal = TrnRenewal::get();
-    //     } else {
-    //         $trn_maintenance = TrnMaintenance::where('sbu_id', userSBU())->get();
-    //         $trn_renewal = TrnRenewal::where('sbu_id', userSBU())->get();
-    //     }
+        if (isSuperadmin()) {
+            $trn_maintenance = TrnMaintenance::get();
+            $trn_renewal = TrnRenewal::get();
+        } else {
+            $trn_maintenance = TrnMaintenance::where('sbu_id', userSBU())->get();
+            $trn_renewal = TrnRenewal::where('sbu_id', userSBU())->get();
+        }
 
-    //     $calendar = $this->timelineCalendar($this->calendar, $trn_maintenance, $trn_renewal);
-    //     return view('timeline', compact('calendar', 'data'));
-    // }
+        $calendar = $this->timelineCalendar($this->calendar, $trn_maintenance, $trn_renewal);
+        return view('timeline', compact('calendar', 'data'));
+    }
 
-    // public function timelineCalendar($calendar, $trn_maintenance, $trn_renewal)
-    // {
-    //     foreach ($trn_maintenance as $m) {
-    //         $calendar->add_event(
-    //             $m->maintenance->name,
-    //             $m->trn_start_date,
-    //             1,
-    //             "/trn-maintenance/{$m->id}",
-    //             $m->trn_status ? "bg-primary" : '',
-    //         );
-    //     }
+    public function timelineCalendar($calendar, $trn_maintenance, $trn_renewal)
+    {
+        foreach ($trn_maintenance as $m) {
+            $calendar->add_event(
+                $m->maintenance->name,
+                $m->trn_start_date,
+                1,
+                "/trn-maintenance/{$m->id}",
+                $m->trn_status ? "bg-primary" : '',
+            );
+        }
 
-    //     foreach ($trn_renewal as $r) {
-    //         $calendar->add_event(
-    //             $r->renewal->name,
-    //             $r->trn_start_date,
-    //             1,
-    //             "/trn-renewal/{$r->id}",
-    //             $r->trn_status ? "bg-primary" : '',
-    //         );
-    //     }
+        foreach ($trn_renewal as $r) {
+            $calendar->add_event(
+                $r->renewal->name,
+                $r->trn_start_date,
+                1,
+                "/trn-renewal/{$r->id}",
+                $r->trn_status ? "bg-primary" : '',
+            );
+        }
 
-    //     return $calendar;
-    // }
+        return $calendar;
+    }
 
     public function formISO()
     {
