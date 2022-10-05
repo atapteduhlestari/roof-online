@@ -59,7 +59,7 @@ class RenewalExport implements
             'No.',
             'Code',
             'ISO',
-            'Asset',
+            'Document',
             'Group',
             'SBU',
             'SDB',
