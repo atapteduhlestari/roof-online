@@ -40,7 +40,7 @@
                     </tr>
                     <tr>
                         <th>Group</th>
-                        <td>{{ $trnRenewal->document->parent->group->asset_group_name }}</td>
+                        <td>{{ $trnRenewal->document->parent->group->asset_group_name ?? '' }}</td>
                     </tr>
                 </table>
             </div>

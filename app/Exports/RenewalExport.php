@@ -37,7 +37,7 @@ class RenewalExport implements
             $trn->trn_no,
             $trn->renewal->no_doc,
             $trn->document->doc_name,
-            $trn->document->parent->group->asset_group_name,
+            $trn->document->parent->group->asset_group_name ?? '',
             $trn->document->sbu->sbu_name,
             $trn->document->sdb->sdb_name ?? '',
             $trn->renewal->name,
