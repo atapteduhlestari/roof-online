@@ -175,7 +175,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($assetGroup->assets->where('sbu_id', userSBU()) as $asset)
+                            @foreach ($assets as $asset)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td> {{ $asset->asset_name }}</td>

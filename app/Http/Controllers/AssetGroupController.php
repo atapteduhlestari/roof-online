@@ -36,14 +36,14 @@ class AssetGroupController extends Controller
 
     public function show(AssetGroup $assetGroup)
     {
-
-
         $employees = Employee::orderBy('name', 'asc')->get();
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
         $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
+        $assets = isSuperadmin() ? $assetGroup->assets : $assetGroup->assets->where('sbu_id', userSBU());
 
         return view('asset.group.show', compact(
             'assetGroup',
+            'assets',
             'employees',
             'SDBs',
             'SBUs'
