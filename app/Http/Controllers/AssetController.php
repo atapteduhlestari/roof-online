@@ -61,9 +61,9 @@ class AssetController extends Controller
     {
         $asset = new Asset();
         if (isSuperadmin())
-            $query = $asset->query();
+            $query = $asset->get()->sortByDesc('pcs_date');
         else
-            $query = $asset->where('sbu_id', userSBU());
+            $query = $asset->where('sbu_id', userSBU())->sortByDesc('pcs_date');
 
         $dt = DataTables::of($query);
 

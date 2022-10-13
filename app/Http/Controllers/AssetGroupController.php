@@ -39,7 +39,7 @@ class AssetGroupController extends Controller
         $employees = Employee::orderBy('name', 'asc')->get();
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
         $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
-        $assets = isSuperadmin() ? $assetGroup->assets : $assetGroup->assets->where('sbu_id', userSBU());
+        $assets = isSuperadmin() ? $assetGroup->assets->sortByDesc('pcs_date') : $assetGroup->assets->where('sbu_id', userSBU()->sortByDesc('pcs_date'));
 
         return view('asset.group.show', compact(
             'assetGroup',
