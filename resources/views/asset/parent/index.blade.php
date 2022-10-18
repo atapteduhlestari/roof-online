@@ -163,11 +163,11 @@
                             <tr>
                                 <th>#</th>
                                 <th>Asset Name</th>
-                                <th>Asset No.</th>
                                 <th>SBU</th>
                                 <th>Purchase Date</th>
                                 <th>Purchase Value</th>
                                 <th>Penanggung Jawab</th>
+                                <th>Condition</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
@@ -407,10 +407,6 @@
                     name: 'asset.asset_name'
                 },
                 {
-                    data: 'asset_no',
-                    name: 'asset.asset_no',
-                },
-                {
                     data: 'sbu',
                     name: 'sbu.sbu_name',
                 },
@@ -425,6 +421,10 @@
                 {
                     data: 'employee',
                     name: 'employee.name',
+                },
+                {
+                    data: 'condition',
+                    name: 'condition',
                 },
                 {
                     data: 'action',

@@ -75,6 +75,8 @@ class AssetController extends Controller
             return $asset->sbu ? $asset->sbu->sbu_name : '';
         })->addColumn('employee', function (Asset $asset) {
             return $asset->employee ? $asset->employee->name : '';
+        })->addColumn('condition', function (Asset $asset) {
+            return  $asset->condition == 1 ? 'Baik' : ($asset->condition == 2 ? 'Kurang' : 'Rusak');
         })->addColumn('action', function ($row) {
             return '<div class="d-flex justify-content-around">
             <div>
@@ -91,7 +93,7 @@ class AssetController extends Controller
                 </form>
             </div>
         </div>';
-        })->rawColumns(['action']);
+        })->rawColumns(['action', 'condition']);
 
         return $dt->toJson();
     }

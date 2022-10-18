@@ -94,7 +94,7 @@
                                     @endphp
                                     <td
                                         class="{{ $asset->condition == 1 ? 'text-success' : ($asset->condition == 2 ? 'text-warning' : 'text-danger') }}">
-                                        {{ $asset->condition == 1 ? 'Baik' : ($asset->condition == 2 ? 'Kurang' : 'Buruk') }}
+                                        {{ $asset->condition == 1 ? 'Baik' : ($asset->condition == 2 ? 'Kurang' : 'Rusak') }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -179,8 +179,7 @@
                                             <td>
                                                 @if ($child->file)
                                                     <a title="download file"
-                                                        href="/asset-child/download/{{ $child->id }}"
-                                                        class="text-dark">
+                                                        href="/asset-child/download/{{ $child->id }}" class="text-dark">
                                                         <i class="fas fa-download"></i>
                                                     </a>
                                                 @else
@@ -256,8 +255,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Asset Name</label>
-                                    <input type="text" class="form-control not-allowed" value="{{ $asset->asset_name }}"
-                                        disabled>
+                                    <input type="text" class="form-control not-allowed"
+                                        value="{{ $asset->asset_name }}" disabled>
                                 </div>
                             </div>
 
@@ -303,7 +302,8 @@
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label for="desc">Description</label>
-                                    <textarea class="form-control  @error('desc') is-invalid @enderror" name="desc" id="desc" cols="30" rows="5">{{ old('desc') }}</textarea>
+                                    <textarea class="form-control  @error('desc') is-invalid @enderror" name="desc" id="desc" cols="30"
+                                        rows="5">{{ old('desc') }}</textarea>
                                 </div>
                             </div>
 
