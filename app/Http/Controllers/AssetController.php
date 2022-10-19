@@ -60,11 +60,12 @@ class AssetController extends Controller
     public function getData()
     {
         $asset = new Asset();
-        if (isSuperadmin())
-            $query = $asset->get()->sortByDesc('pcs_date');
-        else
-            $query = $asset->where('sbu_id', userSBU())->sortByDesc('pcs_date');
+        $query = $asset->query();
 
+        if (!isSuperadmin())
+            $query = $asset->where('sbu_id', userSBU());
+
+        $query->orderBy('pcs_date', 'desc');
         $dt = DataTables::of($query);
 
         $dt->addIndexColumn()->editColumn('pcs_date', function ($row) {
@@ -76,7 +77,9 @@ class AssetController extends Controller
         })->addColumn('employee', function (Asset $asset) {
             return $asset->employee ? $asset->employee->name : '';
         })->addColumn('condition', function (Asset $asset) {
-            return  $asset->condition == 1 ? 'Baik' : ($asset->condition == 2 ? 'Kurang' : 'Rusak');
+            $color = $asset->condition == 1 ? 'text-success' : ($asset->condition == 2 ? 'text-warning' : 'text-danger');
+            $text = $asset->condition == 1 ? 'Baik' : ($asset->condition == 2 ? 'Kurang' : 'Rusak');
+            return "<span class='$color'> {$text}</span>";
         })->addColumn('action', function ($row) {
             return '<div class="d-flex justify-content-around">
             <div>
@@ -95,7 +98,7 @@ class AssetController extends Controller
         </div>';
         })->rawColumns(['action', 'condition']);
 
-        return $dt->toJson();
+        return $dt->orderColumns(['asset_name'], '-:column $1')->toJson();
     }
 
     public function store(AssetRequest $request)

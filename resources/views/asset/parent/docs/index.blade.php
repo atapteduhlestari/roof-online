@@ -73,7 +73,7 @@
                                 </tr>
                                 <tr>
                                     <th>Code</th>
-                                    <td>{{ $asset->asset_code }}</td>
+                                    <td>{{ $asset->asset_code ?? '' }}</td>
                                 </tr>
                                 <tr>
                                     <th>No. (Pol/Rumah/Seri)</th>
@@ -81,7 +81,7 @@
                                 </tr>
                                 <tr>
                                     <th>SBU</th>
-                                    <td>{{ $asset->sbu->sbu_name }}</td>
+                                    <td>{{ $asset->sbu->sbu_name ?? '' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Location</th>

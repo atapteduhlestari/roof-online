@@ -424,7 +424,7 @@
                 },
                 {
                     data: 'condition',
-                    name: 'condition',
+                    name: 'asset.condition',
                 },
                 {
                     data: 'action',
