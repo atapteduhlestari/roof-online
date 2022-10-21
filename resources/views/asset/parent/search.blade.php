@@ -189,11 +189,11 @@
                             <tr>
                                 <th>#</th>
                                 <th>Asset Name</th>
-                                <th>Asset No.</th>
                                 <th>SBU</th>
                                 <th>Purchase Date</th>
                                 <th>Purchase Value</th>
                                 <th>Penanggung Jawab</th>
+                                <th>Condition</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
@@ -202,11 +202,14 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $asset->asset_name }}</td>
-                                    <td>{{ $asset->asset_no ?? '-' }}</td>
                                     <td>{{ $asset->sbu->sbu_name ?? '-' }}</td>
                                     <td>{{ createDate($asset->pcs_date)->format('d F Y') }}</td>
                                     <td>{{ rupiah($asset->pcs_value) }}</td>
                                     <td>{{ $asset->employee->name ?? '-' }}</td>
+                                    <td
+                                        class=" {{ $asset->condition == 1 ? 'text-success' : ($asset->condition == 2 ? 'text-warning' : 'text-danger') }}">
+                                        {{ $asset->condition == 1 ? 'Baik' : ($asset->condition == 2 ? 'Kurang' : 'Rusak') }}
+                                    </td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
