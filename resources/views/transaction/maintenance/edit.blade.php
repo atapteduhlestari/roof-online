@@ -7,7 +7,14 @@
 @section('container')
     <div class="container-fluid">
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Transaction | Edit Maintenance</h1>
+        <div class="d-flex align-items-center mb-3">
+            <div class="flex-grow-1">
+                <h1 class="h3 mb-2 text-gray-800">Transaction | Edit Maintenance</h1>
+            </div>
+            <a href="/trn-maintenance" class="btn btn-secondary btn-sm mr-2">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+        </div>
         <div class="mb-5">
             <form action="/trn-maintenance/{{ $trnMaintenance->id }}" method="POST" id="formTrnmaintenance"
                 enctype="multipart/form-data">
@@ -55,8 +62,7 @@
                     <div class="col-md-6 mb-3">
                         <label for="trn_value">Cost Realization</label>
                         <input type="text" class="form-control currency @error('trn_value') is-invalid @enderror"
-                            name="trn_value" value="{{ old('trn_value', $trnMaintenance->trn_value) }}"
-                            autocomplete="off">
+                            name="trn_value" value="{{ old('trn_value', $trnMaintenance->trn_value) }}" autocomplete="off">
                     </div>
                 </div>
                 <hr>
@@ -64,7 +70,7 @@
                     <div class="col-md-6 mb-3">
                         <label for="pemohon">Pemohon</label>
                         <select class="form-control @error('pemohon') is-invalid @enderror" name="pemohon" id="pemohon">
-                            <option value=""></option>
+                            <option value="">Select Employees</option>
                             @foreach ($employees as $pemohon)
                                 <option value="{{ $pemohon->name }}"
                                     {{ old('pemohon', $trnMaintenance->pemohon) == $pemohon->name ? 'selected' : '' }}>
@@ -83,11 +89,23 @@
                         <label for="penyetuju">Menyetujui</label>
                         <select class="form-control @error('penyetuju') is-invalid @enderror" name="penyetuju"
                             id="penyetuju">
-                            <option value=""></option>
+                            <option value="">Select Employees</option>
                             @foreach ($employees as $penyetuju)
                                 <option value="{{ $penyetuju->name }}"
                                     {{ old('penyetuju', $trnMaintenance->penyetuju) == $penyetuju->name ? 'selected' : '' }}>
                                     {{ $penyetuju->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="sbu_id">Payment SBU</label>
+                        <select class="form-control @error('sbu_id') is-invalid @enderror" name="sbu_id" id="sbu_id">
+                            <option value="">Select SBU</option>
+                            @foreach ($SBUs as $sbu)
+                                <option value="{{ $sbu->id }}"
+                                    {{ old('sbu_id', $trnMaintenance->sbu_id) == $sbu->id ? 'selected' : '' }}>
+                                    {{ $sbu->sbu_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -104,8 +122,8 @@
                     <div class="col-md-6 mb-3">
                         <label for="">File</label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input  @error('file') is-invalid @enderror" name="file"
-                                id="fileInput">
+                            <input type="file" class="custom-file-input  @error('file') is-invalid @enderror"
+                                name="file" id="fileInput">
                             <label class="custom-file-label" for="file">Choose file</label>
                         </div>
                     </div>
@@ -145,6 +163,11 @@
         });
 
         $("#penyetuju").selectize({
+            create: false,
+            sortField: "text",
+        });
+
+        $("#sbu_id").selectize({
             create: false,
             sortField: "text",
         });

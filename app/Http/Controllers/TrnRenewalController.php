@@ -20,9 +20,9 @@ class TrnRenewalController extends Controller
         $data = request()->all();
         // return $trnRenewals = TrnRenewal::where('trn_status', $data['status'])->get();
         if (isSuperadmin())
-            $trnRenewals = TrnRenewal::search($data)->get();
+            $trnRenewals = TrnRenewal::search($data)->orderBy('trn_start_date', 'asc')->get();
         else
-            $trnRenewals = TrnRenewal::search($data)->where('sbu_id', userSBU())->get();
+            $trnRenewals = TrnRenewal::search($data)->where('sbu_id', userSBU())->orderBy('trn_start_date', 'asc')->get();
 
         // return $trnRenewals;
         $renewals = Renewal::get();
@@ -44,11 +44,13 @@ class TrnRenewalController extends Controller
         $renewals = Renewal::orderBy('name', 'asc')->get();
         $employees = Employee::orderBy('name', 'asc')->get();
         $assetChild = AssetChild::findOrFail($request->id);
+        $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
 
         return view('transaction.renewal.create', compact(
             'assetChild',
             'renewals',
-            'employees'
+            'employees',
+            'SBUs'
         ));
     }
 
@@ -58,7 +60,7 @@ class TrnRenewalController extends Controller
 
         if ($request->file('file')) {
             $file = $request->file('file');
-            $fileUrl = $file->storeAs('uploads/files/transactions/renewal',  $file->hashName());
+            $fileUrl = $file->storeAs('uploads/files/transactions/renewal', formatTimeDoc($data['trn_no']));
             $data['file'] = $fileUrl;
         }
 
@@ -74,7 +76,6 @@ class TrnRenewalController extends Controller
             ->count();
 
         $data['user_id'] = auth()->user()->id;
-        $data['sbu_id'] = AssetChild::firstWhere('id', $data['asset_child_id'])->sbu_id;
         $data['trn_no'] = setNoTrn($data['trn_date'], $count ?? null, 'REN');
         $data['trn_value_plan'] = removeDots($data['trn_value_plan']);
         $data['trn_value'] = removeDots($data['trn_value']);
@@ -109,11 +110,13 @@ class TrnRenewalController extends Controller
     {
         $renewals = Renewal::get();
         $employees = Employee::orderBy('name', 'asc')->get();
+        $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
 
         return view('transaction.renewal.edit', compact(
             'trnRenewal',
             'renewals',
-            'employees'
+            'employees',
+            'SBUs'
         ));
     }
 
@@ -128,7 +131,7 @@ class TrnRenewalController extends Controller
         if ($request->file('file')) {
             Storage::delete($trnRenewal->file);
             $file = $request->file('file');
-            $fileUrl = $file->storeAs('uploads/files/transactions/renewal',  $file->hashName());
+            $fileUrl = $file->storeAs('uploads/files/transactions/renewal',  formatTimeDoc($trnRenewal->trn_no));
             $data['file'] = $fileUrl;
         } else {
             $data['file'] = $trnRenewal->file;
@@ -153,7 +156,7 @@ class TrnRenewalController extends Controller
 
     public function updateStatus(TrnRenewal $trnRenewal)
     {
-        if ($trnRenewal->file == 2)
+        if (!$trnRenewal->file)
             return redirect()->back()->with('warning', 'Upload a file to proof!');
 
         $trnRenewal->update([

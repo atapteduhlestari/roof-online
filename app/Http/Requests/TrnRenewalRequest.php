@@ -25,6 +25,7 @@ class TrnRenewalRequest extends FormRequest
             'trn_value_plan' => 'nullable',
             'trn_value' => 'required',
             'renewal_id' =>  'required',
+            'sbu_id' => 'required',
             'pemohon' => 'required',
             'penyetuju' => 'required',
         ];

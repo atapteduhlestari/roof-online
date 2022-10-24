@@ -7,7 +7,7 @@
 @section('container')
     <div class="container-fluid">
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Transaction | Maintenance</h1>
+        <h1 class="h3 mb-0 text-gray-800">Transaction | Maintenance</h1>
 
         <div class="d-flex">
             <div class="my-3 flex-grow-1">
@@ -20,6 +20,9 @@
                 </button>
             </div>
             <div class="my-3">
+                <a title="refresh data" class="btn btn-outline-success" href="/trn-maintenance" type="button">
+                    <i class="fas fa-sync-alt"></i>
+                </a>
                 <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseSearch"
                     aria-expanded="false" aria-controls="collapseSearch">
                     Filter Search
@@ -65,12 +68,11 @@
                             <label for="status">Status</label>
                             <select class="form-control form-control-sm @error('status') is-invalid @enderror"
                                 name="status" id="status">
-                                <option value=""></option>
+                                <option value="" selected></option>
                                 <option class="text-success" value="1" {{ request('status') == 1 ? 'selected' : '' }}>
                                     <i class="fas fa-check"></i> Approved
                                 </option>
-                                <option class="text-danger" value="false"
-                                    {{ request('status') == false ? 'selected' : '' }}>
+                                <option class="text-danger" value="false">
                                     <i class="fas fa-exclamation"></i> Waiting Approval
                                 </option>
                             </select>
@@ -159,9 +161,12 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Document No.</th>
+                                <th>Asset Name</th>
+                                <th>SBU</th>
                                 <th>Type</th>
-                                <th>Due Date</th>
+                                <th>Description</th>
+                                <th>Start Date</th>
+                                <th>Cost</th>
                                 <th>File</th>
                                 <th class="text-center">Actions</th>
                             </tr>
@@ -170,17 +175,23 @@
                             @foreach ($trnMaintenances as $trn)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $trn->trn_no }}</td>
+                                    <td>
+                                        <a
+                                            href="/asset-parent/docs/{{ $trn->asset->id }}">{{ $trn->asset->asset_name }}</a>
+                                    </td>
+                                    <td>{{ $trn->sbu->sbu_name }}</td>
                                     <td>{{ $trn->maintenance->name }}</td>
-                                    <td>{{ createDate($trn->trn_date)->format('d F Y') }}</td>
+                                    <td>{{ $trn->trn_desc }}</td>
+                                    <td>{{ createDate($trn->trn_start_date)->format('d F Y') }}</td>
+                                    <td>{{ rupiah($trn->trn_value) }}</td>
                                     <td>
                                         @if ($trn->file)
                                             <a title="download file" href="/trn-maintenance/download/{{ $trn->id }}"
-                                                class="text-dark">
+                                                class="text-primary">
                                                 <i class="fas fa-download"></i>
                                             </a>
                                         @else
-                                            -
+                                            <a href="/trn-maintenance/{{ $trn->id }}/edit">Add File</a>
                                         @endif
                                     </td>
                                     <td>
@@ -224,7 +235,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-gradient-dark">
-                    <h5 class="modal-title text-white" id="addNewRecordLabel">Form Transaction</h5>
+                    <h5 class="modal-title text-white" id="addNewRecordLabel">Form Transaction Maintenance</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span class="text-white" aria-hidden="true">&times;</span>
                     </button>
@@ -234,7 +245,7 @@
                         enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-12 mb-3">
                                 <label for="asset_id">Select Asset</label>
                                 <select class="form-control @error('asset_id') is-invalid @enderror" id="asset_id"
                                     name="asset_id">
@@ -242,12 +253,12 @@
                                     @foreach ($assets as $asset)
                                         <option value="{{ $asset->id }}"
                                             {{ old('asset_id') == $asset->id ? 'selected' : '' }}>
-                                            {{ $asset->asset_name }}</option>
+                                            {{ $asset->sbu->sbu_name ?? '' }} | {{ $asset->asset_name }} </option>
                                     @endforeach
                                 </select>
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-12 mb-3">
                                 <label for="maintenance_id">
                                     Select Maintenance
                                     @can('superadmin')
@@ -295,7 +306,7 @@
                                 <label for="pemohon">Pemohon</label>
                                 <select class="form-control @error('pemohon') is-invalid @enderror" name="pemohon"
                                     id="pemohon">
-                                    <option value="">Pemohon</option>
+                                    <option value="">Select Employees</option>
                                     @foreach ($employees as $pemohon)
                                         <option value="{{ $pemohon->name }}"
                                             {{ old('pemohon') == $pemohon->name ? 'selected' : '' }}>
@@ -319,10 +330,22 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="sbu_id">Payment SBU</label>
+                                <select class="form-control @error('sbu_id') is-invalid @enderror" name="sbu_id"
+                                    id="sbu_id">
+                                    <option value="">Select SBU</option>
+                                    @foreach ($SBUs as $sbu)
+                                        <option value="{{ $sbu->id }}"
+                                            {{ old('sbu_id') == $sbu->id ? 'selected' : '' }}>
+                                            {{ $sbu->sbu_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-12 mb-3">
                                 <div class="form-group">
                                     <label for="trn_desc">Description</label>
                                     <textarea class="form-control" id="trn_desc" name="trn_desc" cols="10" rows="5">{{ old('trn_desc') }}</textarea>
@@ -371,6 +394,11 @@
         });
 
         $("#asset_id").selectize({
+            create: false,
+            sortField: "text",
+        });
+
+        $("#sbu_id").selectize({
             create: false,
             sortField: "text",
         });

@@ -34,7 +34,6 @@ class AssetChildController extends Controller
     {
         $request->validate([
             'doc_name' => 'required',
-            'doc_no' => 'required',
             'sbu_id' => 'required',
         ]);
 
@@ -68,7 +67,7 @@ class AssetChildController extends Controller
     {
         $request->validate([
             'doc_name' => 'required',
-            'doc_no' => 'required',
+            'sbu_id' => 'required',
         ]);
 
         $data = $request->all();

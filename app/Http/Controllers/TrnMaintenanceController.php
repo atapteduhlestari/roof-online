@@ -21,13 +21,13 @@ class TrnMaintenanceController extends Controller
         $data = request()->all();
 
         if (isSuperadmin())
-            $trnMaintenances = TrnMaintenance::search($data)->get();
+            $trnMaintenances = TrnMaintenance::search($data)->orderBy('trn_start_date', 'asc')->get();
 
         else
-            $trnMaintenances = TrnMaintenance::search($data)->where('sbu_id', userSBU())->get();
+            $trnMaintenances = TrnMaintenance::search($data)->where('sbu_id', userSBU())->orderBy('trn_start_date', 'asc')->get();
 
         $maintenances = Maintenance::get();
-        $assets = Asset::orderBy('asset_name', 'asc')->get();
+        $assets = Asset::with('sbu')->orderBy('asset_name', 'asc')->get();
         $employees = Employee::orderBy('name', 'asc')->get();
         $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
 
@@ -45,11 +45,13 @@ class TrnMaintenanceController extends Controller
         $maintenances = Maintenance::orderBy('name', 'asc')->get();
         $employees = Employee::orderBy('name', 'asc')->get();
         $asset = Asset::findOrFail($request->id);
+        $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
 
         return view('transaction.maintenance.create', compact(
             'asset',
             'maintenances',
-            'employees'
+            'employees',
+            'SBUs'
         ));
     }
 
@@ -60,7 +62,7 @@ class TrnMaintenanceController extends Controller
 
         if ($request->file('file')) {
             $file = $request->file('file');
-            $fileUrl = $file->storeAs('uploads/files/transactions/maintenance',  $file->hashName());
+            $fileUrl = $file->storeAs('uploads/files/transactions/maintenance', formatTimeDoc($data['trn_no']));
             $data['file'] = $fileUrl;
         }
 
@@ -77,7 +79,6 @@ class TrnMaintenanceController extends Controller
             ->count();
 
         $data['user_id'] = auth()->user()->id;
-        $data['sbu_id'] = Asset::firstWhere('id', $data['asset_id'])->sbu_id;
         $data['trn_value_plan'] = removeDots($data['trn_value_plan']);
         $data['trn_value'] = removeDots($data['trn_value']);
         $data['trn_no'] = setNoTrn($data['trn_date'], $count ?? null, 'MAI');
@@ -112,11 +113,13 @@ class TrnMaintenanceController extends Controller
     {
         $maintenances = Maintenance::get();
         $employees = Employee::orderBy('name', 'asc')->get();
+        $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
 
         return view('transaction.maintenance.edit', compact(
             'maintenances',
             'trnMaintenance',
-            'employees'
+            'employees',
+            'SBUs'
         ));
     }
 
@@ -130,7 +133,7 @@ class TrnMaintenanceController extends Controller
         if ($request->file('file')) {
             Storage::delete($trnMaintenance->file);
             $file = $request->file('file');
-            $fileUrl = $file->storeAs('uploads/files/transactions/maintenance',  $file->hashName());
+            $fileUrl = $file->storeAs('uploads/files/transactions/maintenance',  formatTimeDoc($trnMaintenance->trn_no));
             $data['file'] = $fileUrl;
         } else {
             $data['file'] = $trnMaintenance->file;
@@ -155,7 +158,7 @@ class TrnMaintenanceController extends Controller
 
     public function updateStatus(TrnMaintenance $trnMaintenance)
     {
-        if ($trnMaintenance->file == 2)
+        if (!$trnMaintenance->file)
             return redirect()->back()->with('warning', 'Upload a file to proof!');
 
         $trnMaintenance->update([

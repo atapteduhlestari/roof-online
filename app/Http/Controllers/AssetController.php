@@ -212,7 +212,6 @@ class AssetController extends Controller
     {
         $request->validate([
             'doc_name' => 'required',
-            'doc_no' => 'required',
         ]);
 
         $data = $request->all();

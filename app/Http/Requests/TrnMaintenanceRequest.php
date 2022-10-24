@@ -27,6 +27,7 @@ class TrnMaintenanceRequest extends FormRequest
             'trn_value_plan' => 'nullable',
             'trn_value' => 'required',
             'maintenance_id' => 'required',
+            'sbu_id' => 'required',
             'pemohon' => 'required',
             'penyetuju' => 'required'
         ];

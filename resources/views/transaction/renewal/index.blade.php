@@ -20,6 +20,9 @@
                 </button>
             </div>
             <div class="my-3">
+                <a title="refresh data" class="btn btn-outline-success" href="/trn-renewal" type="button">
+                    <i class="fas fa-sync-alt"></i>
+                </a>
                 <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseSearch"
                     aria-expanded="false" aria-controls="collapseSearch">
                     Filter Search
@@ -159,9 +162,12 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Document No.</th>
+                                <th>Doc Name</th>
+                                <th>SBU</th>
                                 <th>Type</th>
-                                <th>Due Date</th>
+                                <th>Description</th>
+                                <th>Start Date</th>
+                                <th>Cost</th>
                                 <th>File</th>
                                 <th class="text-center">Actions</th>
                             </tr>
@@ -170,17 +176,22 @@
                             @foreach ($trnRenewals as $trn)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $trn->trn_no }}</td>
+                                    <td>
+                                        {{ $trn->document->doc_name }} - {{ $trn->document->parent->asset_name ?? '' }}
+                                    </td>
+                                    <td>{{ $trn->sbu->sbu_name }}</td>
                                     <td>{{ $trn->renewal->name }}</td>
-                                    <td>{{ createDate($trn->trn_date)->format('d F Y') }}</td>
+                                    <td>{{ $trn->trn_desc }}</td>
+                                    <td>{{ createDate($trn->trn_start_date)->format('d F Y') }}</td>
+                                    <td>{{ rupiah($trn->trn_value) }}</td>
                                     <td>
                                         @if ($trn->file)
                                             <a title="download file" href="/trn-renewal/download/{{ $trn->id }}"
-                                                class="text-dark">
+                                                class="text-primary">
                                                 <i class="fas fa-download"></i>
                                             </a>
                                         @else
-                                            -
+                                            <a href="/trn-renewal/{{ $trn->id }}/edit">Add File</a>
                                         @endif
                                     </td>
                                     <td>
@@ -224,7 +235,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-gradient-dark">
-                    <h5 class="modal-title text-white" id="addNewRecordLabel">Form Transaction</h5>
+                    <h5 class="modal-title text-white" id="addNewRecordLabel">Form Transaction Renewal</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span class="text-white" aria-hidden="true">&times;</span>
                     </button>
@@ -233,7 +244,7 @@
                     <form action="/trn-renewal" method="POST" id="formTrnRenewal" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-12 mb-3">
                                 <label for="asset_child_id">Select Document</label>
                                 <select class="form-control @error('asset_child_id') is-invalid @enderror"
                                     id="asset_child_id" name="asset_child_id">
@@ -241,12 +252,13 @@
                                     @foreach ($assetChild as $doc)
                                         <option value="{{ $doc->id }}"
                                             {{ old('asset_child_id') == $doc->id ? 'selected' : '' }}>
-                                            {{ $doc->doc_name }}</option>
+                                            {{ $doc->doc_name }} - {{ $doc->parent->asset_name ?? '' }} |
+                                            {{ $doc->sbu->sbu_name ?? '' }} </option>
                                     @endforeach
                                 </select>
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-12 mb-3">
                                 <label for="renewal_id">
                                     Select Renewal
                                     @can('superadmin')
@@ -296,7 +308,7 @@
                                 <label for="pemohon">Pemohon</label>
                                 <select class="form-control @error('pemohon') is-invalid @enderror" name="pemohon"
                                     id="pemohon">
-                                    <option value="">Pemohon</option>
+                                    <option value="">Select Employees</option>
                                     @foreach ($employees as $pemohon)
                                         <option value="{{ $pemohon->name }}"
                                             {{ old('pemohon') == $pemohon->name ? 'selected' : '' }}>
@@ -320,10 +332,22 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="sbu_id">Payment SBU</label>
+                                <select class="form-control @error('sbu_id') is-invalid @enderror" name="sbu_id"
+                                    id="sbu_id">
+                                    <option value="">Select SBU</option>
+                                    @foreach ($SBUs as $sbu)
+                                        <option value="{{ $sbu->id }}"
+                                            {{ old('sbu_id') == $sbu->id ? 'selected' : '' }}>
+                                            {{ $sbu->sbu_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-12 mb-3">
                                 <div class="form-group">
                                     <label for="trn_desc">Description</label>
                                     <textarea class="form-control" id="trn_desc" name="trn_desc" cols="10" rows="5">{{ old('trn_desc') }}</textarea>
@@ -371,6 +395,11 @@
         });
 
         $("#asset_child_id").selectize({
+            create: false,
+            sortField: "text",
+        });
+
+        $("#sbu_id").selectize({
             create: false,
             sortField: "text",
         });

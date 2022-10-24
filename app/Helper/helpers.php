@@ -3,6 +3,11 @@
 use App\Models\SBU;
 use Carbon\Carbon;
 
+function formatTimeDoc($param)
+{
+    return $param . '_' . now()->format('d-m-Y_h-i-s');
+}
+
 function createDate($param)
 {
     return Carbon::create($param);
@@ -129,6 +134,7 @@ function FillAlertsData($assets, $docs)
             'name' => $asset->name,
             'date' => $asset->trn_start_date,
             'asset_name' => $asset->asset_name,
+            // 'sbu_name' => $asset->sbu->sbu_name,
             'type' => 'Asset',
             'link' => "/trn-maintenance/{$asset->trn_id}"
         ];
@@ -139,6 +145,7 @@ function FillAlertsData($assets, $docs)
             'name' => $doc->name,
             'date' => $doc->trn_start_date,
             'asset_name' => $doc->doc_name,
+            // 'sbu_name' => $doc->sbu->sbu_name,
             'type' => 'Document',
             'link' => "/trn-renewal/{$doc->trn_id}"
         ];
@@ -156,23 +163,25 @@ function timelineReminders($assets, $docs)
     $data = collect();
 
     foreach ($assets as $asset) {
-        $data[] = [
-            'id' => $asset->id,
+        $data->push([
+            'id' => $asset->asset_id,
             'name' => $asset->name,
             'date' => $asset->trn_start_date,
             'asset_name' => $asset->asset_name,
+            'sbu_name' => $asset->sbu_name,
             'type' => 'Asset',
-        ];
+        ]);
     }
 
     foreach ($docs as $doc) {
-        $data[] = [
+        $data->push([
             'id' => $doc->id,
             'name' => $doc->name,
             'date' => $doc->trn_start_date,
             'asset_name' => $doc->doc_name,
+            'sbu_name' => $doc->sbu_name,
             'type' => 'Document',
-        ];
+        ]);
     }
 
     return $data;

@@ -22,6 +22,9 @@
             </div>
 
             <div class="my-3">
+                <a title="refresh data" class="btn btn-outline-success" href="/asset-parent" type="button">
+                    <i class="fas fa-sync-alt"></i>
+                </a>
                 <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseSearch"
                     aria-expanded="false" aria-controls="collapseSearch">
                     Filter Search

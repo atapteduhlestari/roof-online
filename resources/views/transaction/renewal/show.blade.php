@@ -36,7 +36,9 @@
                     </tr>
                     <tr>
                         <th>Document</th>
-                        <td>{{ $trnRenewal->document->doc_name }}</td>
+                        <td>
+                            {{ $trnRenewal->document->doc_name }} - {{ $trnRenewal->document->parent->asset_name ?? '' }}
+                        </td>
                     </tr>
                     <tr>
                         <th>Group</th>

@@ -76,7 +76,7 @@
                     <div class="col-md-6 mb-3">
                         <label for="pemohon">Pemohon</label>
                         <select class="form-control @error('pemohon') is-invalid @enderror" name="pemohon" id="pemohon">
-                            <option value=""></option>
+                            <option value="">Select Employees</option>
                             @foreach ($employees as $pemohon)
                                 <option value="{{ $pemohon->name }}"
                                     {{ old('pemohon') == $pemohon->name ? 'selected' : '' }}>
@@ -86,18 +86,27 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="pembuat">Pembuat</label>
-                        <input type="text" class="form-control not-allowed" value="{{ auth()->user()->name }}"
-                            disabled>
+                        <input type="text" class="form-control not-allowed" value="{{ auth()->user()->name }}" disabled>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="penyetuju">Menyetujui</label>
                         <select class="form-control @error('penyetuju') is-invalid @enderror" name="penyetuju"
                             id="penyetuju">
-                            <option value=""></option>
+                            <option value="">Select Employees</option>
                             @foreach ($employees as $penyetuju)
                                 <option value="{{ $penyetuju->name }}"
                                     {{ old('penyetuju') == $penyetuju->name ? 'selected' : '' }}>
                                     {{ $penyetuju->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="sbu_id">Payment SBU</label>
+                        <select class="form-control @error('sbu_id') is-invalid @enderror" name="sbu_id" id="sbu_id">
+                            <option value="">Select SBU</option>
+                            @foreach ($SBUs as $sbu)
+                                <option value="{{ $sbu->id }}" {{ old('sbu_id') == $sbu->id ? 'selected' : '' }}>
+                                    {{ $sbu->sbu_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -151,6 +160,11 @@
         });
 
         $("#penyetuju").selectize({
+            create: false,
+            sortField: "text",
+        });
+
+        $("#sbu_id").selectize({
             create: false,
             sortField: "text",
         });

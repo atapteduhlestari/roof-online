@@ -19,6 +19,10 @@
                         <td>{{ $trnMaintenance->trn_no }}</td>
                     </tr>
                     <tr>
+                        <th>Asset</th>
+                        <td>{{ $trnMaintenance->asset->asset_name }}</td>
+                    </tr>
+                    <tr>
                         <th>Cost Plan</th>
                         <td>{{ rupiah($trnMaintenance->trn_value_plan) }}</td>
                     </tr>
@@ -33,10 +37,6 @@
                     <tr>
                         <th>Due Date</th>
                         <td>{{ createDate($trnMaintenance->trn_date)->format('d F Y') }}</td>
-                    </tr>
-                    <tr>
-                        <th>Asset</th>
-                        <td>{{ $trnMaintenance->asset->asset_name }}</td>
                     </tr>
                     <tr>
                         <th>Group</th>

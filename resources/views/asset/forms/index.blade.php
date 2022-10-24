@@ -16,7 +16,7 @@
                         <div class="custom-file">
                             <input type="file" class="custom-file-input @error('url') is-invalid @enderror"
                                 name="url" id="urlInput">
-                            <label class="custom-file-label" for="url">Upload file</label>
+                            <label class="custom-file-label" for="url">Add Form</label>
                         </div>
                         @error('url')
                             <div class="invalid-feedback">

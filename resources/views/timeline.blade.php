@@ -21,10 +21,10 @@
                 <tr>
                     <th>#</th>
                     <th>Asset</th>
-                    <th>No. Asset</th>
+                    <th>SBU</th>
                     <th>Maintenance Name</th>
                     <th>Due Date</th>
-                    <th>Remaining Days</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
                 @foreach ($data as $asset)
@@ -32,7 +32,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $asset['asset_name'] }}</td>
                         <td>
-                            {{ $asset->asset_no ?? '-' }}
+                            {{ $asset['sbu_name'] ?? '-' }}
                         </td>
                         <td>
                             {{ $asset['name'] }}
@@ -41,20 +41,23 @@
                             {{ createDate($asset['date'])->format('d M Y') }}
                         </td>
                         <td>
-
                             {!! remaining($asset['date']) !!}
 
                             <br>
                             {{-- {{ $asset->trnMaintenance->maintenance->cycle->qty }} --}}
                         </td>
                         <td>
-                            <form action="/trn-maintenance/create">
-                                <input type="hidden" name="id" value="{{ $asset['id'] }}" readonly>
-                                <input type="hidden" name="check" value="document" readonly>
-                                <button type="submit" class="btn btn-outline-dark btn-sm btn-block">
-                                    <i class="fas fa-tools"></i>
-                                </button>
-                            </form>
+                            @if ($asset['type'] == 'Asset')
+                                <a title="Detail" href="/trn-maintenance/{{ $asset['id'] }}"
+                                    class="btn btn-outline-dark text-xs">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            @else
+                                <a title="Detail" href="/trn-renewal/{{ $asset['id'] }}"
+                                    class="btn btn-outline-dark text-xs">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

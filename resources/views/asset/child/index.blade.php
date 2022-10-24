@@ -27,9 +27,8 @@
                             <tr>
                                 <th>#</th>
                                 <th>Doc Name</th>
-                                <th>Doc No</th>
+                                <th>SBU</th>
                                 <th>File</th>
-                                <th>Description</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
@@ -37,8 +36,8 @@
                             @foreach ($children as $child)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $child->doc_name }}</td>
-                                    <td>{{ $child->doc_no }}</td>
+                                    <td>{{ $child->doc_name }} | {{ $child->parent->asset_name ?? '' }}</td>
+                                    <td>{{ $child->sbu->sbu_name ?? '' }}</td>
                                     <td>
                                         @if ($child->file)
                                             <a title="download file" href="/asset-child/download/{{ $child->id }}"
@@ -49,7 +48,6 @@
                                             -
                                         @endif
                                     </td>
-                                    <td>{{ $child->desc }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <form action="/trn-renewal/create">
