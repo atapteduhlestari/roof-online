@@ -19,6 +19,11 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        ini_set('post_max_size ', '256M');
+        ini_set('upload_max_size', '256M');
+        ini_set('memory_limit', '2048M');
+        ini_set('max_execution_time ', '180');
+
         Schema::defaultStringLength(191);
         Carbon::setLocale('en');
         date_default_timezone_set('Asia/Jakarta');

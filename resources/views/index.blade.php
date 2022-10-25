@@ -5,15 +5,16 @@
 @section('container')
     <!-- Begin Page Content -->
     <div class="container-fluid">
+
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Dashboard</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            {{-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> --}}
         </div>
-
+        <hr>
         <!-- Content Row -->
-        <div class="row align-items-center">
+        <div class="row align-items-center mt-4">
             <div class="col-lg-6 mb-4">
                 <img class="img-fluid px-3 px-sm-4 mt-3 mb-4"
                     src="{{ asset('/assets/template/img/undraw_moving_re_pipp.svg') }}">
@@ -47,6 +48,35 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow mb-4 h-100">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Transaction</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <a href="/asset-child" class="btn btn-outline-dark btn-block">
+                                    Maintenance
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <a href="/asset-child" class="btn btn-outline-dark btn-block">
+                                    Renewal
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img class="img-fluid px-3 px-sm-4 mt-3"
+                    src="{{ asset('/assets/template/img/undraw_online_discussion_re_nn7e.svg') }}">
             </div>
         </div>
     </div>

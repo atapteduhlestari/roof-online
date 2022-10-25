@@ -206,8 +206,8 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $asset->asset_name }}</td>
                                     <td>{{ $asset->sbu->sbu_name ?? '-' }}</td>
-                                    <td>{{ createDate($asset->pcs_date)->format('d F Y') }}</td>
-                                    <td>{{ rupiah($asset->pcs_value) }}</td>
+                                    <td class="block">{{ createDate($asset->pcs_date)->format('d F Y') }}</td>
+                                    <td class="block">{{ rupiah($asset->pcs_value) }}</td>
                                     <td>{{ $asset->employee->name ?? '-' }}</td>
                                     <td
                                         class=" {{ $asset->condition == 1 ? 'text-success' : ($asset->condition == 2 ? 'text-warning' : 'text-danger') }}">

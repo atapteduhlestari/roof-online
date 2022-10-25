@@ -14,140 +14,162 @@
                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addNewRecord">
                     Add <i class="fas fa-plus-circle"></i>
                 </button>
-                <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseExport"
-                    aria-expanded="false" aria-controls="collapseExport">
-                    Export <i class="fas fa-file-export"></i>
-                </button>
-            </div>
-            <div class="my-3">
                 <a title="refresh data" class="btn btn-outline-success" href="/trn-renewal" type="button">
                     <i class="fas fa-sync-alt"></i>
                 </a>
-                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseSearch"
-                    aria-expanded="false" aria-controls="collapseSearch">
-                    Filter Search
-                </button>
+            </div>
+
+            <div class="my-3">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-search-tab" data-toggle="pill" href="#pills-search" role="tab"
+                            aria-controls="pills-search" aria-selected="true">
+                            Search <i class="fas fa-search"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-export-tab" data-toggle="pill" href="#pills-export" role="tab"
+                            aria-controls="pills-export" aria-selected="false">
+                            Export <i class="fas fa-file-export"></i>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
 
-        <div class="collapse" id="collapseSearch">
-            <div class="card card-body mt-3">
-                <h6 class="mb-3 font-weight-bold text-primary">Search Filter</h6>
-                <form action="/trn-renewal" method="get">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="start_date">Start Date</label>
-                            <div class="form-group d-flex">
-                                <input type="date" class="form-control form-control-sm" id="start_date" name="start_date"
-                                    value="{{ request('start_date') }}">
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade" id="pills-search" role="tabpanel" aria-labelledby="pills-search-tab">
+                <div class="card card-body mt-3">
+                    <h6 class="mb-3 font-weight-bold text-primary">Search Filter</h6>
+                    <form action="/trn-renewal" method="get">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="start_date">Start Date</label>
+                                <div class="form-group d-flex">
+                                    <input type="date" class="form-control form-control-sm" id="start_date"
+                                        name="start_date" value="{{ request('start_date') }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="due_date">Due Date</label>
-                            <div class="form-group d-flex">
-                                <input type="date" class="form-control form-control-sm" id="due_date" name="due_date"
-                                    value="{{ request('due_date') }}">
+                            <div class="col-md-6">
+                                <label for="due_date">Due Date</label>
+                                <div class="form-group d-flex">
+                                    <input type="date" class="form-control form-control-sm" id="due_date"
+                                        name="due_date" value="{{ request('due_date') }}">
+                                </div>
                             </div>
-                        </div>
 
-                        @can('superadmin')
                             <div class="col-md-6 mb-3">
-                                <label for="sbu_search_id">SBU</label>
-                                <select class="form-control form-control-sm @error('sbu_search_id') is-invalid @enderror"
-                                    id="sbu_search_id" name="sbu_search_id">
-                                    <option value="">Select SBU</option>
-                                    @foreach ($SBUs as $sb)
-                                        <option value="{{ $sb->id }}"
-                                            {{ request('sbu_search_id') == $sb->id ? 'selected' : '' }}>
-                                            {{ $sb->sbu_name }}</option>
+                                <label for="renewal_search_id">Type</label>
+                                <select
+                                    class="form-control form-control-sm @error('renewal_search_id') is-invalid @enderror"
+                                    id="renewal_search_id" name="renewal_search_id">
+                                    <option value="">Select Type</option>
+                                    @foreach ($renewals as $mn)
+                                        <option value="{{ $mn->id }}"
+                                            {{ request('renewal_search_id') == $mn->id ? 'selected' : '' }}>
+                                            {{ $mn->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                        @endcan
-                        <div class="col-md-6 mb-3">
-                            <label for="status">Status</label>
-                            <select class="form-control form-control-sm @error('status') is-invalid @enderror"
-                                name="status" id="status">
-                                <option value=""></option>
-                                <option class="text-success" value="1" {{ request('status') == 1 ? 'selected' : '' }}>
-                                    <i class="fas fa-check"></i> Approved
-                                </option>
-                                <option class="text-danger" value="false"
-                                    {{ request('status') == false ? 'selected' : '' }}>
-                                    <i class="fas fa-exclamation"></i> Waiting Approval
-                                </option>
-                            </select>
+
+                            @can('superadmin')
+                                <div class="col-md-6 mb-3">
+                                    <label for="sbu_search_id">SBU</label>
+                                    <select class="form-control form-control-sm @error('sbu_search_id') is-invalid @enderror"
+                                        id="sbu_search_id" name="sbu_search_id">
+                                        <option value="">Select SBU</option>
+                                        @foreach ($SBUs as $sb)
+                                            <option value="{{ $sb->id }}"
+                                                {{ request('sbu_search_id') == $sb->id ? 'selected' : '' }}>
+                                                {{ $sb->sbu_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endcan
+                            <div class="col-md-6 mb-4">
+                                <label for="status">Status</label>
+                                <select class="form-control form-control-sm @error('status') is-invalid @enderror"
+                                    name="status" id="status">
+                                    <option value="" selected></option>
+                                    <option class="text-success" value="1"
+                                        {{ request('status') == 1 ? 'selected' : '' }}>
+                                        <i class="fas fa-check"></i> Approved
+                                    </option>
+                                    <option class="text-danger" value="false">
+                                        <i class="fas fa-exclamation"></i> Waiting Approval
+                                    </option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
-                            <button type="submit" class="btn btn-primary rounded text-xs">
-                                Find <i class="fas fa-search"></i>
-                            </button>
+                        <div class="row">
+                            <div class="col-md">
+                                <button type="submit" class="btn btn-primary rounded text-xs">
+                                    Find <i class="fas fa-search"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
-
-        <div class="collapse" id="collapseExport">
-            <div class="card card-body mt-3">
-                <h6 class="mb-3 font-weight-bold text-primary">Export Filter</h6>
-                <form action="/trn-renewal-export" method="get">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="start_date">Start Date</label>
-                            <div class="form-group d-flex">
-                                <input type="date" class="form-control form-control-sm" id="start_date" name="start_date"
-                                    value="{{ request('start_date') }}">
+            <div class="tab-pane fade" id="pills-export" role="tabpanel" aria-labelledby="pills-export-tab">
+                <div class="card card-body mt-3">
+                    <h6 class="mb-3 font-weight-bold text-success">Export Filter</h6>
+                    <form action="/trn-renewal-export" method="get">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="start_date">Start Date</label>
+                                <div class="form-group d-flex">
+                                    <input type="date" class="form-control form-control-sm" id="start_date"
+                                        name="start_date" value="{{ request('start_date') }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="due_date">Due Date</label>
-                            <div class="form-group d-flex">
-                                <input type="date" class="form-control form-control-sm" id="due_date" name="due_date"
-                                    value="{{ request('due_date') }}">
+                            <div class="col-md-6">
+                                <label for="due_date">Due Date</label>
+                                <div class="form-group d-flex">
+                                    <input type="date" class="form-control form-control-sm" id="due_date"
+                                        name="due_date" value="{{ request('due_date') }}">
+                                </div>
                             </div>
-                        </div>
 
-                        @can('superadmin')
+                            @can('superadmin')
+                                <div class="col-md-6 mb-3">
+                                    <label for="sbu_export_id">SBU</label>
+                                    <select class="form-control form-control-sm @error('sbu_export_id') is-invalid @enderror"
+                                        id="sbu_export_id" name="sbu_export_id">
+                                        <option value="">Select SBU</option>
+                                        @foreach ($SBUs as $sb)
+                                            <option value="{{ $sb->id }}"
+                                                {{ request('sbu_export_id') == $sb->id ? 'selected' : '' }}>
+                                                {{ $sb->sbu_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endcan
                             <div class="col-md-6 mb-3">
-                                <label for="sbu_export_id">SBU</label>
-                                <select class="form-control form-control-sm @error('sbu_export_id') is-invalid @enderror"
-                                    id="sbu_export_id" name="sbu_export_id">
-                                    <option value="">Select SBU</option>
-                                    @foreach ($SBUs as $sb)
-                                        <option value="{{ $sb->id }}"
-                                            {{ request('sbu_export_id') == $sb->id ? 'selected' : '' }}>
-                                            {{ $sb->sbu_name }}</option>
-                                    @endforeach
+                                <label for="status">Status</label>
+                                <select class="form-control form-control-sm @error('status') is-invalid @enderror"
+                                    name="status" id="status">
+                                    <option value=""></option>
+                                    <option class="text-success" value="1"
+                                        {{ request('status') == 1 ? 'selected' : '' }}>
+                                        <i class="fas fa-check"></i> Approved
+                                    </option>
+                                    <option class="text-danger" value="false"
+                                        {{ request('status') == false ? 'selected' : '' }}>
+                                        <i class="fas fa-exclamation"></i> Waiting Approval
+                                    </option>
                                 </select>
                             </div>
-                        @endcan
-                        <div class="col-md-6 mb-3">
-                            <label for="status">Status</label>
-                            <select class="form-control form-control-sm @error('status') is-invalid @enderror"
-                                name="status" id="status">
-                                <option value=""></option>
-                                <option class="text-success" value="1"
-                                    {{ request('status') == 1 ? 'selected' : '' }}>
-                                    <i class="fas fa-check"></i> Approved
-                                </option>
-                                <option class="text-danger" value="false"
-                                    {{ request('status') == false ? 'selected' : '' }}>
-                                    <i class="fas fa-exclamation"></i> Waiting Approval
-                                </option>
-                            </select>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
-                            <button type="submit" class="btn btn-success rounded text-xs">
-                                Generate <i class="fas fa-file-excel"></i>
-                            </button>
+                        <div class="row">
+                            <div class="col-md">
+                                <button type="submit" class="btn btn-success rounded text-xs">
+                                    Generate <i class="fas fa-file-excel"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -182,8 +204,8 @@
                                     <td>{{ $trn->sbu->sbu_name }}</td>
                                     <td>{{ $trn->renewal->name }}</td>
                                     <td>{{ $trn->trn_desc }}</td>
-                                    <td>{{ createDate($trn->trn_start_date)->format('d F Y') }}</td>
-                                    <td>{{ rupiah($trn->trn_value) }}</td>
+                                    <td class="block">{{ createDate($trn->trn_start_date)->format('d F Y') }}</td>
+                                    <td class="block">{{ rupiah($trn->trn_value) }}</td>
                                     <td>
                                         @if ($trn->file)
                                             <a title="download file" href="/trn-renewal/download/{{ $trn->id }}"
@@ -425,6 +447,11 @@
         });
 
         $("#renewal_id").selectize({
+            create: false,
+            sortField: "text",
+        });
+
+        $("#renewal_search_id").selectize({
             create: false,
             sortField: "text",
         });

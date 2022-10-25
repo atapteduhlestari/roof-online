@@ -8,7 +8,7 @@
     <!-- Begin Page Content -->
     <div class="container-fluid">
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">All Assets</h1>
+        <h1 class="h3 mb-0 text-gray-800">All Assets</h1>
         <div class="d-flex">
             <div class="my-3 flex-grow-1">
                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addNewRecord">
@@ -22,6 +22,9 @@
             </div>
 
             <div class="my-3">
+                <a title="refresh data" class="btn btn-outline-success" href="/asset-parent" type="button">
+                    <i class="fas fa-sync-alt"></i>
+                </a>
                 <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseSearch"
                     aria-expanded="false" aria-controls="collapseSearch">
                     Filter Search

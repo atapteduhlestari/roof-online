@@ -75,6 +75,12 @@ class TrnMaintenance extends Model
             });
         });
 
+        $query->when($filters['maintenance_search_id'] ?? false, function ($query, $maintenance) {
+            return $query->whereHas('maintenance', function ($q) use ($maintenance) {
+                $q->where('maintenance_id', $maintenance);
+            });
+        });
+
         $query->when($filters['status']  ?? false, function ($query, $status) {
             return $query->where('trn_status', $status);
         });

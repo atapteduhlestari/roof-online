@@ -5,13 +5,23 @@ body {
 }
 
 .bg-page {
-    background: #222831;
+    background: #222 !important;
+    /* background: linear-gradient(0deg, rgba(255, 46, 99, 1) 10%, rgba(37, 42, 52, 1) 50%); */
+}
+
+.bg-custom {
+    background: #ff2e63 !important;
     /* background: linear-gradient(0deg, rgba(255, 46, 99, 1) 10%, rgba(37, 42, 52, 1) 50%); */
 }
 
 .bg-header {
-    background: #222831;
+    background: #222;
     /* background: linear-gradient(90deg, rgba(37, 42, 52, 1) 30%, rgba(255, 46, 99, 1) 100%); */
+}
+
+.block {
+    max-width: 100%;
+    white-space: nowrap;
 }
 
 .not-allowed {
@@ -61,7 +71,7 @@ input[type="date"] {
 }
 
 .scroll-to-top:hover {
-    background: hsl(345, 100%, 65%);
+    background: #222;
 }
 
 .card-header {
@@ -184,4 +194,23 @@ td button,
 
 .calendar .event a {
     color: #fff;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgb(235, 235, 235);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #222;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(77, 77, 77);
 }

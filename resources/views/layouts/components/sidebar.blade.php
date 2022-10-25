@@ -119,7 +119,7 @@
             </li>
             <li class="nav-item  {{ request()->is('form*') ? 'active' : '' }}">
                 <a class="nav-link" href="/form">
-                    <i class="far fa-file-alt"></i>
+                    <i class="far fa-fw fa-file-alt"></i>
                     <span>Forms</span>
                 </a>
             </li>
@@ -133,7 +133,7 @@
             <hr class="sidebar-divider d-none d-md-block">
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                <button class="rounded-circle border-0 bg-custom" id="sidebarToggle"></button>
             </div>
 
         </ul>

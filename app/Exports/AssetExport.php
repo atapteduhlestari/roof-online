@@ -80,8 +80,6 @@ class AssetExport implements
 
     public function registerEvents(): array
     {
-
-
         return [
             AfterSheet::class => function (AfterSheet $event) {
                 $event->sheet->getStyle('A1:M1')->applyFromArray([

@@ -41,7 +41,7 @@ class AssetChildController extends Controller
 
         if ($request->file('file')) {
             $file = $request->file('file');
-            $fileUrl = $file->storeAs('uploads/files/docs',  $file->hashName());
+            $fileUrl = $file->storeAs('uploads/files/docs',  formatTimeDoc($request->doc_name));
             $data['file'] = $fileUrl;
         }
 
@@ -75,7 +75,7 @@ class AssetChildController extends Controller
         if ($request->file('file')) {
             Storage::delete($assetChild->file);
             $file = $request->file('file');
-            $fileUrl = $file->storeAs('uploads/files/docs',  $file->hashName());
+            $fileUrl = $file->storeAs('uploads/files/docs',  formatTimeDoc($request->doc_name));
             $data['file'] = $fileUrl;
         } else {
             $data['file'] = $assetChild->file;

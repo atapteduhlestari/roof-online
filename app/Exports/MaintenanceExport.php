@@ -88,8 +88,6 @@ class MaintenanceExport implements
 
     public function registerEvents(): array
     {
-
-
         return [
             AfterSheet::class => function (AfterSheet $event) {
                 $event->sheet->getStyle('A1:Q1')->applyFromArray([

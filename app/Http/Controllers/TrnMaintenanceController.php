@@ -7,7 +7,7 @@ use App\Models\Employee;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
 use App\Models\TrnMaintenance;
-use App\Exports\MaintenanceExport;
+use App\Exports\MaintenanceExportView;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\TrnMaintenanceRequest;
@@ -96,17 +96,28 @@ class TrnMaintenanceController extends Controller
 
     public function export()
     {
-        $data = request()->all();
+        $data['transactions'] = request()->all();
 
         if (isSuperadmin())
-            $data =  TrnMaintenance::filter($data)->get();
+            $data['transactions'] =  TrnMaintenance::filter($data['transactions'])->get();
         else
-            $data = TrnMaintenance::filter($data)->where('sbu_id', userSBU())->get();
+            $data['transactions'] = TrnMaintenance::filter($data['transactions'])->where('sbu_id', userSBU())->get();
 
         $time = now()->format('dmY');
         $name = "ATL-GAN-MAI-{$time}.xlsx";
 
-        return Excel::download(new MaintenanceExport($data), $name);
+        $data['total_cost'] = 0;
+        $data['total_cost_plan'] = 0;
+
+        foreach ($data['transactions'] as $v) {
+            $data['total_cost'] += $v->trn_value;
+        }
+        foreach ($data['transactions'] as $v) {
+            $data['total_cost_plan'] += $v->trn_value_plan;
+        }
+
+        // return Excel::download(new MaintenanceExport($data), $name);
+        return Excel::download(new MaintenanceExportView($data), $name);
     }
 
     public function edit(TrnMaintenance $trnMaintenance)

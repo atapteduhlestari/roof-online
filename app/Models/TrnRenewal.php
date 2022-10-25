@@ -74,6 +74,12 @@ class TrnRenewal extends Model
             });
         });
 
+        $query->when($filters['renewal_search_id'] ?? false, function ($query, $renewal) {
+            return $query->whereHas('renewal', function ($q) use ($renewal) {
+                $q->where('renewal_id', $renewal);
+            });
+        });
+
         $query->when($filters['status']  ?? false, function ($query, $status) {
             return $query->where('trn_status', $status);
         });

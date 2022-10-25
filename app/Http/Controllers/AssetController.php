@@ -112,7 +112,7 @@ class AssetController extends Controller
 
         if ($request->file('image')) {
             $image = $request->file('image');
-            $imageUrl = $image->storeAs('uploads/images/assets',  $image->hashName());
+            $imageUrl = $image->storeAs('uploads/images/assets', formatTimeDoc($request->asset_name));
             $data['image'] = $imageUrl;
         }
 
@@ -172,7 +172,7 @@ class AssetController extends Controller
 
             Storage::delete($asset->image);
             $image = $request->file('image');
-            $imageUrl = $image->storeAs('uploads/images/assets',  $image->hashName());
+            $imageUrl = $image->storeAs('uploads/images/assets', formatTimeDoc($request->asset_name));
             $data['image'] = $imageUrl;
         } else {
             $data['image'] = $asset->image;
@@ -220,7 +220,7 @@ class AssetController extends Controller
 
         if ($request->file('file')) {
             $file = $request->file('file');
-            $fileUrl = $file->storeAs('uploads/files/docs',  $file->hashName());
+            $fileUrl = $file->storeAs('uploads/files/docs',  formatTimeDoc($request->doc_name));
             $data['file'] = $fileUrl;
         }
 
