@@ -49,7 +49,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="sdb_id">SDB</label>
-                            <select class="form-control @error('sdb_id') is-invalid @enderror" name="sdb_id" id="sdb_id">
+                            <select class="form-control @error('sdb_id') is-invalid @enderror" name="sdb_id"
+                                id="sdb_id">
                                 <option value=""></option>
                                 @foreach ($SDBs as $sdb)
                                     <option value="{{ $sdb->id }}"
@@ -85,8 +86,11 @@
                     <div class="col-md-6 mb-3">
                         <label for="">File</label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input  @error('file') is-invalid @enderror" name="file"
-                                id="fileInput">
+                            <input type="file" class="custom-file-input  @error('file') is-invalid @enderror"
+                                name="file" id="fileInput">
+                            @error('file')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                             <label class="custom-file-label" for="file">Choose file</label>
                         </div>
                     </div>

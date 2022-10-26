@@ -212,6 +212,7 @@ class AssetController extends Controller
     {
         $request->validate([
             'doc_name' => 'required',
+            'file' => 'nullable|file|max:5120',
         ]);
 
         $data = $request->all();

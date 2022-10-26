@@ -36,8 +36,8 @@
                     <div class="col-md-6 mb-3">
                         <label for="">Asset Group</label>
                         <input type="hidden" name="asset_group_id" value="{{ $asset->asset_group_id }}" readonly>
-                        <input type="text" class="form-control not-allowed"
-                            value="{{ $asset->group->asset_group_name }}" disabled>
+                        <input type="text" class="form-control not-allowed" value="{{ $asset->group->asset_group_name }}"
+                            disabled>
                     </div>
 
                     <div class="col-md-6 mb-3">
@@ -158,6 +158,9 @@
                         <div class="custom-file">
                             <input type="file" class="custom-file-input  @error('image') is-invalid @enderror"
                                 name="image" id="imageFileInput" accept="image/*">
+                            @error('image')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                             <label class="custom-file-label" for="image">Choose file</label>
                         </div>
                     </div>

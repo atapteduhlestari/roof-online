@@ -28,6 +28,7 @@ class TrnRenewalRequest extends FormRequest
             'sbu_id' => 'required',
             'pemohon' => 'required',
             'penyetuju' => 'required',
+            'file' => 'nullable|file|max:5120',
         ];
     }
 }

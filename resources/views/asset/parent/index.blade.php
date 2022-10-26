@@ -373,6 +373,9 @@
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input  @error('image') is-invalid @enderror"
                                         name="image" id="imageFileInput" accept="image/*">
+                                    @error('image')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                     <label class="custom-file-label" for="image">Choose file</label>
                                 </div>
                             </div>

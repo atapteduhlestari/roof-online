@@ -29,7 +29,8 @@ class TrnMaintenanceRequest extends FormRequest
             'maintenance_id' => 'required',
             'sbu_id' => 'required',
             'pemohon' => 'required',
-            'penyetuju' => 'required'
+            'penyetuju' => 'required',
+            'file' =>  'nullable|file|max:5120',
         ];
     }
 }

@@ -35,6 +35,7 @@ class AssetChildController extends Controller
         $request->validate([
             'doc_name' => 'required',
             'sbu_id' => 'required',
+            'file' => 'nullable|file|max:5120',
         ]);
 
         $data = $request->all();
@@ -68,6 +69,7 @@ class AssetChildController extends Controller
         $request->validate([
             'doc_name' => 'required',
             'sbu_id' => 'required',
+            'file' => 'nullable|file|max:5120'
         ]);
 
         $data = $request->all();
