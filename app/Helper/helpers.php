@@ -1,11 +1,13 @@
 <?php
 
-use App\Models\SBU;
 use Carbon\Carbon;
+use App\Models\SBU;
+use Illuminate\Support\Str;
 
 function formatTimeDoc($param)
 {
-    return $param . '_' . now()->format('d-m-Y_h-i-s');
+    $name = Str::slug($param);
+    return $name . '_' . now()->format('d-m-Y_h-i-s');
 }
 
 function createDate($param)

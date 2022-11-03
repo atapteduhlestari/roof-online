@@ -59,14 +59,14 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 mb-3">
-                                <a href="/asset-child" class="btn btn-outline-dark btn-block">
+                                <a href="/trn-maintenance" class="btn btn-outline-dark btn-block">
                                     Maintenance
                                 </a>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 mb-3">
-                                <a href="/asset-child" class="btn btn-outline-dark btn-block">
+                                <a href="/trn-renewal" class="btn btn-outline-dark btn-block">
                                     Renewal
                                 </a>
                             </div>
