@@ -19,6 +19,7 @@ class TrnMaintenanceController extends Controller
     public function index()
     {
         $data = request()->all();
+        $trnMaintenances = TrnMaintenance::get();
 
         if (isSuperadmin())
             $trnMaintenances = TrnMaintenance::search($data)->orderBy('trn_start_date', 'asc')->get();

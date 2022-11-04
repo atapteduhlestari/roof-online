@@ -20,7 +20,7 @@ class AssetController extends Controller
 {
     public function index()
     {
-        // $assets = Asset::orderBy('asset_name', 'asc')->get(); 
+        // $assets = Asset::orderBy('asset_name', 'asc')->get();
         $assetGroup = AssetGroup::get();
         $employees = Employee::orderBy('name', 'asc')->get();
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
