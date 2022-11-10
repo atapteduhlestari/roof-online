@@ -67,7 +67,7 @@ Route::middleware(['auth', 'reminder'])->group(function () {
     Route::resource('/trn-renewal', TrnRenewalController::class);
     Route::post('/trn-renewal/search', [TrnRenewalController::class, 'search']);
     Route::put('/trn-renewal/update-status/{trnRenewal}', [TrnRenewalController::class, 'updateStatus']);
-    Route::put('/trn-renewal/download/{trnRenewal}', [TrnRenewalController::class, 'download']);
+    Route::get('/trn-renewal/download/{trnRenewal}', [TrnRenewalController::class, 'download']);
     Route::get('/trn-renewal-export', [TrnRenewalController::class, 'export'])->name('renewal-export');
 
     Route::resource('/trn-maintenance', TrnMaintenanceController::class);

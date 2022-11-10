@@ -4,10 +4,10 @@ use Carbon\Carbon;
 use App\Models\SBU;
 use Illuminate\Support\Str;
 
-function formatTimeDoc($param)
+function formatTimeDoc($param, $extension)
 {
     $name = Str::slug($param);
-    return $name . '_' . now()->format('d-m-Y_h-i-s');
+    return $name . '_' . now()->format('d-m-Y_h-i-s') . '.' . $extension;
 }
 
 function createDate($param)

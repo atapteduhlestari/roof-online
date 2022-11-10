@@ -60,7 +60,8 @@ class TrnRenewalController extends Controller
 
         if ($request->file('file')) {
             $file = $request->file('file');
-            $fileUrl = $file->storeAs('uploads/files/transactions/renewal', formatTimeDoc($data['trn_no']));
+            $extension = $file->extension();
+            $fileUrl = $file->storeAs('uploads/files/transactions/renewal', formatTimeDoc($data['trn_no'], $extension));
             $data['file'] = $fileUrl;
         }
 
@@ -150,7 +151,8 @@ class TrnRenewalController extends Controller
         if ($request->file('file')) {
             Storage::delete($trnRenewal->file);
             $file = $request->file('file');
-            $fileUrl = $file->storeAs('uploads/files/transactions/renewal',  formatTimeDoc($trnRenewal->trn_no));
+            $extension = $file->extension();
+            $fileUrl = $file->storeAs('uploads/files/transactions/renewal',  formatTimeDoc($trnRenewal->trn_no, $extension));
             $data['file'] = $fileUrl;
         } else {
             $data['file'] = $trnRenewal->file;

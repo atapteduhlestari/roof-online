@@ -19,7 +19,7 @@ class TrnMaintenanceController extends Controller
     public function index()
     {
         $data = request()->all();
-        $trnMaintenances = TrnMaintenance::get();
+        // $trnMaintenances = TrnMaintenance::where('file', '.pdf')->get();
 
         if (isSuperadmin())
             $trnMaintenances = TrnMaintenance::search($data)->orderBy('trn_start_date', 'asc')->get();
@@ -63,7 +63,8 @@ class TrnMaintenanceController extends Controller
 
         if ($request->file('file')) {
             $file = $request->file('file');
-            $fileUrl = $file->storeAs('uploads/files/transactions/maintenance', formatTimeDoc($data['trn_no']));
+            $extension = $file->extension();
+            $fileUrl = $file->storeAs('uploads/files/transactions/maintenance', formatTimeDoc($data['trn_no'], $extension));
             $data['file'] = $fileUrl;
         }
 
@@ -145,7 +146,8 @@ class TrnMaintenanceController extends Controller
         if ($request->file('file')) {
             Storage::delete($trnMaintenance->file);
             $file = $request->file('file');
-            $fileUrl = $file->storeAs('uploads/files/transactions/maintenance',  formatTimeDoc($trnMaintenance->trn_no));
+            $extension = $file->extension();
+            $fileUrl = $file->storeAs('uploads/files/transactions/maintenance',  formatTimeDoc($trnMaintenance->trn_no, $extension));
             $data['file'] = $fileUrl;
         } else {
             $data['file'] = $trnMaintenance->file;

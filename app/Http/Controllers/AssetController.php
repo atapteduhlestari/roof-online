@@ -20,7 +20,9 @@ class AssetController extends Controller
 {
     public function index()
     {
-        // $assets = Asset::orderBy('asset_name', 'asc')->get();
+        // $assets = Asset::select('asset_name')->where('image', null)->where('sbu_id', 1)->get();
+        // return $assets;
+
         $assetGroup = AssetGroup::get();
         $employees = Employee::orderBy('name', 'asc')->get();
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
@@ -112,7 +114,8 @@ class AssetController extends Controller
 
         if ($request->file('image')) {
             $image = $request->file('image');
-            $imageUrl = $image->storeAs('uploads/images/assets', formatTimeDoc($request->asset_name));
+            $extension = $image->extension();
+            $imageUrl = $image->storeAs('uploads/images/assets', formatTimeDoc($request->asset_name, $extension));
             $data['image'] = $imageUrl;
         }
 
@@ -172,12 +175,12 @@ class AssetController extends Controller
 
             Storage::delete($asset->image);
             $image = $request->file('image');
-            $imageUrl = $image->storeAs('uploads/images/assets', formatTimeDoc($request->asset_name));
+            $extension = $image->extension();
+            $imageUrl = $image->storeAs('uploads/images/assets', formatTimeDoc($request->asset_name, $extension));
             $data['image'] = $imageUrl;
         } else {
             $data['image'] = $asset->image;
         }
-
         $asset->update($data);
         return redirect()->back()->with('success', 'Success!');
     }
@@ -221,7 +224,8 @@ class AssetController extends Controller
 
         if ($request->file('file')) {
             $file = $request->file('file');
-            $fileUrl = $file->storeAs('uploads/files/docs',  formatTimeDoc($request->doc_name));
+            $extension = $file->extension();
+            $fileUrl = $file->storeAs('uploads/files/docs',  formatTimeDoc($request->doc_name, $extension));
             $data['file'] = $fileUrl;
         }
 
