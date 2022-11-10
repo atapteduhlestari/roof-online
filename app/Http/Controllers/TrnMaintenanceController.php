@@ -19,8 +19,8 @@ class TrnMaintenanceController extends Controller
     public function index()
     {
         $data = request()->all();
-        // $trnMaintenances = TrnMaintenance::where('file', '.pdf')->get();
-
+        // $trnMaintenances = TrnMaintenance::select(['trn_desc', 'trn_date'])->where('file', null)->get();
+        // return $trnMaintenances;
         if (isSuperadmin())
             $trnMaintenances = TrnMaintenance::search($data)->orderBy('trn_start_date', 'asc')->get();
 
