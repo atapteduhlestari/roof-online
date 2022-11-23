@@ -469,9 +469,10 @@
             form.submit();
         });
 
-        let formDelete = $('#deleteForm');
+        let formDelete = $('form#deleteForm');
 
         $(document).on('click', '#deleteButton', function(e) {
+            console.log('ok');
             e.preventDefault();
             let id = $(this).data('id');
             formDelete.attr('action', `/trn-maintenance/${id}`)

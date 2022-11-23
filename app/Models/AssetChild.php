@@ -46,13 +46,14 @@ class AssetChild extends Model
 
     public static function getAllLastTransaction($time)
     {
-        DB::statement("SET SQL_MODE=''");
+
         return DB::table('trn_renewal')
             ->select(['trn_renewal.*', 'trn_renewal.id as trn_id',  'asset_child.*', 'asset_renewal.*', 'sbu.sbu_name'])
-            ->leftJoin('asset_child', 'trn_renewal.asset_child_id', 'asset_child.id')
-            ->leftJoin('asset_renewal', 'trn_renewal.renewal_id', 'asset_renewal.id')
-            ->leftJoin('sbu', 'trn_renewal.sbu_id', 'sbu.id')
+            ->join('asset_child', 'trn_renewal.asset_child_id', 'asset_child.id')
+            ->join('asset_renewal', 'trn_renewal.renewal_id', 'asset_renewal.id')
+            ->join('sbu', 'trn_renewal.sbu_id', 'sbu.id')
             // ->groupBy('asset_renewal.name', 'asset_child.doc_name')
+            ->where('trn_status', false)
             ->where('trn_start_date', '<=', $time);
     }
 
@@ -69,19 +70,21 @@ class AssetChild extends Model
         if (isSuperadmin()) {
             return DB::table('trn_renewal')
                 ->select(['trn_renewal.*', 'trn_renewal.id as trn_id',  'asset_child.*', 'asset_renewal.*, sbu.sbu_name'])
-                ->leftJoin('asset_child', 'trn_renewal.asset_child_id', 'asset_child.id')
-                ->leftJoin('asset_renewal', 'trn_renewal.renewal_id', 'asset_renewal.id')
-                ->leftJoin('sbu', 'trn_renewal.sbu_id', 'sbu.id')
+                ->join('asset_child', 'trn_renewal.asset_child_id', 'asset_child.id')
+                ->join('asset_renewal', 'trn_renewal.renewal_id', 'asset_renewal.id')
+                ->join('sbu', 'trn_renewal.sbu_id', 'sbu.id')
                 // ->groupBy('asset_renewal.name', 'asset_child.doc_name')
+                ->where('trn_status', false)
                 ->where('trn_start_date', '<=', $time);
         } else {
             return DB::table('trn_renewal')
                 ->select(['trn_renewal.*', 'trn_renewal.id as trn_id',  'asset_child.*', 'asset_renewal.*, sbu.sbu_name'])
-                ->leftJoin('asset_child', 'trn_renewal.asset_child_id', 'asset_child.id')
-                ->leftJoin('asset_renewal', 'trn_renewal.renewal_id', 'asset_renewal.id')
-                ->leftJoin('sbu', 'trn_renewal.sbu_id', 'sbu.id')
+                ->join('asset_child', 'trn_renewal.asset_child_id', 'asset_child.id')
+                ->join('asset_renewal', 'trn_renewal.renewal_id', 'asset_renewal.id')
+                ->join('sbu', 'trn_renewal.sbu_id', 'sbu.id')
                 // ->groupBy('asset_renewal.name', 'asset_child.doc_name')
                 ->where('trn_start_date', '<=', $time)
+                ->where('trn_status', false)
                 ->where('trn_renewal.sbu_id', userSBU());
         }
     }

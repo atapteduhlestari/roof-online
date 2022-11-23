@@ -166,7 +166,7 @@ function timelineReminders($assets, $docs)
 
     foreach ($assets as $asset) {
         $data->push([
-            'id' => $asset->asset_id,
+            'id' => $asset->trn_id,
             'name' => $asset->name,
             'date' => $asset->trn_start_date,
             'asset_name' => $asset->asset_name,
@@ -177,7 +177,7 @@ function timelineReminders($assets, $docs)
 
     foreach ($docs as $doc) {
         $data->push([
-            'id' => $doc->id,
+            'id' => $doc->trn_id,
             'name' => $doc->name,
             'date' => $doc->trn_start_date,
             'asset_name' => $doc->doc_name,

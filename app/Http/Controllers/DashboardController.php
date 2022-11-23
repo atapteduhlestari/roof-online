@@ -62,14 +62,14 @@ class DashboardController extends Controller
     {
 
         if (isSuperadmin()) {
-            $assets = Asset::getAllLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
-            $docs = AssetChild::getAllLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
+            $assets = Asset::getAllLastTransaction($this->now)->get();
+            $docs = AssetChild::getAllLastTransaction($this->now)->get();
         } else {
-            $assets = Asset::getLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
-            $docs = AssetChild::getLastTransaction($this->now)->where('trn_status', false)->get()->sortByDesc('trn_start_date');
+            $assets = Asset::getLastTransaction($this->now)->get();
+            $docs = AssetChild::getLastTransaction($this->now)->get();
         }
 
-        $data = timelineReminders($assets, $docs)->sortBy('trn_start_date')->reverse();
+        $data = timelineReminders($assets, $docs);
 
         if (isSuperadmin()) {
             $trn_maintenance = TrnMaintenance::get();

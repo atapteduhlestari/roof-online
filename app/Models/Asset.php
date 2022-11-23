@@ -69,11 +69,12 @@ class Asset extends Model
 
         return DB::table('trn_maintenance')
             ->select(['trn_maintenance.*', 'trn_maintenance.id as trn_id', 'asset.*', 'asset_maintenance.*', 'sbu.sbu_name'])
-            ->leftJoin('sbu', 'trn_maintenance.sbu_id', 'sbu.id')
-            ->leftJoin('asset', 'trn_maintenance.asset_id', 'asset.id')
-            ->leftJoin('asset_maintenance', 'trn_maintenance.maintenance_id', 'asset_maintenance.id')
+            ->join('sbu', 'trn_maintenance.sbu_id', 'sbu.id')
+            ->join('asset', 'trn_maintenance.asset_id', 'asset.id')
+            ->join('asset_maintenance', 'trn_maintenance.maintenance_id', 'asset_maintenance.id')
             // ->groupBy('asset_maintenance.name', 'asset.asset_name')
-            ->where('trn_start_date', '<=', $time);
+            ->where('trn_start_date', '<=', $time)
+            ->where('trn_status', false);
     }
 
     public static function getLastTransaction($time)
@@ -83,20 +84,22 @@ class Asset extends Model
         if (isSuperadmin()) {
             return DB::table('trn_maintenance')
                 ->select(['trn_maintenance.*', 'trn_maintenance.id as trn_id', 'asset.*', 'asset_maintenance.*', 'sbu.sbu_name'])
-                ->leftJoin('sbu', 'trn_maintenance.sbu_id', 'sbu.id')
-                ->leftJoin('asset', 'trn_maintenance.asset_id', 'asset.id')
-                ->leftJoin('asset_maintenance', 'trn_maintenance.maintenance_id', 'asset_maintenance.id')
+                ->join('sbu', 'trn_maintenance.sbu_id', 'sbu.id')
+                ->join('asset', 'trn_maintenance.asset_id', 'asset.id')
+                ->join('asset_maintenance', 'trn_maintenance.maintenance_id', 'asset_maintenance.id')
                 // ->groupBy('asset_maintenance.name', 'asset.asset_name')
-                ->where('trn_start_date', '<=', $time);
+                ->where('trn_start_date', '<=', $time)
+                ->where('trn_status', false);
         } else {
             return DB::table('trn_maintenance')
                 ->select(['trn_maintenance.*', 'trn_maintenance.id as trn_id', 'asset.*', 'asset_maintenance.*', 'sbu.sbu_name'])
-                ->leftJoin('asset', 'trn_maintenance.asset_id', 'asset.id')
-                ->leftJoin('asset_maintenance', 'trn_maintenance.maintenance_id', 'asset_maintenance.id')
-                ->leftJoin('sbu', 'trn_maintenance.sbu_id', 'sbu.id')
+                ->join('asset', 'trn_maintenance.asset_id', 'asset.id')
+                ->join('asset_maintenance', 'trn_maintenance.maintenance_id', 'asset_maintenance.id')
+                ->join('sbu', 'trn_maintenance.sbu_id', 'sbu.id')
                 // ->groupBy('asset_maintenance.name', 'asset.asset_name')
                 ->where('trn_start_date', '<=', $time)
-                ->where('trn_maintenance.sbu_id', userSBU());
+                ->where('trn_maintenance.sbu_id', userSBU())
+                ->where('trn_status', false);
         }
     }
 
