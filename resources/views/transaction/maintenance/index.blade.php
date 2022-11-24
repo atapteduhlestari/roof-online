@@ -150,12 +150,10 @@
                                 <select class="form-control form-control-sm @error('status') is-invalid @enderror"
                                     name="status" id="status">
                                     <option value=""></option>
-                                    <option class="text-success" value="1"
-                                        {{ request('status') == 1 ? 'selected' : '' }}>
+                                    <option class="text-success" value="1">
                                         <i class="fas fa-check"></i> Approved
                                     </option>
-                                    <option class="text-danger" value="false"
-                                        {{ request('status') == false ? 'selected' : '' }}>
+                                    <option class="text-danger" value="false">
                                         <i class="fas fa-exclamation"></i> Waiting Approval
                                     </option>
                                 </select>
