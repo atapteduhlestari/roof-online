@@ -67,6 +67,7 @@ Route::middleware(['auth', 'reminder'])->group(function () {
     Route::resource('/trn-renewal', TrnRenewalController::class);
     Route::post('/trn-renewal/search', [TrnRenewalController::class, 'search']);
     Route::put('/trn-renewal/update-status/{trnRenewal}', [TrnRenewalController::class, 'updateStatus']);
+    Route::put('/trn-renewal/update-status-plan/{trnRenewal}', [TrnRenewalController::class, 'updateStatusPlan']);
     Route::get('/trn-renewal/download/{trnRenewal}', [TrnRenewalController::class, 'download']);
     Route::get('/trn-renewal-export', [TrnRenewalController::class, 'export'])->name('renewal-export');
 
@@ -100,6 +101,7 @@ Route::group(['middleware' => ['auth', 'superadmin', 'reminder']], function () {
     // Route::resource('/asset-group', AssetGroupController::class)
     //     ->except(['create']);
     Route::put('/trn-maintenance/update-status/{trnMaintenance}', [TrnMaintenanceController::class, 'updateStatus']);
+    Route::put('/trn-maintenance/update-status-plan/{trnMaintenance}', [TrnMaintenanceController::class, 'updateStatusPlan']);
     Route::resource('/maintenance', MaintenanceController::class)->except(['create']);
     Route::resource('/renewal', RenewalController::class)->except(['create']);
     Route::resource('/sdb', SDBController::class)->except(['create']);

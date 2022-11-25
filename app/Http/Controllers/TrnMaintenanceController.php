@@ -57,8 +57,7 @@ class TrnMaintenanceController extends Controller
     }
 
     public function store(TrnMaintenanceRequest $request)
-    {;
-
+    {
         $data = $this->storeTrnData($request->all());
 
         if ($request->file('file')) {
@@ -179,6 +178,46 @@ class TrnMaintenanceController extends Controller
             'trn_status' => 1
         ]);
         return redirect()->back()->with('success', 'Success!');
+    }
+
+    public function updateStatusPlan(TrnMaintenance $trnMaintenance)
+    {
+        if (!$trnMaintenance->file)
+            return redirect()->back()->with('warning', 'Upload a file to proof!');
+
+        request()->validate([
+            'trn_start_date' => 'required',
+            'trn_date' => 'required'
+        ]);
+
+        $trnMaintenance->update([
+            'trn_status' => 1
+        ]);
+
+        $data = $this->setPlanData(request()->all(), $trnMaintenance);
+        TrnMaintenance::create($data);
+
+        return redirect()->back()->with('success', 'Success!');
+    }
+
+    public function setPlanData($request, $trn)
+    {
+        $date = createDate($request['trn_date']);
+        $count = TrnMaintenance::whereMonth('trn_date', $date->month)
+            ->whereYear('trn_date', $date->year)
+            ->count();
+        $no = setNoTrn($request['trn_date'], $count ?? null, 'REN');
+
+        $trn->trn_no = $no;
+        $trn->trn_start_date = $request['trn_start_date'];
+        $trn->trn_date  = $request['trn_date'];
+        $trn->pemohon  = null;
+        $trn->penyetuju  = null;
+        $trn->trn_value_plan  = null;
+        $trn->trn_value  = null;
+        $trn->trn_desc = '<span class="text-info font-weight-bold">(PLAN)</span> ' . $trn->trn_desc;
+
+        return $trn;
     }
 
     public function download(TrnMaintenance $trnMaintenance)

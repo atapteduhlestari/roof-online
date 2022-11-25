@@ -201,7 +201,7 @@
                                     </td>
                                     <td>{{ $trn->sbu->sbu_name }}</td>
                                     <td>{{ $trn->renewal->name }}</td>
-                                    <td>{{ $trn->trn_desc }}</td>
+                                    <td>{!! $trn->trn_desc !!}</td>
                                     <td class="block">{{ createDate($trn->trn_start_date)->format('d F Y') }}</td>
                                     <td class="block">{{ rupiah($trn->trn_value) }}</td>
                                     <td>
@@ -362,6 +362,20 @@
                                             {{ old('sbu_id') == $sbu->id ? 'selected' : '' }}>
                                             {{ $sbu->sbu_name }}</option>
                                     @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="trn_type">Type</label>
+                                <select class="form-control @error('trn_type') is-invalid @enderror" name="trn_type"
+                                    id="trn_type">
+                                    <option value="">Select Type</option>
+                                    <option value="1">
+                                        <i class="fas fa-check"></i> Routine
+                                    </option>
+                                    <option value="0">
+                                        <i class="fas fa-exclamation"></i> Accidentally
+                                    </option>
                                 </select>
                             </div>
                         </div>

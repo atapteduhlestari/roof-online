@@ -66,7 +66,7 @@
                     </tr>
                     <tr>
                         <th>Description</th>
-                        <td>{{ $trnRenewal->trn_desc }}</td>
+                        <td>{!! $trnRenewal->trn_desc !!}</td>
                     </tr>
                     <tr>
                         <th>Status</th>
@@ -78,13 +78,20 @@
                                             <i class="fas fa-check"></i> Done
                                         </button>
                                     @else
-                                        <form action="/trn-renewal/update-status/{{ $trnRenewal->id }}" method="post">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="btn btn-sm btn-danger btn-block">
+                                        @if ($trnRenewal->trn_type)
+                                            <button type="button" class="btn btn-sm btn-danger btn-block"
+                                                data-toggle="modal" data-target="#setPlanModal">
                                                 <i class="fas fa-exclamation"></i> Waiting Approval
                                             </button>
-                                        </form>
+                                        @else
+                                            <form action="/trn-renewal/update-status/{{ $trnRenewal->id }}" method="post">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-sm btn-danger btn-block">
+                                                    <i class="fas fa-exclamation"></i> Waiting Approval
+                                                </button>
+                                            </form>
+                                        @endif
                                     @endif
                                 </div>
                             </div>
@@ -111,14 +118,59 @@
             </div>
             <div class="col-md-4 mb-3">
                 <label>Menyetujui</label>
-                <input type="button" class="form-control text-left" value="{{ $trnRenewal->penyetuju }}" readonly>
+                <input type="button" class="form-control text-left" value="{{ $trnRenewal->penyetuju ?? '' }}" readonly>
             </div>
             <div class="col-md-4 mb-3">
                 <label>Pemohon</label>
-                <input type="button" class="form-control text-left" value="{{ $trnRenewal->pemohon }}" readonly>
+                <input type="button" class="form-control text-left" value="{{ $trnRenewal->pemohon ?? '' }}" readonly>
             </div>
         </div>
         <!-- End Row-->
 
     </div>
+
+    <div class="modal fade" id="setPlanModal" tabindex="-1" aria-labelledby="setPlanModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="setPlanModalLabel"> Form Plan Periode Selanjutnya
+                        <br> <span class="font-weight-bold">{{ $trnRenewal->renewal->name }}</span>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/trn-renewal/update-status-plan/{{ $trnRenewal->id }}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="trn_start_date">Start Date</label>
+                                <input type="date" class="form-control @error('trn_start_date') is-invalid @enderror"
+                                    name="trn_start_date" value="{{ old('trn_start_date') }}">
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="trn_date">Due Date</label>
+                                <input type="date" class="form-control @error('trn_date') is-invalid @enderror"
+                                    name="trn_date" value="{{ old('trn_date') }}">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+@push('scripts')
+    @if ($errors->any())
+        <script>
+            $('#setPlanModal').modal('show');
+        </script>
+    @endif
+@endpush

@@ -29,6 +29,7 @@ class CreateTrnMaintenanceTable extends Migration
             $table->longText('trn_desc')->nullable();
             $table->text('file')->nullable();
             $table->boolean('trn_status')->default(0);
+            $table->boolean('trn_type')->default(0);
             $table->timestamps();
         });
     }
