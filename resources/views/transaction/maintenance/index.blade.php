@@ -197,8 +197,8 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        <a
-                                            href="/asset-parent/docs/{{ $trn->asset->id }}">{{ $trn->asset->asset_name }}</a>
+                                        <a href="/asset-parent/docs/{{ $trn->asset->id }}">{{ $trn->asset->asset_name }}
+                                        </a>
                                     </td>
                                     <td>{{ $trn->sbu->sbu_name }}</td>
                                     <td>{{ $trn->maintenance->name }}</td>

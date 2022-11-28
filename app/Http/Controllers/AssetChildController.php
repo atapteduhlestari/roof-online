@@ -49,7 +49,7 @@ class AssetChildController extends Controller
 
         AssetChild::create($data);
 
-        return redirect()->back()->with('success', 'Success!');
+        return redirect()->back()->with('success', 'Successfully deleted!');
     }
 
     public function edit(AssetChild $assetChild)
@@ -87,7 +87,7 @@ class AssetChildController extends Controller
 
 
         $assetChild->update($data);
-        return redirect()->back()->with('success', 'Success!');
+        return redirect()->back()->with('success', 'Successfully deleted!');
     }
 
     public function download(AssetChild $assetChild)
@@ -106,6 +106,6 @@ class AssetChildController extends Controller
         Storage::delete($assetChild->file);
         $assetChild->delete();
 
-        return redirect('/asset-child')->with('success', 'Success!');
+        return redirect('/asset-child')->with('success', 'Successfully deleted!');
     }
 }

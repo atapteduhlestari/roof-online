@@ -68,7 +68,7 @@ class TrnMaintenanceController extends Controller
         }
 
         TrnMaintenance::create($data);
-        return redirect()->back()->with('success', 'Success!');
+        return redirect()->back()->with('success', 'Successfully deleted!');
     }
 
     public function storeTrnData($data)
@@ -153,14 +153,17 @@ class TrnMaintenanceController extends Controller
         }
 
         $trnMaintenance->update($data);
-        return redirect()->back()->with('success', 'Success!');
+        return redirect()->back()->with('success', 'Successfully deleted!');
     }
 
     public function destroy(TrnMaintenance $trnMaintenance)
     {
+        if ($trnMaintenance->trn_status)
+            return redirect()->back()->with('warning', 'Status is <b>CLOSED!</b>');
+
         Storage::delete($trnMaintenance->file);
         $trnMaintenance->delete();
-        return redirect('/trn-maintenance')->with('success', 'Success!');
+        return redirect('/trn-maintenance')->with('success', 'Successfully deleted!');
     }
 
     public function search(Request $request)
@@ -172,18 +175,18 @@ class TrnMaintenanceController extends Controller
     public function updateStatus(TrnMaintenance $trnMaintenance)
     {
         if (!$trnMaintenance->file)
-            return redirect()->back()->with('warning', 'Upload a file to proof!');
+            return redirect()->back()->with('warning', 'Upload file proven!');
 
         $trnMaintenance->update([
             'trn_status' => 1
         ]);
-        return redirect()->back()->with('success', 'Success!');
+        return redirect()->back()->with('success', 'Successfully deleted!');
     }
 
     public function updateStatusPlan(TrnMaintenance $trnMaintenance)
     {
         if (!$trnMaintenance->file)
-            return redirect()->back()->with('warning', 'Upload a file to proof!');
+            return redirect()->back()->with('warning', 'Upload file proven!');
 
         request()->validate([
             'trn_start_date' => 'required',
@@ -197,7 +200,7 @@ class TrnMaintenanceController extends Controller
         $data = $this->setPlanData(request()->all(), $trnMaintenance);
         TrnMaintenance::create($data);
 
-        return redirect()->back()->with('success', 'Success!');
+        return redirect()->back()->with('success', 'Successfully deleted!');
     }
 
     public function setPlanData($request, $trn)
@@ -206,7 +209,7 @@ class TrnMaintenanceController extends Controller
         $count = TrnMaintenance::whereMonth('trn_date', $date->month)
             ->whereYear('trn_date', $date->year)
             ->count();
-        $no = setNoTrn($request['trn_date'], $count ?? null, 'REN');
+        $no = setNoTrn($request['trn_date'], $count ?? null, 'MAI');
 
         $trn->trn_no = $no;
         $trn->trn_start_date = $request['trn_start_date'];
@@ -216,8 +219,7 @@ class TrnMaintenanceController extends Controller
         $trn->trn_value_plan  = null;
         $trn->trn_value  = null;
         $trn->trn_desc = '<span class="text-info font-weight-bold">(PLAN)</span> ' . $trn->trn_desc;
-
-        return $trn;
+        $trn->file  = null;
     }
 
     public function download(TrnMaintenance $trnMaintenance)

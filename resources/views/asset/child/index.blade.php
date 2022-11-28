@@ -40,8 +40,7 @@
                                     <td>{{ $child->sbu->sbu_name ?? '' }}</td>
                                     <td>
                                         @if ($child->file)
-                                            <a title="download file" href="/asset-child/download/{{ $child->id }}"
-                                                class="text-dark">
+                                            <a title="download file" href="/asset-child/download/{{ $child->id }}">
                                                 <i class="fas fa-download"></i>
                                             </a>
                                         @else

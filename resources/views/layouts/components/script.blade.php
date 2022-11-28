@@ -35,8 +35,7 @@
     <script>
         Swal.fire({
             icon: 'warning',
-            title: 'Oops!',
-            text: `<?= session('warning') ?>`,
+            html: `<?= session('warning') ?>`,
             timer: 1500,
             showConfirmButton: false,
             timerProgressBar: true,

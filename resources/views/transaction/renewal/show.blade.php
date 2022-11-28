@@ -37,12 +37,12 @@
                     <tr>
                         <th>Document</th>
                         <td>
-                            {{ $trnRenewal->document->doc_name }} - {{ $trnRenewal->document->parent->asset_name ?? '' }}
+                            {{ $trnRenewal->document->doc_name }} - {{ $trnRenewal->document->parent->asset_name ?? '-' }}
                         </td>
                     </tr>
                     <tr>
                         <th>Group</th>
-                        <td>{{ $trnRenewal->document->parent->group->asset_group_name ?? '' }}</td>
+                        <td>{{ $trnRenewal->document->parent->group->asset_group_name ?? '-' }}</td>
                     </tr>
                 </table>
             </div>
@@ -57,16 +57,22 @@
                         <td>{{ $trnRenewal->sbu->sbu_name }}</td>
                     </tr>
                     <tr>
-                        <th>TYPE</th>
+                        <th>Renewal</th>
                         <td>{{ $trnRenewal->renewal->name }}</td>
                     </tr>
                     <tr>
                         <th>SDB</th>
-                        <td>{{ $trnRenewal->document->sdb->sdb_name ?? '' }}</td>
+                        <td>{{ $trnRenewal->document->sdb->sdb_name ?? '-' }}</td>
                     </tr>
                     <tr>
                         <th>Description</th>
                         <td>{!! $trnRenewal->trn_desc !!}</td>
+                    </tr>
+                    <tr>
+                        <th>Type</th>
+                        <td class="{{ $trnRenewal->trn_type ? 'text-info' : 'text-warning' }}">
+                            {{ $trnRenewal->trn_type ? 'Routine' : 'Accidentally' }}
+                        </td>
                     </tr>
                     <tr>
                         <th>Status</th>
@@ -101,9 +107,9 @@
                         <th>File</th>
                         <td>
                             @if ($trnRenewal->file)
-                                <a title="download file" href="/trn-renewal/download/{{ $trnRenewal->id }}"
-                                    class="text-dark">
-                                    <i class="fas fa-download"></i>
+                                <a title="download file" href="/trn-renewal/download/{{ $trnRenewal->id }}">
+                                    {{ getFileName($trnRenewal->file) }}
+                                    {{-- <i class="fas fa-download"></i> --}}
                                 </a>
                             @else
                                 <a href="/trn-renewal/{{ $trnRenewal->id }}/edit">Add File</a>

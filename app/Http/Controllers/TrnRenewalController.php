@@ -66,7 +66,7 @@ class TrnRenewalController extends Controller
         }
 
         TrnRenewal::create($data);
-        return redirect()->back()->with('success', 'Success!');
+        return redirect()->back()->with('success', 'Successfully deleted!');
     }
 
     public function storeTrnData($data)
@@ -159,14 +159,18 @@ class TrnRenewalController extends Controller
         }
 
         $trnRenewal->update($data);
-        return redirect()->back()->with('success', 'Success!');
+        return redirect()->back()->with('success', 'Successfully deleted!');
     }
 
     public function destroy(TrnRenewal $trnRenewal)
     {
+
+        if ($trnRenewal->trn_status)
+            return redirect()->back()->with('warning', 'Status is <b>CLOSED!</b>');
+
         Storage::delete($trnRenewal->file);
         $trnRenewal->delete();
-        return redirect('/trn-renewal')->with('success', 'Success!');
+        return redirect('/trn-renewal')->with('success', 'Successfully deleted!');
     }
 
     public function search(Request $request)
@@ -178,19 +182,19 @@ class TrnRenewalController extends Controller
     public function updateStatus(TrnRenewal $trnRenewal)
     {
         if (!$trnRenewal->file)
-            return redirect()->back()->with('warning', 'Upload a file to proof!');
+            return redirect()->back()->with('warning', 'Upload file proven!');
 
         $trnRenewal->update([
             'trn_status' => 1
         ]);
 
-        return redirect()->back()->with('success', 'Success!');
+        return redirect()->back()->with('success', 'Successfully deleted!');
     }
 
     public function updateStatusPlan(TrnRenewal $trnRenewal)
     {
         if (!$trnRenewal->file)
-            return redirect()->back()->with('warning', 'Upload a file to proof!');
+            return redirect()->back()->with('warning', 'Upload file proven!');
 
         request()->validate([
             'trn_start_date' => 'required',
@@ -204,7 +208,7 @@ class TrnRenewalController extends Controller
         $data = $this->setPlanData(request()->all(), $trnRenewal);
         TrnRenewal::create($data);
 
-        return redirect()->back()->with('success', 'Success!');
+        return redirect()->back()->with('success', 'Successfully deleted!');
     }
 
     public function setPlanData($request, $trn)

@@ -210,3 +210,9 @@ function findSBU($id)
 
     return $sbu ? $sbu->sbu_name : '';
 }
+
+function getFileName($param)
+{
+    $fileName =  explode('/',  $param);
+    return $fileName[4];
+}

@@ -55,18 +55,24 @@
                         <td>{{ $trnMaintenance->sbu->sbu_name }}</td>
                     </tr>
                     <tr>
-                        <th>TYPE</th>
+                        <th>Maintenance</th>
                         <td>{{ $trnMaintenance->maintenance->name }}</td>
                     </tr>
 
                     <tr>
                         <th>SDB</th>
-                        <td>{{ $trnMaintenance->asset->sdb->sdb_name ?? '' }}</td>
+                        <td>{{ $trnMaintenance->asset->sdb->sdb_name ?? '-' }}</td>
                     </tr>
 
                     <tr>
                         <th>Description</th>
-                        <td>{{ $trnMaintenance->trn_desc }}</td>
+                        <td>{!! $trnMaintenance->trn_desc !!}</td>
+                    </tr>
+                    <tr>
+                        <th>Type</th>
+                        <td class="{{ $trnMaintenance->trn_type ? 'text-info' : 'text-warning' }}">
+                            {{ $trnMaintenance->trn_type ? 'Routine' : 'Accidentally' }}
+                        </td>
                     </tr>
                     <tr>
                         <th>Status</th>
@@ -102,9 +108,9 @@
                         <th>File</th>
                         <td>
                             @if ($trnMaintenance->file)
-                                <a title="download file" href="/trn-maintenance/download/{{ $trnMaintenance->id }}"
-                                    class="text-dark">
-                                    <i class="fas fa-download"></i>
+                                <a title="download file" href="/trn-maintenance/download/{{ $trnMaintenance->id }}">
+                                    {{ getFileName($trnMaintenance->file) }}
+                                    {{-- <i class="fas fa-download"></i> --}}
                                 </a>
                             @else
                                 <a href="/trn-maintenance/{{ $trnMaintenance->id }}/edit">Add File</a>
