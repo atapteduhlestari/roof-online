@@ -213,6 +213,10 @@ function findSBU($id)
 
 function getFileName($param)
 {
-    $fileName =  explode('/',  $param);
-    return $fileName[4];
+    if ($param) {
+        $fileName =  explode('/',  $param);
+        return $fileName[4];
+    }
+
+    return 'none';
 }

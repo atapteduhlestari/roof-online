@@ -127,7 +127,7 @@
                         <div class="form-group">
                             <label for="trn_desc">Description</label>
                             <textarea class="form-control  @error('trn_desc') is-invalid @enderror" id="trn_desc" name="trn_desc" cols="10"
-                                rows="5">{{ old('trn_desc', $trnMaintenance->trn_desc) }}</textarea>
+                                rows="5">{{ old('trn_desc', strip_tags($trnMaintenance->trn_desc)) }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -139,7 +139,13 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                             <label class="custom-file-label" for="file">Choose file</label>
+                            @if ($trnMaintenance->file)
+                                <small> old file : <a old file :a
+                                        href="/trn-maintenance/download/{{ $trnMaintenance->id }}">
+                                        {{ getFileName($trnMaintenance->file ?? '') }}</a></small>
+                            @endif
                         </div>
+
                     </div>
                 </div>
 

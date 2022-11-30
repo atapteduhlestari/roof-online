@@ -25,12 +25,12 @@ class TrnMaintenanceRequest extends FormRequest
             'trn_start_date' => 'required|date',
             'trn_date' => 'required|date',
             'trn_value_plan' => 'nullable',
-            'trn_value' => 'required',
+            'trn_value' => 'nullable',
             'trn_type' => 'required',
             'maintenance_id' => 'required',
             'sbu_id' => 'required',
-            'pemohon' => 'required',
-            'penyetuju' => 'required',
+            'pemohon' => 'nullable',
+            'penyetuju' => 'nullable',
             'file' =>  'nullable|file|max:5120',
         ];
     }
