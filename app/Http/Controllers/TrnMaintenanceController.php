@@ -220,6 +220,8 @@ class TrnMaintenanceController extends Controller
         $trn->trn_value  = null;
         $trn->trn_desc = '<span class="text-info font-weight-bold">(PLAN)</span> ' . $trn->trn_desc;
         $trn->file  = null;
+
+        return $trn->toArray();
     }
 
     public function download(TrnMaintenance $trnMaintenance)

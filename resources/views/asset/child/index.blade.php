@@ -210,7 +210,7 @@
 
         let btnSubmit = $('#btnSubmit'),
             form = $('#formAdd'),
-            formDelete = $('#deleteForm');
+            formDelete = $('form#deleteForm');
 
         $("#asset_id").selectize({
             create: false,

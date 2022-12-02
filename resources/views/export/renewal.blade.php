@@ -94,7 +94,7 @@
                     </td>
                     <td>{{ $trn->sbu->sbu_name ?? '' }}</td>
                     <td>{{ $trn->renewal->name }}</td>
-                    <td>{{ $trn->trn_desc }}</td>
+                    <td>{{ strip_tags($trn->trn_desc) }}</td>
                     <td>{{ $trn->document->sdb->sdb_name ?? '' }}</td>
                     <td>{{ createDate($trn->trn_start_date)->format('d F Y') }}</td>
                     <td>{{ createDate($trn->trn_date)->format('d F Y') }}</td>

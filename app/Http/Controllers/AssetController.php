@@ -67,7 +67,7 @@ class AssetController extends Controller
         if (!isSuperadmin())
             $query = $asset->where('sbu_id', userSBU());
 
-        $query->orderBy('pcs_date', 'desc');
+        $query->orderBy('sbu_id', 'asc');
         $dt = DataTables::of($query);
 
         $dt->addIndexColumn()->editColumn('pcs_date', function ($row) {

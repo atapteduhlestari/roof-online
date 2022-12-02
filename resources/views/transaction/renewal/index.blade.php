@@ -186,7 +186,7 @@
                                 <th>SBU</th>
                                 <th>Type</th>
                                 <th>Description</th>
-                                <th>Start Date</th>
+                                <th>Due Date</th>
                                 <th>Cost</th>
                                 <th>File</th>
                                 <th class="text-center">Actions</th>
@@ -202,7 +202,7 @@
                                     <td>{{ $trn->sbu->sbu_name }}</td>
                                     <td>{{ $trn->renewal->name }}</td>
                                     <td>{!! $trn->trn_desc !!}</td>
-                                    <td class="block">{{ createDate($trn->trn_start_date)->format('d F Y') }}</td>
+                                    <td class="block">{{ createDate($trn->trn_date)->format('d F Y') }}</td>
                                     <td class="block">{{ rupiah($trn->trn_value) }}</td>
                                     <td>
                                         @if ($trn->file)

@@ -49,7 +49,7 @@ class RenewalExport implements
             $trn->pemohon,
             $trn->penyetuju,
             $trn->trn_status ? 'Done' : '-',
-            $trn->trn_desc,
+            strip_tags($trn->trn_desc),
         ];
     }
 
