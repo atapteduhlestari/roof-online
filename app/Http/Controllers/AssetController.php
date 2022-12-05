@@ -20,7 +20,18 @@ class AssetController extends Controller
 {
     public function index()
     {
-        // $assets = Asset::select('asset_name')->where('image', null)->where('sbu_id', 1)->get();
+        // $assets = Asset::where('sbu_id', 1)->where('image', null)->get();
+        // return $assets;
+
+        // foreach ($assets as $asset) {
+        //     if ($asset->image) {
+        //         if (!str_contains($asset->image, '.jpg')) {
+        //             $asset->update([
+        //                 'image' => $asset->image . '.jpg'
+        //             ]);
+        //         }
+        //     }
+        // }
         // return $assets;
 
         $assetGroup = AssetGroup::get();

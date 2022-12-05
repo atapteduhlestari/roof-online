@@ -25,10 +25,10 @@
     <table>
         <thead>
             <tr>
-                <th colspan="4" rowspan="5">
+                <th colspan="3" rowspan="5">
 
                 </th>
-                <td colspan="7" style="text-align:center; font-size:14; vertical-align: middle;">
+                <td colspan="3" style="text-align:center; font-size:14; vertical-align: middle;">
                     <strong>PT ATAP TEDUH LESTARI</strong>
                 </td>
                 <td>
@@ -37,7 +37,7 @@
                 <td>ATL-HOJ-SOP-GAN-03-01</td>
             </tr>
             <tr>
-                <td colspan="7" rowspan="2" style="text-align:center; font-size:14;">
+                <td colspan="3" rowspan="2" style="text-align:center; font-size:14;">
                     <strong>FORM</strong>
                 </td>
                 <td>Revisi</td>
@@ -48,7 +48,7 @@
                 <td>{{ now()->format('d/m/Y') }}</td>
             </tr>
             <tr>
-                <td colspan="7" rowspan="2" style="text-align:center; font-size:14; vertical-align: middle;">
+                <td colspan="3" rowspan="2" style="text-align:center; font-size:14; vertical-align: middle;">
                     <strong>KARTU INVENTARISASI ASSET</strong>
                 </td>
                 <td>Department</td>
@@ -65,8 +65,6 @@
             </tr> --}}
             <tr>
                 <th>#</th>
-                <th>Code</th>
-                <th>No. Asset</th>
                 <th>Name</th>
                 <th>SBU</th>
                 <th>Location</th>
@@ -74,32 +72,28 @@
                 <th>Person Responsible</th>
                 <th>Purchase Date</th>
                 <th>Purchase Cost</th>
-                <th>Appraisal Date</th>
-                <th>Appraisal Cost</th>
-                <th>Description</th>
+                {{-- <th>Description</th> --}}
             </tr>
         </thead>
         <tbody>
             @foreach ($assets as $asset)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $asset->asset_code }}</td>
-                    <td>{{ $asset->asset_no }}</td>
                     <td>{{ $asset->asset_name }}</td>
                     <td>{{ $asset->sbu->sbu_name ?? '' }}</td>
                     <td>{{ $asset->location ?? '' }}</td>
-                    <td>{{ $asset->condition == 1 ? 'Baik' : ($asset->condition == 2 ? 'Kurang' : 'Buruk') }}</td>
+                    <td>{{ $asset->condition == 1 ? 'Baik' : ($asset->condition == 2 ? 'Kurang' : 'Rusak') }}</td>
                     <td>{{ $asset->employee->name ?? '' }}</td>
                     <td>{{ createDate($asset->pcs_date)->format('d/m/Y') }}</td>
                     <td>{{ rupiah($asset->pcs_value) }}</td>
-                    <td>
+                    {{-- <td>
                         {{ $asset->appraisals()->exists() ? createDate($asset->appraisals->last()->apr_date)->format('d/m/Y') : null }}
                     </td>
                     <td>
                         {{ rupiah($asset->appraisals->last()->apr_value ?? '') }}
 
-                    </td>
-                    <td>{{ $asset->desc }}</td>
+                    </td> --}}
+                    {{-- <td>{{ $asset->desc }}</td> --}}
                 </tr>
             @endforeach
         </tbody>

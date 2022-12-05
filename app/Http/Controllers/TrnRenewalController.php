@@ -97,9 +97,9 @@ class TrnRenewalController extends Controller
         $data['transactions'] = request()->all();
 
         if (isSuperadmin())
-            $data['transactions'] =  TrnRenewal::filter($data['transactions'])->get();
+            $data['transactions'] =  TrnRenewal::filter($data['transactions'])->whereNotNull('trn_value')->get();
         else
-            $data['transactions'] = TrnRenewal::filter($data['transactions'])->where('sbu_id', userSBU())->get();
+            $data['transactions'] = TrnRenewal::filter($data['transactions'])->where('sbu_id', userSBU())->whereNotNull('trn_value')->get();
 
         $time = now()->format('dmY');
         $name = "ATL-GAN-REN-{$time}.xlsx";

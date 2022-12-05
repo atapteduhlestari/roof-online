@@ -34,8 +34,8 @@ class RenewalExportView implements FromView, WithDrawings, ShouldAutoSize
         $drawing->setCoordinates('A1');
         $drawing->setOffsetX(150);
         $drawing->setOffsetY(300);
-        $drawing->getShadow()->setVisible(true);
-        $drawing->getShadow()->setDirection(35);
+        // $drawing->getShadow()->setVisible(true);
+        // $drawing->getShadow()->setDirection(10);
 
         return $drawing;
     }

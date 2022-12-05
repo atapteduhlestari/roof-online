@@ -100,9 +100,9 @@ class TrnMaintenanceController extends Controller
         $data['transactions'] = request()->all();
 
         if (isSuperadmin())
-            $data['transactions'] =  TrnMaintenance::filter($data['transactions'])->get();
+            $data['transactions'] =  TrnMaintenance::filter($data['transactions'])->whereNotNull('trn_value')->get();
         else
-            $data['transactions'] = TrnMaintenance::filter($data['transactions'])->where('sbu_id', userSBU())->get();
+            $data['transactions'] = TrnMaintenance::filter($data['transactions'])->where('sbu_id', userSBU())->whereNotNull('trn_value')->get();
 
         $time = now()->format('dmY');
         $name = "ATL-GAN-MAI-{$time}.xlsx";

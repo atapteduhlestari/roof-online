@@ -202,7 +202,7 @@
                                     </td>
                                     <td>{{ $trn->sbu->sbu_name }}</td>
                                     <td>{{ $trn->maintenance->name }}</td>
-                                    <td>{{ strip_tags($trn->trn_desc) }}</td>
+                                    <td>{!! $trn->trn_desc !!}</td>
                                     <td class="block">{{ createDate($trn->trn_date)->format('d F Y') }}</td>
                                     <td class="block">{{ rupiah($trn->trn_value) }}</td>
                                     <td>
