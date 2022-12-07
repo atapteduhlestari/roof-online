@@ -139,20 +139,37 @@ class AssetController extends Controller
         return $asset;
     }
 
+    public function exportDetail(Asset $asset)
+    {
+        foreach ($asset->children as $doc) {
+            $asset->sumRenewal += $doc->trnRenewal->sum('trn_value');
+        }
+
+        return view('export.asset_detail', compact('asset'));
+    }
+
     public function export($param)
     {
         $data = request()->all();
         if (isSuperadmin())
-            $assets = $param == 'all' ? Asset::with('sbu', 'employee')->filter($data)->get() : Asset::with('sbu', 'employee')->where('asset_group_id', $param)->filter($data)->get();
+            $data['assets'] = $param == 'all' ? Asset::with('sbu', 'employee')->filter($data)->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->get() : Asset::with('sbu', 'employee')->where('asset_group_id', $param)->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->filter($data)->get();
         else
-            $assets = $param == 'all' ? Asset::with('sbu', 'employee')->where('sbu_id', userSBU())->filter($data)->get() : Asset::with('sbu', 'employee')->where('asset_group_id', $param)->where('sbu_id', userSBU())->filter($data)->get();
+            $data['assets'] = $param == 'all' ? Asset::with('sbu', 'employee')->where('sbu_id', userSBU())->filter($data)->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->get() : Asset::with('sbu', 'employee')->where('asset_group_id', $param)->where('sbu_id', userSBU())->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->filter($data)->get();
 
+
+
+        $sbu = SBU::find(request('sbu_id'));
         $time = now()->format('dmY');
-        $name = "ATL-GAN-ASSET-LIST-{$time}.xlsx";
+        $name = "ATL-GAN-ASSET-DETAIL-{$time}.xlsx";
 
-        // return view('export.asset', compact('assets'));
+        $data['sbu'] = request('sbu_id') ? $sbu->sbu_name : 'All';
+        $data['status'] = (request('status') == 1) ? 'Closed' : ((request('status') == null) ? 'All' : 'Open');
+        $data['start'] = createDate(request('start'))->format('F');
+        $data['end'] = createDate(request('end'))->format('F');
+        $data['year'] = createDate(request('end'))->format('Y');
 
-        return Excel::download(new AssetExportView($assets), $name);
+        return view('export.asset', compact('data'));
+        // return Excel::download(new AssetExportView($data), $name);
     }
 
     public function edit(Asset $asset)
@@ -265,6 +282,100 @@ class AssetController extends Controller
     //     return Excel::download(new AssetExportView, 'tes.xlsx');
     // }
 
+
+    public function detailView()
+    {
+        $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
+        return view('report.detail.asset', compact('SBUs'));
+    }
+
+    public function summaryView()
+    {
+        $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
+        return view('report.summary.asset', compact('SBUs'));
+    }
+
+    public function reportDetail()
+    {
+        if (request('start') > request('end'))
+            return redirect()->back()->with('warning', 'Start date must be lower than End date');
+
+        $data = request()->all();
+
+        if (isSuperadmin())
+            $data['assets'] = Asset::with('sbu', 'employee')->filter($data)->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->get();
+        else
+            $data['assets'] = Asset::with('sbu', 'employee')->where('sbu_id', userSBU())->filter($data)->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->get();
+
+        if (count($data['assets']) <= 0)
+            return redirect()->back()->with('warning', 'No data available');
+
+        $sbu = SBU::find(request('sbu_id'));
+        $time = now()->format('dmY');
+        $name = "ATL-GAN-ASSET-DETAIL-{$time}.xlsx";
+
+        $data['sbu'] = request('sbu_id') ? $sbu->sbu_name : 'All';
+        $data['condition'] = (request('condition') == 1) ? 'Baik' : ((request('condition') == 3) ? 'Rusak' : (request('condition') == 2 ? 'Kurang' : 'All'));
+        $data['total_cost'] =  $data['assets']->sum('pcs_value');
+        $data['total_data'] = $data['assets']->count();
+        $data['periode'] = $this->getPeriodeExport(request());
+
+        return view('export.asset', compact('data'));
+        // return Excel::download(new AssetExportView($data), $name);
+    }
+
+    public function reportSummary()
+    {
+        $data['request'] = request()->all();
+
+        $data['assets'] =  $data['assets'] = Asset::filter($data['request'])->with(['sbu' => function ($q) {
+            $q->select('id', 'sbu_name');
+        }])->get()->groupBy('sbu.sbu_name');
+
+        $asset = Asset::filter($data['request'])->get();
+
+        $data['total_baik']  = $asset->where('condition', 1)->count();
+        $data['total_cost_baik'] = $asset->where('condition', 1)->sum('pcs_value');
+        $data['total_kurang']  = $asset->where('condition', 2)->count();
+        $data['total_cost_kurang'] = $asset->where('condition', 2)->sum('pcs_value');
+        $data['total_rusak']  = $asset->where('condition', 3)->count();
+        $data['total_cost_rusak'] = $asset->where('condition', 3)->sum('pcs_value');
+
+        return view('assetTes', compact('data'));
+    }
+
+    public function getPeriodeExport($data)
+    {
+        $start = null;
+        $startYear = null;
+        $end = null;
+        $endYear = null;
+
+        if ($data['start']) {
+            $start = createDate($data['start'])->format('F');
+            $startYear = createDate($data['start'])->format('Y');
+        }
+
+        if ($data['end']) {
+            $end = createDate($data['end'])->format('F');
+            $endYear = createDate($data['end'])->format('Y');
+        }
+
+        $sd = 'sd';
+
+        if ($start ==  $end && $startYear == $endYear) {
+            $end = null;
+            $endYear = null;
+            $sd = null;
+        }
+
+        if ($startYear == $endYear) {
+            $startYear = null;
+        }
+
+        $periode = isset($periode) ? "$start $startYear $sd $end $endYear" : 'All';
+        return $periode;
+    }
 
     public static function generateButton($row)
     {

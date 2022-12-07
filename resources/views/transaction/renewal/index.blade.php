@@ -27,12 +27,12 @@
                             Search <i class="fas fa-search"></i>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" id="pills-export-tab" data-toggle="pill" href="#pills-export" role="tab"
                             aria-controls="pills-export" aria-selected="false">
                             Export <i class="fas fa-file-export"></i>
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>
@@ -47,14 +47,14 @@
                                 <label for="start_date">Start Date</label>
                                 <div class="form-group d-flex">
                                     <input type="date" class="form-control form-control-sm" id="start_date"
-                                        name="start_date" value="{{ request('start_date') }}">
+                                        name="start_date" value="{{ old('start_date') }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label for="due_date">Due Date</label>
                                 <div class="form-group d-flex">
                                     <input type="date" class="form-control form-control-sm" id="due_date"
-                                        name="due_date" value="{{ request('due_date') }}">
+                                        name="due_date" value="{{ old('due_date') }}">
                                 </div>
                             </div>
 
@@ -66,7 +66,7 @@
                                     <option value="">Select Type</option>
                                     @foreach ($renewals as $mn)
                                         <option value="{{ $mn->id }}"
-                                            {{ request('renewal_search_id') == $mn->id ? 'selected' : '' }}>
+                                            {{ old('renewal_search_id') == $mn->id ? 'selected' : '' }}>
                                             {{ $mn->name }}</option>
                                     @endforeach
                                 </select>
@@ -80,7 +80,7 @@
                                         <option value="">Select SBU</option>
                                         @foreach ($SBUs as $sb)
                                             <option value="{{ $sb->id }}"
-                                                {{ request('sbu_search_id') == $sb->id ? 'selected' : '' }}>
+                                                {{ old('sbu_search_id') == $sb->id ? 'selected' : '' }}>
                                                 {{ $sb->sbu_name }}</option>
                                         @endforeach
                                     </select>
@@ -90,13 +90,12 @@
                                 <label for="status">Status</label>
                                 <select class="form-control form-control-sm @error('status') is-invalid @enderror"
                                     name="status" id="status">
-                                    <option value="" selected></option>
-                                    <option class="text-success" value="1"
-                                        {{ request('status') == 1 ? 'selected' : '' }}>
-                                        <i class="fas fa-check"></i> Approved
-                                    </option>
+                                    <option value=""></option>
                                     <option class="text-danger" value="false">
-                                        <i class="fas fa-exclamation"></i> Waiting Approval
+                                        Open
+                                    </option>
+                                    <option class="text-success" value="1">
+                                        Closed
                                     </option>
                                 </select>
                             </div>
@@ -111,7 +110,7 @@
                     </form>
                 </div>
             </div>
-            <div class="tab-pane fade" id="pills-export" role="tabpanel" aria-labelledby="pills-export-tab">
+            {{-- <div class="tab-pane fade" id="pills-export" role="tabpanel" aria-labelledby="pills-export-tab">
                 <div class="card card-body mt-3">
                     <h6 class="mb-3 font-weight-bold text-success">Export Filter</h6>
                     <form action="/trn-renewal-export" method="get">
@@ -120,14 +119,14 @@
                                 <label for="start_date">Start Date</label>
                                 <div class="form-group d-flex">
                                     <input type="date" class="form-control form-control-sm" id="start_date"
-                                        name="start_date" value="{{ request('start_date') }}">
+                                        name="start_date" value="{{old('start_date') }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label for="due_date">Due Date</label>
                                 <div class="form-group d-flex">
                                     <input type="date" class="form-control form-control-sm" id="due_date"
-                                        name="due_date" value="{{ request('due_date') }}">
+                                        name="due_date" value="{{old('due_date') }}">
                                 </div>
                             </div>
 
@@ -139,7 +138,7 @@
                                         <option value="">Select SBU</option>
                                         @foreach ($SBUs as $sb)
                                             <option value="{{ $sb->id }}"
-                                                {{ request('sbu_export_id') == $sb->id ? 'selected' : '' }}>
+                                                {{old('sbu_export_id') == $sb->id ? 'selected' : '' }}>
                                                 {{ $sb->sbu_name }}</option>
                                         @endforeach
                                     </select>
@@ -168,7 +167,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         <div class="card shadow mt-3">
@@ -446,10 +445,10 @@
             sortField: "text",
         });
 
-        $("#sbu_export_id").selectize({
-            create: false,
-            sortField: "text",
-        });
+        // $("#sbu_export_id").selectize({
+        //     create: false,
+        //     sortField: "text",
+        // });
 
         $("#pemohon").selectize({
             create: false,

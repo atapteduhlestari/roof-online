@@ -22,6 +22,23 @@ Route::middleware(['auth', 'reminder'])->group(function () {
 
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/report', [DashboardController::class, 'report']);
+
+    Route::get('/report-maintenance-detail', [TrnMaintenanceController::class, 'detailView']);
+    Route::get('/trn-maintenance-detail-export', [TrnMaintenanceController::class, 'reportDetail']);
+    Route::get('/report-maintenance-summary', [TrnMaintenanceController::class, 'summaryView']);
+    Route::get('/trn-maintenance-summary-export', [TrnMaintenanceController::class, 'reportSummary']);
+
+    Route::get('/report-renewal-detail', [TrnRenewalController::class, 'detailView']);
+    Route::get('/trn-renewal-detail-export', [TrnRenewalController::class, 'reportDetail']);
+    Route::get('/report-renewal-summary', [TrnRenewalController::class, 'summaryView']);
+    Route::get('/trn-renewal-summary-export', [TrnRenewalController::class, 'reportSummary']);
+
+    Route::get('/report-asset-detail', [AssetController::class, 'detailView']);
+    Route::get('/asset-detail-export', [AssetController::class, 'reportDetail']);
+    Route::get('/report-asset-summary', [AssetController::class, 'summaryView']);
+    Route::get('/asset-summary-export', [AssetController::class, 'reportSummary']);
+
     Route::get('/form', [DashboardController::class, 'formISO']);
     Route::post('/form', [DashboardController::class, 'createForm']);
     Route::get('/form/{param}', [DashboardController::class, 'downloadFormISO']);
@@ -37,6 +54,8 @@ Route::middleware(['auth', 'reminder'])->group(function () {
         ->parameters([
             'asset-parent' => 'asset',
         ])->except(['create']);
+
+    Route::get('/asset-parent/export/{asset}', [AssetController::class, 'exportDetail']);
 
     Route::get('/asset-parent/docs/{asset}', [AssetController::class, 'documents'])
         ->name('assetDocuments');
@@ -76,6 +95,7 @@ Route::middleware(['auth', 'reminder'])->group(function () {
 
     Route::get('/trn-maintenance/download/{trnMaintenance}', [TrnMaintenanceController::class, 'download']);
     Route::get('/trn-maintenance-export', [TrnMaintenanceController::class, 'export'])->name('maintenance-export');
+    Route::get('/trn-maintenance/detail-report', [TrnMaintenanceController::class, 'detailReport'])->name('maintenance-detail-report');
 
     Route::resource('/trn-sdb', TrnSDBController::class)->parameters([
         'trn-sdb' => 'trnSDB',

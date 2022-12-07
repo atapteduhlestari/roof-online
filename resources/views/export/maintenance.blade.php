@@ -4,7 +4,7 @@
 
 <head>
     <meta http-equiv="content-type" content="text/plain; charset=UTF-8" />
-    <title>Maintenance Transaction</title>
+    <title>Report Maintenance Detail</title>
 
     <style>
         table,
@@ -21,52 +21,44 @@
 </head>
 
 <body>
-
     <table>
         <thead>
             <tr>
-                <th colspan="3" rowspan="5">
-
-                </th>
-                <td colspan="3" style="text-align:center; font-size:14; vertical-align: middle;">
+                <td colspan="2" style="font-size:12;">
                     <strong>PT ATAP TEDUH LESTARI</strong>
                 </td>
-                <td>
-                    No. Dokumen
+                <td>Tanggal Cetak: {{ now()->format('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="font-size:12;">
+                    <strong>Laporan Detail Maintenance</strong>
                 </td>
-                <td></td>
+
             </tr>
             <tr>
-                <td colspan="3" rowspan="2" style="text-align:center; font-size:14;">
-                    <strong>FORM</strong>
+                <td colspan="2" style="font-size:12;">
+                    <strong>Periode : {{ $transactions['periode'] }}</strong>
                 </td>
-                <td>Revisi</td>
-                <td>00</td>
             </tr>
             <tr>
-                <td>Tanggal</td>
-                <td>{{ now()->format('d/m/Y') }}</td>
+                <td colspan="12">&nbsp; </td>
             </tr>
             <tr>
-                <td colspan="3" rowspan="2" style="text-align:center; font-size:14; vertical-align: middle;">
-                    <strong>Transaction Maintenance</strong>
-                </td>
-                <td>Department</td>
-                <td>General Affair (GAN)</td>
+                <td colspan="12">Filter = SBU : {{ $transactions['sbu'] }}| Status :
+                    {{ $transactions['status'] }}| Total Cost
+                    :{{ rupiah($transactions['total_cost']) }} | Total
+                    Data : {{ $transactions['total_data'] }}</td>
             </tr>
             <tr>
-                <td colspan="2">&nbsp;</td>
-            </tr>
-            <tr>
-                <td colspan="14">&nbsp;</td>
+                <td colspan="12">&nbsp;</td>
             </tr>
             {{-- <tr>
                 <td colspan="13">&nbsp;</td>
             </tr> --}}
             <tr>
-                <th>#</th>
-                {{-- <th>Code</th> --}}
-                {{-- <th>Asset</th> --}}
+                <th>No</th>
+                <th>Code</th>
+                <th>Asset</th>
                 <th>SBU</th>
                 <th>Type</th>
                 <th>Description</th>
@@ -75,27 +67,29 @@
                 <th>Cost</th>
                 <th>Applicant</th>
                 <th>Approval</th>
-                {{-- <th>Status</th> --}}
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($transactions['transactions'] as $trn)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    {{-- <td>{{ $trn->trn_no }}</td>
-                    <td>{{ $trn->asset->asset_name }}</td> --}}
+                    <td>{{ $trn->trn_no }}</td>
+                    <td>{{ $trn->asset->asset_name }}</td>
                     <td>{{ $trn->sbu->sbu_name ?? '' }}</td>
                     <td>{{ $trn->maintenance->name }}</td>
                     <td>{{ strip_tags($trn->trn_desc) }}</td>
                     <td>{{ createDate($trn->trn_start_date)->format('d/m/Y') }}</td>
                     <td>{{ createDate($trn->trn_date)->format('d/m/Y') }}</td>
-                    <td>{{ rupiah($trn->trn_value) }}</td>
+                    <td style="text-align: right">{{ rupiah($trn->trn_value) }}</td>
                     <td>{{ $trn->pemohon }}</td>
                     <td>{{ $trn->penyetuju }}</td>
-                    {{-- <td>{{ $trn->trn_status ? 'Closed' : 'Open' }}</td> --}}
+                    <td>{{ $trn->trn_status ? 'Closed' : 'Open' }}</td>
                 </tr>
             @endforeach
             <tr>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -107,7 +101,7 @@
                 {{-- <td>
                     <b>{{ rupiah($transactions['total_cost_plan']) }}</b>
                 </td> --}}
-                <td>
+                <td style="text-align: right">
                     <b>{{ rupiah($transactions['total_cost']) }}</b>
                 </td>
             </tr>

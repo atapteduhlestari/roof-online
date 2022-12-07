@@ -12,7 +12,7 @@ function formatTimeDoc($param, $extension)
 
 function createDate($param)
 {
-    return Carbon::create($param);
+    return $param ? Carbon::create($param) : '';
 }
 
 function remaining($param)

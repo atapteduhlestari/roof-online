@@ -4,7 +4,7 @@
 
 <head>
     <meta http-equiv="content-type" content="text/plain; charset=UTF-8" />
-    <title>List Assets</title>
+    <title>Report Asset Detail</title>
 
     <style>
         table,
@@ -25,46 +25,39 @@
     <table>
         <thead>
             <tr>
-                <th colspan="3" rowspan="5">
-
-                </th>
-                <td colspan="3" style="text-align:center; font-size:14; vertical-align: middle;">
+                <td colspan="2" style="font-size:12;">
                     <strong>PT ATAP TEDUH LESTARI</strong>
                 </td>
-                <td>
-                    No. Dokumen
+                <td>Tanggal Cetak: {{ now()->format('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="font-size:12;">
+                    <strong>Laporan Detail Asset</strong>
                 </td>
-                <td>ATL-HOJ-SOP-GAN-03-01</td>
+
             </tr>
             <tr>
-                <td colspan="3" rowspan="2" style="text-align:center; font-size:14;">
-                    <strong>FORM</strong>
+                <td colspan="2" style="font-size:12;">
+                    <strong>Periode : {{ $data['periode'] }}</strong>
                 </td>
-                <td>Revisi</td>
-                <td>00</td>
             </tr>
             <tr>
-                <td>Tanggal</td>
-                <td>{{ now()->format('d/m/Y') }}</td>
+                <td colspan="8">&nbsp; </td>
             </tr>
             <tr>
-                <td colspan="3" rowspan="2" style="text-align:center; font-size:14; vertical-align: middle;">
-                    <strong>KARTU INVENTARISASI ASSET</strong>
-                </td>
-                <td>Department</td>
-                <td>General Affair (GAN)</td>
+                <td colspan="12">Filter = SBU : {{ $data['sbu'] }}| Condition :
+                    {{ $data['condition'] }}| Total Cost
+                    :{{ rupiah($data['total_cost']) }} | Total
+                    Data : {{ $data['total_data'] }}</td>
             </tr>
             <tr>
-                <td colspan="2">&nbsp;</td>
-            </tr>
-            <tr>
-                <td colspan="14">&nbsp;</td>
+                <td colspan="8">&nbsp;</td>
             </tr>
             {{-- <tr>
                 <td colspan="13">&nbsp;</td>
             </tr> --}}
             <tr>
-                <th>#</th>
+                <th>No</th>
                 <th>Name</th>
                 <th>SBU</th>
                 <th>Location</th>
@@ -76,7 +69,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($assets as $asset)
+            @foreach ($data['assets'] as $asset)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $asset->asset_name }}</td>
@@ -85,7 +78,7 @@
                     <td>{{ $asset->condition == 1 ? 'Baik' : ($asset->condition == 2 ? 'Kurang' : 'Rusak') }}</td>
                     <td>{{ $asset->employee->name ?? '' }}</td>
                     <td>{{ createDate($asset->pcs_date)->format('d/m/Y') }}</td>
-                    <td>{{ rupiah($asset->pcs_value) }}</td>
+                    <td style="text-align: right;">{{ rupiah($asset->pcs_value) }}</td>
                     {{-- <td>
                         {{ $asset->appraisals()->exists() ? createDate($asset->appraisals->last()->apr_date)->format('d/m/Y') : null }}
                     </td>
@@ -96,6 +89,20 @@
                     {{-- <td>{{ $asset->desc }}</td> --}}
                 </tr>
             @endforeach
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="text-align: right;">
+                <b>Total</b>
+            </td>
+            <td style="text-align: right;">
+                <b>
+                    {{ rupiah($data['assets']->sum('pcs_value')) }}
+                </b>
+            </td>
         </tbody>
     </table>
 </body>

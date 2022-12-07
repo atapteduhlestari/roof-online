@@ -103,7 +103,7 @@
                 <a class="nav-link {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') ? '' : 'collapsed' }}"
                     href="#" data-toggle="collapse" data-target="#collapseTransaction" aria-expanded="true"
                     aria-controls="collapseTransaction">
-                    <i class="fas fa-hand-holding-usd"></i>
+                    <i class="fas fa-fw fa-hand-holding-usd"></i>
                     <span>Transaction</span>
                 </a>
                 <div id="collapseTransaction"
@@ -117,9 +117,15 @@
                     </div>
                 </div>
             </li>
+            <li class="nav-item  {{ request()->is('report*') ? 'active' : '' }}">
+                <a class="nav-link" href="/report">
+                    <i class="fas fa-fw fa-file-download"></i>
+                    <span>Report</span>
+                </a>
+            </li>
             <li class="nav-item  {{ request()->is('form*') ? 'active' : '' }}">
                 <a class="nav-link" href="/form">
-                    <i class="far fa-fw fa-file-alt"></i>
+                    <i class="fas fa-fw fa-folder-open"></i>
                     <span>Forms</span>
                 </a>
             </li>

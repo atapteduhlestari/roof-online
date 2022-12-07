@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
-class AssetExportView implements
+class MaintenanceExportDetailView implements
     FromView,
     WithProperties,
     WithEvents,
@@ -25,8 +25,8 @@ class AssetExportView implements
 
     public function view(): View
     {
-        $assets = $this->data;
-        return view('export.asset', compact('assets'));
+        $transactions = $this->data;
+        return view('export.maintenance', compact('transactions'));
     }
 
     public function properties(): array
@@ -34,14 +34,13 @@ class AssetExportView implements
         return [
             'creator'        => 'IT - Edward',
             'lastModifiedBy' => 'Administrator',
-            'title'          => 'List Asset Detail Report',
-            'description'    => 'List Asset Detail Report',
-            'subject'        => 'List Asset Detail Report',
+            'title'          => 'Maintenance Detail Report',
+            'description'    => 'Maintenance Detail Report',
+            'subject'        => 'Maintenance Detail Report',
             'category'       => 'Report',
             'company'        => 'PT. ATAP TEDUH LESTARI',
         ];
     }
-
 
     public function registerEvents(): array
     {
@@ -55,10 +54,10 @@ class AssetExportView implements
                 $cellRange = 'A1:B3';
                 $sheet = $event->sheet;
 
-                $sheet->getStyle('A7:H7')->getFill()
+                $sheet->getStyle('A7:L7')->getFill()
                     ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
                     ->getStartColor()->setARGB('E5E4E2');
-                $sheet->getDelegate()->getStyle('A7:H7')->getFont()->setBold(true);
+                $sheet->getDelegate()->getStyle('A7:L7')->getFont()->setBold(true);
                 $sheet->getDelegate()->getStyle($cellRange)->applyFromArray($styleArray);
             },
         ];

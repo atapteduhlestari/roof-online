@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SBU;
 use App\Models\Asset;
 use App\Models\Employee;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
 use App\Models\TrnMaintenance;
-use App\Exports\MaintenanceExportView;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
+use App\Exports\MaintenanceExportDetailView;
 use App\Http\Requests\TrnMaintenanceRequest;
-use App\Models\SBU;
+use App\Exports\MaintenanceExportSummaryView;
 
 class TrnMaintenanceController extends Controller
 {
@@ -22,10 +23,10 @@ class TrnMaintenanceController extends Controller
         // $trnMaintenances = TrnMaintenance::select(['trn_desc', 'trn_date'])->where('trn_status', false)->get();
         // return $trnMaintenances;
         if (isSuperadmin())
-            $trnMaintenances = TrnMaintenance::search($data)->orderBy('trn_start_date', 'asc')->get();
+            $trnMaintenances = TrnMaintenance::search($data)->orderBy('trn_date', 'asc')->get();
 
         else
-            $trnMaintenances = TrnMaintenance::search($data)->where('sbu_id', userSBU())->orderBy('trn_start_date', 'asc')->get();
+            $trnMaintenances = TrnMaintenance::search($data)->where('sbu_id', userSBU())->orderBy('trn_date', 'asc')->get();
 
         $maintenances = Maintenance::get();
         $assets = Asset::with('sbu')->orderBy('asset_name', 'asc')->get();
@@ -95,17 +96,26 @@ class TrnMaintenanceController extends Controller
             return redirect()->back()->with('warning', 'Access Denied!');
     }
 
-    public function export()
+    /*public function export()
     {
-        $data['transactions'] = request()->all();
+        $data['request'] = request()->all();
 
         if (isSuperadmin())
-            $data['transactions'] =  TrnMaintenance::filter($data['transactions'])->whereNotNull('trn_value')->get();
+            $data['transactions'] =  TrnMaintenance::filter($data['request'])->orderBy('trn_start_date')->whereNotNull('trn_value')->get();
         else
-            $data['transactions'] = TrnMaintenance::filter($data['transactions'])->where('sbu_id', userSBU())->whereNotNull('trn_value')->get();
+            $data['transactions'] = TrnMaintenance::filter($data['request'])->where('sbu_id', userSBU())->orderBy('trn_start_date')->whereNotNull('trn_value')->get();
 
+        $sbu = SBU::find(request('sbu_id'));
         $time = now()->format('dmY');
         $name = "ATL-GAN-MAI-{$time}.xlsx";
+
+        $data['sbu'] = request('sbu_id') ? $sbu->sbu_name : 'All';
+        $data['status'] = (request('status') == 1) ? 'Closed' : ((request('status') == null) ? 'All' : 'Open');
+        $data['start'] = createDate(request('start_date'));
+        $data['due'] = createDate(request('due_date'));
+        $data['total_cost'] =  $data['transactions']->sum('trn_value');
+        $data['total_data'] = $data['transactions']->count();
+        return $data;
 
         $data['total_cost'] = 0;
         $data['total_cost_plan'] = 0;
@@ -117,9 +127,11 @@ class TrnMaintenanceController extends Controller
             $data['total_cost_plan'] += $v->trn_value_plan;
         }
 
-        // return Excel::download(new MaintenanceExport($data), $name);
+        $transactions['total_cost_plan'] =  $data['total_cost_plan'];
+
+        return Excel::download(new MaintenanceExport($data), $name);
         return Excel::download(new MaintenanceExportView($data), $name);
-    }
+    }*/
 
     public function edit(TrnMaintenance $trnMaintenance)
     {
@@ -228,5 +240,106 @@ class TrnMaintenanceController extends Controller
     {
         $path = public_path() . $trnMaintenance->takeDoc;
         return response()->download($path);
+    }
+
+    public function detailView()
+    {
+        $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
+        return view('report.detail.maintenance', compact('SBUs'));
+    }
+
+    public function summaryView()
+    {
+        $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
+        return view('report.summary.maintenance', compact('SBUs'));
+    }
+
+    public function reportDetail()
+    {
+        if (request('start') > request('end'))
+            return redirect()->back()->with('warning', 'Start date must be lower than End date');
+
+        $data['request'] = request()->all();
+
+        if (isSuperadmin())
+            $data['transactions'] =  TrnMaintenance::filter($data['request'])->orderBy('trn_start_date')->whereNotNull('trn_value')->get();
+        else
+            $data['transactions'] = TrnMaintenance::filter($data['request'])->where('sbu_id', userSBU())->orderBy('trn_start_date')->whereNotNull('trn_value')->get();
+
+        if (count($data['transactions']) <= 0)
+            return redirect()->back()->with('warning', 'No data available');
+
+        $sbu = SBU::find(request('sbu_id'));
+        $time = now()->format('dmY');
+        $name = "ATL-GAN-MAI-DETAIL-{$time}.xlsx";
+
+        $data['sbu'] = request('sbu_id') ? $sbu->sbu_name : 'All';
+        $data['status'] = (request('status') == 1) ? 'Closed' : ((request('status') == null) ? 'All' : 'Open');
+        $data['periode'] = $this->getPeriodeExport(request());
+        $data['total_cost'] =  $data['transactions']->sum('trn_value');
+        $data['total_cost_plan'] =  $data['transactions']->sum('trn_value_plan');
+        $data['total_data'] = $data['transactions']->count();
+
+        // return Excel::download(new MaintenanceExport($data), $name);
+        return Excel::download(new MaintenanceExportDetailView($data), $name);
+    }
+
+    public function reportSummary()
+    {
+        if (request('start') > request('end'))
+            return redirect()->back()->with('warning', 'Start date must be lower than End date');
+
+        $data['request'] = request()->all();
+
+        $data['transactions'] = TrnMaintenance::filter($data['request'])->whereNotNull('trn_value')->with(['sbu' => function ($q) {
+            $q->select('id', 'sbu_name');
+        }])->get()->groupBy('sbu.sbu_name');
+
+        if (count($data['transactions']) <= 0)
+            return redirect()->back()->with('warning', 'No data available');
+
+        $time = now()->format('dmY');
+        $name = "ATL-GAN-MAI-SUMMARY-{$time}.xlsx";
+        $trn = TrnMaintenance::filter($data['request'])->whereNotNull('trn_value')->get();
+
+        $data['periode'] = $this->getPeriodeExport(request());
+        $data['total_cost'] = $trn->sum('trn_value');
+        $data['total_qty'] = $trn->count();
+
+        // return view('export.summary.maintenance', compact('data'));
+        return Excel::download(new MaintenanceExportSummaryView($data), $name);
+    }
+
+    public function getPeriodeExport($data)
+    {
+        $start = null;
+        $startYear = null;
+        $end = null;
+        $endYear = null;
+
+        if ($data['start']) {
+            $start = createDate($data['start'])->format('F');
+            $startYear = createDate($data['start'])->format('Y');
+        }
+
+        if ($data['end']) {
+            $end = createDate($data['end'])->format('F');
+            $endYear = createDate($data['end'])->format('Y');
+        }
+
+        $sd = 'sd';
+
+        if ($start ==  $end && $startYear == $endYear) {
+            $end = null;
+            $endYear = null;
+            $sd = null;
+        }
+
+        if ($startYear == $endYear) {
+            $startYear = null;
+        }
+
+        $periode = isset($periode) ? "$start $startYear $sd $end $endYear" : 'All';
+        return $periode;
     }
 }

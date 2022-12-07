@@ -12,9 +12,6 @@
             <div class="flex-grow-1">
                 <h1 class="h3 mb-2 text-gray-800">Assets | {{ $asset->group->asset_group_name }}</h1>
             </div>
-            <a href="" class="btn btn-outline-dark">
-                <i class="fas fa-print"></i>
-            </a>
         </div>
         <div class="card shadow mb-4 h-100">
             <div class="card-header py-3">
@@ -25,6 +22,9 @@
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-lg-6">
+                        <a href="/asset-parent/export/{{ $asset->id }}" class="btn btn-outline-success btn-sm px-3">
+                            <i class="fas fa-print"></i> Print Detail
+                        </a>
                         <img class="img-fluid px-3 px-sm-4 my-5"
                             src="{{ $asset->image ? $asset->takeImage : asset('/assets/img/empty-img.jpeg') }}">
                         <div class="row">

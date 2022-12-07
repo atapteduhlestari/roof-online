@@ -108,6 +108,11 @@ class DashboardController extends Controller
         return $calendar;
     }
 
+    public function report()
+    {
+        return view('report.index');
+    }
+
     public function formISO()
     {
         $path = public_path('uploads');

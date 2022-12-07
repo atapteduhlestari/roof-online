@@ -39,15 +39,15 @@ class TrnRenewal extends Model
 
     public function scopeFilter($query, $filters)
     {
-        $query->when($filters['start_date']  ?? false, function ($query, $from) {
+        $query->when($filters['start']  ?? false, function ($query, $from) {
             return $query->whereDate('trn_start_date', '>=', $from);
         });
 
-        $query->when($filters['due_date']  ?? false, function ($query, $to) {
+        $query->when($filters['end']  ?? false, function ($query, $to) {
             return $query->whereDate('trn_date', '<=', $to);
         });
 
-        $query->when($filters['sbu_export_id'] ?? false, function ($query, $sbu) {
+        $query->when($filters['sbu_id'] ?? false, function ($query, $sbu) {
             return $query->whereHas('sbu', function ($q) use ($sbu) {
                 $q->where('sbu_id', $sbu);
             });

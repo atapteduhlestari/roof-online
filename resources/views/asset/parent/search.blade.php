@@ -161,12 +161,15 @@
                 </strong>
                 | Date From =
                 <strong>
-                    {{ createDate(request('search_date_before'))->format('d/m/Y') }}
-
+                    @if (request('search_date_before'))
+                        {{ createDate(request('search_date_before'))->format('d/m/Y') }}
+                    @endif
                 </strong>
                 | Date To =
                 <strong>
-                    {{ createDate(request('search_date_after'))->format('d/m/Y') }}
+                    @if (request('search_date_after'))
+                        {{ createDate(request('search_date_after'))->format('d/m/Y') }}
+                    @endif
                 </strong>
 
                 | SBU =
