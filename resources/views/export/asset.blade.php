@@ -45,7 +45,7 @@
                 <td colspan="8">&nbsp; </td>
             </tr>
             <tr>
-                <td colspan="12">Filter = SBU : {{ $data['sbu'] }}| Condition :
+                <td colspan="8">Filter = SBU : {{ $data['sbu'] }}| Condition :
                     {{ $data['condition'] }}| Total Cost
                     :{{ rupiah($data['total_cost']) }} | Total
                     Data : {{ $data['total_data'] }}</td>

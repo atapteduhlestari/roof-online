@@ -256,6 +256,11 @@ class TrnMaintenanceController extends Controller
 
     public function reportDetail()
     {
+        // request()->validate([
+        //     'start' => 'required',
+        //     'end' => 'required'
+        // ]);
+
         if (request('start') > request('end'))
             return redirect()->back()->with('warning', 'Start date must be lower than End date');
 
@@ -286,6 +291,11 @@ class TrnMaintenanceController extends Controller
 
     public function reportSummary()
     {
+        // request()->validate([
+        //     'start' => 'required',
+        //     'end' => 'required'
+        // ]);
+
         if (request('start') > request('end'))
             return redirect()->back()->with('warning', 'Start date must be lower than End date');
 
@@ -339,7 +349,9 @@ class TrnMaintenanceController extends Controller
             $startYear = null;
         }
 
-        $periode = isset($periode) ? "$start $startYear $sd $end $endYear" : 'All';
+        $text = "$start $startYear $sd $end $endYear";
+        $periode = trim($text) == '' ? 'All' : $text;
+
         return $periode;
     }
 }

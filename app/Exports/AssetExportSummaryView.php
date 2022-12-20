@@ -6,10 +6,11 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithEvents;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
-class AssetExportView implements
+class AssetExportSummaryView implements
     FromView,
     WithProperties,
     WithEvents,
@@ -26,7 +27,7 @@ class AssetExportView implements
     public function view(): View
     {
         $data = $this->data;
-        return view('export.asset', compact('data'));
+        return view('export.summary.asset', compact('data'));
     }
 
     public function properties(): array
@@ -55,11 +56,15 @@ class AssetExportView implements
                 $cellRange = 'A1:B3';
                 $sheet = $event->sheet;
 
-                $sheet->getStyle('A7:H7')->getFill()
+                $sheet->getStyle('A7:G8')->getFill()
                     ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
                     ->getStartColor()->setARGB('E5E4E2');
-                $sheet->getDelegate()->getStyle('A7:H7')->getFont()->setBold(true);
+                $sheet->getStyle('A7:G8')->getBorders()->getAllBorders()
+                    ->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+                $sheet->getDelegate()->getStyle('A7:G8')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+                $sheet->getDelegate()->getStyle('A7:G7')->getFont()->setBold(true);
                 $sheet->getDelegate()->getStyle($cellRange)->applyFromArray($styleArray);
+                $sheet->getDelegate()->getStyle('A7')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
             },
         ];
     }

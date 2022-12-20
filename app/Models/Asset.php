@@ -109,6 +109,7 @@ class Asset extends Model
             return $query->whereDate('pcs_date', '>=', $from);
         });
 
+
         $query->when($filters['end']  ?? false, function ($query, $to) {
             return $query->whereDate('pcs_date', '<=', $to);
         });

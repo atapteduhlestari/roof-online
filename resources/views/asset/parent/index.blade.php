@@ -14,11 +14,6 @@
                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addNewRecord">
                     Add <i class="fas fa-plus-circle"></i>
                 </button>
-
-                <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseExport"
-                    aria-expanded="false" aria-controls="collapseExport">
-                    Export <i class="fas fa-file-export"></i>
-                </button>
             </div>
 
             <div class="my-3">
@@ -92,68 +87,6 @@
                 </form>
             </div>
         </div>
-
-        <div class="collapse" id="collapseExport">
-            <div class="card card-body mt-3">
-                <h6 class="mb-3 font-weight-bold text-primary">Export Filter</h6>
-                <form action="/asset-export/all" method="get">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="date_before">Date</label>
-                            <div class="form-group d-flex">
-                                <input type="date" class="form-control form-control-sm" id="date_before"
-                                    name="date_before" value="{{ request('date_before') }}">
-                            </div>
-                            <div class="form-group d-flex">
-                                <input type="date" class="form-control form-control-sm" id="date_after" name="date_after"
-                                    value="{{ request('date_after') }}">
-                            </div>
-                        </div>
-                        @can('superadmin')
-                            <div class="col-md-6">
-                                <label for="sbu">SBU</label>
-                                <select class="form-control form-control-sm @error('sbu') is-invalid @enderror" name="sbu"
-                                    id="sbu">
-                                    <option value=""></option>
-                                    @foreach ($SBUs as $sbu_search)
-                                        <option value="{{ $sbu_search->id }}"
-                                            {{ request('sbu') == $sbu_search->id ? 'selected' : '' }}>
-                                            {{ $sbu_search->sbu_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        @endcan
-                        <div class="col-md-6 mb-3">
-                            <label for="condition">Condition</label>
-                            <select class="form-control form-control-sm @error('condition') is-invalid @enderror"
-                                name="condition" id="condition">
-                                <option value=""></option>
-                                <option class="text-success" value="1"
-                                    {{ request('condition') == 1 ? 'selected' : '' }}>
-                                    Baik
-                                </option>
-                                <option class="text-warning" value="2"
-                                    {{ request('condition') == 2 ? 'selected' : '' }}>
-                                    Kurang
-                                </option>
-                                <option class="text-danger" value="3"
-                                    {{ request('condition') == 3 ? 'selected' : '' }}>
-                                    Rusak
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
-                            <button type="submit" class="btn btn-success rounded text-xs">
-                                Generate <i class="fas fa-file-excel"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
         <!-- DataTales Example -->
         <div class="card shadow my-4">
             <div class="card-header py-3">
@@ -238,8 +171,8 @@
                             <div class="col-md-6 mb-3">
                                 <label for="asset_name">Asset Name</label>
                                 <input type="text" class="form-control @error('asset_name') is-invalid @enderror"
-                                    name="asset_name" id="asset_name" value="{{ old('asset_name') }}"
-                                    autocomplete="off" autofocus>
+                                    name="asset_name" id="asset_name" value="{{ old('asset_name') }}" autocomplete="off"
+                                    autofocus>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">

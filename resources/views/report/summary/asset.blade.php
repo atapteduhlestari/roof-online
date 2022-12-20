@@ -2,6 +2,9 @@
 @section('title', 'GA | Asset Transaction')
 @section('container')
     <div class="container-fluid">
+        <a href="/report" class="btn btn-secondary btn-sm mr-2">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
         <div class="card card-body mt-3">
             <h6 class="mb-3 font-weight-bold text-primary">Report Asset Summary</h6>
             <form action="/asset-summary-export" method="get">

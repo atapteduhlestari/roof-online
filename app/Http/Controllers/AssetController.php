@@ -8,11 +8,12 @@ use App\Models\Asset;
 use App\Models\Employee;
 use App\Models\AssetChild;
 use App\Models\AssetGroup;
-use App\Exports\AssetExportView;
 use Illuminate\Http\Request;
+use App\Exports\AssetExportView;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\AssetRequest;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\AssetExportSummaryView;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -151,12 +152,11 @@ class AssetController extends Controller
     public function export($param)
     {
         $data = request()->all();
+
         if (isSuperadmin())
             $data['assets'] = $param == 'all' ? Asset::with('sbu', 'employee')->filter($data)->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->get() : Asset::with('sbu', 'employee')->where('asset_group_id', $param)->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->filter($data)->get();
         else
             $data['assets'] = $param == 'all' ? Asset::with('sbu', 'employee')->where('sbu_id', userSBU())->filter($data)->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->get() : Asset::with('sbu', 'employee')->where('asset_group_id', $param)->where('sbu_id', userSBU())->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->filter($data)->get();
-
-
 
         $sbu = SBU::find(request('sbu_id'));
         $time = now()->format('dmY');
@@ -320,8 +320,8 @@ class AssetController extends Controller
         $data['total_data'] = $data['assets']->count();
         $data['periode'] = $this->getPeriodeExport(request());
 
-        return view('export.asset', compact('data'));
-        // return Excel::download(new AssetExportView($data), $name);
+        // return view('export.asset', compact('data'));
+        return Excel::download(new AssetExportView($data), $name);
     }
 
     public function reportSummary()
@@ -332,16 +332,24 @@ class AssetController extends Controller
             $q->select('id', 'sbu_name');
         }])->get()->groupBy('sbu.sbu_name');
 
+
+        $sbu = SBU::find(request('sbu_id'));
+        $time = now()->format('dmY');
+        $name = "ATL-GAN-ASSET-SUMMARY-{$time}.xlsx";
         $asset = Asset::filter($data['request'])->get();
 
+        $data['periode'] = $this->getPeriodeExport(request());
         $data['total_baik']  = $asset->where('condition', 1)->count();
         $data['total_cost_baik'] = $asset->where('condition', 1)->sum('pcs_value');
         $data['total_kurang']  = $asset->where('condition', 2)->count();
         $data['total_cost_kurang'] = $asset->where('condition', 2)->sum('pcs_value');
         $data['total_rusak']  = $asset->where('condition', 3)->count();
         $data['total_cost_rusak'] = $asset->where('condition', 3)->sum('pcs_value');
+        $data['total_cost'] = $asset->sum('pcs_value');
+        $data['total_data'] = $asset->count();
 
-        return view('assetTes', compact('data'));
+        // return view('export.summary.asset', compact('data'));
+        return Excel::download(new AssetExportSummaryView($data), $name);
     }
 
     public function getPeriodeExport($data)
@@ -373,7 +381,9 @@ class AssetController extends Controller
             $startYear = null;
         }
 
-        $periode = isset($periode) ? "$start $startYear $sd $end $endYear" : 'All';
+        $text = "$start $startYear $sd $end $endYear";
+        $periode = trim($text) == '' ? 'All' : $text;
+
         return $periode;
     }
 

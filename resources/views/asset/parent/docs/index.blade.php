@@ -12,6 +12,9 @@
             <div class="flex-grow-1">
                 <h1 class="h3 mb-2 text-gray-800">Assets | {{ $asset->group->asset_group_name }}</h1>
             </div>
+            <a href="/asset-parent" class="btn btn-secondary btn-sm">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
         </div>
         <div class="card shadow mb-4 h-100">
             <div class="card-header py-3">
