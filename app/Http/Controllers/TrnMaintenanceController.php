@@ -202,7 +202,8 @@ class TrnMaintenanceController extends Controller
 
         request()->validate([
             'trn_start_date' => 'required',
-            'trn_date' => 'required'
+            'trn_date' => 'required',
+            'trn_value_plan' => 'required'
         ]);
 
         $trnMaintenance->update([
@@ -232,6 +233,7 @@ class TrnMaintenanceController extends Controller
         $trn->trn_value  = null;
         $trn->trn_desc = '<span class="text-info font-weight-bold">(PLAN)</span> ' . $trn->trn_desc;
         $trn->file  = null;
+        $trn->trn_status = 0;
 
         return $trn->toArray();
     }

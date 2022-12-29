@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'GA | Detail maintenance Transaction')
+@section('title', 'GA | Detail Maintenance Transaction')
 @section('container')
     <div class="container-fluid">
         <div class="col-12 mb-3 text-center">

@@ -73,7 +73,7 @@ class Asset extends Model
             ->join('asset', 'trn_maintenance.asset_id', 'asset.id')
             ->join('asset_maintenance', 'trn_maintenance.maintenance_id', 'asset_maintenance.id')
             // ->groupBy('asset_maintenance.name', 'asset.asset_name')
-            ->where('trn_start_date', '<=', $time)
+            ->where('trn_date', '<=', $time)
             ->where('trn_status', false);
     }
 
@@ -88,7 +88,7 @@ class Asset extends Model
                 ->join('asset', 'trn_maintenance.asset_id', 'asset.id')
                 ->join('asset_maintenance', 'trn_maintenance.maintenance_id', 'asset_maintenance.id')
                 // ->groupBy('asset_maintenance.name', 'asset.asset_name')
-                ->where('trn_start_date', '<=', $time)
+                ->where('trn_date', '<=', $time)
                 ->where('trn_status', false);
         } else {
             return DB::table('trn_maintenance')
@@ -97,7 +97,7 @@ class Asset extends Model
                 ->join('asset_maintenance', 'trn_maintenance.maintenance_id', 'asset_maintenance.id')
                 ->join('sbu', 'trn_maintenance.sbu_id', 'sbu.id')
                 // ->groupBy('asset_maintenance.name', 'asset.asset_name')
-                ->where('trn_start_date', '<=', $time)
+                ->where('trn_date', '<=', $time)
                 ->where('trn_maintenance.sbu_id', userSBU())
                 ->where('trn_status', false);
         }

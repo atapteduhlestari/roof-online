@@ -54,7 +54,7 @@ class AssetChild extends Model
             ->join('sbu', 'trn_renewal.sbu_id', 'sbu.id')
             // ->groupBy('asset_renewal.name', 'asset_child.doc_name')
             ->where('trn_status', false)
-            ->where('trn_start_date', '<=', $time);
+            ->where('trn_date', '<=', $time);
     }
 
     public static function getLastTransaction($time)
@@ -75,7 +75,7 @@ class AssetChild extends Model
                 ->join('sbu', 'trn_renewal.sbu_id', 'sbu.id')
                 // ->groupBy('asset_renewal.name', 'asset_child.doc_name')
                 ->where('trn_status', false)
-                ->where('trn_start_date', '<=', $time);
+                ->where('trn_date', '<=', $time);
         } else {
             return DB::table('trn_renewal')
                 ->select(['trn_renewal.*', 'trn_renewal.id as trn_id',  'asset_child.*', 'asset_renewal.*, sbu.sbu_name'])
@@ -83,7 +83,7 @@ class AssetChild extends Model
                 ->join('asset_renewal', 'trn_renewal.renewal_id', 'asset_renewal.id')
                 ->join('sbu', 'trn_renewal.sbu_id', 'sbu.id')
                 // ->groupBy('asset_renewal.name', 'asset_child.doc_name')
-                ->where('trn_start_date', '<=', $time)
+                ->where('trn_date', '<=', $time)
                 ->where('trn_status', false)
                 ->where('trn_renewal.sbu_id', userSBU());
         }

@@ -229,6 +229,7 @@ class TrnRenewalController extends Controller
         $trn->trn_value  = null;
         $trn->trn_desc = '<span class="text-info font-weight-bold">(PLAN)</span> ' . $trn->trn_desc;
         $trn->file  = null;
+        $trn->trn_status = 0;
 
         return $trn->toArray();
     }
