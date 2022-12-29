@@ -28,11 +28,15 @@ Route::middleware(['auth', 'reminder'])->group(function () {
     Route::get('/trn-maintenance-detail-export', [TrnMaintenanceController::class, 'reportDetail']);
     Route::get('/report-maintenance-summary', [TrnMaintenanceController::class, 'summaryView']);
     Route::get('/trn-maintenance-summary-export', [TrnMaintenanceController::class, 'reportSummary']);
+    Route::get('/trn-maintenance-plan-export', [TrnMaintenanceController::class, 'reportPlan']);
+
 
     Route::get('/report-renewal-detail', [TrnRenewalController::class, 'detailView']);
     Route::get('/trn-renewal-detail-export', [TrnRenewalController::class, 'reportDetail']);
     Route::get('/report-renewal-summary', [TrnRenewalController::class, 'summaryView']);
     Route::get('/trn-renewal-summary-export', [TrnRenewalController::class, 'reportSummary']);
+    Route::get('/trn-renewal-plan-export', [TrnRenewalController::class, 'reportPlan']);
+
 
     Route::get('/report-asset-detail', [AssetController::class, 'detailView']);
     Route::get('/asset-detail-export', [AssetController::class, 'reportDetail']);

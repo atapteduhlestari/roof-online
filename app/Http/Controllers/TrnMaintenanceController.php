@@ -10,9 +10,10 @@ use Illuminate\Http\Request;
 use App\Models\TrnMaintenance;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
-use App\Exports\MaintenanceExportDetailView;
 use App\Http\Requests\TrnMaintenanceRequest;
+use App\Exports\MaintenanceExportDetailView;
 use App\Exports\MaintenanceExportSummaryView;
+use App\Exports\MaintenanceExportPlanView;
 
 class TrnMaintenanceController extends Controller
 {
@@ -95,43 +96,6 @@ class TrnMaintenanceController extends Controller
         else
             return redirect()->back()->with('warning', 'Access Denied!');
     }
-
-    /*public function export()
-    {
-        $data['request'] = request()->all();
-
-        if (isSuperadmin())
-            $data['transactions'] =  TrnMaintenance::filter($data['request'])->orderBy('trn_start_date')->whereNotNull('trn_value')->get();
-        else
-            $data['transactions'] = TrnMaintenance::filter($data['request'])->where('sbu_id', userSBU())->orderBy('trn_start_date')->whereNotNull('trn_value')->get();
-
-        $sbu = SBU::find(request('sbu_id'));
-        $time = now()->format('dmY');
-        $name = "ATL-GAN-MAI-{$time}.xlsx";
-
-        $data['sbu'] = request('sbu_id') ? $sbu->sbu_name : 'All';
-        $data['status'] = (request('status') == 1) ? 'Closed' : ((request('status') == null) ? 'All' : 'Open');
-        $data['start'] = createDate(request('start_date'));
-        $data['due'] = createDate(request('due_date'));
-        $data['total_cost'] =  $data['transactions']->sum('trn_value');
-        $data['total_data'] = $data['transactions']->count();
-        return $data;
-
-        $data['total_cost'] = 0;
-        $data['total_cost_plan'] = 0;
-
-        foreach ($data['transactions'] as $v) {
-            $data['total_cost'] += $v->trn_value;
-        }
-        foreach ($data['transactions'] as $v) {
-            $data['total_cost_plan'] += $v->trn_value_plan;
-        }
-
-        $transactions['total_cost_plan'] =  $data['total_cost_plan'];
-
-        return Excel::download(new MaintenanceExport($data), $name);
-        return Excel::download(new MaintenanceExportView($data), $name);
-    }*/
 
     public function edit(TrnMaintenance $trnMaintenance)
     {
@@ -229,7 +193,7 @@ class TrnMaintenanceController extends Controller
         $trn->trn_date  = $request['trn_date'];
         $trn->pemohon  = null;
         $trn->penyetuju  = null;
-        $trn->trn_value_plan  = null;
+        $trn->trn_value_plan  = removeDots($request['trn_value_plan']);
         $trn->trn_value  = null;
         $trn->trn_desc = '<span class="text-info font-weight-bold">(PLAN)</span> ' . $trn->trn_desc;
         $trn->file  = null;
@@ -320,6 +284,34 @@ class TrnMaintenanceController extends Controller
 
         // return view('export.summary.maintenance', compact('data'));
         return Excel::download(new MaintenanceExportSummaryView($data), $name);
+    }
+
+    public function reportPlan()
+    {
+        if (request('start') > request('end'))
+            return redirect()->back()->with('warning', 'Start date must be lower than End date');
+
+        $data['request'] = request()->all();
+
+        if (isSuperadmin())
+            $data['transactions'] = TrnMaintenance::filter($data['request'])->orderBy('trn_start_date')->whereNull('trn_value')->where('trn_type', 1)->get();
+        else
+            $data['transactions'] = TrnMaintenance::filter($data['request'])->where('sbu_id', userSBU())->orderBy('trn_start_date')->whereNull('trn_value')->where('trn_type', 1)->get();
+
+        if (count($data['transactions']) <= 0)
+            return redirect()->back()->with('warning', 'No data available');
+
+        $sbu = SBU::find(request('sbu_id'));
+        $time = now()->format('dmY');
+        $name = "ATL-GAN-MAI-PLAN-{$time}.xlsx";
+
+        $data['sbu'] = request('sbu_id') ? $sbu->sbu_name : '';
+        $data['status'] = (request('status') == 1) ? 'Closed' : ((request('status') == null) ? '' : 'Open');
+        $data['periode'] = $this->getPeriodeExport(request());
+        $data['total_cost_plan'] =  $data['transactions']->sum('trn_value_plan');
+        $data['total_data'] = $data['transactions']->count();
+
+        return Excel::download(new MaintenanceExportPlanView($data), $name);
     }
 
     public function getPeriodeExport($data)

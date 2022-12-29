@@ -161,11 +161,20 @@
                                 <input type="date" class="form-control @error('trn_date') is-invalid @enderror"
                                     name="trn_date" value="{{ old('trn_date') }}">
                             </div>
+
+
+                            <div class="col-md-6 mb-3">
+                                <label for="trn_value_plan">Cost Plan</label>
+                                <input type="text"
+                                    class="form-control currency @error('trn_value_plan') is-invalid @enderror"
+                                    name="trn_value_plan" value="{{ old('trn_value_plan') }}" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6 mb-3">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>
@@ -173,6 +182,12 @@
     </div>
 @endsection
 @push('scripts')
+    <script src="/js/jquery.mask.min.js"></script>
+    <script>
+        $('.currency').mask('000.000.000.000', {
+            reverse: true
+        });
+    </script>
     @if ($errors->any())
         <script>
             $('#setPlanModal').modal('show');

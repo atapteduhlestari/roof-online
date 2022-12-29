@@ -9,6 +9,7 @@ use App\Models\AssetChild;
 use App\Models\TrnRenewal;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\RenewalExportPlanView;
 use Illuminate\Support\Facades\Storage;
 use App\Exports\RenewalExportDetailView;
 use App\Http\Requests\TrnRenewalRequest;
@@ -199,7 +200,8 @@ class TrnRenewalController extends Controller
 
         request()->validate([
             'trn_start_date' => 'required',
-            'trn_date' => 'required'
+            'trn_date' => 'required',
+            'trn_value_plan' => 'required'
         ]);
 
         $trnRenewal->update([
@@ -225,7 +227,7 @@ class TrnRenewalController extends Controller
         $trn->trn_date  = $request['trn_date'];
         $trn->pemohon  = null;
         $trn->penyetuju  = null;
-        $trn->trn_value_plan  = null;
+        $trn->trn_value_plan  = removeDots($request['trn_value_plan']);
         $trn->trn_value  = null;
         $trn->trn_desc = '<span class="text-info font-weight-bold">(PLAN)</span> ' . $trn->trn_desc;
         $trn->file  = null;
@@ -316,6 +318,34 @@ class TrnRenewalController extends Controller
 
         // return view('export.summary.renewal', compact('data'));
         return Excel::download(new RenewalExportSummaryView($data), $name);
+    }
+
+    public function reportPlan()
+    {
+        if (request('start') > request('end'))
+            return redirect()->back()->with('warning', 'Start date must be lower than End date');
+
+        $data['request'] = request()->all();
+
+        if (isSuperadmin())
+            $data['transactions'] = TrnRenewal::filter($data['request'])->orderBy('trn_start_date')->whereNull('trn_value')->where('trn_type', 1)->get();
+        else
+            $data['transactions'] = TrnRenewal::filter($data['request'])->where('sbu_id', userSBU())->orderBy('trn_start_date')->whereNull('trn_value')->where('trn_type', 1)->get();
+
+        if (count($data['transactions']) <= 0)
+            return redirect()->back()->with('warning', 'No data available');
+
+        $sbu = SBU::find(request('sbu_id'));
+        $time = now()->format('dmY');
+        $name = "ATL-GAN-REN-PLAN-{$time}.xlsx";
+
+        $data['sbu'] = request('sbu_id') ? $sbu->sbu_name : '';
+        $data['status'] = (request('status') == 1) ? 'Closed' : ((request('status') == null) ? '' : 'Open');
+        $data['periode'] = $this->getPeriodeExport(request());
+        $data['total_cost_plan'] =  $data['transactions']->sum('trn_value_plan');
+        $data['total_data'] = $data['transactions']->count();
+
+        return Excel::download(new RenewalExportPlanView($data), $name);
     }
 
     public function getPeriodeExport($data)
