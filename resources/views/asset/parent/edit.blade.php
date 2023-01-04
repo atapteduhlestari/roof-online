@@ -116,6 +116,31 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="aktiva">Type Aktiva</label>
+                        <select class="form-control @error('aktiva') is-invalid @enderror" name="aktiva" id="aktiva">
+                            <option value=""></option>
+                            <option value="Bangunan" {{ old('aktiva', $asset->aktiva) == 'Bangunan' ? 'selected' : '' }}>
+                                Bangunan
+                            </option>
+                            <option value="Mesin" {{ old('aktiva', $asset->aktiva) == 'Mesin' ? 'selected' : '' }}>
+                                Mesin
+                            </option>
+                            <option value="Mobil" {{ old('aktiva', $asset->aktiva) == 'Mobil' ? 'selected' : '' }}>
+                                Mobil
+                            </option>
+                            <option value="Motor" {{ old('aktiva', $asset->aktiva) == 'Motor' ? 'selected' : '' }}>
+                                Motor
+                            </option>
+                            <option value="Peralatan" {{ old('aktiva', $asset->aktiva) == 'Peralatan' ? 'selected' : '' }}>
+                                Peralatan
+                            </option>
+                            <option value="Tanah" {{ old('aktiva', $asset->aktiva) == 'Tanah' ? 'selected' : '' }}>
+                                Tanah
+                            </option>
+                        </select>
+                    </div>
                 </div>
 
                 <hr>
@@ -123,8 +148,8 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="pcs_date">Purchase Date</label>
-                        <input type="date" class="form-control @error('pcs_date') is-invalid @enderror" name="pcs_date"
-                            id="pcs_date" value="{{ old('pcs_date', $asset->pcs_date) }}">
+                        <input type="date" class="form-control @error('pcs_date') is-invalid @enderror"
+                            name="pcs_date" id="pcs_date" value="{{ old('pcs_date', $asset->pcs_date) }}">
                     </div>
 
                     <div class="col-md-6 mb-3">

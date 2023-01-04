@@ -362,6 +362,32 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="aktiva">Type Aktiva</label>
+                                <select class="form-control @error('aktiva') is-invalid @enderror" name="aktiva"
+                                    id="aktiva">
+                                    <option value=""></option>
+                                    <option value="Bangunan" {{ old('aktiva') == 'Bangunan' ? 'selected' : '' }}>
+                                        Bangunan
+                                    </option>
+                                    <option value="Mesin" {{ old('aktiva') == 'Mesin' ? 'selected' : '' }}>
+                                        Mesin
+                                    </option>
+                                    <option value="Mobil" {{ old('aktiva') == 'Mobil' ? 'selected' : '' }}>
+                                        Mobil
+                                    </option>
+                                    <option value="Motor" {{ old('aktiva') == 'Motor' ? 'selected' : '' }}>
+                                        Motor
+                                    </option>
+                                    <option value="Peralatan" {{ old('aktiva') == 'Peralatan' ? 'selected' : '' }}>
+                                        Peralatan
+                                    </option>
+                                    <option value="Tanah" {{ old('aktiva') == 'Tanah' ? 'selected' : '' }}>
+                                        Tanah
+                                    </option>
+                                </select>
+                            </div>
                         </div>
 
                         <hr>

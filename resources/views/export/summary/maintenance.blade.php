@@ -26,11 +26,12 @@
 <body>
     <table class="table table-bordered">
         <tr>
+            <td colspan="2">{{ now()->format('d/m/Y') }}</td>
+        </tr>
+        <tr>
             <td colspan="2" style="font-size:12;">
                 <strong>PT ATAP TEDUH LESTARI</strong>
             </td>
-            <td>Tanggal Cetak: </td>
-            <td>{{ now()->format('d/m/Y') }}</td>
         </tr>
         <tr>
             <td colspan="2" style="font-size:12;">

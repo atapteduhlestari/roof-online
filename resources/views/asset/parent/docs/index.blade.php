@@ -83,6 +83,10 @@
                                     <td>{{ $asset->asset_no }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Aktiva</th>
+                                    <td>{{ $asset->aktiva }}</td>
+                                </tr>
+                                <tr>
                                     <th>SBU</th>
                                     <td>{{ $asset->sbu->sbu_name ?? '' }}</td>
                                 </tr>
