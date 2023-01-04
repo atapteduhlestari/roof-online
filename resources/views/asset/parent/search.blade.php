@@ -195,6 +195,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Asset Name</th>
+                                <th>Code</th>
                                 <th>SBU</th>
                                 <th>Purchase Date</th>
                                 <th>Purchase Value</th>
@@ -208,6 +209,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $asset->asset_name }}</td>
+                                    <td>{{ $asset->asset_code }}</td>
                                     <td>{{ $asset->sbu->sbu_name ?? '-' }}</td>
                                     <td class="block">{{ createDate($asset->pcs_date)->format('d F Y') }}</td>
                                     <td class="block">{{ rupiah($asset->pcs_value) }}</td>

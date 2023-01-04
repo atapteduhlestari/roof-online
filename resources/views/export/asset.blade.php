@@ -89,20 +89,22 @@
                     {{-- <td>{{ $asset->desc }}</td> --}}
                 </tr>
             @endforeach
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td style="text-align: right;">
-                <b>Total</b>
-            </td>
-            <td style="text-align: right;">
-                <b>
-                    {{ rupiah($data['assets']->sum('pcs_value')) }}
-                </b>
-            </td>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="text-align: right;">
+                    <b>Total</b>
+                </td>
+                <td style="text-align: right;">
+                    <b>
+                        {{ rupiah($data['assets']->sum('pcs_value')) }}
+                    </b>
+                </td>
+            </tr>
         </tbody>
     </table>
 </body>

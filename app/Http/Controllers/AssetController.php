@@ -21,8 +21,10 @@ class AssetController extends Controller
 {
     public function index()
     {
-        // $assets = Asset::where('sbu_id', 1)->where('image', null)->get();
-        // return $assets;
+
+        // $assetsUnique = $assets->unique(['asset_code']);
+        // $userDuplicates = $assets->diff($assets);
+        // return $userDuplicates;
 
         // foreach ($assets as $asset) {
         //     if ($asset->image) {
