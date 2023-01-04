@@ -53,14 +53,14 @@ class RenewalExportSummaryView implements
                 ];
 
                 $sheet = $event->sheet;
-                $cellRange = 'A7:D1000';
+                $cellRange = 'A8:D1000';
                 // $event->sheet->getDelegate()->getColumnDimension('A')->setAutoSize(true);
-                // $sheet->getStyle('A7:D7')->getBorders()->getAllBorders()
+                // $sheet->getStyle('A8:D8')->getBorders()->getAllBorders()
                 //     ->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-                $sheet->getStyle('A7:D7')->getFill()
+                $sheet->getStyle('A8:D8')->getFill()
                     ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
                     ->getStartColor()->setARGB('E5E4E2');
-                $sheet->getDelegate()->getStyle('A7:D7')->getFont()->setBold(true);
+                $sheet->getDelegate()->getStyle('A8:D8')->getFont()->setBold(true);
                 $sheet->getDelegate()->getStyle($cellRange)->applyFromArray($styleArray);
             },
         ];

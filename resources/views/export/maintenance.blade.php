@@ -24,10 +24,12 @@
     <table>
         <thead>
             <tr>
+                <td colspan="2">{{ now()->format('d/m/Y') }}</td>
+            </tr>
+            <tr>
                 <td colspan="2" style="font-size:12;">
                     <strong>PT ATAP TEDUH LESTARI</strong>
                 </td>
-                <td>Tanggal Cetak: {{ now()->format('d/m/Y') }}</td>
             </tr>
             <tr>
                 <td colspan="2" style="font-size:12;">

@@ -54,10 +54,10 @@ class MaintenanceExportPlanView implements
                 $cellRange = 'A1:B3';
                 $sheet = $event->sheet;
 
-                $sheet->getStyle('A7:I7')->getFill()
+                $sheet->getStyle('A8:I8')->getFill()
                     ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
                     ->getStartColor()->setARGB('E5E4E2');
-                $sheet->getDelegate()->getStyle('A7:I7')->getFont()->setBold(true);
+                $sheet->getDelegate()->getStyle('A8:I8')->getFont()->setBold(true);
                 $sheet->getDelegate()->getStyle($cellRange)->applyFromArray($styleArray);
             },
         ];

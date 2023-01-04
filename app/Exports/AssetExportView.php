@@ -55,10 +55,10 @@ class AssetExportView implements
                 $cellRange = 'A1:B3';
                 $sheet = $event->sheet;
 
-                $sheet->getStyle('A7:H7')->getFill()
+                $sheet->getStyle('A8:H8')->getFill()
                     ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
                     ->getStartColor()->setARGB('E5E4E2');
-                $sheet->getDelegate()->getStyle('A7:H7')->getFont()->setBold(true);
+                $sheet->getDelegate()->getStyle('A8:H8')->getFont()->setBold(true);
                 $sheet->getDelegate()->getStyle($cellRange)->applyFromArray($styleArray);
             },
         ];
