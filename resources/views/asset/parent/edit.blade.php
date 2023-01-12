@@ -133,7 +133,8 @@
                             <option value="Motor" {{ old('aktiva', $asset->aktiva) == 'Motor' ? 'selected' : '' }}>
                                 Motor
                             </option>
-                            <option value="Peralatan" {{ old('aktiva', $asset->aktiva) == 'Peralatan' ? 'selected' : '' }}>
+                            <option value="Peralatan"
+                                {{ old('aktiva', $asset->aktiva) == 'Peralatan' ? 'selected' : '' }}>
                                 Peralatan
                             </option>
                             <option value="Tanah" {{ old('aktiva', $asset->aktiva) == 'Tanah' ? 'selected' : '' }}>
@@ -156,6 +157,13 @@
                         <label for="pcs_value">Purchase Value</label>
                         <input type="text" class="form-control currency @error('pcs_value') is-invalid @enderror"
                             name="pcs_value" id="pcs_value" value="{{ old('pcs_value', $asset->pcs_value) }}"
+                            autocomplete="off">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="nilai_buku">Nilai Buku</label>
+                        <input type="text" class="form-control currency @error('nilai_buku') is-invalid @enderror"
+                            name="nilai_buku" id="nilai_buku" value="{{ old('nilai_buku', $asset->nilai_buku) }}"
                             autocomplete="off">
                     </div>
 

@@ -56,15 +56,15 @@ class AssetExportSummaryView implements
                 $cellRange = 'A1:B3';
                 $sheet = $event->sheet;
 
-                $sheet->getStyle('A8:G9')->getFill()
+                $sheet->getStyle('A8:E9')->getFill()
                     ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
                     ->getStartColor()->setARGB('E5E4E2');
-                $sheet->getStyle('A8:G9')->getBorders()->getAllBorders()
+                $sheet->getStyle('A8:E9')->getBorders()->getAllBorders()
                     ->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-                $sheet->getDelegate()->getStyle('A8:G9')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-                $sheet->getDelegate()->getStyle('A7:G7')->getFont()->setBold(true);
+                $sheet->getDelegate()->getStyle('A8:E9')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+                $sheet->getDelegate()->getStyle('A8:E8')->getFont()->setBold(true);
                 $sheet->getDelegate()->getStyle($cellRange)->applyFromArray($styleArray);
-                $sheet->getDelegate()->getStyle('A7')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+                $sheet->getDelegate()->getStyle('A8')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
             },
         ];
     }

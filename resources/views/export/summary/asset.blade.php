@@ -58,15 +58,12 @@
         <tr>
             <th rowspan="2">SBU</th>
             <th colspan="2">Baik</th>
-            <th colspan="2">Kurang</th>
-            <th colspan="2">Rusak6</th>
+            <th colspan="2">Rusak</th>
         </tr>
         <tr>
-            <th>Asset qty</th>
+            <th>qty</th>
             <th>Total Cost</th>
-            <th>Asset qty</th>
-            <th>Total Cost</th>
-            <th>Asset qty</th>
+            <th>qty</th>
             <th>Total Cost</th>
         </tr>
         @foreach ($data['assets'] as $key => $asset)
@@ -77,12 +74,6 @@
                 </td>
                 <td style="text-align: right;">
                     {{ rupiah($asset->where('condition', 1)->sum('pcs_value')) }}
-                </td>
-                <td style="text-align: center">
-                    {{ $asset->where('condition', 2)->count() }}
-                </td>
-                <td style="text-align: right;">
-                    {{ rupiah($asset->where('condition', 2)->sum('pcs_value')) }}
                 </td>
                 <td style="text-align: center">
                     {{ $asset->where('condition', 3)->count() }}
@@ -99,8 +90,6 @@
             </th>
             <th style="text-align: center">{{ $data['total_baik'] }}</th>
             <th style="text-align: right">{{ rupiah($data['total_cost_baik']) }}</th>
-            <th style="text-align: center">{{ $data['total_kurang'] }}</th>
-            <th style="text-align: right">{{ rupiah($data['total_cost_kurang']) }}</th>
             <th style="text-align: center">{{ $data['total_rusak'] }}</th>
             <th style="text-align: right">{{ rupiah($data['total_cost_rusak']) }}</th>
         </tr>

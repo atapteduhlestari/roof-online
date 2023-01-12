@@ -21,7 +21,6 @@ class AssetController extends Controller
 {
     public function index()
     {
-
         // $assetsUnique = $assets->unique(['asset_code']);
         // $userDuplicates = $assets->diff($assets);
         // return $userDuplicates;
@@ -55,9 +54,9 @@ class AssetController extends Controller
         $data = request()->all();
 
         if (isSuperadmin())
-            $assets = $param == 'all' ? Asset::search($data)->get() : Asset::where('asset_group_id', $param)->search($data)->get();
+            $assets = $param == 'all' ? Asset::search($data)->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->get() : Asset::where('asset_group_id', $param)->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->search($data)->get();
         else
-            $assets = $param == 'all' ? Asset::where('sbu_id', userSBU())->search($data)->get() : Asset::where('asset_group_id', $param)->where('sbu_id', userSBU())->search($data)->get();
+            $assets = $param == 'all' ? Asset::where('sbu_id', userSBU())->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->search($data)->get() : Asset::where('asset_group_id', $param)->where('sbu_id', userSBU())->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->search($data)->get();
 
         $assetGroup = AssetGroup::get();
         $employees = Employee::orderBy('name', 'asc')->get();
@@ -76,12 +75,11 @@ class AssetController extends Controller
     public function getData()
     {
         $asset = new Asset();
-        $query = $asset->query();
+        $query = $asset->query()->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc');
 
         if (!isSuperadmin())
             $query = $asset->where('sbu_id', userSBU());
 
-        $query->orderBy('sbu_id', 'asc');
         $dt = DataTables::of($query);
 
         $dt->addIndexColumn()->editColumn('pcs_date', function ($row) {
@@ -93,8 +91,8 @@ class AssetController extends Controller
         })->addColumn('employee', function (Asset $asset) {
             return $asset->employee ? $asset->employee->name : '';
         })->addColumn('condition', function (Asset $asset) {
-            $color = $asset->condition == 1 ? 'text-success' : ($asset->condition == 2 ? 'text-warning' : 'text-danger');
-            $text = $asset->condition == 1 ? 'Baik' : ($asset->condition == 2 ? 'Kurang' : 'Rusak');
+            $color = $asset->condition == 1 ? 'text-success' : 'text-danger';
+            $text = $asset->condition == 1 ? 'Baik' :  'Rusak';
             return "<span class='$color'> {$text}</span>";
         })->addColumn('action', function ($row) {
             return '<div class="d-flex justify-content-around">
@@ -122,6 +120,7 @@ class AssetController extends Controller
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
         $data['pcs_value'] = removeDots($request->pcs_value);
+        $data['nilai_buku'] = removeDots($request->nilai_buku);
 
         if (isAdmin())
             $data['sbu_id'] = userSBU();
@@ -139,6 +138,12 @@ class AssetController extends Controller
 
     public function show(Asset $asset)
     {
+        // $asset = Asset::select('id', 'asset_code', 'sbu_id', "asset_name")->with('sbu')->where('aktiva', "")->get();
+        // foreach ($asset as $s) {
+        //     $s->update([
+        //         'aktiva' => ''
+        //     ]);
+        // }
         return $asset;
     }
 
@@ -161,7 +166,7 @@ class AssetController extends Controller
             $data['assets'] = $param == 'all' ? Asset::with('sbu', 'employee')->where('sbu_id', userSBU())->filter($data)->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->get() : Asset::with('sbu', 'employee')->where('asset_group_id', $param)->where('sbu_id', userSBU())->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->filter($data)->get();
 
         $sbu = SBU::find(request('sbu_id'));
-        $time = now()->format('dmY');
+        $time = now()->format('dmY') . uniqid();
         $name = "ATL-GAN-ASSET-DETAIL-{$time}.xlsx";
 
         $data['sbu'] = request('sbu_id') ? $sbu->sbu_name : 'All';
@@ -197,6 +202,7 @@ class AssetController extends Controller
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
         $data['pcs_value'] = removeDots($request->pcs_value);
+        $data['nilai_buku'] = removeDots($request->nilai_buku);
 
         if (isAdmin())
             $data['sbu_id'] = userSBU();
@@ -313,11 +319,12 @@ class AssetController extends Controller
             return redirect()->back()->with('warning', 'No data available');
 
         $sbu = SBU::find(request('sbu_id'));
-        $time = now()->format('dmY');
+        $sbuName = $sbu ? $sbu->sbu_name . '_' : '';
+        $time =  $sbuName . now()->format('dmY') . uniqid();
         $name = "ATL-GAN-ASSET-DETAIL-{$time}.xlsx";
 
         $data['sbu'] = request('sbu_id') ? $sbu->sbu_name : 'All';
-        $data['condition'] = (request('condition') == 1) ? 'Baik' : ((request('condition') == 3) ? 'Rusak' : (request('condition') == 2 ? 'Kurang' : 'All'));
+        $data['condition'] = (request('condition') == 1) ? 'Baik' : ((request('condition') == 3) ? 'Rusak' :  'All');
         $data['total_cost'] =  $data['assets']->sum('pcs_value');
         $data['total_data'] = $data['assets']->count();
         $data['periode'] = $this->getPeriodeExport(request());
@@ -334,17 +341,13 @@ class AssetController extends Controller
             $q->select('id', 'sbu_name');
         }])->get()->groupBy('sbu.sbu_name');
 
-
-        $sbu = SBU::find(request('sbu_id'));
-        $time = now()->format('dmY');
+        $time = now()->format('dmY') . uniqid();
         $name = "ATL-GAN-ASSET-SUMMARY-{$time}.xlsx";
         $asset = Asset::filter($data['request'])->get();
 
         $data['periode'] = $this->getPeriodeExport(request());
         $data['total_baik']  = $asset->where('condition', 1)->count();
         $data['total_cost_baik'] = $asset->where('condition', 1)->sum('pcs_value');
-        $data['total_kurang']  = $asset->where('condition', 2)->count();
-        $data['total_cost_kurang'] = $asset->where('condition', 2)->sum('pcs_value');
         $data['total_rusak']  = $asset->where('condition', 3)->count();
         $data['total_cost_rusak'] = $asset->where('condition', 3)->sum('pcs_value');
         $data['total_cost'] = $asset->sum('pcs_value');

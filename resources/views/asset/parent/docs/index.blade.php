@@ -99,9 +99,8 @@
                                     @php
                                         $foo = 1;
                                     @endphp
-                                    <td
-                                        class="{{ $asset->condition == 1 ? 'text-success' : ($asset->condition == 2 ? 'text-warning' : 'text-danger') }}">
-                                        {{ $asset->condition == 1 ? 'Baik' : ($asset->condition == 2 ? 'Kurang' : 'Rusak') }}
+                                    <td class="{{ $asset->condition == 1 ? 'text-success' : 'text-danger' }}">
+                                        {{ $asset->condition == 1 ? 'Baik' : 'Rusak' }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -117,6 +116,10 @@
                                 <tr>
                                     <th>Purchase Value</th>
                                     <td>{{ rupiah($asset->pcs_value) }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Nilai Buku</th>
+                                    <td>{{ rupiah($asset->nilai_buku) }}</td>
                                 </tr>
                                 <tr>
                                     <th>Appraisal Date</th>

@@ -71,10 +71,6 @@
                                     {{ request('search_condition') == 1 ? 'selected' : '' }}>
                                     Baik
                                 </option>
-                                <option class="text-warning" value="2"
-                                    {{ request('search_condition') == 2 ? 'selected' : '' }}>
-                                    Kurang
-                                </option>
                                 <option class="text-danger" value="3"
                                     {{ request('search_condition') == 3 ? 'selected' : '' }}>
                                     Rusak
@@ -405,6 +401,13 @@
                                 <input type="text"
                                     class="form-control currency @error('pcs_value') is-invalid @enderror"
                                     name="pcs_value" id="pcs_value" value="{{ old('pcs_value') }}" autocomplete="off">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="nilai_buku">Nilai Buku</label>
+                                <input type="text"
+                                    class="form-control currency @error('nilai_buku') is-invalid @enderror"
+                                    name="nilai_buku" id="nilai_buku" value="{{ old('nilai_buku') }}"
+                                    autocomplete="off">
                             </div>
 
                             {{-- <div class="col-md-6 mb-3">

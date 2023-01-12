@@ -70,7 +70,7 @@
                             $foo = 1;
                         @endphp
                         <td>
-                            {{ $asset->condition == 1 ? 'Baik' : ($asset->condition == 2 ? 'Kurang' : 'Rusak') }}
+                            {{ $asset->condition == 1 ? 'Baik' : 'Rusak' }}
                         </td>
                     </tr>
                     <tr>

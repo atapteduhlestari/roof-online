@@ -35,6 +35,7 @@ class AssetRequest extends FormRequest
             'apr_value' => 'nullable',
             'location' => 'nullable',
             'condition' => 'required',
+            'aktiva' => 'required',
             'image' => 'nullable|file|max:5120',
         ];
     }

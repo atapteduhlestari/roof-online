@@ -25,6 +25,7 @@ class CreateAssetTable extends Migration
             $table->string('asset_name');
             $table->date('pcs_date');
             $table->double('pcs_value', 2);
+            $table->double('nilai_buku', 2);
             $table->string('location')->nullable();
             $table->string('condition', 1);
             $table->string('aktiva');

@@ -48,10 +48,7 @@
                             <option class="text-success" value="1">
                                 Baik
                             </option>
-                            <option class="text-warning" value="2">
-                                Kurang
-                            </option>
-                            <option class="text-danger" value="false">
+                            <option class="text-danger" value="3">
                                 Rusak
                             </option>
                         </select>

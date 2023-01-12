@@ -103,7 +103,7 @@ class TrnRenewalController extends Controller
         else
             $data['transactions'] = TrnRenewal::filter($data['transactions'])->where('sbu_id', userSBU())->orderBy('trn_start_date')->whereNotNull('trn_value')->get();
 
-        $time = now()->format('dmY');
+         $time = now()->format('dmY') . uniqid();
         $name = "ATL-GAN-REN-{$time}.xlsx";
 
         // $cost = $data['transactions']->sum(function ($val) {
@@ -275,7 +275,7 @@ class TrnRenewalController extends Controller
             return redirect()->back()->with('warning', 'No data available');
 
         $sbu = SBU::find(request('sbu_id'));
-        $time = now()->format('dmY');
+        $time = now()->format('dmY') . uniqid();
         $name = "ATL-GAN-REN-DETAIL-{$time}.xlsx";
 
         $data['sbu'] = request('sbu_id') ? $sbu->sbu_name : 'All';
@@ -308,7 +308,7 @@ class TrnRenewalController extends Controller
         if (count($data['transactions']) <= 0)
             return redirect()->back()->with('warning', 'No data available');
 
-        $time = now()->format('dmY');
+        $time = now()->format('dmY') . uniqid();
         $name = "ATL-GAN-REN-SUMMARY-{$time}.xlsx";
         $trn = TrnRenewal::filter($data['request'])->whereNotNull('trn_value')->get();
 
@@ -336,7 +336,7 @@ class TrnRenewalController extends Controller
             return redirect()->back()->with('warning', 'No data available');
 
         $sbu = SBU::find(request('sbu_id'));
-        $time = now()->format('dmY');
+        $time = now()->format('dmY') . uniqid();
         $name = "ATL-GAN-REN-PLAN-{$time}.xlsx";
 
         $data['sbu'] = request('sbu_id') ? $sbu->sbu_name : '';

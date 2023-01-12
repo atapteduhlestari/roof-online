@@ -241,7 +241,7 @@ class TrnMaintenanceController extends Controller
             return redirect()->back()->with('warning', 'No data available');
 
         $sbu = SBU::find(request('sbu_id'));
-        $time = now()->format('dmY');
+        $time = now()->format('dmY') . uniqid();
         $name = "ATL-GAN-MAI-DETAIL-{$time}.xlsx";
 
         $data['sbu'] = request('sbu_id') ? $sbu->sbu_name : 'All';
@@ -274,7 +274,7 @@ class TrnMaintenanceController extends Controller
         if (count($data['transactions']) <= 0)
             return redirect()->back()->with('warning', 'No data available');
 
-        $time = now()->format('dmY');
+        $time = now()->format('dmY') . uniqid();
         $name = "ATL-GAN-MAI-SUMMARY-{$time}.xlsx";
         $trn = TrnMaintenance::filter($data['request'])->whereNotNull('trn_value')->get();
 
@@ -302,7 +302,7 @@ class TrnMaintenanceController extends Controller
             return redirect()->back()->with('warning', 'No data available');
 
         $sbu = SBU::find(request('sbu_id'));
-        $time = now()->format('dmY');
+        $time = now()->format('dmY') . uniqid();
         $name = "ATL-GAN-MAI-PLAN-{$time}.xlsx";
 
         $data['sbu'] = request('sbu_id') ? $sbu->sbu_name : '';
