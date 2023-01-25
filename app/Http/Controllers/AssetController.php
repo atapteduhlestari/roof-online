@@ -14,6 +14,7 @@ use Yajra\DataTables\DataTables;
 use App\Http\Requests\AssetRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AssetExportSummaryView;
+use App\Http\Requests\AssetChildRequest;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -117,7 +118,8 @@ class AssetController extends Controller
 
     public function store(AssetRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
+
         $data['user_id'] = auth()->user()->id;
         $data['pcs_value'] = removeDots($request->pcs_value);
         $data['nilai_buku'] = removeDots($request->nilai_buku);
@@ -199,7 +201,8 @@ class AssetController extends Controller
 
     public function update(AssetRequest $request, Asset $asset)
     {
-        $data = $request->all();
+        $data = $request->validated();
+
         $data['user_id'] = auth()->user()->id;
         $data['pcs_value'] = removeDots($request->pcs_value);
         $data['nilai_buku'] = removeDots($request->nilai_buku);
@@ -247,7 +250,7 @@ class AssetController extends Controller
             return redirect()->back()->with('warning', 'Access Denied!');
     }
 
-    public function addDocuments(Request $request, Asset $asset)
+    public function addDocuments(AssetChildRequest $request, Asset $asset)
     {
         $request->validate([
             'doc_name' => 'required',

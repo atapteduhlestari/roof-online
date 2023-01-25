@@ -8,6 +8,7 @@ use App\Models\Asset;
 use App\Models\AssetChild;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\AssetChildRequest;
 
 class AssetChildController extends Controller
 {
@@ -30,15 +31,9 @@ class AssetChildController extends Controller
         ));
     }
 
-    public function store(Request $request)
+    public function store(AssetChildRequest $request)
     {
-        $request->validate([
-            'doc_name' => 'required',
-            'sbu_id' => 'required',
-            'file' => 'nullable|file|max:5120',
-        ]);
-
-        $data = $request->all();
+        $data = $request->validated();
 
         if ($request->file('file')) {
             $file = $request->file('file');
@@ -65,15 +60,9 @@ class AssetChildController extends Controller
         ));
     }
 
-    public function update(AssetChild $assetChild, Request $request)
+    public function update(AssetChildRequest $assetChild, Request $request)
     {
-        $request->validate([
-            'doc_name' => 'required',
-            'sbu_id' => 'required',
-            'file' => 'nullable|file|max:5120'
-        ]);
-
-        $data = $request->all();
+        $data = $request->validated();
 
         if ($request->file('file')) {
             Storage::delete($assetChild->file);
