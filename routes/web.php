@@ -26,15 +26,10 @@ Route::middleware(['auth', 'reminder'])->group(function () {
 
     Route::get('/report-maintenance-detail', [TrnMaintenanceController::class, 'detailView']);
     Route::get('/trn-maintenance-detail-export', [TrnMaintenanceController::class, 'reportDetail']);
-    Route::get('/report-maintenance-summary', [TrnMaintenanceController::class, 'summaryView']);
-    Route::get('/trn-maintenance-summary-export', [TrnMaintenanceController::class, 'reportSummary']);
     Route::get('/trn-maintenance-plan-export', [TrnMaintenanceController::class, 'reportPlan']);
-
 
     Route::get('/report-renewal-detail', [TrnRenewalController::class, 'detailView']);
     Route::get('/trn-renewal-detail-export', [TrnRenewalController::class, 'reportDetail']);
-    Route::get('/report-renewal-summary', [TrnRenewalController::class, 'summaryView']);
-    Route::get('/trn-renewal-summary-export', [TrnRenewalController::class, 'reportSummary']);
     Route::get('/trn-renewal-plan-export', [TrnRenewalController::class, 'reportPlan']);
 
 
@@ -124,6 +119,12 @@ Route::group(['middleware' => ['auth', 'superadmin', 'reminder']], function () {
     Route::delete('/asset-group/{assetGroup}', [AssetGroupController::class, 'destroy']);
     // Route::resource('/asset-group', AssetGroupController::class)
     //     ->except(['create']);
+
+    Route::get('/report-maintenance-summary', [TrnMaintenanceController::class, 'summaryView']);
+    Route::get('/trn-maintenance-summary-export', [TrnMaintenanceController::class, 'reportSummary']);
+    Route::get('/report-renewal-summary', [TrnRenewalController::class, 'summaryView']);
+    Route::get('/trn-renewal-summary-export', [TrnRenewalController::class, 'reportSummary']);
+
     Route::put('/trn-maintenance/update-status/{trnMaintenance}', [TrnMaintenanceController::class, 'updateStatus']);
     Route::put('/trn-maintenance/update-status-plan/{trnMaintenance}', [TrnMaintenanceController::class, 'updateStatusPlan']);
     Route::resource('/maintenance', MaintenanceController::class)->except(['create']);

@@ -36,7 +36,6 @@ class AssetController extends Controller
         //     }
         // }
         // return $assets;
-
         $assetGroup = AssetGroup::get();
         $employees = Employee::orderBy('name', 'asc')->get();
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
@@ -340,13 +339,17 @@ class AssetController extends Controller
     {
         $data['request'] = request()->all();
 
-        $data['assets'] =  $data['assets'] = Asset::filter($data['request'])->with(['sbu' => function ($q) {
-            $q->select('id', 'sbu_name');
-        }])->get()->groupBy('sbu.sbu_name');
+        $data['assets'] = isSuperadmin() ? Asset::filter($data['request'])->with([
+            'sbu' => fn ($q) =>
+            $q->select('id', 'sbu_name')
+        ])->where('sbu_id', userSBU())->get()->groupBy('sbu.sbu_name') : Asset::filter($data['request'])->with([
+            'sbu' => fn ($q) =>
+            $q->select('id', 'sbu_name')
+        ])->where('sbu_id', userSBU())->get()->groupBy('sbu.sbu_name');
 
         $time = now()->format('dmY') . uniqid();
         $name = "ATL-GAN-ASSET-SUMMARY-{$time}.xlsx";
-        $asset = Asset::filter($data['request'])->get();
+        $asset = isSuperadmin() ? Asset::filter($data['request'])->get() : Asset::filter($data['request'])->where('sbu_id', userSBU())->get();
 
         $data['periode'] = $this->getPeriodeExport(request());
         $data['total_baik']  = $asset->where('condition', 1)->count();

@@ -60,8 +60,9 @@ class AssetChildController extends Controller
         ));
     }
 
-    public function update(AssetChildRequest $assetChild, Request $request)
+    public function update(AssetChildRequest $request, AssetChild $assetChild)
     {
+
         $data = $request->validated();
 
         if ($request->file('file')) {

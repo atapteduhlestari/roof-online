@@ -69,7 +69,7 @@ class AssetChild extends Model
 
         if (isSuperadmin()) {
             return DB::table('trn_renewal')
-                ->select(['trn_renewal.*', 'trn_renewal.id as trn_id',  'asset_child.*', 'asset_renewal.*, sbu.sbu_name'])
+                ->select(['trn_renewal.*', 'trn_renewal.id as trn_id',  'asset_child.*', 'asset_renewal.*', ' sbu.sbu_name'])
                 ->join('asset_child', 'trn_renewal.asset_child_id', 'asset_child.id')
                 ->join('asset_renewal', 'trn_renewal.renewal_id', 'asset_renewal.id')
                 ->join('sbu', 'trn_renewal.sbu_id', 'sbu.id')
@@ -78,7 +78,7 @@ class AssetChild extends Model
                 ->where('trn_date', '<=', $time);
         } else {
             return DB::table('trn_renewal')
-                ->select(['trn_renewal.*', 'trn_renewal.id as trn_id',  'asset_child.*', 'asset_renewal.*, sbu.sbu_name'])
+                ->select(['trn_renewal.*', 'trn_renewal.id as trn_id',  'asset_child.*', 'asset_renewal.*', 'sbu.sbu_name'])
                 ->join('asset_child', 'trn_renewal.asset_child_id', 'asset_child.id')
                 ->join('asset_renewal', 'trn_renewal.renewal_id', 'asset_renewal.id')
                 ->join('sbu', 'trn_renewal.sbu_id', 'sbu.id')
