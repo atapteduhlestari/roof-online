@@ -16,7 +16,7 @@ use App\Http\Controllers\AssetGroupController;
 use App\Http\Controllers\TrnRenewalController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\TrnMaintenanceController;
-
+use App\Http\Controllers\UserController;
 
 Route::middleware(['auth', 'reminder'])->group(function () {
 
@@ -112,6 +112,14 @@ Route::middleware(['auth', 'reminder'])->group(function () {
 });
 
 Route::group(['middleware' => ['auth', 'superadmin', 'reminder']], function () {
+
+    Route::get('/user', [UserController::class, 'index']);
+    Route::post('/user', [UserController::class, 'store']);
+    Route::get('/user/{user:username}/edit', [UserController::class, 'edit']);
+    Route::put('/user/{user}', [UserController::class, 'update']);
+    Route::delete('/user/{user}', [UserController::class, 'destroy']);
+
+
     Route::get('/asset-group', [AssetGroupController::class, 'index']);
     Route::post('/asset-group', [AssetGroupController::class, 'store']);
     Route::get('/asset-group/{assetGroup}/edit', [AssetGroupController::class, 'edit']);

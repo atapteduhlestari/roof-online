@@ -134,7 +134,7 @@ class AssetController extends Controller
         }
 
         Asset::create($data);
-        return redirect()->back()->with('success', 'Successfully deleted!');
+        return redirect()->back()->with('success', 'Success!');
     }
 
     public function show(Asset $asset)
@@ -220,7 +220,7 @@ class AssetController extends Controller
             $data['image'] = $asset->image;
         }
         $asset->update($data);
-        return redirect()->back()->with('success', 'Successfully deleted!');
+        return redirect()->back()->with('success', 'Success!');
     }
 
     public function destroy(Asset $asset)
@@ -235,7 +235,7 @@ class AssetController extends Controller
 
         Storage::delete($asset->image);
         $asset->delete();
-        return redirect('/asset-parent')->with('success', 'Successfully deleted!');
+        return redirect('/asset-parent')->with('success', 'Success!');
     }
 
     public function documents(Asset $asset)
@@ -268,7 +268,7 @@ class AssetController extends Controller
         }
 
         $asset->children()->create($data);
-        return redirect()->back()->with('success', 'Successfully deleted!');
+        return redirect()->back()->with('success', 'Success!');
     }
 
     public function editDocuments(Asset $asset, $childId)
