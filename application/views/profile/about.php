@@ -44,6 +44,9 @@
                     <li>Memberika kesejahteraan bagi karyawan, pemilik, serta pengembangan usaha.</li>
                 </ul>
             </div>
+            <div class="col">
+                <a class="text-home" href="#!"><i class="fas fa-file-download"></i> Company Profile</a>
+            </div>
         </div>
     </div>
 </section><!-- Facts end -->

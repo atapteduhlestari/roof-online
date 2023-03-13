@@ -68,9 +68,7 @@
                     <?php endforeach; ?>
                 </div>
             </div>
-
             <div class="col-md-12"><br><?= $this->pagination->create_links(); ?></div>
-
-        </div><!-- Content row end -->
-    </div><!-- container end -->
-</section><!-- Main container end -->
+        </div>
+    </div>
+</section>

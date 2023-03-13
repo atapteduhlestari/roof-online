@@ -11,7 +11,6 @@
                     </li>
                 </ul>
             </div>
-            <!--/ Top info end -->
 
             <div class="col-lg-4 col-md-4 top-social text-center text-md-right">
                 <ul class="list-unstyled">
@@ -31,9 +30,6 @@
                     </li>
                 </ul>
             </div>
-            <!--/ Top social end -->
         </div>
-        <!--/ Content row end -->
     </div>
-    <!--/ Container end -->
 </div>

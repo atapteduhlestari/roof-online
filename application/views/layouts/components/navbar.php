@@ -7,7 +7,7 @@
                         <a class="d-block" href="<?= base_url(); ?>">
                             <img loading="lazy" src="<?= base_url(); ?>assets/images/logo/logo_atl.png" alt="ATL">
                         </a>
-                    </div><!-- logo end -->
+                    </div>
 
                     <div class="col-lg-9 header-right">
                         <ul class="top-info-box">
@@ -26,7 +26,9 @@
                                 <div class="info-box">
                                     <div class="info-box-content">
                                         <p class="info-box-title">Call Us</p>
-                                        <p class="info-box-subtitle">(021) 864-6506</p>
+                                        <p class="info-box-subtitle">
+                                            <a class="text-dark" href="tel:0218646506">(021) 864-6506</a>
+                                        </p>
                                     </div>
                                 </div>
                             </li>
@@ -34,7 +36,9 @@
                                 <div class="info-box">
                                     <div class="info-box-content">
                                         <p class="info-box-title">Our Email</p>
-                                        <p class="info-box-subtitle">info@roof-online.com</p>
+                                        <p class="info-box-subtitle">
+                                            <a class="text-dark" href="mailto:info@roofonline.com">info@roof-online.com</a>
+                                        </p>
                                     </div>
                                 </div>
                             </li>
@@ -44,12 +48,11 @@
                                     <i class="fas fa-music"></i>
                                 </a>
                             </li>
-                        </ul><!-- Ul end -->
-                    </div><!-- header right end -->
-                </div><!-- logo area end -->
-
-            </div><!-- Row end -->
-        </div><!-- Container end -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="site-navigation">
@@ -100,25 +103,21 @@
                         </div>
                     </nav>
                 </div>
-                <!--/ Col end -->
             </div>
-            <!--/ Row end -->
 
             <div class="nav-search">
                 <span id="search"><i class="fa fa-search"></i></span>
-            </div><!-- Search end -->
+            </div>
 
             <div class="search-block" style="display: none;">
                 <label for="search-field" class="w-100 mb-0">
                     <input type="text" class="form-control" id="search-field" placeholder="Anything you curious about?">
                 </label>
                 <span class="search-close">&times;</span>
-            </div><!-- Site search end -->
+            </div>
         </div>
-        <!--/ Container end -->
-
     </div>
-    <!--/ Navigation end -->
+
 </header>
 <div class="icon-bar rounded-circle">
     <a target="_blank" href="https://www.facebook.com/atapteduhlestari.pt" class="facebook">

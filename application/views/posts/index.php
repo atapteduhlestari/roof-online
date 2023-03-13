@@ -25,8 +25,8 @@
                                 </div>
                             </div>
                         <?php endforeach; ?>
-                    </div><!-- Archives end -->
-                </div><!-- Sidebar end -->
+                    </div>
+                </div>
             </div>
             <div class="col-md">
                 <div class="row mb-3">
@@ -54,14 +54,12 @@
                                         </span>
                                     </div>
                                 </div>
-                            </div><!-- Latest post end -->
+                            </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
                 <div class="col-md-12"><br><?= $this->pagination->create_links(); ?></div>
             </div>
-        </div><!-- Main row end -->
-
-
-    </div><!-- Container end -->
-</section><!-- Main container end -->
+        </div>
+    </div>
+</section>

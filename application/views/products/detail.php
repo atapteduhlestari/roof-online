@@ -24,7 +24,7 @@
                                     <img loading="lazy" class="img-fluid col mx-auto img-wrap" src=" <?= $gambar->url_gambar; ?>" alt="<?= $product->nama_produk ?>" />
                                 </div>
                             <?php endforeach; ?>
-                        </div><!-- Page slider end -->
+                        </div>
                         <div class="gap-40"></div>
                         <nav>
                             <div class="nav nav-tabs border-0 mb-3" id="nav-tab" role="tablist">
@@ -124,4 +124,4 @@
             </div>
         </div>
     </div>
-</section><!-- Main container end -->
+</section>

@@ -105,14 +105,9 @@
                         <h3 class="into-sub-title">We Deliver building solution</h3>
                     </div>
                 </div>
-                <!-- <div class="col-md-4 text-center text-md-right mt-3 mt-md-0">
-                    <div class="call-to-action-btn">
-                        <a class="btn btn-dark" href="#">Request Quote</a>
-                    </div>
-                </div> -->
-            </div><!-- row end -->
-        </div><!-- Action style box -->
-    </div><!-- Container end -->
+            </div>
+        </div>
+    </div>
 </section>
 
 <section id="ts-features" class="ts-features">
@@ -129,8 +124,8 @@
                             <div class="ts-service-box-content">
                                 <h3 class="service-box-title">Decades of Experience</h3>
                             </div>
-                        </div><!-- Service 1 end -->
-                    </div><!-- col end -->
+                        </div>
+                    </div>
 
                     <div class="col-md-6">
                         <div class="ts-service-box">
@@ -140,9 +135,9 @@
                             <div class="ts-service-box-content">
                                 <h3 class="service-box-title">Warranty</h3>
                             </div>
-                        </div><!-- Service 2 end -->
-                    </div><!-- col end -->
-                </div><!-- Content row 1 end -->
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-md-6">
@@ -153,8 +148,8 @@
                             <div class="ts-service-box-content">
                                 <h3 class="service-box-title">Premium Quality</h3>
                             </div>
-                        </div><!-- Service 1 end -->
-                    </div><!-- col end -->
+                        </div>
+                    </div>
 
                     <div class="col-md-6">
                         <div class="ts-service-box">
@@ -164,9 +159,9 @@
                             <div class="ts-service-box-content">
                                 <h3 class="service-box-title">A Team of Professionals</h3>
                             </div>
-                        </div><!-- Service 2 end -->
-                    </div><!-- col end -->
-                </div><!-- Content row 1 end -->
+                        </div>
+                    </div>
+                </div>
 
                 <div class="col-12">
                     <div class="row shuffle-wrapper">
@@ -185,7 +180,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div><!-- shuffle item 1 end -->
+                        </div>
 
                         <div class="col-lg-4 col-md-6 shuffle-item">
                             <div class="project-img-container">
@@ -201,7 +196,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div><!-- shuffle item 2 end -->
+                        </div>
 
                         <div class="col-lg-4 col-md-6 shuffle-item">
                             <div class="project-img-container">
@@ -233,7 +228,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div><!-- shuffle item 3 end -->
+                        </div>
 
                         <div class="col-lg-4 col-md-6 shuffle-item">
                             <div class="project-img-container">
@@ -249,7 +244,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div><!-- shuffle item 5 end -->
+                        </div>
 
                         <div class="col-lg-4 col-md-6 shuffle-item">
                             <div class="project-img-container">
@@ -265,15 +260,13 @@
                                     </div>
                                 </div>
                             </div>
-                        </div><!-- shuffle item 4 end -->
-
-                    </div><!-- shuffle end -->
+                        </div>
+                    </div>
                 </div>
-            </div><!-- Content row end -->
-        </div><!-- Col end -->
-        <!--/ Accordion end -->
+            </div>
+        </div>
     </div>
-</section><!-- Feature are end -->
+</section>
 
 <section class="mt-n5 dark-bg" id="highlight-product">
     <div class="">
@@ -401,11 +394,6 @@
 
             </div>
         </div>
-        <!-- <div class="general-btn text-center mt-5 py-5">
-            <a class="btn btn-primary shadow-sm" href="<?= base_url(); ?>product">
-                Discover more
-            </a>
-        </div> -->
     </div>
 </section>
 
@@ -643,16 +631,11 @@
                             <a href="#!"><img loading="lazy" title="Easyuse Drain Cell for Roof Garden" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/easyuse.png" alt="Easyuse" /></a>
                         </figure>
                     </div>
-
-                </div><!-- Clients row end -->
-
-            </div><!-- Col end -->
-
+                </div>
+            </div>
         </div>
-        <!--/ Content row end -->
     </div>
-    <!--/ Container end -->
-</section><!-- Content end -->
+</section>
 
 <section class="subscribe no-padding">
     <div class="container">
@@ -660,9 +643,11 @@
             <div class="col-lg-4">
                 <div class="subscribe-call-to-acton">
                     <h3>We've got you covered</h3>
-                    <h4>(021) 864-6506</h4>
+                    <h4>
+                        <a href="tel:0218646506">(021) 864-6506</a>
+                    </h4>
                 </div>
-            </div><!-- Col end -->
+            </div>
 
             <div class="col-lg-8">
                 <div class="ts-newsletter row align-items-center">
@@ -670,11 +655,10 @@
                         <h4 class="text-white mb-0">provide you the best, because your life matters</h4>
                     </div>
                 </div>
-            </div><!-- Col end -->
+            </div>
 
-        </div><!-- Content row end -->
+        </div>
     </div>
-    <!--/ Container end -->
 </section>
 
 <section id="news" class="news">
@@ -711,16 +695,14 @@
                                 </span>
                             </div>
                         </div>
-                    </div><!-- Latest post end -->
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>
         <div class="general-btn text-center mt-4">
-            <a class="btn btn-primary shadow-sm" href="/home/news">
+            <a class="btn btn-primary shadow-sm" href="<?= base_url(); ?>post">
                 Show more
             </a>
         </div>
     </div>
-    <!--/ Container end -->
 </section>
-<!--/ News end -->

@@ -498,7 +498,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="row">
@@ -509,8 +508,4 @@
             </div>
         </div>
     </div>
-    <div class="gap-60"></div>
-
-
-    </div><!-- Conatiner end -->
-</section><!-- Main container end -->
+</section>

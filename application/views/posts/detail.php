@@ -25,8 +25,8 @@
                                 </div>
                             </div>
                         <?php endforeach; ?>
-                    </div><!-- Archives end -->
-                </div><!-- Sidebar end -->
+                    </div>
+                </div>
             </div>
             <div class="col-md-8 mb-5 mb-lg-0">
                 <div class="post-content post-single">
@@ -41,15 +41,13 @@
                             <h2 class="entry-title">
                                 <?= $news->judul ?>
                             </h2>
-                        </div><!-- header end -->
-
+                        </div>
                         <div class="entry-content">
                             <?= $news->isi ?>
                         </div>
-
-                    </div><!-- post-body end -->
-                </div><!-- post content end -->
-            </div><!-- Content Col end -->
-        </div><!-- Main row end -->
-    </div><!-- Container end -->
-</section><!-- Main container end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -21,8 +21,6 @@
                 </div>
             <?php endforeach; ?>
         </div>
-
         <div class="col-md-12"><br><?= $this->pagination->create_links(); ?></div>
-
-    </div><!-- Container end -->
-</section><!-- Main container end -->
+    </div>
+</section>

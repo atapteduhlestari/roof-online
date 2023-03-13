@@ -2,27 +2,17 @@
 <html lang="en">
 
 <head>
-
-    <!-- Basic Page Needs
-================================================== -->
     <meta charset="utf-8">
     <title><?= $title ? $title : 'PT ATAP TEDUH LESTARI' ?></title>
-
-    <!-- Mobile Specific Metas
-================================================== -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="'Atap Teduh Lestari merupakan perusahaan supplier atap dan bahan bangunan lainnya. Menyediakan berbagai produk untuk roofing, waterproofing, dan insulasi.';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta name='author' content='Edward'>
-
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://roof-online.com/">
     <meta property="og:title" content="PT. Atap Teduh Lestari">
     <meta property="og:description" content="Atap Teduh Lestari merupakan perusahaan supplier atap dan bahan bangunan lain nya. Menyediakan berbagai produk untuk Atap ashpalt,/bitumenoofing, waterproofing, insulasi, Pintu dan Jendela, dan Strukur.">
     <meta property="og:image" content="<?= base_url(); ?>assets/images/logo/logo_.png">
-
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://roof-online.com/">
     <meta property="twitter:title" content="PT. Atap Teduh Lestari">

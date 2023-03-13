@@ -13,12 +13,16 @@
                         <tr>
                             <td><i class="fas fa-phone-alt"></i></td>
                             <td>:</td>
-                            <td>(021) 864-6506</td>
+                            <td>
+                                <a class="text-light" href="tel:0218646506">(021) 864-6506</a>
+                            </td>
                         </tr>
                         <tr>
                             <td><i class="far fa-envelope-open"></i></td>
                             <td>:</td>
-                            <td>info@roof-online.com</td>
+                            <td>
+                                <a class="text-light" href="mailto:info@roofonline.com">info@roof-online.com</a>
+                            </td>
                         </tr>
                         <tr>
                             <td><i class="fab fa-chrome"></i></td>
@@ -55,58 +59,51 @@
                                 </a>
                             </li>
                         </ul>
-                    </div><!-- Footer social end -->
-                </div><!-- Col end -->
+                    </div>
+                </div>
 
                 <div class="col-lg-3 col-md-6 mt-5 mt-lg-0 footer-widget">
                     <h3 class="widget-title">
                         Navigate
                     </h3>
                     <ul class="list-arrow">
-
                         <li>
                             <a href="<?= base_url(); ?>product/kategori/1">
                                 Roofing
                             </a>
                         </li>
-
                         <li>
                             <a href=" <?= base_url(); ?>product/kategori/2">
                                 Waterproofing
                             </a>
                         </li>
-
                         <li>
                             <a href="<?= base_url(); ?>product/kategori/3">
                                 Insulation
                             </a>
                         </li>
-
                         <li>
                             <a href=" https://lestarijendela.com/">
                                 Windows & Doors
                             </a>
                         </li>
-
                         <li>
                             <a href="<?= base_url(); ?>product/kategori/4">
                                 Structure
                             </a>
                         </li>
-
                         <li>
                             <a href=" <?= base_url(); ?>product/kategori/7">
                                 Wall
                             </a>
                         </li>
-
                         <li>
                             <a href="<?= base_url(); ?>project">
                                 Gallery Project
                             </a>
                         </li>
                     </ul>
-                </div><!-- Col end -->
+                </div>
 
                 <div class="col-lg-3 col-md-6 footer-widget mt-5 mt-md-0">
                     <h3 class="widget-title">INFO</h3>
@@ -138,16 +135,16 @@
                             Your browser does not support the audio element.
                         </audio>
                     </div>
-                </div><!-- Col end -->
+                </div>
 
                 <div class="col-lg-3 col-md-6 mt-5 mt-lg-0 footer-widget">
                     <div class="fb-page" data-href="https://www.facebook.com/atapteduhlestari.pt/" data-tabs="timeline" data-width="" data-height="375" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
                         <blockquote cite="https://www.facebook.com/atapteduhlestari.pt/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/atapteduhlestari.pt/">Atap Teduh Lestari, PT</a></blockquote>
                     </div>
-                </div><!-- Col end -->
-            </div><!-- Row end -->
-        </div><!-- Container end -->
-    </div><!-- Footer main end -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="copyright">
         <div class="container">
@@ -157,8 +154,7 @@
                         Copyright &copy;<span id="copyRightYear"></span>. PT Atap Teduh Lestari. All Rights Reserved
                     </div>
                 </div>
-
-            </div><!-- Row end -->
+            </div>
 
             <div id="back-to-top" data-spy="affix" data-offset-top="10" class="back-to-top position-fixed">
                 <button class="btn btn-primary" title="Back to Top">
@@ -166,26 +162,18 @@
                 </button>
             </div>
 
-        </div><!-- Container end -->
-    </div><!-- Copyright end -->
-</footer><!-- Footer end -->
-
-</div><!-- Body inner end -->
-
+        </div>
+    </div>
+</footer>
+</div>
 
 <script src="<?= base_url(); ?>assets/plugins/jQuery/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="<?= base_url(); ?>assets/plugins/bootstrap/bootstrap.min.js" defer></script>
-
-<!-- Slick Carousel -->
 <script src="<?= base_url(); ?>assets/plugins/slick/slick.min.js"></script>
 <script src="<?= base_url(); ?>assets/plugins/slick/slick-animation.min.js"></script>
-
-<!-- Color box -->
 <script src="<?= base_url(); ?>assets/plugins/colorbox/jquery.colorbox.js"></script>
-<!-- shuffle -->
 <script src="<?= base_url(); ?>assets/plugins/shuffle/shuffle.min.js" defer></script>
-
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU" defer></script>
 <script src="<?= base_url(); ?>assets/plugins/google-map/map.js" defer></script>
 <script src="<?= base_url(); ?>assets/js/lightbox.js"></script>
