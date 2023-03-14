@@ -637,28 +637,19 @@
     </div>
 </section>
 
-<section class="subscribe no-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="subscribe-call-to-acton">
-                    <h3>We've got you covered</h3>
-                    <h4>
-                        <a href="tel:0218646506">(021) 864-6506</a>
-                    </h4>
-                </div>
-            </div>
+<section class="subscribe no-padding bg-shake-hands">
 
-            <div class="col-lg-8">
-                <div class="ts-newsletter row align-items-center">
-                    <div class="newsletter-introtext">
-                        <h4 class="text-white mb-0">provide you the best, because your life matters</h4>
-                    </div>
-                </div>
+    <div class="row shake-hands-desc">
+        <div class="col-lg bg-home ">
+            <div class="subscribe-call-to-acton">
+                <h3>We've got you covered</h3>
+                <h4>
+                    <a href="tel:0218646506" class="text-white">(021) 864-6506</a>
+                </h4>
             </div>
-
         </div>
     </div>
+
 </section>
 
 <section id="news" class="news">

@@ -113,6 +113,30 @@
             -webkit-filter: brightness(90%);
             filter: brightness(90%);
         }
+
+        .bg-hands {
+            position: relative;
+            height: 100vh;
+            background: url(' <?= base_url(); ?>assets/images/home/about/4.JPG');
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: top -110px right 0;
+            -webkit-filter: brightness(75%);
+            filter: brightness(75%);
+        }
+
+        .bg-shake-hands {
+            position: relative;
+            height: 100vh;
+            background: url(' <?= base_url(); ?>assets/images/home/about/3.JPG');
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: top -110px right 0;
+            -webkit-filter: brightness(75%);
+            filter: brightness(75%);
+        }
     </style>
 
 </head>
