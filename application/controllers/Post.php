@@ -50,7 +50,6 @@ class Post extends CI_Controller
         $data['archives'] = $this->Model_news->get_archive();
 
         $this->load->view('layouts/header', $data);
-        $this->load->view('layouts/components/topbar');
         $this->load->view('layouts/components/navbar');
         $this->load->view('layouts/components/banner');
         $this->load->view('posts/index');
@@ -66,7 +65,6 @@ class Post extends CI_Controller
         $data['news_data'] = $this->Model_news->get_news_by_date($year, $month);
 
         $this->load->view('layouts/header', $data);
-        $this->load->view('layouts/components/topbar');
         $this->load->view('layouts/components/navbar');
         $this->load->view('layouts/components/banner');
         $this->load->view('posts/index');
@@ -82,7 +80,6 @@ class Post extends CI_Controller
         $data['archives'] = $this->Model_news->get_archive();
 
         $this->load->view('layouts/header', $data);
-        $this->load->view('layouts/components/topbar');
         $this->load->view('layouts/components/navbar');
         $this->load->view('layouts/components/banner', $data);
         $this->load->view('posts/detail');

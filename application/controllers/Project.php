@@ -49,7 +49,6 @@ class Project extends CI_Controller
         $data['project_data'] = $this->Model_project->get_project($config['per_page'], $from);
 
         $this->load->view('layouts/header', $data);
-        $this->load->view('layouts/components/topbar');
         $this->load->view('layouts/components/navbar');
         $this->load->view('layouts/components/banner');
         $this->load->view('projects/index');
@@ -62,7 +61,6 @@ class Project extends CI_Controller
         $data['banner_title'] = 'Gallery Videos';
 
         $this->load->view('layouts/header', $data);
-        $this->load->view('layouts/components/topbar');
         $this->load->view('layouts/components/navbar');
         $this->load->view('layouts/components/banner');
         $this->load->view('projects/video');

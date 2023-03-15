@@ -2627,7 +2627,7 @@ img.testimonial-thumb {
 /*-- Banner --*/
 .banner-area {
 	position: relative;
-	min-height: 300px;
+	min-height: 400px;
 	color: #fff;
 	background-position: 50% 50%;
 	background-size: cover;

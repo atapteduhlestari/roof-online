@@ -12,11 +12,11 @@
                 </p>
             </div><!-- Col end -->
             <div class="col-md-6">
-                <img style="height:300px; width:100%;" class="img-wrap rounded" src="<?= base_url(); ?>assets/images/home/about/1.JPG" alt="">
+                <img style="height:300px; width:100%;" class="img-wrap rounded" src="<?= base_url(); ?>assets/images/home/about/1.jpeg" alt="">
             </div>
 
             <div class="col-md-6">
-                <img style="height:300px; width:100%;" class="img-wrap rounded" src="<?= base_url(); ?>assets/images/home/about/2.JPG" alt="">
+                <img style="height:300px; width:100%;" class="img-wrap rounded" src="<?= base_url(); ?>assets/images/home/about/2.jpeg" alt="">
             </div>
 
             <div class="col-md-6">

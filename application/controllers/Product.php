@@ -53,7 +53,6 @@ class Product extends CI_Controller
         $data['product_data'] = $this->Model_product->get_product($config['per_page'], $from);
 
         $this->load->view('layouts/header', $data);
-        $this->load->view('layouts/components/topbar');
         $this->load->view('layouts/components/navbar');
         $this->load->view('layouts/components/banner');
         $this->load->view('products/index');
@@ -96,7 +95,6 @@ class Product extends CI_Controller
         $data['banner_title'] = 'Product Category: ' . $data['product_data'][0]->nama_kategori;
 
         $this->load->view('layouts/header', $data);
-        $this->load->view('layouts/components/topbar');
         $this->load->view('layouts/components/navbar');
         $this->load->view('layouts/components/banner');
         $this->load->view('products/index');
@@ -141,7 +139,6 @@ class Product extends CI_Controller
         // $this->output->enable_profiler(TRUE);
 
         $this->load->view('layouts/header', $data);
-        $this->load->view('layouts/components/topbar');
         $this->load->view('layouts/components/navbar');
         $this->load->view('layouts/components/banner');
         $this->load->view('products/index');
@@ -158,7 +155,6 @@ class Product extends CI_Controller
 
 
         $this->load->view('layouts/header', $data);
-        $this->load->view('layouts/components/topbar');
         $this->load->view('layouts/components/navbar');
         $this->load->view('layouts/components/banner');
         $this->load->view('products/detail');

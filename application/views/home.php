@@ -5,9 +5,12 @@
                 <div class="row align-items-center h-100">
                     <div class="col-md-12">
                         <img loading="lazy" height="75" src="<?= base_url(); ?>assets/images/logo/iko-logo.png" data-animation-in="bounceInDown" alt="IKO Ashpalt Shingle Bitumen" data-duration-in="1.5">
-                        <h3 class="slide-sub-title text-shadow" data-animation-in="fadeInUp">
-                            CAMBRIDGE
-                        </h3>
+                        <div class="d-flex align-items-center">
+                            <h3 class="slide-sub-title text-shadow mr-1" data-animation-in="fadeInUp" data-duration-in="1.2">
+                                CAMBRIDGE
+                            </h3>
+                            <img style="height:50px;" src="<?= base_url(); ?>assets/images/logo/30_year.png" data-animation-in="fadeInUp" data-duration-in="2">
+                        </div>
                         <h2 class="slide-title text-shadow" data-animation-in="slideInLeft">Laminated Architectural Shingle</h2>
                         <p data-animation-in="slideInRight" data-duration-in="1.2">
                             <a href="<?= base_url(); ?>project" class="slider btn btn-primary">Our Projects</a>
@@ -277,7 +280,8 @@
                 <div class="mb-3">
                     <img loading="lazy" width="200" src="<?= base_url(); ?>/assets/images/logo/iko-logo.png" alt="IKO Cambridge" class="img-fluid">
                 </div>
-                <h3>Cambridge</h3>
+                <h3 style="display: inline-block;">Cambridge</h3>
+                <img style="height:35px; display: inline-block;" src="<?= base_url(); ?>assets/images/logo/30_year.png">
                 <p>
                     IKO Cambridge memberikan penampilan yang lebih cantik untuk segala bentuk rumah dari yang tradisional hingga modern, di pedesaan ataupun di kota. Dengan profil dimensional dan bayangan yang dalam membuat atap terlihat seperti terbuat dari campuran kayu alami sehingga memberikan penampilan rumah kelas atas dengan biaya yang terjangkau.<b> IKO Cambridge dikembangkan untuk tahan selama bertahun-tahun, menjadikannya salah satu shingle yang paling tahan lama</b>.
                 </p>
@@ -550,6 +554,12 @@
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
+                            <a href="#!"><img loading="lazy" title="Soprema Tecsound Soundproofing Membrane" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/tecsound.png" alt="Soundproofing Membrane" /></a>
+                        </figure>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
+                        <figure class="home-logo rounded">
                             <a href="#!"><img loading="lazy" title="Micapel Slate Roof" class="img-fluid" style="height:80px;" src="<?= base_url(); ?>assets/images/logo/micapel.png" alt="Micapel Slate Roof" /></a>
                         </figure>
                     </div>
@@ -560,11 +570,11 @@
                         </figure>
                     </div>
 
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
+                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
                             <a href="#!"><img loading="lazy" title="Knauf Aquapanel Cement Board" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/aquapanel.png" alt="Knauf Aquapanel" /></a>
                         </figure>
-                    </div>
+                    </div> -->
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">

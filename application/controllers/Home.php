@@ -20,7 +20,6 @@ class Home extends CI_Controller
         $data['news_data'] = $this->Model_news->get_news();
 
         $this->load->view('layouts/header', $data);
-        $this->load->view('layouts/components/topbar');
         $this->load->view('layouts/components/navbar');
         $this->load->view('home');
         $this->load->view('layouts/footer');
@@ -32,7 +31,6 @@ class Home extends CI_Controller
         $data['banner_title'] = 'About Us';
 
         $this->load->view('layouts/header', $data);
-        $this->load->view('layouts/components/topbar');
         $this->load->view('layouts/components/navbar');
         $this->load->view('layouts/components/banner', $data);
         $this->load->view('profile/about');
@@ -45,7 +43,6 @@ class Home extends CI_Controller
         $data['banner_title'] = 'Contact';
 
         $this->load->view('layouts/header', $data);
-        $this->load->view('layouts/components/topbar');
         $this->load->view('layouts/components/navbar');
         $this->load->view('layouts/components/banner', $data);
         $this->load->view('profile/contact');

@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="banner-heading">
-                        <img loading="lazy" height="150px" src="<?= base_url(); ?>/assets/images/logo/logo_.png" alt="logo atap teduh lestari">
+                        <img loading="lazy" height="250px" src="<?= base_url(); ?>/assets/images/logo/logo_atl_new.png" alt="logo atap teduh lestari">
                         <h1 class="banner-title text-shadow"><?= $banner_title ?></h1>
                         <!-- <nav aria-label="breadcrumb breadcrumb-home">
                             <ol class="breadcrumb justify-content-center">
