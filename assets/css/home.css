@@ -6,6 +6,22 @@
 	background-color: #8bc34a !important;
 }
 
+.mt-n1 {
+	margin-top: -0.25rem !important;
+}
+.mt-n2 {
+	margin-top: -0.5rem !important;
+}
+.mt-n3 {
+	margin-top: -1rem !important;
+}
+.mt-n4 {
+	margin-top: -1.5rem !important;
+}
+.mt-n5 {
+	margin-top: -3rem !important;
+}
+
 .text-shadow {
 	/* text-shadow: 5px 5px 3px rgba(0, 0, 0, 0.2); */
 	text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1),
@@ -17,10 +33,28 @@
 	border-color: #108140;
 }
 
+.logoAbout {
+	max-height: 500px;
+	max-width: 500px;
+	width: auto;
+	height: auto;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
 @media (max-width: 768px) {
 	.icon-bar,
 	.addressTop {
 		display: none;
+	}
+
+	.logoAbout {
+		max-height: 250px;
+		max-width: 250px;
 	}
 
 	.img-detail-product,

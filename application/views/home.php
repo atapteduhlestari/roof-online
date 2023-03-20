@@ -570,11 +570,17 @@
                         </figure>
                     </div>
 
-                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
                             <a href="#!"><img loading="lazy" title="Knauf Aquapanel Cement Board" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/aquapanel.png" alt="Knauf Aquapanel" /></a>
                         </figure>
-                    </div> -->
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
+                        <figure class="home-logo rounded">
+                            <a href="#!"><img loading="lazy" title="Easyuse Drain Cell for Roof Garden" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/easyuse.png" alt="Easyuse" /></a>
+                        </figure>
+                    </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
@@ -635,12 +641,6 @@
                             <a href="#!"><img loading="lazy" title="Emarin Atap Metal" class="img-fluid" style="height:65px;" src="<?= base_url(); ?>assets/images/logo/emarin.jpg" alt="Emarin" /></a>
                         </figure>
                     </div>
-
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
-                        <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="Easyuse Drain Cell for Roof Garden" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/easyuse.png" alt="Easyuse" /></a>
-                        </figure>
-                    </div>
                 </div>
             </div>
         </div>
@@ -653,9 +653,7 @@
         <div class="col-lg bg-home ">
             <div class="subscribe-call-to-acton">
                 <h3>We've got you covered</h3>
-                <h4>
-                    <a href="tel:0218646506" class="text-white">(021) 864-6506</a>
-                </h4>
+                <a href="javascript:void(Tawk_API.toggle())" class="btn btn-dark mb-3">Get in touch</a>
             </div>
         </div>
     </div>

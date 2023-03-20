@@ -17,8 +17,9 @@ class Model_product extends CI_Model
 		$result = array();
 		if ($query->num_rows() > 0) {
 			$result = $query->result();
+			return $result;
 		}
-		return $result;
+		return show_404();
 	}
 
 	function product_first($id)
@@ -36,8 +37,10 @@ class Model_product extends CI_Model
 		$result = array();
 		if ($query->num_rows() > 0) {
 			$result = $query->row();
+			return $result;
 		}
-		return $result;
+		dd($id);
+		return show_404();
 	}
 
 	function image_product($id)
@@ -100,14 +103,15 @@ class Model_product extends CI_Model
 		$this->db->where('produk.status', 1);
 		$this->db->where('kategori.status', 1);
 		$this->db->where('kategori.id_kategori', $kategori);
-		// $this->db->limit($number, $offset);
+		$this->db->limit($number, $offset);
 		$query = $this->db->get();
 
 		$result = array();
 		if ($query->num_rows() > 0) {
 			$result = $query->result();
+			return $result;
 		}
-		return $result;
+		return show_404();
 	}
 
 	function tot_product_category($kategori)
@@ -144,8 +148,9 @@ class Model_product extends CI_Model
 		$result = array();
 		if ($query->num_rows() > 0) {
 			$result = $query->result();
+			return $result;
 		}
-		return $result;
+		return show_404();
 	}
 
 	function tot_product_subcategory($subkategori)

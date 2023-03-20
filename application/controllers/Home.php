@@ -34,6 +34,7 @@ class Home extends CI_Controller
         $this->load->view('layouts/components/navbar');
         $this->load->view('layouts/components/banner', $data);
         $this->load->view('profile/about');
+        $this->load->view('layouts/components/logo_product');
         $this->load->view('layouts/footer');
     }
 

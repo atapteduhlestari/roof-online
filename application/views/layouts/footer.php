@@ -83,18 +83,18 @@
                             </a>
                         </li>
                         <li>
-                            <a href=" https://lestarijendela.com/">
-                                Windows & Doors
-                            </a>
-                        </li>
-                        <li>
                             <a href="<?= base_url(); ?>product/kategori/4">
                                 Structure
                             </a>
                         </li>
                         <li>
                             <a href=" <?= base_url(); ?>product/kategori/7">
-                                Wall
+                                Ceiling & Wall
+                            </a>
+                        </li>
+                        <li>
+                            <a href=" https://lestarijendela.com/">
+                                Windows & Doors
                             </a>
                         </li>
                         <li>

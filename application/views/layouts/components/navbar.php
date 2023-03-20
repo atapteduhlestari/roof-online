@@ -17,7 +17,8 @@
                                         <p class="info-box-subtitle text-center">
                                             <img height="47" src="<?= base_url(); ?>assets/images/logo/iaf.png" alt="">
                                             <img height="60" src="<?= base_url(); ?>assets/images/logo/iso-9001.png" alt="">
-                                            <img height="60" src="<?= base_url(); ?>assets/images/logo/iso.png" alt="">
+                                            <!-- <img height="60" src="<?= base_url(); ?>assets/images/logo/iso.png" alt=""> -->
+                                            <img height="50" src="<?= base_url(); ?>assets/images/logo/tkdn.jpg" alt="">
                                         </p>
                                     </div>
                                 </div>
@@ -83,9 +84,9 @@
                                         </li>
                                         <li><a href="<?= base_url(); ?>product/kategori/2">Waterproofing</a></li>
                                         <li><a href="<?= base_url(); ?>product/kategori/3">Insulation</a></li>
-                                        <li><a href="http://lestarijendela.com/">Windows & Doors</a></li>
                                         <li><a href="<?= base_url(); ?>product/kategori/4">Structure</a></li>
-                                        <li><a href="<?= base_url(); ?>product/kategori/7">Wall</a></li>
+                                        <li><a href="<?= base_url(); ?>product/kategori/7">Ceiling & Wall</a></li>
+                                        <li><a href="http://lestarijendela.com/">Windows & Doors</a></li>
                                     </ul>
                                 </li>
 

@@ -87,7 +87,7 @@ class Product extends CI_Controller
         $config['base_url'] = base_url() . 'product/kategori/' . $id . '/';
         $config['total_rows'] = $product_tot;
         $config['per_page'] = 9;
-        $from = $this->uri->segment(3);
+        $from = $this->uri->segment(4);
         $this->pagination->initialize($config);
 
         $data['product_data'] = $this->Model_product->get_product_category($id, $config['per_page'], $from);
@@ -147,12 +147,12 @@ class Product extends CI_Controller
 
     public function detail($id)
     {
+
         $data['title'] = 'Detail Product - ATAP TEDUH LESTARI';
         $data['product'] = $this->Model_product->product_first($id);
         $data['gambar_product'] = $this->Model_product->image_product($id);
         $data['gambar_project'] = $this->Model_product->image_project($id);
         $data['banner_title'] = 'Detail Product - ' . $data['product']->nama_produk;
-
 
         $this->load->view('layouts/header', $data);
         $this->load->view('layouts/components/navbar');

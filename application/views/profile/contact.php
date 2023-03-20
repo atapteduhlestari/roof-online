@@ -11,14 +11,14 @@
                     <div class="border-0 bg-white">
                         <div class="mb-3 border-0 bg-white" id="headingTwo">
                             <h2 class="mb-0">
-                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseHO">
+                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseContact">
                                     Head Office <span class="float-right">
                                         <i class="caret-icon fas fa-caret-right"></i>
                                     </span>
                                 </button>
                             </h2>
                         </div>
-                        <div id="collapseHO" class="collapse">
+                        <div id="collapseContact" class="collapse">
                             <table class="table table-borderless" width="100%">
                                 <tr>
                                     <td colspan="2">
@@ -52,14 +52,14 @@
                     <div class="border-0 bg-white">
                         <div class="mb-3 border-0 bg-white" id="headingTwo">
                             <h2 class="mb-0">
-                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseXML">
+                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseContact">
                                     Jakarta - Kalimalang <span class="float-right">
                                         <i class="caret-icon fas fa-caret-right"></i>
                                     </span>
                                 </button>
                             </h2>
                         </div>
-                        <div id="collapseXML" class="collapse">
+                        <div id="collapseContact" class="collapse">
                             <table class="table table-borderless" width="100%">
                                 <tr>
                                     <td colspan="2">
@@ -93,14 +93,14 @@
                     <div class="border-0 bg-white">
                         <div class="mb-3 border-0 bg-white" id="headingTwo">
                             <h2 class="mb-0">
-                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseSW">
+                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseContact">
                                     Jakarta - Tebet <span class="float-right">
                                         <i class="caret-icon fas fa-caret-right"></i>
                                     </span>
                                 </button>
                             </h2>
                         </div>
-                        <div id="collapseSW" class="collapse">
+                        <div id="collapseContact" class="collapse">
                             <table class="table table-borderless" width="100%">
                                 <tr>
                                     <td colspan="2">
@@ -134,14 +134,14 @@
                     <div class="border-0 bg-white">
                         <div class="mb-3 border-0 bg-white" id="headingTwo">
                             <h2 class="mb-0">
-                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseJDC">
+                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseContact">
                                     Jakarta - JDC <span class="float-right">
                                         <i class="caret-icon fas fa-caret-right"></i>
                                     </span>
                                 </button>
                             </h2>
                         </div>
-                        <div id="collapseJDC" class="collapse">
+                        <div id="collapseContact" class="collapse">
                             <table class="table table-borderless" width="100%">
                                 <tr>
                                     <td colspan="2">
@@ -175,14 +175,14 @@
                     <div class="border-0 bg-white">
                         <div class="mb-3 border-0 bg-white" id="headingTwo">
                             <h2 class="mb-0">
-                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseFAT">
+                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseContact">
                                     Jakarta - Fatmawati <span class="float-right">
                                         <i class="caret-icon fas fa-caret-right"></i>
                                     </span>
                                 </button>
                             </h2>
                         </div>
-                        <div id="collapseFAT" class="collapse">
+                        <div id="collapseContact" class="collapse">
                             <table class="table table-borderless" width="100%">
                                 <tr>
                                     <td colspan="2">
@@ -216,14 +216,14 @@
                     <div class="border-0 bg-white">
                         <div class="mb-3 border-0 bg-white" id="headingTwo">
                             <h2 class="mb-0">
-                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapsePAL">
+                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseContact">
                                     Jakarta - Palmerah <span class="float-right">
                                         <i class="caret-icon fas fa-caret-right"></i>
                                     </span>
                                 </button>
                             </h2>
                         </div>
-                        <div id="collapsePAL" class="collapse">
+                        <div id="collapseContact" class="collapse">
                             <table class="table table-borderless" width="100%">
                                 <tr>
                                     <td colspan="2">
@@ -257,14 +257,14 @@
                     <div class="border-0 bg-white">
                         <div class="mb-3 border-0 bg-white" id="headingTwo">
                             <h2 class="mb-0">
-                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseBDG">
+                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseContact">
                                     Bandung <span class="float-right">
                                         <i class="caret-icon fas fa-caret-right"></i>
                                     </span>
                                 </button>
                             </h2>
                         </div>
-                        <div id="collapseBDG" class="collapse">
+                        <div id="collapseContact" class="collapse">
                             <table class="table table-borderless" width="100%">
                                 <tr>
                                     <td colspan="2">
@@ -298,14 +298,14 @@
                     <div class="border-0 bg-white">
                         <div class="mb-3 border-0 bg-white" id="headingTwo">
                             <h2 class="mb-0">
-                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseSMG">
+                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseContact">
                                     Semarang <span class="float-right">
                                         <i class="caret-icon fas fa-caret-right"></i>
                                     </span>
                                 </button>
                             </h2>
                         </div>
-                        <div id="collapseSMG" class="collapse">
+                        <div id="collapseContact" class="collapse">
                             <table class="table table-borderless" width="100%">
                                 <tr>
                                     <td colspan="2">
@@ -339,14 +339,14 @@
                     <div class="border-0 bg-white">
                         <div class="mb-3 border-0 bg-white" id="headingTwo">
                             <h2 class="mb-0">
-                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseSBY">
+                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseContact">
                                     Surabaya <span class="float-right">
                                         <i class="caret-icon fas fa-caret-right"></i>
                                     </span>
                                 </button>
                             </h2>
                         </div>
-                        <div id="collapseSBY" class="collapse">
+                        <div id="collapseContact" class="collapse">
                             <table class="table table-borderless" width="100%">
                                 <tr>
                                     <td colspan="2">
@@ -380,14 +380,14 @@
                     <div class="border-0 bg-white">
                         <div class="mb-3 border-0 bg-white" id="headingTwo">
                             <h2 class="mb-0">
-                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseBDG">
+                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseContact">
                                     Medan - Asia <span class="float-right">
                                         <i class="caret-icon fas fa-caret-right"></i>
                                     </span>
                                 </button>
                             </h2>
                         </div>
-                        <div id="collapseBDG" class="collapse">
+                        <div id="collapseContact" class="collapse">
                             <table class="table table-borderless" width="100%">
                                 <tr>
                                     <td colspan="2">
@@ -421,14 +421,14 @@
                     <div class="border-0 bg-white">
                         <div class="mb-3 border-0 bg-white" id="headingTwo">
                             <h2 class="mb-0">
-                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseBDG">
+                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseContact">
                                     Medan - Sarah <span class="float-right">
                                         <i class="caret-icon fas fa-caret-right"></i>
                                     </span>
                                 </button>
                             </h2>
                         </div>
-                        <div id="collapseBDG" class="collapse">
+                        <div id="collapseContact" class="collapse">
                             <table class="table table-borderless" width="100%">
                                 <tr>
                                     <td colspan="2">
@@ -462,14 +462,14 @@
                     <div class="border-0 bg-white">
                         <div class="mb-3 border-0 bg-white" id="headingTwo">
                             <h2 class="mb-0">
-                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseBDG">
+                                <button class="btn btn-primary btn-block text-left collapsed btn-contact-collapse" type="button" data-toggle="collapse" data-target="#collapseContact">
                                     Bali <span class="float-right">
                                         <i class="caret-icon fas fa-caret-right"></i>
                                     </span>
                                 </button>
                             </h2>
                         </div>
-                        <div id="collapseBDG" class="collapse">
+                        <div id="collapseContact" class="collapse">
                             <table class="table table-borderless" width="100%">
                                 <tr>
                                     <td colspan="2">

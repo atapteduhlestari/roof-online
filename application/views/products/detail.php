@@ -56,16 +56,15 @@
                                     <li class="<?= $product->id_kategori == 3 ? 'active' : ''; ?>">
                                         <a href="<?= base_url(); ?>product/kategori/3">Insulation</a>
                                     </li>
-                                    <li>
-                                        <a href="https://lestarijendela.com/">Windows & Doors</a>
-                                    </li>
                                     <li class="<?= $product->id_kategori == 4 ? 'active' : ''; ?>">
                                         <a href="<?= base_url(); ?>product/kategori/4">Structure</a>
                                     </li>
                                     <li class="<?= $product->id_kategori == 7 ? 'active' : ''; ?>">
-                                        <a href="<?= base_url(); ?>product/kategori/7">Wall</a>
+                                        <a href="<?= base_url(); ?>product/kategori/7">Ceiling & Wall</a>
                                     </li>
-
+                                    <li>
+                                        <a href="https://lestarijendela.com/">Windows & Doors</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="gap-20"></div>
@@ -94,7 +93,7 @@
                                 <h3 class="column-title-small">
                                     Project References
                                 </h3>
-                                <div class="row" id="list-projects">
+                                <div class="row justify-content-center" id="list-projects">
                                     <?php if (count($gambar_project) > 0) : ?>
                                         <?php foreach ($gambar_project as $gbp) : ?>
                                             <div class="col-lg-4 col-md-6 mb-4">
@@ -113,9 +112,10 @@
                                             </div>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
-                                    <div class="mx-auto mt-5">
-                                        <a class="btn btn-primary" href="<?= base_url(); ?>project"> Discover more</a>
-                                    </div>
+
+                                </div>
+                                <div class="d-flex mt-5">
+                                    <a class="btn btn-primary mx-auto" href="<?= base_url(); ?>project"> Discover more</a>
                                 </div>
                             </div>
                         </div>

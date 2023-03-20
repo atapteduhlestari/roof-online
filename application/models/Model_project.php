@@ -44,8 +44,9 @@ class Model_project extends CI_Model
 		$result = array();
 		if ($query->num_rows() > 0) {
 			$result = $query->result();
+			return $result;
 		}
-		return $result;
+		return show_404();
 	}
 
 	function tot_product_category($kategori)
@@ -82,8 +83,9 @@ class Model_project extends CI_Model
 		$result = array();
 		if ($query->num_rows() > 0) {
 			$result = $query->result();
+			return $result;
 		}
-		return $result;
+		return show_404();
 	}
 
 	function tot_product_subcategory($subkategori)

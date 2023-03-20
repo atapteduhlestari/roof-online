@@ -8,7 +8,7 @@
                         <?php foreach ($archives as $year => $archive) : ?>
                             <button class="btn btn-primary btn-block btn-archive-collapse text-left" type="button" data-toggle="collapse" data-target="#collapse<?= $year ?>" aria-expanded="false" aria-controls="collapse">
                                 <?= $year ?> <span class="float-right">
-                                    <i class="caret-icon fas fa-caret-right"></i>
+                                    <i class="caret-icon fas  <?= ($this->uri->segment(3) == $year) ? 'fa-caret-down' : 'fa-caret-right' ?>"></i>
                                 </span>
                             </button>
                             <div class="collapse <?= $this->uri->segment(3) == $year ? 'show' : '' ?>" id="collapse<?= $year ?>">

@@ -57,7 +57,7 @@ class Post extends CI_Controller
     }
 
 
-    public function date($year, $month)
+    public function date($year = null, $month = null)
     {
         $data['title'] = 'News - ATAP TEDUH LESTARI';
         $data['banner_title'] = 'News';

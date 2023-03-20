@@ -30,18 +30,18 @@
                     </a>
                 </div>
                 <div class=" col-sm-6 col-md-3 mb-3">
-                    <a href="https://lestarijendela.com/" class="btn btn-primary btn-block">
-                        windows & doors
-                    </a>
-                </div>
-                <div class=" col-sm-6 col-md-3 mb-3">
                     <a href="<?= base_url(); ?>product/kategori/4" class="btn btn-primary btn-block <?= ($this->uri->segment(3) == 4) && ($this->uri->segment(2) == 'kategori') ? 'active' : '' ?>">
                         structure
                     </a>
                 </div>
                 <div class=" col-sm-6 col-md-3 mb-3">
                     <a href="<?= base_url(); ?>product/kategori/7" class="btn btn-primary btn-block <?= ($this->uri->segment(3) == 7) && ($this->uri->segment(2) == 'kategori') ? 'active' : '' ?>">
-                        wall
+                        ceiling & wall
+                    </a>
+                </div>
+                <div class=" col-sm-6 col-md-3 mb-3">
+                    <a href="https://lestarijendela.com/" class="btn btn-primary btn-block">
+                        windows & doors
                     </a>
                 </div>
             </div>
