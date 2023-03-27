@@ -1,12 +1,9 @@
-<section class="content" id="product-logo-section">
+<section class="content bg-white" id="product-logo-section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 mt-5 mt-lg-0">
+            <div class="col-lg-12 mt-lg-0">
                 <p>
-                    <b>PT. ATAP TEDUH LESTARI</b> memproduksi dan menyediakan
-                    produk - produk berkualitas baik dari dalam maupun luar negeri
-                    yang meliputi Atap, Waterproofing, Rangka Baja Ringan, Insulasi,
-                    Kusen, Pintu, dan Jendela yang <b>bergaransi sampai dengan 30 tahun</b>.
+                    <b>PT. Atap Teduh Lestari</b> Memproduksi dan mendistribusikan produk Atap, Waterproofing, Struktur Rangka, lnsulasi, Kusen, Pintu, dan Jendela yang berkualitas dengan <b>garansi pemakaian sampai dengan 30 tahun dilengkapi dengan sertifikat hasil uji.</b>
                 </p>
                 <div class="row all-clients justify-content-center">
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">

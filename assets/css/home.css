@@ -46,6 +46,15 @@
 	margin: auto;
 }
 
+@media (max-width: 1005px) {
+	.bg-shake-hands,
+	.bg-hands {
+		background-position: center !important;
+		background-attachment: scroll !important;
+		background-size: cover;
+	}
+}
+
 @media (max-width: 768px) {
 	.icon-bar,
 	.addressTop {
@@ -146,10 +155,31 @@
 	object-position: center;
 }
 
+.about-image img {
+	cursor: pointer;
+	overflow: hidden;
+	width: 100%;
+	height: 150px;
+	-o-object-fit: cover;
+	object-fit: cover;
+	-o-object-position: center;
+	object-position: center;
+	transition: all 0.5s;
+}
+
+.about-image:hover img {
+	transform: scale(1.2);
+}
+
+.about-image-wrap {
+	overflow: hidden;
+}
+
 .home-project-catalog {
 	height: 500px;
 	margin-right: 5px;
 }
+
 .home-project-catalog img {
 	overflow: hidden;
 	transition: all 0.5s;

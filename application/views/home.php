@@ -285,7 +285,7 @@
                 <p>
                     IKO Cambridge memberikan penampilan yang lebih cantik untuk segala bentuk rumah dari yang tradisional hingga modern, di pedesaan ataupun di kota. Dengan profil dimensional dan bayangan yang dalam membuat atap terlihat seperti terbuat dari campuran kayu alami sehingga memberikan penampilan rumah kelas atas dengan biaya yang terjangkau.<b> IKO Cambridge dikembangkan untuk tahan selama bertahun-tahun, menjadikannya salah satu shingle yang paling tahan lama</b>.
                 </p>
-                <a href="#!" class="highlight btn btn-primary border">Read more</a>
+                <a href="<?= base_url(); ?>product/detail/10" class="highlight btn btn-primary border">Read more</a>
 
             </div>
             <div class="col-md-7 mb-3">
@@ -310,7 +310,7 @@
                 <p>
                     IKO Marathon Plus AR adalah atap tradisional dari bitumen 3 daun yang telah teruji oleh waktu, terbuat dari material yang mengandung fiberglass sebagai perkuatan untuk mengatasi cuaca yang ekstrim. Desain klasik IKO Marathon Plus AR akan mempercantik bangunan anda.<b> Dengan permukaan bebatuan yang tahan terhadap jamur akan mencegah terbentuknya garis-garis yang merusak atap bitumen disebabkan oleh jamur</b> dan membuat atap anda tetap terlihat cantik walaupun sudah bertahun-tahun terpasang.
                 </p>
-                <a href="#!" class="highlight btn btn-primary border">Read more</a>
+                <a href="<?= base_url(); ?>product/detail/11" class="highlight btn btn-primary border">Read more</a>
 
             </div>
         </div>
@@ -327,7 +327,7 @@
                 <p>
                     Palmex Original menawarkan solusi permanen untuk proyek2 di seluruh dunia.<b> Dengan memiliki Palmex, anda memilih produk yang tahan lama (permanen) serta dapat di daur-ulang</b>. Produk Palmex terlihat sangat persis seperti aslinya serta membuat anda nyaman tanpa harus berpikir untuk selalu melakukan perawatan ataupun mengganti atap (alang2) bangunan anda setiap tahun karena cuaca yang merubah warna atap.
                 </p>
-                <a href="#!" class="highlight btn btn-primary border">Read more</a>
+                <a href="<?= base_url(); ?>product/detail/20" class="highlight btn btn-primary border">Read more</a>
 
             </div>
             <div class="col-md-7 mb-3">
@@ -352,7 +352,7 @@
                     Duo Composite Membrane Adalah waterproofing membrane bakar premium Asal Belgia,<b> berbahan dasar Modified Bitumen yang di padukan dengan SBS ( Styerene Butadiene Styerene ) dan TPO ( Thermoplastic Polyolefin ) sehingga menghasilkan membran yang sangat kuat namun tetap flexible.</b>
                     DuO menggabungkan Fiberglass dan Polyester menjadi Composite Reinforcement yang menghasilkan tulangan yang flexible namun sangat kuat serta memilki kekuatan terhadap sobek atau tusukan.
                 </p>
-                <a href="#!" class="highlight btn btn-primary border">Read more</a>
+                <a href="<?= base_url(); ?>product/detail/14" class="highlight btn btn-primary border">Read more</a>
 
             </div>
         </div>
@@ -369,7 +369,7 @@
                     Lestari jendela merupakan produk kusen/frame, daun pintu dan jendela yang diproduksi oleh PT Atap Teduh Lestari. Lestari Jendela memiliki 2 jenis material yang ditawarkan sebagai pilihan yaitu uPVC dan Aluminium.
                     Lestari Jendela UPVC memakai standar profil merk Tonish pertama dan satu-satunya di Indonesia.<b> uPVC yang digunakan mengandung senyawa kimia TiO2(Titanium dioxide), dimana membuat profil </b> ..
                 </p>
-                <a href="#!" class="highlight btn btn-primary border">Read more</a>
+                <a href="https://lestarijendela.com" class="highlight btn btn-primary border">Read more</a>
 
             </div>
             <div class="col-md-7 mb-3">
@@ -394,7 +394,7 @@
                     Rangka Baja Ringan 1.2 Truss - <b>Satu-satunya Rangka Baja Ringan di Indonesia yang menggunakan Frame Profil S, Web Capsul, dan Connector Mur + Baut.</b> Sistem Mur + Baut diadopsi dari Rangka Baja Berat. Dengan sistem Mur + Baut maka ikatan rangka semakin kuat dibandingkan dengan screw biasa. Profil S mempunyai momen Inersia lebih besar, sehingga mempunyai kekuatan lebih besar
                     juga mampu menahan beban tarik dan beban tekan serta dapat meminimalkan resiko terjadi puntiran. Profil S mampu dipasang untuk bentangan sampai 24 meter tanpa balok tambahan.
                 </p>
-                <a href="#!" class="highlight btn btn-primary border">Read more</a>
+                <a href="<?= base_url(); ?>product/detail/4" class="highlight btn btn-primary border">Read more</a>
 
             </div>
         </div>
@@ -407,84 +407,84 @@
         <div class="projectSlider ">
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/1.jpg" data-max-width="750" data-footer="Project Name" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/1.jpg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/1.jpg">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/2.jpg" data-max-width="750" data-footer="Project Name" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/2.jpg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/2.jpg">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/3.JPG" data-max-width="750" data-footer="Project Name" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/3.JPG" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/3.JPG">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/4.jpg" data-max-width="750" data-footer="Project Name" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/4.jpg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/4.jpg">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/5.jpg" data-max-width="750" data-footer="Project Name" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/5.jpg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/5.jpg">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/6.jpg" data-max-width="750" data-footer="Project Name" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/6.jpg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/6.jpg">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/7.jpeg" data-max-width="750" data-footer="Project Name" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/7.jpeg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/7.jpeg">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/8.jpg" data-max-width="750" data-footer="Project Name" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/8.jpg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/8.jpg">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/9.jpg" data-max-width="750" data-footer="Project Name" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/9.jpg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/9.jpg">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/10.JPG" data-max-width="750" data-footer="Project Name" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/10.JPG" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/10.JPG">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/11.jpg" data-max-width="750" data-footer="Project Name" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/11.jpg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/11.jpg">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/12.jpg" data-max-width="750" data-footer="Project Name" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/12.jpg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/12.jpg">
                     </a>
                 </div>

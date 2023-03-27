@@ -117,7 +117,7 @@
         .bg-hands {
             position: relative;
             height: 100vh;
-            background: url(' <?= base_url(); ?>assets/images/home/about/4.jpeg');
+            background: url(' <?= base_url(); ?>assets/images/home/about/4.JPG');
             background-attachment: fixed;
             background-repeat: no-repeat;
             background-size: cover;
@@ -129,7 +129,7 @@
         .bg-shake-hands {
             position: relative;
             height: 100vh;
-            background: url(' <?= base_url(); ?>assets/images/home/about/3.png');
+            background: url(' <?= base_url(); ?>assets/images/home/about/3.jpeg');
             background-attachment: fixed;
             background-repeat: no-repeat;
             background-size: cover;

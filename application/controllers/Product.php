@@ -160,4 +160,13 @@ class Product extends CI_Controller
         $this->load->view('products/detail');
         $this->load->view('layouts/footer');
     }
+
+    public function search()
+    {
+
+        $data['title'] = 'Product - ATAP TEDUH LESTARI';
+        $data['banner_title'] = 'Product - ATAP TEDUH LESTARI';
+        echo $this->input->post('keywords');
+        die;
+    }
 }

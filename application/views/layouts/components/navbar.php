@@ -1,4 +1,5 @@
 <header id="header" class="header-one">
+    <span id="top-bar" class="top-bar"></span>
     <div class="bg-white">
         <div class="container">
             <div class="logo-area">
@@ -106,16 +107,19 @@
                 </div>
             </div>
 
-            <div class="nav-search">
+            <!-- <div class="nav-search">
                 <span id="search"><i class="fa fa-search"></i></span>
-            </div>
+            </div> -->
 
-            <div class="search-block" style="display: none;">
-                <label for="search-field" class="w-100 mb-0">
-                    <input type="text" class="form-control" id="search-field" placeholder="Anything you curious about?">
-                </label>
-                <span class="search-close">&times;</span>
-            </div>
+            <!-- <div class="search-block" style="display: none;">
+                <form action="<?= base_url(); ?>product/search">
+                    <label for="search-field" class="w-100 mb-0">
+                        <input type="text" class="form-control" name="keywords" id="search-field" placeholder="Search product">
+                    </label>
+                    <span class="search-close">&times;</span>
+                    <button type="submit">ok</button>
+                </form>
+            </div> -->
         </div>
     </div>
 
