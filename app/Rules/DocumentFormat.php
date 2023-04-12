@@ -21,6 +21,6 @@ class DocumentFormat implements Rule
 
     public function message()
     {
-        return "Change '#' with number";
+        return "Replace '#' with number";
     }
 }
