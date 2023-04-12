@@ -103,7 +103,8 @@ class TrnRenewalController extends Controller
         else
             $data['transactions'] = TrnRenewal::filter($data['transactions'])->where('sbu_id', userSBU())->orderBy('trn_start_date')->whereNotNull('trn_value')->get();
 
-         $time = now()->format('dmY') . uniqid();
+        $time = now()->format('dmY') . '-' . uniqid();
+    
         $name = "ATL-GAN-REN-{$time}.xlsx";
 
         // $cost = $data['transactions']->sum(function ($val) {
@@ -275,12 +276,12 @@ class TrnRenewalController extends Controller
             return redirect()->back()->with('warning', 'No data available');
 
         $sbu = SBU::find(request('sbu_id'));
-        $time = now()->format('dmY') . uniqid();
+        $time = now()->format('dmY') . '-' . uniqid();
         $name = "ATL-GAN-REN-DETAIL-{$time}.xlsx";
 
         $data['sbu'] = request('sbu_id') ? $sbu->sbu_name : 'All';
         $data['status'] = (request('status') == 1) ? 'Closed' : ((request('status') == null) ? 'All' : 'Open');
-        $data['periode'] = $this->getPeriodeExport(request());
+        $data['periode'] = getPeriodeExport(request());
         $data['total_cost'] =  $data['transactions']->sum('trn_value');
         $data['total_cost_plan'] =  $data['transactions']->sum('trn_value_plan');
         $data['total_data'] = $data['transactions']->count();
@@ -308,11 +309,11 @@ class TrnRenewalController extends Controller
         if (count($data['transactions']) <= 0)
             return redirect()->back()->with('warning', 'No data available');
 
-        $time = now()->format('dmY') . uniqid();
+        $time = now()->format('dmY') . '-' . uniqid();
         $name = "ATL-GAN-REN-SUMMARY-{$time}.xlsx";
         $trn = TrnRenewal::filter($data['request'])->whereNotNull('trn_value')->get();
 
-        $data['periode'] = $this->getPeriodeExport(request());
+        $data['periode'] = getPeriodeExport(request());
         $data['total_cost'] = $trn->sum('trn_value');
         $data['total_qty'] = $trn->count();
 
@@ -336,50 +337,15 @@ class TrnRenewalController extends Controller
             return redirect()->back()->with('warning', 'No data available');
 
         $sbu = SBU::find(request('sbu_id'));
-        $time = now()->format('dmY') . uniqid();
+        $time = now()->format('dmY') . '-' . uniqid();
         $name = "ATL-GAN-REN-PLAN-{$time}.xlsx";
 
         $data['sbu'] = request('sbu_id') ? $sbu->sbu_name : '';
         $data['status'] = (request('status') == 1) ? 'Closed' : ((request('status') == null) ? '' : 'Open');
-        $data['periode'] = $this->getPeriodeExport(request());
+        $data['periode'] = getPeriodeExport(request());
         $data['total_cost_plan'] =  $data['transactions']->sum('trn_value_plan');
         $data['total_data'] = $data['transactions']->count();
 
         return Excel::download(new RenewalExportPlanView($data), $name);
-    }
-
-    public function getPeriodeExport($data)
-    {
-        $start = null;
-        $startYear = null;
-        $end = null;
-        $endYear = null;
-
-        if ($data['start']) {
-            $start = createDate($data['start'])->format('F');
-            $startYear = createDate($data['start'])->format('Y');
-        }
-
-        if ($data['end']) {
-            $end = createDate($data['end'])->format('F');
-            $endYear = createDate($data['end'])->format('Y');
-        }
-
-        $sd = 'sd';
-
-        if ($start ==  $end && $startYear == $endYear) {
-            $end = null;
-            $endYear = null;
-            $sd = null;
-        }
-
-        if ($startYear == $endYear) {
-            $startYear = null;
-        }
-
-        $text = "$start $startYear $sd $end $endYear";
-        $periode = trim($text) == '' ? 'All' : $text;
-
-        return $periode;
     }
 }

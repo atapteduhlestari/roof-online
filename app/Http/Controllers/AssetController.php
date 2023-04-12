@@ -8,7 +8,6 @@ use App\Models\Asset;
 use App\Models\Employee;
 use App\Models\AssetChild;
 use App\Models\AssetGroup;
-use Illuminate\Http\Request;
 use App\Exports\AssetExportView;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\AssetRequest;
@@ -167,7 +166,7 @@ class AssetController extends Controller
             $data['assets'] = $param == 'all' ? Asset::with('sbu', 'employee')->where('sbu_id', userSBU())->filter($data)->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->get() : Asset::with('sbu', 'employee')->where('asset_group_id', $param)->where('sbu_id', userSBU())->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->filter($data)->get();
 
         $sbu = SBU::find(request('sbu_id'));
-        $time = now()->format('dmY') . uniqid();
+        $time = now()->format('dmY') . '-' . uniqid();
         $name = "ATL-GAN-ASSET-DETAIL-{$time}.xlsx";
 
         $data['sbu'] = request('sbu_id') ? $sbu->sbu_name : 'All';
@@ -347,7 +346,7 @@ class AssetController extends Controller
             $q->select('id', 'sbu_name')
         ])->where('sbu_id', userSBU())->get()->groupBy('sbu.sbu_name');
 
-        $time = now()->format('dmY') . uniqid();
+        $time = now()->format('dmY') . '-' . uniqid();
         $name = "ATL-GAN-ASSET-SUMMARY-{$time}.xlsx";
         $asset = isSuperadmin() ? Asset::filter($data['request'])->get() : Asset::filter($data['request'])->where('sbu_id', userSBU())->get();
 

@@ -66,6 +66,41 @@ function removeDots($param)
     return $val;
 }
 
+function getPeriodeExport($data)
+{
+    $start = null;
+    $startYear = null;
+    $end = null;
+    $endYear = null;
+
+    if ($data['start']) {
+        $start = createDate($data['start'])->format('F');
+        $startYear = createDate($data['start'])->format('Y');
+    }
+
+    if ($data['end']) {
+        $end = createDate($data['end'])->format('F');
+        $endYear = createDate($data['end'])->format('Y');
+    }
+
+    $sd = 'sd';
+
+    if ($start ==  $end && $startYear == $endYear) {
+        $end = null;
+        $endYear = null;
+        $sd = null;
+    }
+
+    if ($startYear == $endYear) {
+        $startYear = null;
+    }
+
+    $text = "$start $startYear $sd $end $endYear";
+    $periode = trim($text) == '' ? 'All' : $text;
+
+    return $periode;
+}
+
 function setNoDoc($no_doc)
 {
     $name = "ATL-HO-SOP-GAN";
