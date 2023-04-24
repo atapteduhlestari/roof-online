@@ -33,6 +33,10 @@ class AssetChild extends Model
         return $this->belongsTo(SBU::class, 'sbu_id');
     }
 
+    public function loan()
+    {
+        return $this->hasMany(Loan::class, 'asset_child_id');
+    }
 
     public function trnSDBDetail()
     {

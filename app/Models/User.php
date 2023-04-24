@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->belongsTo(SBU::class, 'sbu_id');
     }
 
+    public function loan()
+    {
+        return $this->hasMany(Loan::class, 'user_id');
+    }
+
     public function isSuperadmin()
     {
         return $this->is_admin == 1;

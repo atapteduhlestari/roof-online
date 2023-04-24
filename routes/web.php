@@ -13,6 +13,7 @@ use App\Http\Controllers\AppraisalController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AssetChildController;
 use App\Http\Controllers\AssetGroupController;
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\TrnRenewalController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\TrnMaintenanceController;
@@ -141,6 +142,7 @@ Route::group(['middleware' => ['auth', 'superadmin', 'reminder']], function () {
     Route::resource('/sbu', SBUController::class)->except(['create']);
     Route::resource('/employee', EmployeeController::class)->except(['create']);
     Route::resource('/cycle', CycleController::class)->except(['create']);
+    Route::resource('/loan', LoanController::class)->except(['create']);
 });
 
 // Route::get('/get-api', function () {

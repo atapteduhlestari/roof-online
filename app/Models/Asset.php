@@ -49,6 +49,11 @@ class Asset extends Model
         return $this->belongsTo(SDB::class, 'sdb_id');
     }
 
+    public function loan()
+    {
+        return $this->hasMany(Loan::class, 'asset_id');
+    }
+
     public function trnSDBDetail()
     {
         return $this->hasOne(TrnSDBDetail::class, 'asset_id');

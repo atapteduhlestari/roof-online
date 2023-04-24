@@ -15,12 +15,13 @@ class CreateLoansTable extends Migration
     {
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('asset_id');
-            $table->foreignId('asset_child_id');
+            $table->foreignId('asset_id')->nullable();
+            $table->foreignId('asset_child_id')->nullable();
             $table->foreignId('sbu_id');
             $table->foreignId('user_id');
-            $table->tinyInteger('loan_type', 1);
+            $table->string('loan_type', 1);
             $table->string('peminjam');
+            $table->longText('description')->nullable();
             $table->date('loan_start_date');
             $table->date('loan_due_date');
             $table->date('loan_date');

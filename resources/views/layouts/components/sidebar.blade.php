@@ -107,13 +107,14 @@
                     <span>Transaction</span>
                 </a>
                 <div id="collapseTransaction"
-                    class="collapse {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') ? 'show' : '' }}"
+                    class="collapse {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') || request()->is('loan*') ? 'show' : '' }}"
                     aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item {{ request()->is('trn-renewal*') ? 'active' : '' }}"
                             href="/trn-renewal">Renewal</a>
                         <a class="collapse-item {{ request()->is('trn-maintenance*') ? 'active' : '' }}"
                             href="/trn-maintenance">Maintenance</a>
+                        <a class="collapse-item {{ request()->is('loan*') ? 'active' : '' }}" href="/loan">Loan</a>
                     </div>
                 </div>
             </li>

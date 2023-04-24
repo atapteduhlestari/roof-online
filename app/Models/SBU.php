@@ -27,6 +27,11 @@ class SBU extends Model
         return $this->hasMany(AssetChild::class, 'sbu_id');
     }
 
+    public function loan()
+    {
+        return $this->hasMany(Loan::class, 'sbu_id');
+    }
+
     public function trnRenewal()
     {
         return $this->hasMany(TrnRenewal::class, 'sbu_id');
