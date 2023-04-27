@@ -49,7 +49,7 @@ class Asset extends Model
         return $this->belongsTo(SDB::class, 'sdb_id');
     }
 
-    public function loan()
+    public function loans()
     {
         return $this->hasMany(Loan::class, 'asset_id');
     }

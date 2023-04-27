@@ -14,7 +14,11 @@ class LoanController extends Controller
     public function index()
     {
         $loans = Loan::get();
-        $assets = Asset::orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->get();
+
+        $assets = Asset::whereDoesntHave('loans', function ($q) {
+            $q->where('loan_status', 0);
+        })->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->get();
+
         $assetChild = AssetChild::orderBy('doc_name', 'asc')->get();
         $employees = Employee::orderBy('name', 'asc')->get();
         $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
@@ -51,15 +55,11 @@ class LoanController extends Controller
 
     public function edit(Loan $loan)
     {
-        $assets = Asset::orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->get();
-        $assetChild = AssetChild::orderBy('doc_name', 'asc')->get();
         $employees = Employee::orderBy('name', 'asc')->get();
         $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
 
         return view('transaction.loan.edit', compact(
             'loan',
-            'assets',
-            'assetChild',
             'employees',
             'SBUs'
         ));
@@ -88,6 +88,10 @@ class LoanController extends Controller
 
     public function destroy(Loan $loan)
     {
-        return $loan;
+        if ($loan->loan_status)
+            return redirect()->back()->with('warning', 'Status is <b>CLOSED!</b>');
+
+        $loan->delete();
+        return redirect('/loan')->with('success', 'Successfully deleted!');
     }
 }
