@@ -17,8 +17,12 @@
         }
 
         table {
-
             border-collapse: collapse;
+        }
+
+        table#tableTTD,
+        table#tableTTD td {
+            border: none;
         }
     </style>
 </head>
@@ -97,6 +101,42 @@
             <td>Asset qty: {{ $data['total_data'] }}</td>
             <td>Total Cost: {{ rupiah($data['total_cost']) }}</td>
         </tr> --}}
+    </table>
+    <table id="tableTTD">
+        <tr>
+            <td style="text-align: center">
+                Pembuat,
+            </td>
+            <td style="text-align: center">
+                Mengetahui,
+            </td>
+            <td style="text-align: center">
+                Menyetujui,
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;">
+                (.............................)
+            </td>
+            <td style="text-align:center;">
+                (.............................)
+            </td>
+            <td style="text-align:center;">
+                (.............................)
+            </td>
+        </tr>
     </table>
 </body>
 

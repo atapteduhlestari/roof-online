@@ -252,6 +252,8 @@ class TrnMaintenanceController extends Controller
         $data['total_data'] = $data['transactions']->count();
 
         // return Excel::download(new MaintenanceExport($data), $name);
+        // $transactions = $data;
+        // return view('export.maintenance', compact('transactions'));
         return Excel::download(new MaintenanceExportDetailView($data), $name);
     }
 

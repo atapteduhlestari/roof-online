@@ -25,6 +25,11 @@
             width: 100%;
             border-collapse: collapse;
         }
+
+        table#tableTTD,
+        table#tableTTD td {
+            border: none;
+        }
     </style>
     <script>
         window.print()
@@ -200,7 +205,31 @@
             </div>
         </div>
     </div>
-
+    <br>
+    <table id="tableTTD">
+        <tr>
+            <td style="text-align: center">
+                Pembuat,
+            </td>
+            <td style="text-align: center">
+                Mengetahui,
+            </td>
+            <td style="text-align: center">
+                Menyetujui,
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-top:60px; text-align:center;">
+                (.............................)
+            </td>
+            <td style="padding-top:60px; text-align:center;">
+                (.............................)
+            </td>
+            <td style="padding-top:60px; text-align:center;">
+                (.............................)
+            </td>
+        </tr>
+    </table>
 </body>
 
 </html>
