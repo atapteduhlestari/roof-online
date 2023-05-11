@@ -25,6 +25,9 @@ Route::middleware(['auth', 'reminder'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/report', [DashboardController::class, 'report']);
 
+    Route::get('/report-loan-detail', [LoanController::class, 'detailView']);
+    Route::get('/loan-detail-export', [LoanController::class, 'reportDetail']);
+
     Route::get('/report-maintenance-detail', [TrnMaintenanceController::class, 'detailView']);
     Route::get('/trn-maintenance-detail-export', [TrnMaintenanceController::class, 'reportDetail']);
     Route::get('/trn-maintenance-plan-export', [TrnMaintenanceController::class, 'reportPlan']);

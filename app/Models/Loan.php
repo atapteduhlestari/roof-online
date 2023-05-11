@@ -30,4 +30,25 @@ class Loan extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeFilter($query, $filters)
+    {
+        $query->when($filters['start']  ?? false, function ($query, $from) {
+            return $query->whereDate('loan_start_date', '>=', $from);
+        });
+
+        $query->when($filters['end']  ?? false, function ($query, $to) {
+            return $query->whereDate('loan_due_date', '<=', $to);
+        });
+
+        $query->when($filters['sbu_id'] ?? false, function ($query, $sbu) {
+            return $query->whereHas('sbu', function ($q) use ($sbu) {
+                $q->where('sbu_id', $sbu);
+            });
+        });
+
+        $query->when($filters['status']  ?? false, function ($query, $status) {
+            return $query->whereNotNull('loan_date');
+        });
+    }
 }

@@ -8,6 +8,9 @@ use App\Models\Asset;
 use App\Models\Employee;
 use App\Models\AssetChild;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\LoanExportDetailView;
+use App\Exports\LoanExportDetailView as ExportsLoanExportDetailView;
 
 class LoanController extends Controller
 {
@@ -84,6 +87,40 @@ class LoanController extends Controller
 
         $loan->update($data);
         return redirect('/loan')->with('success', 'Success!');
+    }
+
+    public function detailView()
+    {
+        $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
+        return view('report.detail.loan', compact('SBUs'));
+    }
+
+    public function reportDetail()
+    {
+        if (request('start') > request('end'))
+            return redirect()->back()->with('warning', 'Start date must be lower than End date');
+
+        $data['request'] = request()->all();
+
+        if (isSuperadmin())
+            $data['loans'] =  Loan::filter($data['request'])->orderBy('loan_start_date')->get();
+        else
+            $data['loans'] = Loan::filter($data['request'])->where('sbu_id', userSBU())->orderBy('loan_start_date')->get();
+
+        if (count($data['loans']) <= 0)
+            return redirect()->back()->with('warning', 'No data available');
+
+        $sbu = SBU::find(request('sbu_id'));
+        $time = now()->format('dmY') . '-' . uniqid();
+        $name = "ATL-GAN-LOAN-DETAIL-{$time}.xlsx";
+
+        $data['sbu'] = request('sbu_id') ? $sbu->sbu_name : 'All';
+        $data['status'] = (request('status') == 1) ? 'Closed' : ((request('status') == null) ? 'All' : 'Open');
+        $data['periode'] = getPeriodeExport(request());
+
+        $loans = $data;
+        return view('export.loan', compact('loans'));
+        return Excel::download(new LoanExportDetailView($data), $name);
     }
 
     public function destroy(Loan $loan)
