@@ -63,16 +63,13 @@
             </tr> --}}
             <tr>
                 <th>No</th>
-                <th>Code</th>
-                <th>Asset</th>
-                <th>SBU</th>
+                <th>Title</th>
                 <th>Type</th>
-                <th>Description</th>
+                <th>SBU</th>
+                <th>Peminjam</th>
                 <th>Start Date</th>
                 <th>Due Date</th>
-                <th>Cost</th>
-                <th>Applicant</th>
-                <th>Approval</th>
+                <th>Return Date</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -80,37 +77,16 @@
             @foreach ($loans['loans'] as $trn)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $trn->trn_no }}</td>
-                    <td>{{ $trn->asset->asset_name }}</td>
+                    <td>{{ $trn->loan_type ? $trn->asset->asset_name : $trn->document->doc_name }}</td>
+                    <td>{{ $trn->loan_type ? 'Asset' : 'Document' }}</td>
                     <td>{{ $trn->sbu->sbu_name ?? '' }}</td>
-                    <td>{{ $trn->Loan->name }}</td>
-                    <td>{{ strip_tags($trn->trn_desc) }}</td>
-                    <td>{{ createDate($trn->trn_start_date)->format('d/m/Y') }}</td>
-                    <td>{{ createDate($trn->trn_date)->format('d/m/Y') }}</td>
-                    <td style="text-align: right">{{ rupiah($trn->trn_value) }}</td>
-                    <td>{{ $trn->pemohon }}</td>
-                    <td>{{ $trn->penyetuju }}</td>
-                    <td>{{ $trn->trn_status ? 'Closed' : 'Open' }}</td>
+                    <td>{{ $trn->peminjam }}</td>
+                    <td>{{ createDate($trn->loan_start_date)->format('d/m/Y') }}</td>
+                    <td>{{ createDate($trn->loan_due_date)->format('d/m/Y') }}</td>
+                    <td>{{ $trn->loan_date ? createDate($trn->loan_date)->format('d/m/Y') : '' }}</td>
+                    <td>{{ $trn->loan_status ? 'Returned' : 'On loan' }}</td>
                 </tr>
             @endforeach
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                    <b>Total</b>
-                </td>
-                {{-- <td>
-                    <b>{{ rupiah($loans['total_cost_plan']) }}</b>
-                </td> --}}
-                <td style="text-align: right">
-                    <b>{{ rupiah($loans['total_cost']) }}</b>
-                </td>
-            </tr>
         </tbody>
     </table>
 

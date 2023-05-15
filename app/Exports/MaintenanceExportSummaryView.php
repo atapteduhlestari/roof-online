@@ -61,7 +61,7 @@ class MaintenanceExportSummaryView implements
                 //     ->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
                 $sheet->getStyle('A8:D8')->getFill()
                     ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-                    ->getStartColor()->setARGB('E5E4E2');
+                    ->getStartColor()->setARGB('A9D08E');
                 $sheet->getDelegate()->getStyle('A8:D8')->getFont()->setBold(true);
                 $sheet->getDelegate()->getStyle($cellRange)->applyFromArray($styleArray);
             },

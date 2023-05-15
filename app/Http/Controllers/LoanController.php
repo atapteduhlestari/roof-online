@@ -117,6 +117,7 @@ class LoanController extends Controller
         $data['sbu'] = request('sbu_id') ? $sbu->sbu_name : 'All';
         $data['status'] = (request('status') == 1) ? 'Closed' : ((request('status') == null) ? 'All' : 'Open');
         $data['periode'] = getPeriodeExport(request());
+        $data['total_data'] = $data['loans']->count();
 
         $loans = $data;
         return view('export.loan', compact('loans'));

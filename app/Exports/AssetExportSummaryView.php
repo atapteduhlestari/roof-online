@@ -58,7 +58,7 @@ class AssetExportSummaryView implements
 
                 $sheet->getStyle('A8:E9')->getFill()
                     ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-                    ->getStartColor()->setARGB('E5E4E2');
+                    ->getStartColor()->setARGB('#A9D08E');
                 $sheet->getStyle('A8:E9')->getBorders()->getAllBorders()
                     ->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
                 $sheet->getDelegate()->getStyle('A8:E9')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
