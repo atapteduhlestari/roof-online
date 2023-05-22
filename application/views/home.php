@@ -49,7 +49,7 @@
             <div class="container h-100">
                 <div class="row align-items-center h-100">
                     <div class="col-md-12 text-center">
-                        <img height="100" class="mx-auto" loading="lazy" src="<?= base_url(); ?>assets/images/logo/palmex-logo.png" data-animation-in="bounceInDown" alt="Palmex Synthetic Roofing Thatch">
+                        <img height="100" class="mx-auto" loading="lazy" src="<?= base_url(); ?>assets/images/logo/palmex-web.png" data-animation-in="bounceInDown" alt="Palmex Synthetic Roofing Thatch">
                         <h2 class="slide-title text-shadow" data-animation-in="slideInLeft">World's most durable</h2>
                         <h3 class="slide-sub-title text-shadow " data-animation-in="slideInRight">SYNTHETIC ROOFING</h3>
                         <p data-animation-in="fadeIn" data-duration-in="1.2">
@@ -211,7 +211,7 @@
                                 </a>
                                 <div class="project-item-info">
                                     <div class="project-item-info-text">
-                                        <p class="project-cat">Excursion</p>
+                                        <p class="project-cat">Theme Park</p>
                                     </div>
                                 </div>
                             </div>
@@ -272,7 +272,7 @@
 </section>
 
 <section class="mt-n5 dark-bg" id="highlight-product">
-    <div class="">
+    <div>
         <h3 class="section-sub-title text-center text-white">Product Overview</h3>
         <div class="row align-items-center flex-column-reverse flex-md-row">
             <div class="col-md-5 mb-3 text-right px-5">
@@ -283,7 +283,7 @@
                 <h3 style="display: inline-block;">Cambridge</h3>
                 <img style="height:35px; display: inline-block;" src="<?= base_url(); ?>assets/images/logo/30_year.png">
                 <p>
-                    IKO Cambridge memberikan penampilan yang lebih cantik untuk segala bentuk rumah dari yang tradisional hingga modern, di pedesaan ataupun di kota. Dengan profil dimensional dan bayangan yang dalam membuat atap terlihat seperti terbuat dari campuran kayu alami sehingga memberikan penampilan rumah kelas atas dengan biaya yang terjangkau.<b> IKO Cambridge dikembangkan untuk tahan selama bertahun-tahun, menjadikannya salah satu shingle yang paling tahan lama</b>.
+                    IKO Cambridge memberikan penampilan yang lebih cantik untuk segala bentuk rumah dari yang tradisional hingga modern, di pedesaan ataupun di kota. IKO Cambridge Architectural Laminated Shingles memiliki konstruksi double layer dengan bahan dasar asphalt yang diperkuat tulangan fiberglass.<b> Memiliki ukuran dan area exposure lebih lebar dengan tampilan "acak" terlihat seperti sirap alami sehingga memberikan kesan elegan pada atap rumah dengan biaya yang terjangkau.</b>
                 </p>
                 <a href="<?= base_url(); ?>product/detail/10" class="highlight btn btn-primary border">Read more</a>
 
@@ -294,6 +294,7 @@
             </div>
 
         </div>
+
         <div class="gap-60"></div>
 
         <div class="row align-items-center">
@@ -308,13 +309,15 @@
                 </div>
                 <h3>Marathon Plus AR</h3>
                 <p>
-                    IKO Marathon Plus AR adalah atap tradisional dari bitumen 3 daun yang telah teruji oleh waktu, terbuat dari material yang mengandung fiberglass sebagai perkuatan untuk mengatasi cuaca yang ekstrim. Desain klasik IKO Marathon Plus AR akan mempercantik bangunan anda.<b> Dengan permukaan bebatuan yang tahan terhadap jamur akan mencegah terbentuknya garis-garis yang merusak atap bitumen disebabkan oleh jamur</b> dan membuat atap anda tetap terlihat cantik walaupun sudah bertahun-tahun terpasang.
+                    IKO Marathon Plus AR Traditional 3-tab terbuat dari asphalt yang diperkuat dengan tulangan fiberglass untuk mengatasi cuaca ekstrim. Desain klasik IKO Marathon Plus AR akan mempercantik bangunan anda.<b> Memiliki lapisan batuan (Algae Resistance) sehingga mencegah perubahan warna kehitaman pada lembar yang disebabkan oleh jamur dan membuat atap anda tetap terlihat cantik walaupun sudah bertahun-tahun terpasang.</b>
                 </p>
                 <a href="<?= base_url(); ?>product/detail/11" class="highlight btn btn-primary border">Read more</a>
 
             </div>
         </div>
+
         <div class="gap-60"></div>
+
         <div class="row align-items-center flex-column-reverse flex-md-row">
             <div class="col-md-5 mb-3 text-right px-5">
                 <hr>
@@ -325,7 +328,7 @@
                     Synthetic Thatch Original
                 </h3>
                 <p>
-                    Palmex Original menawarkan solusi permanen untuk proyek2 di seluruh dunia.<b> Dengan memiliki Palmex, anda memilih produk yang tahan lama (permanen) serta dapat di daur-ulang</b>. Produk Palmex terlihat sangat persis seperti aslinya serta membuat anda nyaman tanpa harus berpikir untuk selalu melakukan perawatan ataupun mengganti atap (alang2) bangunan anda setiap tahun karena cuaca yang merubah warna atap.
+                    Palmex Original menawarkan solusi permanen untuk proyek2 di seluruh dunia.<b> Palmex original merupakan atap alang-alang sintetis berbahan dasar HDPE, sehingga memiliki ketahanan hingga 50 tahun, 100% Weatherproof dan recyclable.</b> Palmex memiliki tampilan seperti alang-alang alami tanpa memerlukan perawatan rutin sehingga tidak perlu penggantian dan cocok sebagai investasi jangka panjang.
                 </p>
                 <a href="<?= base_url(); ?>product/detail/20" class="highlight btn btn-primary border">Read more</a>
 
@@ -356,6 +359,7 @@
 
             </div>
         </div>
+
         <div class="gap-60"></div>
 
         <div class="row align-items-center flex-column-reverse flex-md-row">
@@ -501,19 +505,19 @@
                 <div class="row all-clients justify-content-center">
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" class="img-fluid" title="IKO Shingle Bitumen" style="height:70px;" src="<?= base_url(); ?>assets/images/logo/iko-logo.png" alt="IKO" /></a>
+                            <a href="<?= base_url(); ?>product/subkategori/1"><img loading="lazy" class="img-fluid" title="IKO Shingle Bitumen" style="height:70px;" src="<?= base_url(); ?>assets/images/logo/iko-logo.png" alt="IKO" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" class="img-fluid" title="Palmex Synthetic Thatch" style="height:115px;" src="<?= base_url(); ?>assets/images/logo/palmex-logo.png" alt="Palmex" /></a>
+                            <a href="<?= base_url(); ?>product/subkategori/5"><img loading="lazy" class="img-fluid" title="Palmex Synthetic Thatch" style="height:115px;" src="<?= base_url(); ?>assets/images/logo/palmex-logo.png" alt="Palmex" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="Duo Composite Membrane" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/duo-logo.png" alt="DUO" /></a>
+                            <a href="<?= base_url(); ?>product/detail/14"><img loading="lazy" title="Duo Composite Membrane" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/duo-logo.png" alt="DUO" /></a>
                         </figure>
                     </div>
 
@@ -525,120 +529,120 @@
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="IKO Spectraplan TPE" class="img-fluid" style="height:50px;" src="<?= base_url(); ?>assets/images/logo/iko-spectraplan.png" alt="IKO Spectraplan TPE" /></a>
+                            <a href="<?= base_url(); ?>product/detail/19"><img loading="lazy" title="IKO Spectraplan TPE" class="img-fluid" style="height:50px;" src="<?= base_url(); ?>assets/images/logo/iko-spectraplan.png" alt="IKO Spectraplan TPE" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="Soprasun APP Membrane" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/soprasun.png" alt="Soprema Soprasun" /></a>
+                            <a href="<?= base_url(); ?>product/detail/51"><img loading="lazy" title="Soprasun APP Membrane" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/soprasun.png" alt="Soprema Soprasun" /></a>
                         </figure>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="Sagitta APP Membrane" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/sagitta.png" alt="General Membrane Sagitta" /></a>
-                        </figure>
-                    </div>
-
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
-                        <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="Polygum Polymer Bitumen" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/polygum.png" alt="Polygum" /></a>
+                            <a href="<?= base_url(); ?>product/detail/46"><img loading="lazy" title="Sagitta APP Membrane" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/sagitta.png" alt="General Membrane Sagitta" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="IKO Enertherm ALU Insulation" class="img-fluid" style="height:50px;" src="<?= base_url(); ?>assets/images/logo/iko-enertherm.png" alt="IKO Enertherm Insulation" /></a>
+                            <a href="<?= base_url(); ?>product/detail/27"><img loading="lazy" title="Polygum Polymer Bitumen" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/polygum.png" alt="Polygum" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="Soprema Tecsound Soundproofing Membrane" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/tecsound.png" alt="Soundproofing Membrane" /></a>
+                            <a href="<?= base_url(); ?>product/detail/18"><img loading="lazy" title="IKO Enertherm ALU Insulation" class="img-fluid" style="height:50px;" src="<?= base_url(); ?>assets/images/logo/iko-enertherm.png" alt="IKO Enertherm Insulation" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="Micapel Slate Roof" class="img-fluid" style="height:80px;" src="<?= base_url(); ?>assets/images/logo/micapel.png" alt="Micapel Slate Roof" /></a>
+                            <a href="<?= base_url(); ?>product/detail/52"><img loading="lazy" title="Soprema Tecsound Soundproofing Membrane" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/tecsound.png" alt="Soundproofing Membrane" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="KAWA KZ Standing Seam" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/kawa.png" alt="Unisons Kawa KZ" /></a>
+                            <a href="<?= base_url(); ?>product/detail/29"><img loading="lazy" title="Micapel Slate Roof" class="img-fluid" style="height:80px;" src="<?= base_url(); ?>assets/images/logo/micapel.png" alt="Micapel Slate Roof" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="Knauf Aquapanel Cement Board" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/aquapanel.png" alt="Knauf Aquapanel" /></a>
+                            <a href="<?= base_url(); ?>product/detail/24"><img loading="lazy" title="KAWA KZ Standing Seam" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/kawa.png" alt="Unisons Kawa KZ" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="Easyuse Drain Cell for Roof Garden" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/easyuse.png" alt="Easyuse" /></a>
+                            <a href="<?= base_url(); ?>product/kategori/7"><img loading="lazy" title="Knauf Aquapanel Cement Board" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/aquapanel.png" alt="Knauf Aquapanel" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="1.2 Truss Rangka Atap Baja Ringan" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/12truss.JPG" alt="1.2 Truss Rangka Baja Ringan" /></a>
+                            <a href="<?= base_url(); ?>product/detail/28"><img loading="lazy" title="Easyuse Drain Cell for Roof Garden" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/easyuse.png" alt="Easyuse" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="Maharoof Atap Metal" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/maharoof.jpg" alt="Maharoof Genteng Metal" /></a>
+                            <a href="<?= base_url(); ?>product/detail/23"><img loading="lazy" title="1.2 Truss Rangka Atap Baja Ringan" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/12truss.JPG" alt="1.2 Truss Rangka Baja Ringan" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="Maha SpanRoof Atap Metal" class="img-fluid" style="height:70px;" src="<?= base_url(); ?>assets/images/logo/mahaspan.jpeg" alt="Maha Spanroof" /></a>
+                            <a href="<?= base_url(); ?>product/detail/30"><img loading="lazy" title="Maharoof Atap Metal" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/maharoof.jpg" alt="Maharoof Genteng Metal" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="MahaFlat Atap Metal" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/mahaflat.jpg" alt="MahaFlat" /></a>
+                            <a href="<?= base_url(); ?>product/detail/49"><img loading="lazy" title="Maha SpanRoof Atap Metal" class="img-fluid" style="height:70px;" src="<?= base_url(); ?>assets/images/logo/mahaspan.jpeg" alt="Maha Spanroof" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="Flexideck Seam Atap Metal" class="img-fluid" style="height:65px;" src="<?= base_url(); ?>assets/images/logo/flexideck.jpg" alt="Flexideck Seam" /></a>
+                            <a href="<?= base_url(); ?>product/detail/42"><img loading="lazy" title="MahaFlat Atap Metal" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/mahaflat.jpg" alt="MahaFlat" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="TaperRoof Atap Metal" class="img-fluid" style="height:50px;" src="<?= base_url(); ?>assets/images/logo/taperoof.jpg" alt="TaperRoof" /></a>
+                            <a href="<?= base_url(); ?>product/detail/44"><img loading="lazy" title="Flexideck Seam Atap Metal" class="img-fluid" style="height:65px;" src="<?= base_url(); ?>assets/images/logo/flexideck.jpg" alt="Flexideck Seam" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="EcoRoof Atap Metal" class="img-fluid" style="height:50px;" src="<?= base_url(); ?>assets/images/logo/ecoroof.jpg" alt="EcoRoof" /></a>
+                            <a href="<?= base_url(); ?>product/detail/43"><img loading="lazy" title="TaperRoof Atap Metal" class="img-fluid" style="height:50px;" src="<?= base_url(); ?>assets/images/logo/taperoof.jpg" alt="TaperRoof" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="FlexiRoof Atap Metal" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/flexiroof.jpg" alt="FlexiRoof" /></a>
+                            <a href="<?= base_url(); ?>product/detail/32"><img loading="lazy" title="EcoRoof Atap Metal" class="img-fluid" style="height:50px;" src="<?= base_url(); ?>assets/images/logo/ecoroof.jpg" alt="EcoRoof" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="Pelapis Atap Metal" class="img-fluid" style="height:75px;" src="<?= base_url(); ?>assets/images/logo/mahainsulasi.jpg" alt="Maha Insulasi" /></a>
+                            <a href="<?= base_url(); ?>product/detail/50"><img loading="lazy" title="FlexiRoof Atap Metal" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/flexiroof.jpg" alt="FlexiRoof" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="#!"><img loading="lazy" title="Emarin Atap Metal" class="img-fluid" style="height:65px;" src="<?= base_url(); ?>assets/images/logo/emarin.jpg" alt="Emarin" /></a>
+                            <a href="<?= base_url(); ?>product/detail/48"><img loading="lazy" title="Pelapis Atap Metal" class="img-fluid" style="height:75px;" src="<?= base_url(); ?>assets/images/logo/mahainsulasi.jpg" alt="Maha Insulasi" /></a>
+                        </figure>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
+                        <figure class="home-logo rounded">
+                            <a href="<?= base_url(); ?>product/detail/31"><img loading="lazy" title="Emarin Atap Metal" class="img-fluid" style="height:65px;" src="<?= base_url(); ?>assets/images/logo/emarin.jpg" alt="Emarin" /></a>
                         </figure>
                     </div>
                 </div>
@@ -648,7 +652,6 @@
 </section>
 
 <section class="subscribe no-padding bg-shake-hands">
-
     <div class="row shake-hands-desc">
         <div class="col-lg bg-home ">
             <div class="subscribe-call-to-acton">
@@ -657,7 +660,6 @@
             </div>
         </div>
     </div>
-
 </section>
 
 <section id="news" class="news">
@@ -684,7 +686,7 @@
                                     <?= $news->judul ?>
                                 </a>
                             </h4>
-                            <div class="my-2 limit-text">
+                            <div class="my-2 limit-text post-desc">
                                 <?= $news->isi ?>
                             </div>
                             <div class="latest-post-meta">

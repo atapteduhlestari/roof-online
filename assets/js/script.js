@@ -393,13 +393,6 @@ jQuery(function ($) {
 		],
 	});
 
-	$(document).on("click", '[data-toggle="lightbox"]', function (event) {
-		event.preventDefault();
-		$(this).ekkoLightbox({
-			wrapping: false,
-		});
-	});
-
 	$(document).on("click", ".btn-contact-collapse", function () {
 		$(".caret-icon", this).toggleClass("fa-caret-down fa-caret-right");
 	});

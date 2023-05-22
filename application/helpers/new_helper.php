@@ -1,7 +1,39 @@
 <?php
 function atlSong()
 {
-    return 'ok';
+    $lyrics = "(*) MENTARI YANG PANAS <br>
+    ATAU HUJAN DERAS<br>
+    TAK KAN MEMBUAT AKU MALAS<br>
+    <br>
+    KU TETAP BERGEGAS<br>
+    MENJALANKAN TUGAS<br>
+    DEMI KELUARGA DAN JUGA CITA CITA KU<br>
+    UUU.....<br>
+    AAA......<br>
+    ATAP MENEDUHI KEHIDUPANKU<br>
+    ATAP PUN MEMBANTU MEWUJUDKAN MIMPI KU<br>
+    KU KAN BERJUANG<br>
+    RAIH PELUANG<br>
+    PELANGGAN YG DATANG KAN KEUNTUNGAN<br>
+    KAN KU TERANGKAN<br>
+    SEPENUH HATI<br>
+    HANYA DISINI PRODUK YG TERBAIK<br>
+    <br>
+    DI ATAP TEDUH LESTARI --> (*)<br>
+    <br>
+    Atap Teduh Lestari,<br><i>every product is beautiful
+    customer feels good, great satisfaction<br>
+    back home winning story, morning glory<br>
+    <br></i>
+    KU KAN BERJUANG<br>
+    RAIH PELUANG<br>
+    PELANGGAN YG DATANG KAN KEUNTUNGAN<br>
+    <br>````````
+    KAN KU TERANGKAN<br>
+    SEPENUH HATI<br>
+    HANYA DISINI PRODUK YG TERBAIK";
+
+    return $lyrics;
 }
 
 function dd($param)

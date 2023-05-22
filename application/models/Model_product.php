@@ -39,7 +39,6 @@ class Model_product extends CI_Model
 			$result = $query->row();
 			return $result;
 		}
-		dd($id);
 		return show_404();
 	}
 
@@ -78,7 +77,7 @@ class Model_product extends CI_Model
 
 	function tot_product()
 	{
-		$this->db->select('produk.*, nama_logo, gambar_logo');
+		$this->db->select('produk.*');
 		$this->db->from('produk');
 		$this->db->join('produk_subkategori', 'produk.id_produk = produk_subkategori.id_produk');
 		$this->db->join('kategori', 'produk_subkategori.id_kategori = kategori.id_kategori', 'LEFT');
@@ -116,7 +115,7 @@ class Model_product extends CI_Model
 
 	function tot_product_category($kategori)
 	{
-		$this->db->select('produk.*, gambar_logo, nama_logo');
+		$this->db->select('produk.*');
 		$this->db->from('produk');
 		$this->db->join('produk_subkategori', 'produk.id_produk = produk_subkategori.id_produk', 'LEFT');
 		$this->db->join('kategori', 'produk_subkategori.id_kategori = kategori.id_kategori', 'LEFT');
@@ -155,7 +154,7 @@ class Model_product extends CI_Model
 
 	function tot_product_subcategory($subkategori)
 	{
-		$this->db->select('produk.*, gambar_logo, nama_logo');
+		$this->db->select('produk.*');
 		$this->db->from('produk');
 		$this->db->join('produk_subkategori', 'produk.id_produk = produk_subkategori.id_produk', 'LEFT');
 		$this->db->join('kategori', 'produk_subkategori.id_kategori = kategori.id_kategori', 'LEFT');

@@ -45,7 +45,11 @@
                                         </a>
                                     </h4>
                                     <div class="my-2 limit-text">
+                                        <p>
+                                            <img alt="" src="http://roof-online.com/atl/assets/uploads/images/palmex-bamboo-desc-min.png">
+                                        </p>
                                         <?= $news->isi ?>
+
                                     </div>
                                     <div class="latest-post-meta">
                                         <span class="post-item-date">

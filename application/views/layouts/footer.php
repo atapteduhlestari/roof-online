@@ -49,7 +49,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a target="_blank" href="https://www.youtube.com/channel/UCXayZkXcKBH1o19D9cDUkiQ" aria-label="Youtube">
+                                <a target="_blank" href="https://www.youtube.com/@atapteduhlestari7737" aria-label="Youtube">
                                     <i class="fab fa-youtube"></i>
                                 </a>
                             </li>
@@ -119,7 +119,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="<?= base_url(); ?>home/faqs">
+                            <a href="#!">
                                 FAQs </a>
                         </li>
                     </ul>
@@ -193,10 +193,16 @@
         s0.parentNode.insertBefore(s1, s0);
     })();
 
-
     let year = new Date().getFullYear();
     let copyright = document.getElementById('copyRightYear');
     copyright.innerHTML = year;
+
+    $(document).ready(function() {
+        $(document).on("click", '[data-toggle="lightbox"]', function(event) {
+            event.preventDefault();
+            $(this).ekkoLightbox();
+        });
+    });
 </script>
 </body>
 

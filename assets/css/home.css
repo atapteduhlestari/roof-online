@@ -102,6 +102,11 @@
 }
 
 .limit-text {
+	height: 25px;
+	-o-object-fit: cover;
+	object-fit: cover;
+	-o-object-position: center;
+	object-position: center;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;

@@ -105,7 +105,7 @@
                                                     </div>
                                                     <div class="card-body">
                                                         <h5 class="card-text text-white text-center">
-                                                            Project Name
+                                                            <?= $gbp->judul_project ?>
                                                         </h5>
                                                     </div>
                                                 </div>

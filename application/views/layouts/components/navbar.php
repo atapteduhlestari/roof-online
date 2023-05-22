@@ -134,7 +134,7 @@
     <a target="_blank" href="https://twitter.com/roofatap" class="twitter">
         <i class="fab fa-twitter"></i>
     </a>
-    <a target="_blank" href="https://www.youtube.com/channel/UCXayZkXcKBH1o19D9cDUkiQ" class="youtube">
+    <a target="_blank" href="https://www.youtube.com/@atapteduhlestari7737" class="youtube">
         <i class="fab fa-youtube"></i>
     </a>
     <a role="button" class="song" id="songIcon" title="Play/Pause Song">

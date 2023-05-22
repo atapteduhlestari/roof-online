@@ -27,7 +27,6 @@ class Product extends CI_Controller
         $config['total_rows'] = $product_tot;
         $config['per_page'] = 9;
         $from = $this->uri->segment(3);
-        //config for bootstrap pagination class integration
         $config['first_link']       = 'First';
         $config['last_link']        = 'Last';
         $config['next_link']        = 'Next';
@@ -46,7 +45,6 @@ class Product extends CI_Controller
         $config['first_tagl_close'] = '</span></li>';
         $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
         $config['last_tagl_close']  = '</span></li>';
-        // $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
         $data['pagination'] = $this->pagination->create_links();
         $this->pagination->initialize($config);
 
@@ -64,7 +62,6 @@ class Product extends CI_Controller
         $product_tot = $this->Model_product->tot_product_category($id);
         $data['product_tot'] = $product_tot;
 
-        //config for bootstrap pagination class integration
         $config['first_link']       = 'First';
         $config['last_link']        = 'Last';
         $config['next_link']        = 'Next';
@@ -106,7 +103,6 @@ class Product extends CI_Controller
         $product_tot = $this->Model_product->tot_product_subcategory($id);
         $data['product_tot'] = $product_tot;
 
-        //config for bootstrap pagination class integration
         $config['first_link']       = 'First';
         $config['last_link']        = 'Last';
         $config['next_link']        = 'Next';
@@ -135,8 +131,6 @@ class Product extends CI_Controller
         $data['product_data'] = $this->Model_product->get_product_subcategory($id, $config['per_page'], $from);
         $data['title'] = 'Product Category: ' . $data['product_data'][0]->nama_subkategori . ' - ATAP TEDUH LESTARI';
         $data['banner_title'] = 'Product Category: ' . $data['product_data'][0]->nama_subkategori;
-        // // tampilkan query
-        // $this->output->enable_profiler(TRUE);
 
         $this->load->view('layouts/header', $data);
         $this->load->view('layouts/components/navbar');
@@ -161,12 +155,12 @@ class Product extends CI_Controller
         $this->load->view('layouts/footer');
     }
 
-    public function search()
-    {
+    // public function search()
+    // {
 
-        $data['title'] = 'Product - ATAP TEDUH LESTARI';
-        $data['banner_title'] = 'Product - ATAP TEDUH LESTARI';
-        echo $this->input->post('keywords');
-        die;
-    }
+    //     $data['title'] = 'Product - ATAP TEDUH LESTARI';
+    //     $data['banner_title'] = 'Product - ATAP TEDUH LESTARI';
+    //     echo $this->input->post('keywords');
+    //     die;
+    // }
 }

@@ -473,13 +473,13 @@
                             <table class="table table-borderless" width="100%">
                                 <tr>
                                     <td colspan="2">
-                                        Jl. Mahendradatta No. 129, Padangsambian Kodya Denpasar, Bali 80118
+                                        JI. Mahendradatta No. 99A, Padangsambian Kodya Denpasar, Bali 80118
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Phone</td>
                                     <td>
-                                        0361-8451745 / 0812 9590 8643 / 0857 8115 7228
+                                        0361-8451745
                                     </td>
                                 </tr>
                                 <tr>
