@@ -6,7 +6,6 @@ use App\Models\SBU;
 use App\Models\SDB;
 use App\Models\Asset;
 use App\Models\AssetChild;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\AssetChildRequest;
 
@@ -43,7 +42,6 @@ class AssetChildController extends Controller
         }
 
         AssetChild::create($data);
-
         return redirect()->back()->with('success', 'Successfully deleted!');
     }
 

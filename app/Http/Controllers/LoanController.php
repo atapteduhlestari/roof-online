@@ -119,8 +119,8 @@ class LoanController extends Controller
         $data['periode'] = getPeriodeExport(request());
         $data['total_data'] = $data['loans']->count();
 
-        $loans = $data;
-        return view('export.loan', compact('loans'));
+        // $loans = $data;
+        // return view('export.loan', compact('loans'));
         return Excel::download(new LoanExportDetailView($data), $name);
     }
 
