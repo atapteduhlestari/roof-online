@@ -88,7 +88,11 @@ class AssetChildController extends Controller
     {
 
         if ($assetChild->trnRenewal()->exists()) {
-            return redirect('/asset-child')->with('warning', 'Cannot delete document that have transactions!');
+            return redirect('/asset-child')->with('warning', 'Cannot delete document that has transactions!');
+        }
+
+        if ($assetChild->loan()->exists()) {
+            return redirect('/asset-child')->with('warning', 'Cannot delete document that has been loaned!');
         }
 
         Storage::delete($assetChild->file);

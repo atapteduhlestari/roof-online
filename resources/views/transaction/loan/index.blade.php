@@ -47,7 +47,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        {{ $loan->loan_type ? $loan->asset->asset_name : $loan->document->doc_name }}
+                                        {{ $loan->loan_type ? $loan->asset->asset_name : $loan->document->doc_name ?? '' }}
                                     </td>
                                     <td>{{ $loan->loan_type ? 'Asset' : 'Document' }}</td>
                                     <td>{{ $loan->sbu->sbu_name }}</td>

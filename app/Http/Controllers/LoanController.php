@@ -126,8 +126,8 @@ class LoanController extends Controller
 
     public function destroy(Loan $loan)
     {
-        if ($loan->loan_status)
-            return redirect()->back()->with('warning', 'Status is <b>CLOSED!</b>');
+        // if ($loan->loan_status)
+        //     return redirect()->back()->with('warning', 'Status is <b>CLOSED!</b>');
 
         $loan->delete();
         return redirect('/loan')->with('success', 'Successfully deleted!');
