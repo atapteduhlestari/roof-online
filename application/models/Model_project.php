@@ -1,13 +1,17 @@
 <?php
 class Model_project extends CI_Model
 {
-	function get_project($number, $offset)
+	function get_project($number, $offset, $keyword = '')
 	{
 		$this->db->select('project.*, produk.nama_produk, gambar_logo, nama_logo');
 		$this->db->from('project');
 		$this->db->join('produk', 'produk.id_produk = project.id_produk');
 		$this->db->join('logo', 'produk.id_logo = logo.id_logo', 'LEFT');
-		$this->db->order_by('priority', 'DESC');
+		if ($keyword) {
+			$this->db->like('judul_project', $keyword);
+			$this->db->or_like('produk.nama_produk', $keyword);
+		}
+		$this->db->order_by('rec_update', 'asc');
 		$this->db->limit($number, $offset);
 		$query = $this->db->get();
 
@@ -18,10 +22,17 @@ class Model_project extends CI_Model
 		return $result;
 	}
 
-	function tot_project()
+	function tot_project($keyword = '')
 	{
+		$this->db->select('project.*, produk.nama_produk, gambar_logo, nama_logo');
+		$this->db->from('project');
 		$this->db->join('produk', 'produk.id_produk = project.id_produk');
-		$query = $this->db->get('project');
+		$this->db->join('logo', 'produk.id_logo = logo.id_logo', 'LEFT');
+		if ($keyword) {
+			$this->db->like('judul_project', $keyword);
+			$this->db->or_like('produk.nama_produk', $keyword);
+		}
+		$query = $this->db->get();
 
 		$result = $query->num_rows();
 		return $result;

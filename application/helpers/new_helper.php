@@ -36,6 +36,17 @@ function atlSong()
     return $lyrics;
 }
 
+function removeSpecialChar($str)
+{
+    $param = trim($str);
+
+    $res = str_replace(array(
+        '\'', '"', ',', ';', '<', '>', '!', '#', '$', '*', '%', '@'
+    ), '', $param);
+
+    return $res;
+}
+
 function dd($param)
 {
     echo json_encode($param);
