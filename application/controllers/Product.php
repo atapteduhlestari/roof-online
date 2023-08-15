@@ -62,6 +62,10 @@ class Product extends CI_Controller
         $product_tot = $this->Model_product->tot_product_category($id);
         $data['product_tot'] = $product_tot;
 
+        $config['total_rows'] = $product_tot;
+        $config['per_page'] = 9;
+        $from = $this->uri->segment(4);
+        $config['base_url'] = base_url() . 'product/kategori/' . $id . '/';
         $config['first_link']       = 'First';
         $config['last_link']        = 'Last';
         $config['next_link']        = 'Next';
@@ -80,11 +84,7 @@ class Product extends CI_Controller
         $config['first_tagl_close'] = '</span></li>';
         $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
         $config['last_tagl_close']  = '</span></li>';
-
-        $config['base_url'] = base_url() . 'product/kategori/' . $id . '/';
-        $config['total_rows'] = $product_tot;
-        $config['per_page'] = 9;
-        $from = $this->uri->segment(4);
+        $data['pagination'] = $this->pagination->create_links();
         $this->pagination->initialize($config);
 
         $data['product_data'] = $this->Model_product->get_product_category($id, $config['per_page'], $from);
@@ -103,6 +103,10 @@ class Product extends CI_Controller
         $product_tot = $this->Model_product->tot_product_subcategory($id);
         $data['product_tot'] = $product_tot;
 
+        $config['base_url'] = base_url() . 'product/subkategori/' . $id . '/';
+        $config['total_rows'] = $product_tot;
+        $config['per_page'] = 9;
+        $from = $this->uri->segment(4);
         $config['first_link']       = 'First';
         $config['last_link']        = 'Last';
         $config['next_link']        = 'Next';
@@ -121,11 +125,7 @@ class Product extends CI_Controller
         $config['first_tagl_close'] = '</span></li>';
         $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
         $config['last_tagl_close']  = '</span></li>';
-
-        $config['base_url'] = base_url() . 'product/subkategori/' . $id . '/';
-        $config['total_rows'] = $product_tot;
-        $config['per_page'] = 9;
-        $from = $this->uri->segment(3);
+        $data['pagination'] = $this->pagination->create_links();
         $this->pagination->initialize($config);
 
         $data['product_data'] = $this->Model_product->get_product_subcategory($id, $config['per_page'], $from);

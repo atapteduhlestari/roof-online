@@ -21,6 +21,7 @@ class Project extends CI_Controller
         $data['banner_title'] = 'Gallery Project';
         $project_tot = $this->Model_project->tot_project();
         $from = $this->uri->segment(3);
+        $data['discover_name'] = '';
 
         $config['base_url'] = base_url() . 'project/index/';
         $config['total_rows'] = $project_tot;
@@ -56,14 +57,27 @@ class Project extends CI_Controller
         $this->load->view('layouts/footer');
     }
 
+    public function discover($keyword)
+    {
+        $keyword = str_replace('%20', ' ', $keyword);
+        $data['title'] = 'Gallery Project - ATAP TEDUH LESTARI';
+        $data['banner_title'] = 'Gallery Project';
+        $data['project_data'] = $this->Model_project->discover_project($keyword);
+        $data['discover_name'] = $keyword;
+
+        $this->load->view('layouts/header', $data);
+        $this->load->view('layouts/components/navbar');
+        $this->load->view('layouts/components/banner');
+        $this->load->view('projects/index');
+        $this->load->view('layouts/footer');
+    }
+
     public function search()
     {
         $data['title'] = 'Gallery Project - ATAP TEDUH LESTARI';
         $data['banner_title'] = 'Gallery Project';
 
         $keyword = removeSpecialChar($this->input->post('keyword'));
-        if (!$keyword) return  redirect(base_url() . 'project', 'refresh');
-
         $search = ($this->uri->segment(3)) ? $this->uri->segment(3) : $keyword;
         $project_tot = $this->Model_project->tot_project($search);
         $from = $this->uri->segment(4);

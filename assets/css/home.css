@@ -22,6 +22,10 @@
 	margin-top: -3rem !important;
 }
 
+.text-home {
+	color: #8bc34a !important;
+}
+
 .text-shadow {
 	/* text-shadow: 5px 5px 3px rgba(0, 0, 0, 0.2); */
 	text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1),
@@ -146,11 +150,7 @@
 	transition: 0.5s;
 }
 
-.card-img-wrap {
-	overflow: hidden;
-}
-
-.card-img-wrap img {
+.card-img-wrap .img-title {
 	transition: transform 0.5s;
 	height: 250px;
 	width: 100%;
@@ -301,7 +301,7 @@ filter: grayscale(0%); */
 	transition: all 0.5s;
 }
 
-.home-recent-posts img {
+.home-recent-posts .img-title {
 	overflow: hidden;
 	max-height: 100%;
 	transition: all 0.5s;
@@ -316,8 +316,8 @@ filter: grayscale(0%); */
 	color: #8bc34a !important;
 }
 
-.home-recent-posts:hover img {
-	transform: scale(1.2);
+.home-recent-posts:hover .img-title {
+	transform: scale(1.1);
 }
 
 .show > .btn-primary.dropdown-toggle {

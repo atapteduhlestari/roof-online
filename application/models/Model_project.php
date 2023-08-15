@@ -1,7 +1,7 @@
 <?php
 class Model_project extends CI_Model
 {
-	function get_project($number, $offset, $keyword = '')
+	function get_project($number = '', $offset = '', $keyword = '')
 	{
 		$this->db->select('project.*, produk.nama_produk, gambar_logo, nama_logo');
 		$this->db->from('project');
@@ -35,6 +35,23 @@ class Model_project extends CI_Model
 		$query = $this->db->get();
 
 		$result = $query->num_rows();
+		return $result;
+	}
+
+	function discover_project($keyword = '')
+	{
+		$this->db->select('project.*, produk.nama_produk, produk.id_produk, gambar_logo, nama_logo');
+		$this->db->from('project');
+		$this->db->join('produk', 'produk.id_produk = project.id_produk');
+		$this->db->join('logo', 'produk.id_logo = logo.id_logo', 'LEFT');
+		$this->db->where('produk.nama_produk', $keyword);
+		$this->db->order_by('rec_update', 'asc');
+		$query = $this->db->get();
+
+		$result = array();
+		if ($query->num_rows() > 0) {
+			$result = $query->result();
+		}
 		return $result;
 	}
 

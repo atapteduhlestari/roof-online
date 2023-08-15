@@ -39,7 +39,6 @@ function atlSong()
 function removeSpecialChar($str)
 {
     $param = trim($str);
-
     $res = str_replace(array(
         '\'', '"', ',', ';', '<', '>', '!', '#', '$', '*', '%', '@'
     ), '', $param);

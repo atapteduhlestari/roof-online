@@ -141,7 +141,7 @@ class Model_product extends CI_Model
 		$this->db->where('produk.status', 1);
 		$this->db->where('kategori.status', 1);
 		$this->db->where('subkategori.id_subkategori', $subkategori);
-		// $this->db->limit($number, $offset);
+		$this->db->limit($number, $offset);
 		$query = $this->db->get();
 
 		$result = array();

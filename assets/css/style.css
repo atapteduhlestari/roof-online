@@ -3047,6 +3047,7 @@ label {
 }
 
 .post-body {
+	overflow: hidden;
 	padding: 20px 0;
 }
 

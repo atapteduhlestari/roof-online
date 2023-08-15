@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="input-group">
-                        <input type="text" name="keyword" class="form-control" title="Search project" placeholder="Type keywords here">
+                        <input type="text" name="keyword" class="form-control" title="Search project" placeholder="Project name">
                         <div class="input-group-btn">
                             <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
                         </div>
@@ -12,6 +12,9 @@
                 </div>
             </div>
         </form>
+        <?php if ($discover_name) : ?>
+            <h5 class="mt-5">Product covered with <a class="text-home" href="<?= base_url() ?>product/detail/<?= $project_data[0]->id_produk ?>"><?= $discover_name ?></a></h5>
+        <?php endif; ?>
         <div class="row mt-3" id="list-projects">
             <?php if (!$project_data) : ?>
                 <div class="col-md-6">

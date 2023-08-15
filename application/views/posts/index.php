@@ -33,9 +33,9 @@
                     <?php foreach ($news_data as $news) : ?>
                         <div class="col-md-6 mb-4">
                             <div class="latest-post home-recent-posts h-100">
-                                <div class="latest-post-media card-img-wrap">
-                                    <a href="<?= base_url(); ?>post/detail/<?= $news->id_newsletter ?>" class="latest-post-img">
-                                        <img loading="lazy" class="img-fluid rounded" height="100" src="<?= $news->gambar_url ?>" alt="<?= $news->judul ?>">
+                                <div class="card-img-wrap">
+                                    <a href="<?= base_url(); ?>post/detail/<?= $news->id_newsletter ?>">
+                                        <img loading="lazy" class="img-fluid rounded img-title" height="100" src="<?= $news->gambar_url ?>" alt="<?= $news->judul ?>">
                                     </a>
                                 </div>
                                 <div class="post-body p-3">
@@ -45,11 +45,7 @@
                                         </a>
                                     </h4>
                                     <div class="my-2 limit-text">
-                                        <p>
-                                            <img alt="" src="http://roof-online.com/atl/assets/uploads/images/palmex-bamboo-desc-min.png">
-                                        </p>
                                         <?= $news->isi ?>
-
                                     </div>
                                     <div class="latest-post-meta">
                                         <span class="post-item-date">

@@ -34,9 +34,11 @@
                                 <a class="nav-link btn btn-primary border-0 mb-1 mr-1" id="nav-spesifikasi-tab" data-toggle="tab" href="#nav-spesifikasi" role="tab" aria-controls="nav-spesifikasi" aria-selected="false">
                                     Spesification
                                 </a>
-                                <a class="nav-link btn btn-primary border-0 mb-1 mr-1" id="nav-references-tab" data-toggle="tab" href="#nav-references" role="tab" aria-controls="nav-references" aria-selected="false">
-                                    Project References
-                                </a>
+                                <?php if ($gambar_project) : ?>
+                                    <a class="nav-link btn btn-primary border-0 mb-1 mr-1" id="nav-references-tab" data-toggle="tab" href="#nav-references" role="tab" aria-controls="nav-references" aria-selected="false">
+                                        Project References
+                                    </a>
+                                <?php endif; ?>
                             </div>
                         </nav>
                     </div>
@@ -86,38 +88,38 @@
                                     Spesification
                                 </h3>
                                 <?= $product->spesifikasi_id; ?>
-
                             </div>
-
-                            <div class="tab-pane fade" id="nav-references" role="tabpanel">
-                                <h3 class="column-title-small">
-                                    Project References
-                                </h3>
-                                <div class="row justify-content-center" id="list-projects">
-                                    <?php if (count($gambar_project) > 0) : ?>
-                                        <?php foreach ($gambar_project as $gbp) : ?>
-                                            <div class="col-lg-4 col-md-6 mb-4">
-                                                <div class="card text-white list-project-catalog border-0 dark-bg gallery-catalog h-100">
-                                                    <div class="img-project-catalog p-1">
-                                                        <a href="<?= $gbp->gambar_project ?>" data-max-width="750" data-toggle="lightbox" data-gallery="example-gallery">
-                                                            <img class="card-img" loading="lazy" height="250" src="<?= $gbp->gambar_project ?>">
-                                                        </a>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <h5 class="card-text text-white text-center">
-                                                            <?= $gbp->judul_project ?>
-                                                        </h5>
+                            <?php if ($gambar_project) : ?>
+                                <div class="tab-pane fade" id="nav-references" role="tabpanel">
+                                    <h3 class="column-title-small">
+                                        Project References
+                                    </h3>
+                                    <div class="row justify-content-center" id="list-projects">
+                                        <?php if (count($gambar_project) > 0) : ?>
+                                            <?php foreach ($gambar_project as $gbp) : ?>
+                                                <div class="col-lg-4 col-md-6 mb-4">
+                                                    <div class="card text-white list-project-catalog border-0 dark-bg gallery-catalog h-100">
+                                                        <div class="img-project-catalog p-1">
+                                                            <a href="<?= $gbp->gambar_project ?>" data-max-width="750" data-toggle="lightbox" data-gallery="example-gallery">
+                                                                <img class="card-img" loading="lazy" height="250" src="<?= $gbp->gambar_project ?>">
+                                                            </a>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-text text-white text-center">
+                                                                <?= $gbp->judul_project ?>
+                                                            </h5>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
 
+                                    </div>
+                                    <div class="d-flex mt-5">
+                                        <a class="btn btn-primary mx-auto" href="<?= base_url(); ?>project/discover/<?= $product->nama_produk ?>"> Discover more</a>
+                                    </div>
                                 </div>
-                                <div class="d-flex mt-5">
-                                    <a class="btn btn-primary mx-auto" href="<?= base_url(); ?>project"> Discover more</a>
-                                </div>
-                            </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
