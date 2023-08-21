@@ -65,6 +65,10 @@ class Project extends CI_Controller
         $data['project_data'] = $this->Model_project->discover_project($keyword);
         $data['discover_name'] = $keyword;
 
+        if (count($data['project_data']) <= 0) {
+            redirect(base_url() . 'error');
+        }
+
         $this->load->view('layouts/header', $data);
         $this->load->view('layouts/components/navbar');
         $this->load->view('layouts/components/banner');

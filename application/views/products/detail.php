@@ -94,7 +94,7 @@
                                     <h3 class="column-title-small">
                                         Project References
                                     </h3>
-                                    <div class="row justify-content-center" id="list-projects">
+                                    <div class="row" id="list-projects">
                                         <?php if (count($gambar_project) > 0) : ?>
                                             <?php foreach ($gambar_project as $gbp) : ?>
                                                 <div class="col-lg-4 col-md-6 mb-4">
@@ -115,9 +115,11 @@
                                         <?php endif; ?>
 
                                     </div>
-                                    <div class="d-flex mt-5">
-                                        <a class="btn btn-primary mx-auto" href="<?= base_url(); ?>project/discover/<?= $product->nama_produk ?>"> Discover more</a>
-                                    </div>
+                                    <?php if (count($gambar_project) > 6) : ?>
+                                        <div class="d-flex mt-5">
+                                            <a class="btn btn-primary mx-auto" href="<?= base_url(); ?>project/discover/<?= $product->nama_produk ?>"> Discover more</a>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             <?php endif; ?>
                         </div>
