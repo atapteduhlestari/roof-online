@@ -141,12 +141,12 @@ class Product extends CI_Controller
 
     public function detail($id)
     {
-
         $data['title'] = 'Detail Product - ATAP TEDUH LESTARI';
         $data['product'] = $this->Model_product->product_first($id);
         $data['gambar_product'] = $this->Model_product->image_product($id);
         $data['gambar_project'] = $this->Model_product->image_project($id);
         $data['banner_title'] = 'Detail Product - ' . $data['product']->nama_produk;
+        $data['total_project'] =  $this->Model_product->tot_project($id);
 
         $this->load->view('layouts/header', $data);
         $this->load->view('layouts/components/navbar');

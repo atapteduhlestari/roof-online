@@ -111,6 +111,7 @@ class Project extends CI_Controller
         $this->pagination->initialize($config);
 
         $data['project_data'] = $this->Model_project->get_project($config['per_page'], $from, $search);
+        $data['discover_name'] = '';
 
         $this->load->view('layouts/header', $data);
         $this->load->view('layouts/components/navbar');

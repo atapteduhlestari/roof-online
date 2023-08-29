@@ -113,9 +113,8 @@
                                                 </div>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
-
                                     </div>
-                                    <?php if (count($gambar_project) > 6) : ?>
+                                    <?php if ($total_project > 6) : ?>
                                         <div class="d-flex mt-5">
                                             <a class="btn btn-primary mx-auto" href="<?= base_url(); ?>project/discover/<?= $product->nama_produk ?>"> Discover more</a>
                                         </div>

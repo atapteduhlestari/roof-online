@@ -26,6 +26,7 @@ class Model_product extends CI_Model
 	{
 		$this->db->select('produk.*, gambar_logo, nama_logo, kategori.nama_kategori, kategori.id_kategori');
 		$this->db->from('produk');
+		$this->db->join('project', 'produk.id_produk = project.id_produk');
 		$this->db->join('produk_subkategori', 'produk.id_produk = produk_subkategori.id_produk');
 		$this->db->join('kategori', 'produk_subkategori.id_kategori = kategori.id_kategori', 'LEFT');
 		$this->db->join('subkategori', 'produk_subkategori.id_subkategori = subkategori.id_subkategori', 'LEFT');
@@ -68,11 +69,19 @@ class Model_product extends CI_Model
 
 		if ($query->num_rows() > 0) {
 			foreach ($query->result() as $data) {
-
 				$hasil[] = $data;
 			}
 			return $hasil;
 		}
+	}
+
+	function tot_project($id)
+	{
+		$this->db->select('project.id_produk');
+		$this->db->from('project');
+		$this->db->where('project.id_produk', $id);
+		$query = $this->db->get();
+		return $query->num_rows();
 	}
 
 	function tot_product()
