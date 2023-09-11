@@ -3,7 +3,7 @@ class Model_product extends CI_Model
 {
 	function get_product($number, $offset)
 	{
-		$this->db->select('produk.*, gambar_logo, nama_logo');
+		$this->db->select('produk.*, logo.gambar_logo, logo.nama_logo');
 		$this->db->from('produk');
 		$this->db->join('produk_subkategori', 'produk.id_produk = produk_subkategori.id_produk');
 		$this->db->join('kategori', 'produk_subkategori.id_kategori = kategori.id_kategori', 'LEFT');
@@ -24,9 +24,9 @@ class Model_product extends CI_Model
 
 	function product_first($id)
 	{
-		$this->db->select('produk.*, gambar_logo, nama_logo, kategori.nama_kategori, kategori.id_kategori');
+		$this->db->select('produk.*, logo.gambar_logo, logo.nama_logo, kategori.nama_kategori, kategori.id_kategori');
 		$this->db->from('produk');
-		$this->db->join('project', 'produk.id_produk = project.id_produk');
+		$this->db->join('project', 'produk.id_produk = project.id_produk', 'LEFT');
 		$this->db->join('produk_subkategori', 'produk.id_produk = produk_subkategori.id_produk');
 		$this->db->join('kategori', 'produk_subkategori.id_kategori = kategori.id_kategori', 'LEFT');
 		$this->db->join('subkategori', 'produk_subkategori.id_subkategori = subkategori.id_subkategori', 'LEFT');
@@ -102,7 +102,7 @@ class Model_product extends CI_Model
 
 	function get_product_category($kategori, $number, $offset)
 	{
-		$this->db->select('produk.*, gambar_logo, nama_logo, kategori.nama_kategori');
+		$this->db->select('produk.*, logo.gambar_logo, logo.nama_logo, kategori.nama_kategori');
 		$this->db->from('produk');
 		$this->db->join('produk_subkategori', 'produk.id_produk = produk_subkategori.id_produk', 'LEFT');
 		$this->db->join('kategori', 'produk_subkategori.id_kategori = kategori.id_kategori', 'LEFT');
@@ -141,7 +141,7 @@ class Model_product extends CI_Model
 
 	function get_product_subcategory($subkategori, $number, $offset)
 	{
-		$this->db->select('produk.*, gambar_logo, nama_logo, subkategori.nama_subkategori');
+		$this->db->select('produk.*, logo.gambar_logo, logo.nama_logo, subkategori.nama_subkategori');
 		$this->db->from('produk');
 		$this->db->join('produk_subkategori', 'produk.id_produk = produk_subkategori.id_produk', 'LEFT');
 		$this->db->join('kategori', 'produk_subkategori.id_kategori = kategori.id_kategori', 'LEFT');

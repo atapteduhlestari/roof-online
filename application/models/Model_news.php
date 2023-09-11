@@ -6,10 +6,7 @@ class Model_news extends CI_Model
         $this->db->select('*');
         $this->db->from('newsletter');
         $this->db->order_by('tanggal', 'DESC');
-
         $this->db->limit($number, $offset);
-
-
         $query =  $this->db->get();
 
         $result = array();
