@@ -10,7 +10,7 @@
                         </button>
                         <div class="dropdown-menu product-items">
                             <a class="dropdown-item" href="<?= base_url(); ?>product/kategori/1">All</a>
-                            <a class="dropdown-item" href="<?= base_url(); ?>product/subkategori/1">Asphalt</a>
+                            <a class="dropdown-item" href="<?= base_url(); ?>product/subkategori/1">Shingles AR</a>
                             <a class="dropdown-item" href="<?= base_url(); ?>product/subkategori/5">Synthetic Thatch</a>
                             <a class="dropdown-item" href="<?= base_url(); ?>product/subkategori/2">Membrane</a>
                             <a class="dropdown-item" href="<?= base_url(); ?>product/subkategori/3">Metal</a>
@@ -40,7 +40,7 @@
                     </a>
                 </div>
                 <div class=" col-sm-6 col-md-3 mb-3">
-                    <a href="https://lestarijendela.com/" class="btn btn-primary btn-block">
+                    <a href="<?= base_url(); ?>product/kategori/8" class="btn btn-primary btn-block">
                         windows & doors
                     </a>
                 </div>
@@ -53,9 +53,15 @@
                         <div class="col-lg-4 col-md-6 mb-3">
                             <div class="card border-0 list-product-catalog h-100">
                                 <div class="card-body">
-                                    <a href="<?= base_url(); ?>product/detail/<?= $rec->id_produk ?>">
-                                        <img loading="lazy" src="<?= $rec->gambar_produk; ?>" alt="<?= $rec->nama_produk; ?>" class=" rounded mb-4 col mx-auto img-thumbnail p-1 img-wrap" alt="<?= $rec->nama_produk ?>">
-                                    </a>
+                                    <?php if ($rec->id_produk == 56) : ?>
+                                        <a href="<?= 'https://lestarijendela.com/' ?>">
+                                            <img loading="lazy" src="<?= $rec->gambar_produk; ?>" alt="<?= $rec->nama_produk; ?>" class=" rounded mb-4 col mx-auto img-thumbnail p-1 img-wrap" alt="<?= $rec->nama_produk ?>">
+                                        </a>
+                                    <?php else : ?>
+                                        <a href="<?= base_url(); ?>product/detail/<?= $rec->id_produk ?>">
+                                            <img loading="lazy" src="<?= $rec->gambar_produk; ?>" alt="<?= $rec->nama_produk; ?>" class=" rounded mb-4 col mx-auto img-thumbnail p-1 img-wrap" alt="<?= $rec->nama_produk ?>">
+                                        </a>
+                                    <?php endif; ?>
                                     <div class="text-center">
                                         <img loading="lazy" class="mb-2" src="<?= base_url() . $rec->gambar_logo; ?>" style="height:37.5px;" alt="<?= $rec->nama_logo ?>">
                                         <h5>

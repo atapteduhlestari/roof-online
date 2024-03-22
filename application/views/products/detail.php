@@ -65,7 +65,7 @@
                                         <a href="<?= base_url(); ?>product/kategori/7">Ceiling & Wall</a>
                                     </li>
                                     <li>
-                                        <a href="https://lestarijendela.com/">Windows & Doors</a>
+                                        <a href="<?= base_url(); ?>product/kategori/8">Windows & Doors</a>
                                     </li>
                                 </ul>
                             </div>

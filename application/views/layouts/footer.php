@@ -88,12 +88,12 @@
                             </a>
                         </li>
                         <li>
-                            <a href=" <?= base_url(); ?>product/kategori/7">
+                            <a href="<?= base_url(); ?>product/kategori/7">
                                 Ceiling & Wall
                             </a>
                         </li>
                         <li>
-                            <a href=" https://lestarijendela.com/">
+                            <a href="<?= base_url(); ?>product/kategori/8">
                                 Windows & Doors
                             </a>
                         </li>

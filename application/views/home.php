@@ -11,7 +11,7 @@
                             </h3>
                             <img style="height:50px;" src="<?= base_url(); ?>assets/images/logo/30_year.png" data-animation-in="fadeInUp" data-duration-in="2">
                         </div>
-                        <h2 class="slide-title text-shadow" data-animation-in="slideInLeft">Laminated Architectural Shingle</h2>
+                        <h2 class="slide-title text-shadow" data-animation-in="slideInLeft">Laminated Architectural Shingles</h2>
                         <p data-animation-in="slideInRight" data-duration-in="1.2">
                             <a href="<?= base_url(); ?>project" class="slider btn btn-primary">Our Projects</a>
                             <a href="javascript:void(Tawk_API.toggle())" class="slider btn btn-primary border">Get in touch</a>
@@ -283,7 +283,7 @@
                 <h3 style="display: inline-block;">Cambridge</h3>
                 <img style="height:35px; display: inline-block;" src="<?= base_url(); ?>assets/images/logo/30_year.png">
                 <p>
-                    IKO Cambridge memberikan penampilan yang lebih cantik untuk segala bentuk rumah dari yang tradisional hingga modern, di pedesaan ataupun di kota. IKO Cambridge Architectural Laminated Shingles memiliki konstruksi double layer dengan bahan dasar asphalt yang diperkuat tulangan fiberglass.<b> Memiliki ukuran dan area exposure lebih lebar dengan tampilan "acak" terlihat seperti sirap alami sehingga memberikan kesan elegan pada atap rumah dengan biaya yang terjangkau.</b>
+                    <b>Shingles AR</b> IKO Cambridge memberikan penampilan yang lebih cantik untuk segala bentuk rumah dari yang tradisional hingga modern, di pedesaan ataupun di kota. IKO Cambridge Architectural Laminated Shingles memiliki konstruksi double layer dengan bahan dasar asphalt yang diperkuat tulangan fiberglass.<b> Memiliki ukuran dan area exposure lebih lebar dengan tampilan "acak" terlihat seperti sirap alami sehingga memberikan kesan elegan pada atap rumah dengan biaya yang terjangkau.</b>
                 </p>
                 <a href="<?= base_url(); ?>product/detail/10" class="highlight btn btn-primary border">Read more</a>
 
@@ -309,7 +309,7 @@
                 </div>
                 <h3>Marathon Plus AR</h3>
                 <p>
-                    IKO Marathon Plus AR Traditional 3-tab terbuat dari asphalt yang diperkuat dengan tulangan fiberglass untuk mengatasi cuaca ekstrim. Desain klasik IKO Marathon Plus AR akan mempercantik bangunan anda.<b> Memiliki lapisan batuan (Algae Resistance) sehingga mencegah perubahan warna kehitaman pada lembar yang disebabkan oleh jamur dan membuat atap anda tetap terlihat cantik walaupun sudah bertahun-tahun terpasang.</b>
+                    <b>Shingles AR</b> IKO Marathon Plus AR Traditional 3-tab terbuat dari asphalt yang diperkuat dengan tulangan fiberglass untuk mengatasi cuaca ekstrim. Desain klasik IKO Marathon Plus AR akan mempercantik bangunan anda.<b> Memiliki lapisan batuan (Algae Resistance) sehingga mencegah perubahan warna kehitaman pada lembar yang disebabkan oleh jamur dan membuat atap anda tetap terlihat cantik walaupun sudah bertahun-tahun terpasang.</b>
                 </p>
                 <a href="<?= base_url(); ?>product/detail/11" class="highlight btn btn-primary border">Read more</a>
 
@@ -529,6 +529,12 @@
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
+                            <a href="<?= base_url(); ?>product/detail/55"><img loading="lazy" title="Lestari Abadi Door" class="img-fluid" style="height:119px;" src="<?= base_url(); ?>assets/images/logo/lead-logo.png" alt="Lestari Abadi Door" /></a>
+                        </figure>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
+                        <figure class="home-logo rounded">
                             <a href="<?= base_url(); ?>product/detail/19"><img loading="lazy" title="IKO Spectraplan TPE" class="img-fluid" style="height:50px;" src="<?= base_url(); ?>assets/images/logo/iko-spectraplan.png" alt="IKO Spectraplan TPE" /></a>
                         </figure>
                     </div>
@@ -565,6 +571,12 @@
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
                             <a href="<?= base_url(); ?>product/detail/29"><img loading="lazy" title="Micapel Slate Roof" class="img-fluid" style="height:80px;" src="<?= base_url(); ?>assets/images/logo/micapel.png" alt="Micapel Slate Roof" /></a>
+                        </figure>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
+                        <figure class="home-logo rounded">
+                            <a href="<?= base_url(); ?>product/detail/57"><img loading="lazy" title="SpaceTech Space Frame" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/space-frame-logo.png" alt="SpaceTech Space Frame" /></a>
                         </figure>
                     </div>
 

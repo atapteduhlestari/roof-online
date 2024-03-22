@@ -30,6 +30,12 @@
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
+                            <a href="<?= base_url(); ?>product/detail/55"><img loading="lazy" title="Lestari Abadi Door" class="img-fluid" style="height:119px;" src="<?= base_url(); ?>assets/images/logo/lead-logo.png" alt="Lestari Abadi Door" /></a>
+                        </figure>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
+                        <figure class="home-logo rounded">
                             <a href="<?= base_url(); ?>product/detail/19"><img loading="lazy" title="IKO Spectraplan TPE" class="img-fluid" style="height:50px;" src="<?= base_url(); ?>assets/images/logo/iko-spectraplan.png" alt="IKO Spectraplan TPE" /></a>
                         </figure>
                     </div>
@@ -66,6 +72,12 @@
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
                             <a href="<?= base_url(); ?>product/detail/29"><img loading="lazy" title="Micapel Slate Roof" class="img-fluid" style="height:80px;" src="<?= base_url(); ?>assets/images/logo/micapel.png" alt="Micapel Slate Roof" /></a>
+                        </figure>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
+                        <figure class="home-logo rounded">
+                            <a href="<?= base_url(); ?>product/detail/57"><img loading="lazy" title="SpaceTech Space Frame" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/space-frame-logo.png" alt="SpaceTech Space Frame" /></a>
                         </figure>
                     </div>
 

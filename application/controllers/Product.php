@@ -141,6 +141,8 @@ class Product extends CI_Controller
 
     public function detail($id)
     {
+        if ($id == 56) header("Location: https://lestarijendela.com/");
+
         $data['title'] = 'Detail Product - ATAP TEDUH LESTARI';
         $data['product'] = $this->Model_product->product_first($id);
         $data['gambar_product'] = $this->Model_product->image_product($id);

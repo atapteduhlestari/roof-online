@@ -87,7 +87,8 @@
                                         <li><a href="<?= base_url(); ?>product/kategori/3">Insulation</a></li>
                                         <li><a href="<?= base_url(); ?>product/kategori/4">Structure</a></li>
                                         <li><a href="<?= base_url(); ?>product/kategori/7">Ceiling & Wall</a></li>
-                                        <li><a href="http://lestarijendela.com/">Windows & Doors</a></li>
+                                        <li><a href="<?= base_url(); ?>product/kategori/8">Windows & Doors</a></li>
+                                        <!-- <li><a href="http://lestarijendela.com/">Windows & Doors</a></li> -->
                                     </ul>
                                 </li>
 
