@@ -19,6 +19,7 @@ class CreateAssetChildTable extends Migration
             $table->foreignId('sdb_id')->nullable();
             $table->foreignId('sbu_id')->nullable();
             $table->string('doc_name');
+            $table->string('doc_code');
             $table->string('doc_no')->nullable();
             $table->text('file')->nullable();
             $table->text('desc')->nullable();

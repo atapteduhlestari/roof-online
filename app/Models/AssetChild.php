@@ -18,6 +18,11 @@ class AssetChild extends Model
         return $this->belongsTo(Asset::class, 'asset_id');
     }
 
+    public function document()
+    {
+        return $this->belongsTo(DocumentGroup::class, 'document_id');
+    }
+
     public function trnRenewal()
     {
         return $this->hasMany(TrnRenewal::class, 'asset_child_id');

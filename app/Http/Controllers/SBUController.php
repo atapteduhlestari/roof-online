@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SBU;
 use Illuminate\Http\Request;
+use App\Rules\SpecialCharacter;
 
 class SBUController extends Controller
 {
@@ -21,7 +22,7 @@ class SBUController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'sbu_name' => 'required',
+            'sbu_name' => ['required', new SpecialCharacter],
         ]);
 
         $data = $request->all();
@@ -43,7 +44,7 @@ class SBUController extends Controller
     function update(Request $request, SBU $sbu)
     {
         $request->validate([
-            'sbu_name' => 'required',
+            'sbu_name' => ['required', new SpecialCharacter],
         ]);
 
         $data = $request->all();

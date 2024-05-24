@@ -6,6 +6,7 @@ use App\Models\SBU;
 use App\Models\SDB;
 use App\Models\Asset;
 use App\Models\AssetChild;
+use App\Models\DocumentGroup;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\AssetChildRequest;
 
@@ -17,12 +18,14 @@ class AssetChildController extends Controller
             'parent' => fn ($q) => $q->orderBy('asset_name')
         ]);
 
+        $documentGroup = DocumentGroup::orderBy('document_group_name', 'asc')->get();
         $children = isSuperadmin() ? $children->get() : $children->where('sbu_id', userSBU())->get();
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
         $SBUs = SBU::orderBy('sbu_name', 'desc')->get();
         $assets = Asset::orderBy('asset_name', 'asc')->get();
 
         return view('asset.child.index', compact(
+            'documentGroup',
             'children',
             'assets',
             'SDBs',
@@ -47,11 +50,13 @@ class AssetChildController extends Controller
 
     public function edit(AssetChild $assetChild)
     {
+        $documentGroup = DocumentGroup::get();
         $child = $assetChild;
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
         $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
 
         return view('asset.child.edit', compact(
+            'documentGroup',
             'child',
             'SDBs',
             'SBUs'
@@ -60,7 +65,6 @@ class AssetChildController extends Controller
 
     public function update(AssetChildRequest $request, AssetChild $assetChild)
     {
-
         $data = $request->validated();
 
         if ($request->file('file')) {
@@ -72,7 +76,6 @@ class AssetChildController extends Controller
         } else {
             $data['file'] = $assetChild->file;
         }
-
 
         $assetChild->update($data);
         return redirect()->back()->with('success', 'Successfully deleted!');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cycle;
+use App\Rules\SpecialCharacter;
 use Illuminate\Http\Request;
 
 class CycleController extends Controller
@@ -21,7 +22,7 @@ class CycleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'cycle_name' => 'required',
+            'cycle_name' => ['required', new SpecialCharacter],
             'cycle_type' => 'required',
             'qty' => 'required'
         ]);
@@ -45,7 +46,7 @@ class CycleController extends Controller
     public function update(Request $request, Cycle $cycle)
     {
         $request->validate([
-            'cycle_name' => 'required',
+            'cycle_name' => ['required', new SpecialCharacter],
             'cycle_type' => 'required',
             'qty' => 'required'
         ]);

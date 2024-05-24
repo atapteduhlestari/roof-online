@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SDB;
 use Illuminate\Http\Request;
+use App\Rules\SpecialCharacter;
 
 class SDBController extends Controller
 {
@@ -16,7 +17,7 @@ class SDBController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'sdb_name' => 'required',
+            'sdb_name' => ['required', new SpecialCharacter],
         ]);
 
         $data = $request->all();
@@ -39,7 +40,7 @@ class SDBController extends Controller
     public function update(Request $request, SDB $sdb)
     {
         $request->validate([
-            'sdb_name' => 'required',
+            'sdb_name' => ['required', new SpecialCharacter],
         ]);
 
         $data = $request->all();

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Maintenance;
-use Illuminate\Http\Request;
 use App\Rules\ISOFormatRule;
+use Illuminate\Http\Request;
 use App\Rules\DocumentFormat;
+use App\Rules\SpecialCharacter;
 
 class MaintenanceController extends Controller
 {
@@ -28,7 +29,7 @@ class MaintenanceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => ['required', new SpecialCharacter],
             'no_doc' =>  ['nullable', new DocumentFormat],
         ]);
 
@@ -53,7 +54,7 @@ class MaintenanceController extends Controller
     public function update(Request $request, Maintenance $maintenance)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => ['required', new SpecialCharacter],
             'no_doc' =>  [
                 'nullable',
                 new DocumentFormat,

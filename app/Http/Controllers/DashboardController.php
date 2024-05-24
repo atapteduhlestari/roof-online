@@ -113,6 +113,11 @@ class DashboardController extends Controller
         return view('report.index');
     }
 
+    public function group()
+    {
+        return view('asset.group.index');
+    }
+
     public function formISO()
     {
         $path = public_path('uploads');

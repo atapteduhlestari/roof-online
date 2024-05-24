@@ -10,7 +10,6 @@ use App\Models\AssetChild;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\LoanExportDetailView;
-use App\Exports\LoanExportDetailView as ExportsLoanExportDetailView;
 
 class LoanController extends Controller
 {

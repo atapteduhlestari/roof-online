@@ -6,6 +6,7 @@ use App\Models\Renewal;
 use App\Rules\ISOFormatRule;
 use Illuminate\Http\Request;
 use App\Rules\DocumentFormat;
+use App\Rules\SpecialCharacter;
 
 class RenewalController extends Controller
 {
@@ -28,7 +29,7 @@ class RenewalController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => ['required', new SpecialCharacter],
             'no_doc' =>  ['nullable', new DocumentFormat, new ISOFormatRule],
         ]);
 
@@ -53,7 +54,7 @@ class RenewalController extends Controller
     public function update(Request $request, Renewal $renewal)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => ['required', new SpecialCharacter],
             'no_doc' =>  [
                 'nullable',
                 new DocumentFormat,

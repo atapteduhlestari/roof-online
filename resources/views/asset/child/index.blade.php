@@ -26,7 +26,10 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Group</th>
+                                <th>Account No</th>
                                 <th>Doc Name</th>
+                                <th>Asset</th>
                                 <th>SBU</th>
                                 <th>File</th>
                                 <th class="text-center">Actions</th>
@@ -36,7 +39,10 @@
                             @foreach ($children as $child)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $child->doc_name }} | {{ $child->parent->asset_name ?? '' }}</td>
+                                    <td>{{ $child->document->document_group_name }}</td>
+                                    <td>{{ $child->doc_code }}</td>
+                                    <td>{{ $child->doc_name }}</td>
+                                    <td>{{ $child->parent->asset_name }}</td>
                                     <td>{{ $child->sbu->sbu_name ?? '' }}</td>
                                     <td>
                                         @if ($child->file)
@@ -121,17 +127,29 @@
                                         @endforeach
                                     </select>
                                 </div>
-
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="doc_no">Document No</label>
-                                    <input name="doc_no" id="doc_no" type="text"
-                                        class="form-control @error('doc_no') is-invalid @enderror"
-                                        value="{{ old('doc_no') }}">
+                                    <label for="doc_code">Account No</label>
+                                    <input name="doc_code" id="doc_code" type="text"
+                                        class="form-control @error('doc_code') is-invalid @enderror"
+                                        value="{{ old('doc_code') }}">
                                 </div>
                             </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="document_id">Group</label>
+                                <select class="form-control @error('document_id') is-invalid @enderror" name="document_id"
+                                    id="document_id">
+                                    <option value=""></option>
+                                    @foreach ($documentGroup as $group)
+                                        <option value="{{ $group->id }}"
+                                            {{ old('document_id') == $group->id ? 'selected' : '' }}>
+                                            {{ $group->document_group_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
+
 
                         <div class="row">
                             <div class="col-md-6 mb-3">

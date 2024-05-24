@@ -15,6 +15,30 @@ function createDate($param)
     return $param ? Carbon::create($param) : '';
 }
 
+function textCondition($param)
+{
+    if ($param == 1)
+        return 'Excellent';
+    if ($param == 2)
+        return 'Fair';
+    if ($param == 3)
+        return 'Poor';
+    if ($param == 4)
+        return 'Disposed';
+}
+
+function colorCondition($param)
+{
+    if ($param == 1)
+        return 'text-success';
+    if ($param == 2)
+        return 'text-warning';
+    if ($param == 3)
+        return 'text-danger';
+    if ($param == 4)
+        return 'text-dark';
+}
+
 function remaining($param)
 {
     $dt = createDate($param);

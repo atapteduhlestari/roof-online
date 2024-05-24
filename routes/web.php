@@ -13,6 +13,7 @@ use App\Http\Controllers\AppraisalController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AssetChildController;
 use App\Http\Controllers\AssetGroupController;
+use App\Http\Controllers\DocumentGroupController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\TrnRenewalController;
 use App\Http\Controllers\MaintenanceController;
@@ -24,6 +25,7 @@ Route::middleware(['auth', 'reminder'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/report', [DashboardController::class, 'report']);
+    Route::get('/group', [DashboardController::class, 'group']);
 
     Route::get('/report-loan-detail', [LoanController::class, 'detailView']);
     Route::get('/loan-detail-export', [LoanController::class, 'reportDetail']);
@@ -124,13 +126,16 @@ Route::group(['middleware' => ['auth', 'superadmin', 'reminder']], function () {
     Route::delete('/user/{user}', [UserController::class, 'destroy']);
 
 
-    Route::get('/asset-group', [AssetGroupController::class, 'index']);
-    Route::post('/asset-group', [AssetGroupController::class, 'store']);
-    Route::get('/asset-group/{assetGroup}/edit', [AssetGroupController::class, 'edit']);
-    Route::put('/asset-group/{assetGroup}', [AssetGroupController::class, 'update']);
-    Route::delete('/asset-group/{assetGroup}', [AssetGroupController::class, 'destroy']);
-    // Route::resource('/asset-group', AssetGroupController::class)
-    //     ->except(['create']);
+    // Route::get('/asset-group', [AssetGroupController::class, 'index']);
+    // Route::post('/asset-group', [AssetGroupController::class, 'store']);
+    // Route::get('/asset-group/{assetGroup}/edit', [AssetGroupController::class, 'edit']);
+    // Route::put('/asset-group/{assetGroup}', [AssetGroupController::class, 'update']);
+    // Route::delete('/asset-group/{assetGroup}', [AssetGroupController::class, 'destroy']);
+    Route::resource('/asset-group', AssetGroupController::class)
+        ->except(['create']);
+
+    Route::resource('/document-group', DocumentGroupController::class)
+        ->except(['create']);
 
     Route::get('/report-maintenance-summary', [TrnMaintenanceController::class, 'summaryView']);
     Route::get('/trn-maintenance-summary-export', [TrnMaintenanceController::class, 'reportSummary']);

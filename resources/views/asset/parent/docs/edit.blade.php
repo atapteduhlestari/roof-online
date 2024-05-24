@@ -30,18 +30,30 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="">Asset Name</label>
+                            <label for="">Asset</label>
                             <input type="text" class="form-control not-allowed" value="{{ $child->parent->asset_name }}"
                                 disabled>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="doc_no">Document No</label>
-                            <input name="doc_no" id="doc_no" type="text"
-                                class="form-control @error('doc_no') is-invalid @enderror"
-                                value="{{ old('doc_no', $child->doc_no) }}">
+                            <label for="doc_code">Account No</label>
+                            <input name="doc_code" id="doc_code" type="text"
+                                class="form-control @error('doc_code') is-invalid @enderror"
+                                value="{{ old('doc_code', $child->doc_code) }}">
                         </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="document_id">Group</label>
+                        <select class="form-control @error('document_id') is-invalid @enderror" name="document_id"
+                            id="document_id">
+                            <option value=""></option>
+                            @foreach ($documentGroup as $group)
+                                <option value="{{ $group->id }}"
+                                    {{ old('document_id', $child->document_id) == $group->id ? 'selected' : '' }}>
+                                    {{ $group->document_group_name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 

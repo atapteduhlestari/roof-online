@@ -8,13 +8,14 @@ use App\Models\Asset;
 use App\Models\Employee;
 use App\Models\AssetChild;
 use App\Models\AssetGroup;
+use App\Models\DocumentGroup;
 use App\Exports\AssetExportView;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\AssetRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AssetExportSummaryView;
-use App\Http\Requests\AssetChildRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\AssetChildRequest;
 
 
 class AssetController extends Controller
@@ -74,7 +75,7 @@ class AssetController extends Controller
     public function getData()
     {
         $asset = new Asset();
-        $query = $asset->query()->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc');
+        $query = $asset->query();
 
         if (!isSuperadmin())
             $query = $asset->where('sbu_id', userSBU());
@@ -85,13 +86,17 @@ class AssetController extends Controller
             return createDate($row->pcs_date)->format('d F Y');
         })->editColumn('pcs_value', function ($row) {
             return rupiah($row->pcs_value);
+        })->addColumn('group', function (Asset $asset) {
+            return $asset->group->asset_group_name;
+        })->addColumn('asset_code', function (Asset $asset) {
+            return $asset->asset_code;
         })->addColumn('sbu', function (Asset $asset) {
             return $asset->sbu ? $asset->sbu->sbu_name : '';
         })->addColumn('employee', function (Asset $asset) {
-            return $asset->employee ? $asset->employee->name : '';
+            return $asset->employee ? $asset->employee->name : '-';
         })->addColumn('condition', function (Asset $asset) {
-            $color = $asset->condition == 1 ? 'text-success' : 'text-danger';
-            $text = $asset->condition == 1 ? 'Baik' :  'Rusak';
+            $text = textCondition($asset->condition);
+            $color = colorCondition($asset->condition);
             return "<span class='$color'> {$text}</span>";
         })->addColumn('action', function ($row) {
             return '<div class="d-flex justify-content-around">
@@ -111,7 +116,8 @@ class AssetController extends Controller
         </div>';
         })->rawColumns(['action', 'condition']);
 
-        return $dt->orderColumns(['asset_name'], '-:column $1')->toJson();
+        return $dt->orderColumn('pcs_date', '-pcs_date $1')->toJson();
+        // return $dt->toJson();
     }
 
     public function store(AssetRequest $request)
@@ -239,25 +245,25 @@ class AssetController extends Controller
 
     public function documents(Asset $asset)
     {
+        $documentGroup = DocumentGroup::get();
         $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
 
         if (isSuperadmin() || $asset->sbu_id == userSBU())
-            return view('asset.parent.docs.index', compact('asset', 'SDBs', 'SBUs'));
+            return view('asset.parent.docs.index', compact(
+                'documentGroup',
+                'asset',
+                'SDBs',
+                'SBUs'
+            ));
         else
             return redirect()->back()->with('warning', 'Access Denied!');
     }
 
     public function addDocuments(AssetChildRequest $request, Asset $asset)
     {
-        $request->validate([
-            'doc_name' => 'required',
-            'file' => 'nullable|file|max:5120',
-        ]);
-
-        $data = $request->all();
+        $data = $request->validated();
         $data['asset_id'] = $asset->id;
-        $data['sbu_id'] = $request->sbu_id ?? $asset->sbu_id;
 
         if ($request->file('file')) {
             $file = $request->file('file');
@@ -272,11 +278,13 @@ class AssetController extends Controller
 
     public function editDocuments(Asset $asset, $childId)
     {
+        $documentGroup = DocumentGroup::get();
         $child = AssetChild::find($childId);
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
         $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
 
         return view('asset.parent.docs.edit', compact(
+            'documentGroup',
             'asset',
             'child',
             'SDBs',

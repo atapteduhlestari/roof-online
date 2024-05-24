@@ -62,7 +62,7 @@
                         <span>Data</span>
                     </a>
                     <div id="collapseData"
-                        class="collapse {{ request()->is('asset-parent*') || request()->is('asset-child*') || request()->is('asset-group*') || request()->is('renewal*') || request()->is('maintenance*') || request()->is('cycle*') || request()->is('sbu*') ? 'show' : '' }}"
+                        class="collapse {{ request()->is('asset-parent*') || request()->is('asset-child*') || request()->is('asset-group*') || request()->is('document-group*') || request()->is('renewal*') || request()->is('maintenance*') || request()->is('cycle*') || request()->is('sbu*') ? 'show' : '' }}"
                         aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item  {{ request()->is('asset-parent*') ? 'active' : '' }}"
@@ -73,8 +73,8 @@
                                 href="/asset-child">
                                 Document
                             </a>
-                            <a class="collapse-item  {{ request()->is('asset-group*') ? 'active' : '' }}"
-                                href="/asset-group">
+                            <a class="collapse-item  {{ request()->is('asset-group*') || request()->is('document-group*') ? 'active' : '' }}"
+                                href="/group">
                                 Group
                             </a>
                             {{-- <a class="collapse-item {{ request()->is('cycle*') ? 'active' : '' }}" href="/cycle">

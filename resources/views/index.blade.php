@@ -22,17 +22,22 @@
             <div class="col-lg-6 mb-4">
                 <div class="card shadow mb-4 h-100">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Group</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Quick Access</h6>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            @foreach ($groups as $item)
+                            {{-- @foreach ($groups as $item)
                                 <div class="col-md-12 mb-3">
                                     <a href="/asset-group/{{ $item->id }}" class="btn btn-outline-dark btn-block">
                                         {{ $item->asset_group_name }}
                                     </a>
                                 </div>
-                            @endforeach
+                            @endforeach --}}
+                            <div class="col-md-12 mb-3">
+                                <a href="/asset-parent" class="btn btn-outline-dark btn-block">
+                                    All Assets
+                                </a>
+                            </div>
                             <div class="col-md-12 mb-3">
                                 <a href="/asset-child" class="btn btn-outline-dark btn-block">
                                     Documents

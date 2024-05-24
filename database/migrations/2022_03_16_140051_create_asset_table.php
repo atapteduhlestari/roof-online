@@ -28,7 +28,7 @@ class CreateAssetTable extends Migration
             $table->double('nilai_buku', 2);
             $table->string('location')->nullable();
             $table->string('condition', 1);
-            $table->string('aktiva');
+            // $table->string('aktiva');
             $table->text('desc')->nullable();
             $table->text('image')->nullable();
             $table->boolean('asset_is_exist')->default(1);

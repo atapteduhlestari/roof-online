@@ -61,14 +61,22 @@
                             <label for="search_condition">Condition</label>
                             <select class="form-control form-control-sm @error('search_condition') is-invalid @enderror"
                                 name="search_condition" id="search_condition">
-                                <option value=""></option>
+                                <option value="" disabled selected></option>
                                 <option class="text-success" value="1"
                                     {{ request('search_condition') == 1 ? 'selected' : '' }}>
-                                    Baik
+                                    Excellent
+                                </option>
+                                <option class="text-warning" value="2"
+                                    {{ request('search_condition') == 2 ? 'selected' : '' }}>
+                                    Fair
                                 </option>
                                 <option class="text-danger" value="3"
                                     {{ request('search_condition') == 3 ? 'selected' : '' }}>
-                                    Rusak
+                                    Poor
+                                </option>
+                                <option class="text-dark" value="4"
+                                    {{ request('search_condition') == 4 ? 'selected' : '' }}>
+                                    Disposed
                                 </option>
                             </select>
                         </div>
@@ -94,11 +102,13 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Asset Name</th>
+                                <th>Group</th>
+                                <th>Account No</th>
+                                <th>Name</th>
                                 <th>SBU</th>
                                 <th>Purchase Date</th>
                                 <th>Purchase Value</th>
-                                <th>Penanggung Jawab</th>
+                                <th>PIC</th>
                                 <th>Condition</th>
                                 <th class="text-center">Actions</th>
                             </tr>
@@ -185,7 +195,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="asset_code">Asset Code</label>
+                                <label for="asset_code">Account No</label>
                                 <input type="text" class="form-control @error('asset_code') is-invalid @enderror"
                                     name="asset_code" id="asset_code" value="{{ old('asset_code') }}">
 
@@ -198,15 +208,19 @@
                                     <option value=""></option>
                                     <option class="text-success" value="1"
                                         {{ old('condition') == 1 ? 'selected' : '' }}>
-                                        Baik
+                                        Excellent
                                     </option>
                                     <option class="text-warning" value="2"
                                         {{ old('condition') == 2 ? 'selected' : '' }}>
-                                        Kurang
+                                        Fair
                                     </option>
                                     <option class="text-danger" value="3"
                                         {{ old('condition') == 3 ? 'selected' : '' }}>
-                                        Rusak
+                                        Poor
+                                    </option>
+                                    <option class="text-dark" value="4"
+                                        {{ old('condition') == 4 ? 'selected' : '' }}>
+                                        Disposed
                                     </option>
                                 </select>
                             </div>
@@ -231,7 +245,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="emp_id">Penanggung Jawab</label>
+                                <label for="emp_id">PIC</label>
                                 <select class="form-control @error('emp_id') is-invalid @enderror" name="emp_id"
                                     id="emp_id">
                                     <option value=""></option>
@@ -259,33 +273,6 @@
                                             {{ old('sdb_id') == $sdb->id ? 'selected' : '' }}>
                                             {{ $sdb->sdb_name }}</option>
                                     @endforeach
-                                </select>
-                            </div>
-
-
-                            <div class="col-md-6 mb-3">
-                                <label for="aktiva">Type Aktiva</label>
-                                <select class="form-control @error('aktiva') is-invalid @enderror" name="aktiva"
-                                    id="aktiva">
-                                    <option value=""></option>
-                                    <option value="Bangunan" {{ old('aktiva') == 'Bangunan' ? 'selected' : '' }}>
-                                        Bangunan
-                                    </option>
-                                    <option value="Mesin" {{ old('aktiva') == 'Mesin' ? 'selected' : '' }}>
-                                        Mesin
-                                    </option>
-                                    <option value="Mobil" {{ old('aktiva') == 'Mobil' ? 'selected' : '' }}>
-                                        Mobil
-                                    </option>
-                                    <option value="Motor" {{ old('aktiva') == 'Motor' ? 'selected' : '' }}>
-                                        Motor
-                                    </option>
-                                    <option value="Peralatan" {{ old('aktiva') == 'Peralatan' ? 'selected' : '' }}>
-                                        Peralatan
-                                    </option>
-                                    <option value="Tanah" {{ old('aktiva') == 'Tanah' ? 'selected' : '' }}>
-                                        Tanah
-                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -362,15 +349,25 @@
             processing: true,
             serverSide: true,
             pageLength: 25,
+            order: [
+                [2, 'asc']
+            ],
             ajax: {
                 url: "{{ route('getData.asset') }}"
-
             },
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',
                     orderable: false,
                     searchable: false
+                },
+                {
+                    data: 'group',
+                    name: 'group.asset_group_name'
+                },
+                {
+                    data: 'asset_code',
+                    name: 'asset.asset_code'
                 },
                 {
                     data: 'asset_name',
@@ -399,8 +396,8 @@
                 {
                     data: 'action',
                     name: 'action',
-                    orderable: true,
-                    searchable: true
+                    orderable: false,
+                    searchable: false
                 },
             ]
         });

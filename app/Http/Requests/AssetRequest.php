@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\SpecialCharacter;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AssetRequest extends FormRequest
@@ -20,7 +21,7 @@ class AssetRequest extends FormRequest
             'emp_id' => 'nullable',
             'asset_code' => 'required',
             'asset_no' => 'nullable',
-            'asset_name' => 'required',
+            'asset_name' => ['required', new SpecialCharacter],
             'pcs_date' => 'required|date',
             'pcs_value' => 'required',
             'nilai_buku' => 'nullable',

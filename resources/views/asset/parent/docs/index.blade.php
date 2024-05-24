@@ -25,11 +25,20 @@
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-lg-6">
-                        <a href="/asset-parent/export/{{ $asset->id }}" class="btn btn-outline-success btn-sm px-3">
-                            <i class="fas fa-print"></i> Print Detail
-                        </a>
-                        <img class="img-fluid px-3 px-sm-4 my-5"
-                            src="{{ $asset->image ? $asset->takeImage : asset('/assets/img/empty-img.jpeg') }}">
+                        <div class="row">
+                            <div class="col-md">
+                                <a href="/asset-parent/export/{{ $asset->id }}"
+                                    class="btn btn-outline-success btn-sm px-3">
+                                    <i class="fas fa-print"></i> Print Detail
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row my-3">
+                            <div class="col-md">
+                                <img class="img-fluid"
+                                    src="{{ $asset->image ? $asset->takeImage : asset('/assets/img/empty-img.jpeg') }}">
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <form action="/trn-maintenance/create">
@@ -75,7 +84,7 @@
                                     <td>{{ $asset->asset_name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Code</th>
+                                    <th>Account No</th>
                                     <td>{{ $asset->asset_code ?? '' }}</td>
                                 </tr>
                                 <tr>
@@ -83,8 +92,8 @@
                                     <td>{{ $asset->asset_no }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Aktiva</th>
-                                    <td>{{ $asset->aktiva }}</td>
+                                    <th>Group</th>
+                                    <td>{{ $asset->group->asset_group_name }}</td>
                                 </tr>
                                 <tr>
                                     <th>SBU</th>
@@ -105,7 +114,7 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        Penanggung Jawab
+                                        PIC
                                     </th>
                                     <td>{{ $asset->employee->name ?? '' }}</td>
                                 </tr>
@@ -146,14 +155,14 @@
                         <button class="btn btn-dark btn-sm btn-block border-0" type="button" data-toggle="collapse"
                             data-target="#collapseDocuments" aria-expanded="false" aria-controls="collapseDocuments"
                             id="collapseButton">
-                            <span>Documents</span> <i id="toggler" class="fas fa-angle-right"></i>
+                            <span>Documents</span> <i id="toggler" class="fas fa-angle-down"></i>
                         </button>
                     </div>
 
                 </div>
 
 
-                <div class="collapse pb-3" id="collapseDocuments">
+                <div class="collapse show pb-3" id="collapseDocuments">
                     <div class="">
                         <div class="d-flex align-items-end mb-4">
                             <div class="flex-grow-1">
@@ -173,8 +182,9 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Doc Name</th>
-                                        <th>Doc No</th>
+                                        <th>Name</th>
+                                        <th>Account No</th>
+                                        {{-- <th>Doc Name</th> --}}
                                         <th>SBU</th>
                                         <th>File</th>
                                         <th class="text-center">Actions</th>
@@ -184,8 +194,9 @@
                                     @foreach ($asset->children as $child)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $child->doc_name }}</td>
-                                            <td>{{ $child->doc_no ?? '' }}</td>
+                                            <td>{{ $child->document->document_group_name }}</td>
+                                            <td>{{ $child->doc_code }}</td>
+                                            {{-- <td>{{ $child->doc_name }}</td> --}}
                                             <td>{{ $child->sbu->sbu_name }}</td>
                                             <td>
                                                 @if ($child->file)
@@ -272,11 +283,24 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="doc_no">Document No</label>
-                                    <input name="doc_no" id="doc_no" type="text"
-                                        class="form-control @error('doc_no') is-invalid @enderror"
-                                        value="{{ old('doc_no') }}">
+                                    <label for="doc_code">Account No</label>
+                                    <input name="doc_code" id="doc_code" type="text"
+                                        class="form-control @error('doc_code') is-invalid @enderror"
+                                        value="{{ old('doc_code') }}">
                                 </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="document_id">Group</label>
+                                <select class="form-control @error('document_id') is-invalid @enderror" name="document_id"
+                                    id="document_id">
+                                    <option value=""></option>
+                                    @foreach ($documentGroup as $group)
+                                        <option value="{{ $group->id }}"
+                                            {{ old('document_id') == $group->id ? 'selected' : '' }}>
+                                            {{ $group->document_group_name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
