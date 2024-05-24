@@ -341,7 +341,7 @@ class AssetController extends Controller
         $data['assets'] = isSuperadmin() ? Asset::filter($data['request'])->with([
             'sbu' => fn ($q) =>
             $q->select('id', 'sbu_name')
-        ])->where('sbu_id', userSBU())->get()->groupBy('sbu.sbu_name') : Asset::filter($data['request'])->with([
+        ])->get()->groupBy('sbu.sbu_name') : Asset::filter($data['request'])->with([
             'sbu' => fn ($q) =>
             $q->select('id', 'sbu_name')
         ])->where('sbu_id', userSBU())->get()->groupBy('sbu.sbu_name');

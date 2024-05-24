@@ -480,7 +480,7 @@
             $(this).next('.custom-file-label').html(e.target.files[0].name);
         });
 
-        let formDelete = $('#deleteForm');
+        let formDelete = $('form#deleteForm');
 
         $(document).on('click', '#deleteButton', function(e) {
             e.preventDefault();
