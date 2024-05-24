@@ -12,7 +12,6 @@ class MaintenanceController extends Controller
 {
     public function index()
     {
-        // $cycles = Cycle::get();
         $maintenances = Maintenance::get();
 
         $lastNoDoc = $maintenances->last();
@@ -46,7 +45,6 @@ class MaintenanceController extends Controller
 
     public function edit(Maintenance $maintenance)
     {
-        // $cycles = Cycle::get();
         $maintenances = Maintenance::get();
         return view('asset.maintenance.edit', compact('maintenance', 'maintenances'));
     }
