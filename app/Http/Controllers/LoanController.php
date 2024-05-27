@@ -52,7 +52,7 @@ class LoanController extends Controller
 
     public function show(Loan $loan)
     {
-        //
+        return redirect('/loan')->with('warning', 'In Development');
     }
 
     public function edit(Loan $loan)

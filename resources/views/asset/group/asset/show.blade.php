@@ -3,13 +3,13 @@
     <link href="/assets/template/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="/assets/template/vendor/selectize/selectize.css" rel="stylesheet">
 @endpush
-@section('title', 'GA | Asset Group')
+@section('title', 'GA | Asset Type')
 @section('container')
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Asset Group | {{ $assetGroup->asset_group_name }}</h1>
+        <h1 class="h3 mb-2 text-gray-800">Asset Type - {{ $assetGroup->asset_group_name }}</h1>
 
         <div class="d-flex">
             <div class="my-3 flex-grow-1">
@@ -64,10 +64,18 @@
                                 <option value=""></option>
                                 <option class="text-success" value="1"
                                     {{ request('search_condition') == 1 ? 'selected' : '' }}>
-                                    Baik
+                                    Excellent
+                                </option>
+                                <option class="text-warning" value="2"
+                                    {{ request('search_condition') == 2 ? 'selected' : '' }}>
+                                    Fair
                                 </option>
                                 <option class="text-danger" value="3"
                                     {{ request('search_condition') == 3 ? 'selected' : '' }}>
+                                    Poor
+                                </option>
+                                <option class="text-dark" value="4"
+                                    {{ request('search_condition') == 4 ? 'selected' : '' }}>
                                     Rusak
                                 </option>
                             </select>
@@ -86,7 +94,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">List group</h6>
+                <h6 class="m-0 font-weight-bold text-primary">List Asset</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -165,7 +173,7 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="asset_name">Asset Name</label>
+                                <label for="asset_name">Name</label>
                                 <input type="text" class="form-control @error('asset_name') is-invalid @enderror"
                                     name="asset_name" id="asset_name" value="{{ old('asset_name') }}"
                                     autocomplete="off" autofocus>
@@ -173,35 +181,39 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="">Asset Group</label>
+                                <label for="">Type</label>
                                 <input type="hidden" name="asset_group_id" value="{{ $assetGroup->id }}" readonly>
                                 <input type="text" class="form-control not-allowed"
                                     value="{{ $assetGroup->asset_group_name }}" disabled>
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="asset_code">Asset Code</label>
+                                <label for="asset_code">Code Acc</label>
                                 <input type="text" class="form-control @error('asset_code') is-invalid @enderror"
                                     name="asset_code" id="asset_code" value="{{ old('asset_code') }}">
 
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="condition">Asset Condition</label>
+                                <label for="condition">Condition</label>
                                 <select class="form-control @error('condition') is-invalid @enderror" name="condition"
                                     id="condition">
                                     <option value=""></option>
                                     <option class="text-success" value="1"
                                         {{ old('condition') == 1 ? 'selected' : '' }}>
-                                        Baik
+                                        Excellent
                                     </option>
                                     <option class="text-warning" value="2"
                                         {{ old('condition') == 2 ? 'selected' : '' }}>
-                                        Kurang
+                                        Fair
                                     </option>
                                     <option class="text-danger" value="3"
                                         {{ old('condition') == 3 ? 'selected' : '' }}>
-                                        Rusak
+                                        Poor
+                                    </option>
+                                    <option class="text-dark" value="4"
+                                        {{ old('condition') == 4 ? 'selected' : '' }}>
+                                        Disposed
                                     </option>
                                 </select>
                             </div>
@@ -220,13 +232,13 @@
                                 </div>
                             @endcan
                             <div class="col-md-6 mb-3">
-                                <label for="location">Asset Location</label>
+                                <label for="location">Location</label>
                                 <input type="text" class="form-control @error('location') is-invalid @enderror"
                                     name="location" value="{{ old('location') }}">
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="emp_id">Penanggung Jawab</label>
+                                <label for="emp_id">PIC</label>
                                 <select class="form-control @error('emp_id') is-invalid @enderror" name="emp_id"
                                     id="emp_id">
                                     <option value=""></option>

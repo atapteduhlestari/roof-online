@@ -10,7 +10,6 @@ class AssetGroup extends Model
     use HasFactory;
     protected $table = 'asset_group';
     protected $guarded = ['id'];
-    protected $with = ['assets'];
 
     public function assets()
     {

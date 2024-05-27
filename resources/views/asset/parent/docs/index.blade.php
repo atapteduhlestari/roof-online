@@ -84,7 +84,7 @@
                                     <td>{{ $asset->asset_name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Account No</th>
+                                    <th>Code Acc</th>
                                     <td>{{ $asset->asset_code ?? '' }}</td>
                                 </tr>
                                 <tr>
@@ -92,7 +92,7 @@
                                     <td>{{ $asset->asset_no }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Group</th>
+                                    <th>Type</th>
                                     <td>{{ $asset->group->asset_group_name }}</td>
                                 </tr>
                                 <tr>
@@ -105,11 +105,11 @@
                                 </tr>
                                 <tr>
                                     <th>Condition</th>
-                                    @php
+                                    {{-- @php
                                         $foo = 1;
-                                    @endphp
-                                    <td class="{{ $asset->condition == 1 ? 'text-success' : 'text-danger' }}">
-                                        {{ $asset->condition == 1 ? 'Baik' : 'Rusak' }}
+                                    @endphp --}}
+                                    <td class="{{ colorCondition($asset->condition) }}">
+                                        {{ textCondition($asset->condition) }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -183,7 +183,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>Account No</th>
+                                        <th>Code Acc</th>
                                         {{-- <th>Doc Name</th> --}}
                                         <th>SBU</th>
                                         <th>File</th>
@@ -283,7 +283,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="doc_code">Account No</label>
+                                    <label for="doc_code">Code Acc</label>
                                     <input name="doc_code" id="doc_code" type="text"
                                         class="form-control @error('doc_code') is-invalid @enderror"
                                         value="{{ old('doc_code') }}">
@@ -291,7 +291,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="document_id">Group</label>
+                                <label for="document_id">Type</label>
                                 <select class="form-control @error('document_id') is-invalid @enderror" name="document_id"
                                     id="document_id">
                                     <option value=""></option>

@@ -54,8 +54,12 @@
                         <td>{{ $asset->asset_name }}</td>
                     </tr>
                     <tr>
-                        <th>Code</th>
+                        <th>Code Acc</th>
                         <td>{{ $asset->asset_code ?? '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Type</th>
+                        <td>{{ $asset->group->asset_group_name }}</td>
                     </tr>
                     <tr>
                         <th>No. (Pol/Rumah/Seri)</th>
@@ -80,7 +84,7 @@
                     </tr>
                     <tr>
                         <th>
-                            Penanggung Jawab
+                            PIC
                         </th>
                         <td>{{ $asset->employee->name ?? '' }}</td>
                     </tr>
@@ -125,7 +129,7 @@
                 <table class="table table-bordered">
                     <tr>
                         <th>#</th>
-                        <th>Code</th>
+                        <th>Code Acc</th>
                         <th>Description</th>
                         <th>Start Date</th>
                         <th>Due Date</th>
@@ -165,7 +169,7 @@
                 <table class="table table-bordered">
                     <tr>
                         <th>#</th>
-                        <th>Code</th>
+                        <th>Code Acc</th>
                         <th>Description</th>
                         <th>Start Date</th>
                         <th>Due Date</th>

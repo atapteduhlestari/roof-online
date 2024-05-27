@@ -19,6 +19,10 @@
                         <td>{{ $trnMaintenance->trn_no }}</td>
                     </tr>
                     <tr>
+                        <th>Type</th>
+                        <td>{{ $trnMaintenance->asset->group->asset_group_name }}</td>
+                    </tr>
+                    <tr>
                         <th>Asset</th>
                         <td>{{ $trnMaintenance->asset->asset_name }}</td>
                     </tr>
@@ -37,10 +41,6 @@
                     <tr>
                         <th>Due Date</th>
                         <td>{{ createDate($trnMaintenance->trn_date)->format('d F Y') }}</td>
-                    </tr>
-                    <tr>
-                        <th>Group</th>
-                        <td>{{ $trnMaintenance->asset->group->asset_group_name }}</td>
                     </tr>
                 </table>
             </div>

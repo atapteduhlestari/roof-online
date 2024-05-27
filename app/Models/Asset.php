@@ -12,7 +12,7 @@ class Asset extends Model
 
     protected $table = 'asset';
     protected $guarded = ['id'];
-    protected $with = ['children', 'trnMaintenance', 'appraisals', 'sbu', 'employee'];
+    protected $with = ['group', 'children', 'trnMaintenance', 'appraisals', 'sbu', 'employee'];
 
     public function group()
     {
@@ -143,6 +143,12 @@ class Asset extends Model
         $query->when($filters['sbu_search_id'] ?? false, function ($query, $sbu) {
             return $query->whereHas('sbu', function ($q) use ($sbu) {
                 $q->where('sbu_id', $sbu);
+            });
+        });
+
+        $query->when($filters['group_search_id'] ?? false, function ($query, $group) {
+            return $query->whereHas('group', function ($q) use ($group) {
+                $q->where('asset_group_id', $group);
             });
         });
 

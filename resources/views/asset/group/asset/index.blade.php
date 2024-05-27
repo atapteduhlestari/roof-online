@@ -2,17 +2,17 @@
 @push('styles')
     <link href="/assets/template/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 @endpush
-@section('title', 'GA | Asset Group')
+@section('title', 'GA | Asset Type')
 @section('container')
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Asset Group</h1>
+        {{-- <h1 class="h3 mb-2 text-gray-800">Asset Type</h1> --}}
 
         <div class="my-4">
             <div class="mb-3">
-                <h6 class="text-muted">Add new record</h6>
+                <h6 class="text-muted">Add new type</h6>
             </div>
             <form action="/asset-group" method="POST">
                 @csrf
@@ -20,8 +20,7 @@
                     <div class="form-group col-6">
                         <input name="asset_group_name" type="text"
                             class="form-control @error('asset_group_name') is-invalid @enderror"
-                            placeholder="Asset Group Name" value="{{ old('asset_group_name') }}" autocomplete="off"
-                            autofocus>
+                            value="{{ old('asset_group_name') }}" autocomplete="off" autofocus>
                         @error('asset_group_name')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -30,7 +29,7 @@
                     </div>
                     <div class="col-6">
                         <button type="submit" class="btn btn-primary">
-                            Submit
+                            Save
                         </button>
                     </div>
                 </div>
@@ -40,7 +39,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">List group</h6>
+                <h6 class="m-0 font-weight-bold text-primary">List Type</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

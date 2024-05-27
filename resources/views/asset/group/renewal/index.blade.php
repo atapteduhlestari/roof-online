@@ -2,25 +2,24 @@
 @push('styles')
     <link href="/assets/template/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 @endpush
-@section('title', 'GA | Maintenance')
+@section('title', 'GA | Renewal')
 @section('container')
     <!-- Begin Page Content -->
     <div class="container-fluid">
-
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Maintenance</h1>
+        <h1 class="h3 mb-2 text-gray-800">Renewal</h1>
 
         <div class="my-4">
             <div class="mb-3">
                 <h6 class="text-muted">Add new record</h6>
             </div>
-            <form action="/maintenance" method="POST">
+            <form action="/renewal" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <input name="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                placeholder="Maintenance Name" value="{{ old('name') }}" autocomplete="off" autofocus>
+                                placeholder="Renewal Name" value="{{ old('name') }}" autocomplete="off" autofocus>
                             @error('name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -71,7 +70,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">List record</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Table Data</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -81,37 +80,34 @@
                                 <th>#</th>
                                 <th>No</th>
                                 <th>Name</th>
-
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($maintenances as $m)
+                            @foreach ($renewals as $renewal)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $m->no_doc }}</td>
-                                    <td>{{ $m->name }}</td>
+                                    <td>{{ $renewal->no_doc }}</td>
+                                    <td>{{ $renewal->name }}</td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>
-                                                <a title="Edit Data" href="/maintenance/{{ $m->id }}/edit"
+                                                <a title="Edit Data" href="/renewal/{{ $renewal->id }}/edit"
                                                     class="btn btn-outline-dark text-xs">Edit</a>
                                             </div>
                                             <div>
-                                                <form action="/maintenance/{{ $m->id }}" method="post"
-                                                    id="deleteForm">
+                                                <form action="/renewal/{{ $renewal->id }}" method="post" id="deleteForm">
                                                     @csrf
                                                     @method('delete')
                                                     <button title="Delete Data" class="btn btn-outline-danger text-xs"
                                                         onclick="return false" id="deleteButton"
-                                                        data-id="{{ $m->id }}">
+                                                        data-id="{{ $renewal->id }}">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
                                                 </form>
                                             </div>
                                         </div>
                                     </td>
-
                                 </tr>
                             @endforeach
                         </tbody>
@@ -119,7 +115,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <!-- /.container-fluid -->
 @endsection
@@ -137,7 +132,7 @@
         $(document).on('click', '#deleteButton', function(e) {
             e.preventDefault();
             let id = $(this).data('id');
-            formDelete.attr('action', `/maintenance/${id}`)
+            formDelete.attr('action', `/renewal/${id}`)
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",

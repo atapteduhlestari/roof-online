@@ -13,7 +13,6 @@
             <div class="flex-grow-1">
                 <h1 class="h3 text-gray-800 flex-grow-1">Edit Assets | {{ $asset->asset_name }}</h1>
             </div>
-
             <a href="/asset-parent" class="btn btn-secondary btn-sm mr-2">
                 <i class="fas fa-arrow-left"></i> Back
             </a>
@@ -28,14 +27,14 @@
                 @method('PUT')
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="asset_name">Asset Name</label>
+                        <label for="asset_name">Name</label>
                         <input type="text" class="form-control @error('asset_name') is-invalid @enderror"
                             name="asset_name" id="asset_name" value="{{ old('asset_name', $asset->asset_name) }}"
                             autocomplete="off" autofocus>
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="asset_group_id">Group</label>
+                        <label for="asset_group_id">Type</label>
                         <select class="form-control @error('asset_group_id') is-invalid @enderror" name="asset_group_id"
                             id="asset_group_id">
                             <option value=""></option>
@@ -48,13 +47,13 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="asset_code">Account No</label>
+                        <label for="asset_code">Code Acc</label>
                         <input type="text" class="form-control @error('asset_code') is-invalid @enderror"
                             name="asset_code" id="asset_code" value="{{ old('asset_code', $asset->asset_code) }}">
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="condition">Asset Condition</label>
+                        <label for="condition">Condition</label>
                         <select class="form-control @error('condition') is-invalid @enderror" name="condition"
                             id="condition">
                             <option value=""></option>
@@ -70,7 +69,7 @@
                                 {{ old('condition', $asset->condition) == 3 ? 'selected' : '' }}>
                                 Poor
                             </option>
-                            <option class="text-danger" value="4"
+                            <option class="text-dark" value="4"
                                 {{ old('condition', $asset->condition) == 4 ? 'selected' : '' }}>
                                 Disposed
                             </option>
@@ -90,7 +89,7 @@
                         </div>
                     @endcan
                     <div class="col-md-6 mb-3">
-                        <label for="location">Asset Location</label>
+                        <label for="location">Location</label>
                         <input type="text" class="form-control @error('location') is-invalid @enderror" name="location"
                             value="{{ old('location', $asset->location) }}">
                     </div>

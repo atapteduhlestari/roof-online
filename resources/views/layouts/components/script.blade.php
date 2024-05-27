@@ -23,7 +23,7 @@
             icon: 'success',
             title: 'Success!',
             text: `<?= session('success') ?>`,
-            timer: 1500,
+            timer: 2000,
             showConfirmButton: false,
             timerProgressBar: true,
             allowOutsideClick: true,
@@ -36,9 +36,27 @@
         Swal.fire({
             icon: 'warning',
             html: `<?= session('warning') ?>`,
-            timer: 1500,
+            timer: 2000,
             showConfirmButton: false,
             timerProgressBar: true,
+            allowOutsideClick: true,
+            didOpen: (swal) => {
+                swal.addEventListener('mouseenter', Swal.stopTimer)
+                swal.addEventListener('mouseleave', Swal.resumeTimer)
+            },
+        });
+    </script>
+@endif
+
+@if (session('fail'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            html: `<?= session('fail') ?>`,
+            timer: 2000,
+            showConfirmButton: false,
+            timerProgressBar: true,
+            allowOutsideClick: true,
             didOpen: (swal) => {
                 swal.addEventListener('mouseenter', Swal.stopTimer)
                 swal.addEventListener('mouseleave', Swal.resumeTimer)
@@ -53,7 +71,7 @@
             icon: 'error',
             title: 'Something wrong!',
             text: `Please check your input`,
-            timer: 1500,
+            timer: 2000,
             showConfirmButton: false,
             timerProgressBar: true,
             allowOutsideClick: true,

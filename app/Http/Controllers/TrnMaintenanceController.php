@@ -25,12 +25,11 @@ class TrnMaintenanceController extends Controller
         // return $trnMaintenances;
         if (isSuperadmin())
             $trnMaintenances = TrnMaintenance::search($data)->orderBy('trn_date', 'asc')->get();
-
         else
             $trnMaintenances = TrnMaintenance::search($data)->where('sbu_id', userSBU())->orderBy('trn_date', 'asc')->get();
 
         $maintenances = Maintenance::get();
-        $assets = Asset::with('sbu')->orderBy('asset_name', 'asc')->get();
+        $assets = Asset::with('sbu')->orderBy('asset_name', 'asc')->where('condition', '!=', 4)->get();
         $employees = Employee::orderBy('name', 'asc')->get();
         $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
 
@@ -45,9 +44,14 @@ class TrnMaintenanceController extends Controller
 
     public function create(Request $request)
     {
+        $asset = Asset::findOrFail($request->id);
+
+        if ($asset->condition == 4) {
+            return redirect()->back()->with('fail', 'Asset is Disposed !');
+        }
+
         $maintenances = Maintenance::orderBy('name', 'asc')->get();
         $employees = Employee::orderBy('name', 'asc')->get();
-        $asset = Asset::findOrFail($request->id);
         $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
 
         return view('transaction.maintenance.create', compact(

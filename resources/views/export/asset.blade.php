@@ -63,7 +63,8 @@
                 <td colspan="13">&nbsp;</td>
             </tr> --}}
         <tr>
-            <th>Code</th>
+            <th>Code Acc</th>
+            <th>Type</th>
             <th>Name</th>
             <th>SBU</th>
             <th>Date</th>
@@ -74,25 +75,27 @@
             <th>Person Responsible</th>
             {{-- <th>Description</th> --}}
         </tr>
-        @foreach ($data['assets'] as $bangunan)
+        @foreach ($data['assets'] as $asset)
             <tr>
-                <td>{{ $bangunan->asset_code }}</td>
-                <td>{{ $bangunan->asset_name }}</td>
-                <td>{{ $bangunan->sbu->sbu_name ?? '' }}</td>
-                <td>{{ createDate($bangunan->pcs_date)->format('d/m/Y') }}</td>
-                <td style="text-align: right;">{{ rupiah($bangunan->pcs_value) }}</td>
-                <td style="text-align: right;">{{ rupiah($bangunan->nilai_buku) }}</td>
-                <td>{{ $bangunan->location ?? '' }}</td>
-                <td>{{ $bangunan->condition == 1 ? 'Baik' : 'Rusak' }}</td>
-                <td>{{ $bangunan->employee->name ?? '' }}</td>
+                <td>{{ $asset->asset_code }}</td>
+                <td>{{ $asset->group->asset_group_name }}</td>
+                <td>{{ $asset->asset_name }}</td>
+                <td>{{ $asset->asset_name }}</td>
+                <td>{{ $asset->sbu->sbu_name ?? '' }}</td>
+                <td>{{ createDate($asset->pcs_date)->format('d/m/Y') }}</td>
+                <td style="text-align: right;">{{ rupiah($asset->pcs_value) }}</td>
+                <td style="text-align: right;">{{ rupiah($asset->nilai_buku) }}</td>
+                <td>{{ $asset->location ?? '' }}</td>
+                <td>{{ $asset->condition == 1 ? 'Baik' : 'Rusak' }}</td>
+                <td>{{ $asset->employee->name ?? '' }}</td>
                 {{-- <td>
-                {{ $bangunan->appraisals()->exists() ? createDate($bangunan->appraisals->last()->apr_date)->format('d/m/Y') : null }}
+                {{ $asset->appraisals()->exists() ? createDate($asset->appraisals->last()->apr_date)->format('d/m/Y') : null }}
             </td>
             <td>
-                {{ rupiah($bangunan->appraisals->last()->apr_value ?? '') }}
+                {{ rupiah($asset->appraisals->last()->apr_value ?? '') }}
 
             </td> --}}
-                {{-- <td>{{ $bangunan->desc }}</td> --}}
+                {{-- <td>{{ $asset->desc }}</td> --}}
             </tr>
         @endforeach
         <tr>

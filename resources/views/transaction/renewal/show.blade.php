@@ -19,6 +19,16 @@
                         <td>{{ $trnRenewal->trn_no }}</td>
                     </tr>
                     <tr>
+                        <th>Type</th>
+                        <td>{{ $trnRenewal->document->parent->group->asset_group_name ?? '-' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Document</th>
+                        <td>
+                            {{ $trnRenewal->document->doc_name }} - {{ $trnRenewal->document->parent->asset_name ?? '-' }}
+                        </td>
+                    </tr>
+                    <tr>
                         <th>Cost Plan</th>
                         <td>{{ rupiah($trnRenewal->trn_value_plan) }}</td>
                     </tr>
@@ -33,16 +43,6 @@
                     <tr>
                         <th>Due Date</th>
                         <td>{{ createDate($trnRenewal->trn_date)->format('d F Y') }}</td>
-                    </tr>
-                    <tr>
-                        <th>Document</th>
-                        <td>
-                            {{ $trnRenewal->document->doc_name }} - {{ $trnRenewal->document->parent->asset_name ?? '-' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Group</th>
-                        <td>{{ $trnRenewal->document->parent->group->asset_group_name ?? '-' }}</td>
                     </tr>
                 </table>
             </div>

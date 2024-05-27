@@ -27,36 +27,23 @@
             </div>
         </div>
 
-        <div class="collapse" id="collapseSearch">
+        <div class="collapse show" id="collapseSearch">
             <div class="card card-body mt-3">
-                <h6 class="mb-3 font-weight-bold text-primary">Search Filter</h6>
+                <h6 class="mb-3 font-weight-bold text-primary">Search</h6>
                 <form action="/asset-parent/search/all" method="get">
                     <div class="row">
-                        <div class="col-md-6">
-                            <label for="search_date_before">Date</label>
-                            <div class="form-group d-flex">
-                                <input type="date" class="form-control form-control-sm" id="search_date_before"
-                                    name="search_date_before" value="{{ request('search_date_before') }}">
-                            </div>
-                            <div class="form-group d-flex">
-                                <input type="date" class="form-control form-control-sm" id="search_date_after"
-                                    name="search_date_after" value="{{ request('search_date_after') }}">
-                            </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="group_search_id">Type</label>
+                            <select class="form-control form-control-sm @error('group_search_id') is-invalid @enderror"
+                                name="group_search_id" id="group_search_id">
+                                <option value="" disabled selected></option>
+                                @foreach ($assetGroup as $group)
+                                    <option value="{{ $group->id }}"
+                                        {{ request('group_search_id') == $group->id ? 'selected' : '' }}>
+                                        {{ $group->asset_group_name }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        @can('superadmin')
-                            <div class="col-md-6 mb-3">
-                                <label for="sbu_search_id">SBU</label>
-                                <select class="form-control form-control-sm @error('sbu_search_id') is-invalid @enderror"
-                                    id="sbu_search_id" name="sbu_search_id">
-                                    <option value="">Select SBU</option>
-                                    @foreach ($SBUs as $sb)
-                                        <option value="{{ $sb->id }}"
-                                            {{ request('sbu_search_id') == $sb->id ? 'selected' : '' }}>
-                                            {{ $sb->sbu_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        @endcan
                         <div class="col-md-6 mb-3">
                             <label for="search_condition">Condition</label>
                             <select class="form-control form-control-sm @error('search_condition') is-invalid @enderror"
@@ -80,10 +67,35 @@
                                 </option>
                             </select>
                         </div>
+                        <div class="col-md-6">
+                            <label for="search_date_before">Date</label>
+                            <div class="form-group d-flex">
+                                <input type="date" class="form-control form-control-sm" id="search_date_before"
+                                    name="search_date_before" value="{{ request('search_date_before') }}">
+                            </div>
+                            <div class="form-group d-flex">
+                                <input type="date" class="form-control form-control-sm" id="search_date_after"
+                                    name="search_date_after" value="{{ request('search_date_after') }}">
+                            </div>
+                        </div>
+                        @can('superadmin')
+                            <div class="col-md-6 mb-3">
+                                <label for="sbu_search_id">SBU</label>
+                                <select class="form-control form-control-sm @error('sbu_search_id') is-invalid @enderror"
+                                    id="sbu_search_id" name="sbu_search_id">
+                                    <option value=""></option>
+                                    @foreach ($SBUs as $sb)
+                                        <option value="{{ $sb->id }}"
+                                            {{ request('sbu_search_id') == $sb->id ? 'selected' : '' }}>
+                                            {{ $sb->sbu_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endcan
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <button type="submit" class="btn btn-primary rounded text-xs">
+                            <button type="submit" class="btn btn-outline-primary rounded text-xs">
                                 Find <i class="fas fa-search"></i>
                             </button>
                         </div>
@@ -94,7 +106,7 @@
         <!-- DataTales Example -->
         <div class="card shadow my-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">List assets</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Table Data</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -102,8 +114,8 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Group</th>
-                                <th>Account No</th>
+                                <th>Type</th>
+                                <th>Code Acc</th>
                                 <th>Name</th>
                                 <th>SBU</th>
                                 <th>Purchase Date</th>
@@ -175,14 +187,14 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="asset_name">Asset Name</label>
+                                <label for="asset_name">Name</label>
                                 <input type="text" class="form-control @error('asset_name') is-invalid @enderror"
-                                    name="asset_name" id="asset_name" value="{{ old('asset_name') }}" autocomplete="off"
-                                    autofocus>
+                                    name="asset_name" id="asset_name" value="{{ old('asset_name') }}"
+                                    autocomplete="off" autofocus>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="asset_group_id">Group</label>
+                                <label for="asset_group_id">Type</label>
                                 <select class="form-control @error('asset_group_id') is-invalid @enderror"
                                     name="asset_group_id" id="asset_group_id">
                                     <option value=""></option>
@@ -195,14 +207,14 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="asset_code">Account No</label>
+                                <label for="asset_code">Code Acc</label>
                                 <input type="text" class="form-control @error('asset_code') is-invalid @enderror"
                                     name="asset_code" id="asset_code" value="{{ old('asset_code') }}">
 
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="condition">Asset Condition</label>
+                                <label for="condition">Condition</label>
                                 <select class="form-control @error('condition') is-invalid @enderror" name="condition"
                                     id="condition">
                                     <option value=""></option>
@@ -239,7 +251,7 @@
                                 </div>
                             @endcan
                             <div class="col-md-6 mb-3">
-                                <label for="location">Asset Location</label>
+                                <label for="location">Location</label>
                                 <input type="text" class="form-control @error('location') is-invalid @enderror"
                                     name="location" value="{{ old('location') }}">
                             </div>
@@ -350,7 +362,7 @@
             serverSide: true,
             pageLength: 25,
             order: [
-                [2, 'asc']
+                [5, 'DESC']
             ],
             ajax: {
                 url: "{{ route('getData.asset') }}"

@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-6">
                         <button type="submit" class="btn btn-primary">
-                            Submit
+                            Save
                         </button>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">List Documents</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Table Data</h6>
             </div>
             <div class="card-body">
                 <div class="">
@@ -53,26 +53,19 @@
                             @foreach ($files as $file)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $file['filename'] }}</td>
+                                    <td><a title="download" href="/form/{{ $file['basename'] }}">{{ $file['filename'] }}</a>
+                                    </td>
                                     <td>
-                                        <div class="d-flex justify-content-around">
-                                            <div>
-                                                <a title="download form" href="/form/{{ $file['basename'] }}"
-                                                    class="btn btn-outline-dark">
-                                                    <i class="fas fa-file-download"></i>
-                                                </a>
-                                            </div>
-                                            <div>
-                                                <form action="/form/{{ $file['basename'] }}" method="post" id="deleteForm">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button title="Delete Data" class="btn btn-outline-danger text-xs"
-                                                        onclick="return false" id="deleteButton"
-                                                        data-id="{{ $file['basename'] }}">
-                                                        <i class="fas fa-trash-alt"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
+                                        <div>
+                                            <form action="/form/{{ $file['basename'] }}" method="post" id="deleteForm">
+                                                @csrf
+                                                @method('delete')
+                                                <button title="Delete Data" class="btn btn-outline-danger text-xs"
+                                                    onclick="return false" id="deleteButton"
+                                                    data-id="{{ $file['basename'] }}">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>

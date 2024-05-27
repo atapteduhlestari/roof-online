@@ -18,7 +18,7 @@ class RenewalController extends Controller
         $lastNoDoc = $renewals->last();
         $no_doc = "ATL-HOJ-SOP-GAN-0#-##";
 
-        return view('asset.renewal.index', compact('renewals', 'no_doc'));
+        return view('asset.group.renewal.index', compact('renewals', 'no_doc'));
     }
 
     public function create()
@@ -48,7 +48,7 @@ class RenewalController extends Controller
     {
         // $cycles = Cycle::get();
         $renewals = Renewal::get();
-        return view('asset.renewal.edit', compact('renewal', 'renewals'));
+        return view('asset.group.renewal.edit', compact('renewal', 'renewals'));
     }
 
     public function update(Request $request, Renewal $renewal)

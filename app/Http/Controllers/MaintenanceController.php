@@ -17,7 +17,7 @@ class MaintenanceController extends Controller
         $lastNoDoc = $maintenances->last();
         $no_doc = "ATL-HOJ-SOP-GAN-0#-##";
 
-        return view('asset.maintenance.index', compact('maintenances', 'no_doc'));
+        return view('asset.group.maintenance.index', compact('maintenances', 'no_doc'));
     }
 
     public function create()
@@ -46,7 +46,7 @@ class MaintenanceController extends Controller
     public function edit(Maintenance $maintenance)
     {
         $maintenances = Maintenance::get();
-        return view('asset.maintenance.edit', compact('maintenance', 'maintenances'));
+        return view('asset.group.maintenance.edit', compact('maintenance', 'maintenances'));
     }
 
     public function update(Request $request, Maintenance $maintenance)

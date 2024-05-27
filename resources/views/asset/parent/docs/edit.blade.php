@@ -37,14 +37,14 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="doc_code">Account No</label>
+                            <label for="doc_code">Code Acc</label>
                             <input name="doc_code" id="doc_code" type="text"
                                 class="form-control @error('doc_code') is-invalid @enderror"
                                 value="{{ old('doc_code', $child->doc_code) }}">
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="document_id">Group</label>
+                        <label for="document_id">Type</label>
                         <select class="form-control @error('document_id') is-invalid @enderror" name="document_id"
                             id="document_id">
                             <option value=""></option>

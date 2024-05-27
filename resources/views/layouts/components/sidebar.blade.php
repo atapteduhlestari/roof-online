@@ -54,15 +54,15 @@
             </li> --}}
             @can('superadmin')
                 <li
-                    class="nav-item {{ request()->is('asset-parent*') || request()->is('asset-group*') || request()->is('renewal*') || request()->is('maintenance*') || request()->is('cycle*') || request()->is('sbu*') ? 'active' : '' }}">
-                    <a class="nav-link {{ request()->is('asset-parent*') || request()->is('asset-group*') || request()->is('renewal*') || request()->is('maintenance*') || request()->is('cycle*') || request()->is('sbu*') ? '' : 'collapsed' }}"
+                    class="nav-item {{ request()->is('asset-parent*') || request()->is('group*') || request()->is('asset-group*') || request()->is('renewal*') || request()->is('maintenance*') || request()->is('cycle*') || request()->is('sbu*') ? 'active' : '' }}">
+                    <a class="nav-link {{ request()->is('asset-parent*') || request()->is('group*') || request()->is('asset-group*') || request()->is('renewal*') || request()->is('maintenance*') || request()->is('cycle*') || request()->is('sbu*') ? '' : 'collapsed' }}"
                         href="#" data-toggle="collapse" data-target="#collapseData" aria-expanded="true"
                         aria-controls="collapseData">
                         <i class="fas fa-fw fa-cog"></i>
                         <span>Data</span>
                     </a>
                     <div id="collapseData"
-                        class="collapse {{ request()->is('asset-parent*') || request()->is('asset-child*') || request()->is('asset-group*') || request()->is('document-group*') || request()->is('renewal*') || request()->is('maintenance*') || request()->is('cycle*') || request()->is('sbu*') ? 'show' : '' }}"
+                        class="collapse {{ request()->is('asset-parent*') || request()->is('asset-child*') || request()->is('group*') || request()->is('asset-group*') || request()->is('document-group*') || request()->is('renewal*') || request()->is('maintenance*') || request()->is('cycle*') || request()->is('sbu*') ? 'show' : '' }}"
                         aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item  {{ request()->is('asset-parent*') ? 'active' : '' }}"
@@ -73,22 +73,15 @@
                                 href="/asset-child">
                                 Document
                             </a>
-                            <a class="collapse-item  {{ request()->is('asset-group*') || request()->is('document-group*') ? 'active' : '' }}"
-                                href="/group">
-                                Group
-                            </a>
                             {{-- <a class="collapse-item {{ request()->is('cycle*') ? 'active' : '' }}" href="/cycle">
                             Cycle
                         </a> --}}
-                            <a class="collapse-item  {{ request()->is('maintenance*') ? 'active' : '' }}"
-                                href="/maintenance">
-                                Maintenance
-                            </a>
-                            <a class="collapse-item  {{ request()->is('renewal*') ? 'active' : '' }}" href="/renewal">
-                                Renewal
-                            </a>
                             <a class="collapse-item {{ request()->is('sbu*') ? 'active' : '' }}" href="/sbu">
                                 SBU
+                            </a>
+                            <a class="collapse-item  {{ request()->is('group*') || request()->is('asset-group*') || request()->is('document-group*') || request()->is('renewal*') || request()->is('maintenance*') ? 'active' : '' }}"
+                                href="/group">
+                                Type
                             </a>
                         </div>
                     </div>

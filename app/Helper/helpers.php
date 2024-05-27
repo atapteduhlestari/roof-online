@@ -36,7 +36,7 @@ function colorCondition($param)
     if ($param == 3)
         return 'text-danger';
     if ($param == 4)
-        return 'text-dark';
+        return 'font-weight-bold font-italic text-grey';
 }
 
 function remaining($param)
