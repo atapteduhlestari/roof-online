@@ -14,12 +14,13 @@ class AssetChildController extends Controller
 {
     public function index()
     {
+        $data = request()->all();
         $children = AssetChild::with([
             'parent' => fn ($q) => $q->orderBy('asset_name')
         ]);
 
         $documentGroup = DocumentGroup::orderBy('document_group_name', 'asc')->get();
-        $children = isSuperadmin() ? $children->get() : $children->where('sbu_id', userSBU())->get();
+        $children = isSuperadmin() ? $children->search($data)->get() : $children->search($data)->where('sbu_id', userSBU())->get();
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
         $SBUs = SBU::orderBy('sbu_name', 'desc')->get();
         $assets = Asset::orderBy('asset_name', 'asc')->get();

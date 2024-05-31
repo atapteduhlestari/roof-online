@@ -55,8 +55,7 @@ class AssetChild extends Model
 
     public static function getAllLastTransaction($time)
     {
-
-        return DB::table('trn_renewal')
+        $data = DB::table('trn_renewal')
             ->select(['trn_renewal.*', 'trn_renewal.id as trn_id',  'asset_child.*', 'asset_renewal.*', 'sbu.sbu_name'])
             ->join('asset_child', 'trn_renewal.asset_child_id', 'asset_child.id')
             ->join('asset_renewal', 'trn_renewal.renewal_id', 'asset_renewal.id')
@@ -64,6 +63,8 @@ class AssetChild extends Model
             // ->groupBy('asset_renewal.name', 'asset_child.doc_name')
             ->where('trn_status', false)
             ->where('trn_date', '<=', $time);
+
+        return $data;
     }
 
     public static function getLastTransaction($time)
@@ -96,5 +97,20 @@ class AssetChild extends Model
                 ->where('trn_status', false)
                 ->where('trn_renewal.sbu_id', userSBU());
         }
+    }
+
+    public function scopeSearch($query, $filters)
+    {
+        $query->when($filters['sbu_search_id'] ?? false, function ($query, $sbu) {
+            return $query->whereHas('sbu', function ($q) use ($sbu) {
+                $q->where('sbu_id', $sbu);
+            });
+        });
+
+        $query->when($filters['group_search_id'] ?? false, function ($query, $group) {
+            return $query->whereHas('document', function ($q) use ($group) {
+                $q->where('document_id', $group);
+            });
+        });
     }
 }

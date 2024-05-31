@@ -436,6 +436,11 @@
             sortField: "text",
         });
 
+        $("#group_search_id").selectize({
+            create: false,
+            sortField: "text",
+        });
+
         $("#sbu").selectize({
             create: false,
             sortField: "text",

@@ -9,12 +9,80 @@
     <div class="container-fluid">
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">All Documents</h1>
-        <div class="my-4">
-            <!-- Button trigger modal -->
-            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addNewRecord">
-                Add <i class="fas fa-plus-circle"></i>
-            </button>
+        <!-- Button trigger modal -->
+        <div class="d-flex">
+            <div class="my-3 flex-grow-1">
+                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addNewRecord">
+                    Add <i class="fas fa-plus-circle"></i>
+                </button>
+            </div>
+
+            <div class="my-3">
+                <a title="refresh data" class="btn btn-outline-success" href="/asset-child" type="button">
+                    <i class="fas fa-sync-alt"></i>
+                </a>
+                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseSearch"
+                    aria-expanded="false" aria-controls="collapseSearch">
+                    Filter Search
+                </button>
+            </div>
         </div>
+
+        <div class="collapse show" id="collapseSearch">
+            <div class="card card-body mt-3">
+                <h6 class="mb-3 font-weight-bold text-primary">Search</h6>
+                <form action="/asset-child" method="get">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="group_search_id">Type</label>
+                            <select class="form-control form-control-sm @error('group_search_id') is-invalid @enderror"
+                                name="group_search_id" id="group_search_id">
+                                <option value="" disabled selected></option>
+                                @foreach ($documentGroup as $group)
+                                    <option value="{{ $group->id }}"
+                                        {{ request('group_search_id') == $group->id ? 'selected' : '' }}>
+                                        {{ $group->document_group_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @can('superadmin')
+                            <div class="col-md-6 mb-3">
+                                <label for="sbu_search_id">SBU</label>
+                                <select class="form-control form-control-sm @error('sbu_search_id') is-invalid @enderror"
+                                    id="sbu_search_id" name="sbu_search_id">
+                                    <option value=""></option>
+                                    @foreach ($SBUs as $sb)
+                                        <option value="{{ $sb->id }}"
+                                            {{ request('sbu_search_id') == $sb->id ? 'selected' : '' }}>
+                                            {{ $sb->sbu_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endcan
+
+                        <div class="col-md-6">
+                            <label for="search_date_before">Date</label>
+                            <div class="form-group d-flex">
+                                <input type="date" class="form-control form-control-sm" id="search_date_before"
+                                    name="search_date_before" value="{{ request('search_date_before') }}">
+                            </div>
+                            <div class="form-group d-flex">
+                                <input type="date" class="form-control form-control-sm" id="search_date_after"
+                                    name="search_date_after" value="{{ request('search_date_after') }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <button type="submit" class="btn btn-outline-primary rounded text-xs">
+                                Find <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -239,6 +307,17 @@
             create: false,
             sortField: "text",
         });
+
+        $("#sbu_search_id").selectize({
+            create: false,
+            sortField: "text",
+        });
+
+        $("#group_search_id").selectize({
+            create: false,
+            sortField: "text",
+        });
+
 
         btnSubmit.click(function() {
             $(this).prop('disabled', true);
