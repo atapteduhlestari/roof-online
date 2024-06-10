@@ -100,17 +100,17 @@
                                 <th>Asset</th>
                                 <th>SBU</th>
                                 <th>File</th>
-                                <th class="text-center">Actions</th>
+                                <th class="text-center" width=25%>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($children as $child)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $child->document->document_group_name }}</td>
+                                    <td>{{ $child->document->document_group_name ?? '-' }}</td>
                                     <td>{{ $child->doc_code }}</td>
                                     <td>{{ $child->doc_name }}</td>
-                                    <td>{{ $child->parent->asset_name }}</td>
+                                    <td>{{ $child->parent->asset_name ?? '-' }}</td>
                                     <td>{{ $child->sbu->sbu_name ?? '' }}</td>
                                     <td>
                                         @if ($child->file)

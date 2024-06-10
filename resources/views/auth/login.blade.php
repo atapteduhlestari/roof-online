@@ -51,7 +51,6 @@
             background: linear-gradient(to right, #FF2E63, #222831);
             /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
         }
-
     </style>
 </head>
 
@@ -131,6 +130,21 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/assets/template/js/sb-admin-2.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: `<?= session('success') ?>`,
+                timer: 2000,
+                showConfirmButton: false,
+                timerProgressBar: true,
+                allowOutsideClick: true,
+            });
+        </script>
+    @endif
 
 </body>
 

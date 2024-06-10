@@ -194,7 +194,7 @@
                                     @foreach ($asset->children as $child)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $child->document->document_group_name }}</td>
+                                            <td>{{ $child->document->document_group_name ?? '-' }}</td>
                                             <td>{{ $child->doc_code }}</td>
                                             {{-- <td>{{ $child->doc_name }}</td> --}}
                                             <td>{{ $child->sbu->sbu_name }}</td>

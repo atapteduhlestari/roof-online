@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -16,8 +16,8 @@ class LoginController extends Controller
 
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    protected $maxAttempts = 10;
-    protected $decayMinutes = 1;
+    protected $maxAttempts = 5;
+    protected $decayMinutes = 10;
     protected $username;
 
     public function __construct()
@@ -28,6 +28,9 @@ class LoginController extends Controller
 
     protected function authenticated()
     {
+        // if (Auth::check()) {
+        //     session()->flash('warning', 'You logged in with another devices');
+        // }
         Auth::logoutOtherDevices(request('password'));
         return redirect('/')->with('success', 'Login Success!');
     }
@@ -54,6 +57,7 @@ class LoginController extends Controller
 
     public function loggedOut()
     {
+        Auth::logout();
         return redirect('/login')->with('success', 'Logout Berhasil!');
     }
 }
