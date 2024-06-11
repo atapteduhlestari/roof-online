@@ -76,11 +76,11 @@ class AssetController extends Controller
     {
         $asset = new Asset();
         $query = $asset->query();
-        $total = $query->count();
 
         if (!isSuperadmin())
             $query = $asset->where('sbu_id', userSBU());
 
+        $totalQueries = $query->count();
         $dt = DataTables::of($query);
 
         $dt->addIndexColumn()->editColumn('pcs_date', function ($row) {
@@ -117,7 +117,7 @@ class AssetController extends Controller
     </div>';
         })->rawColumns(['action', 'condition']);
 
-        return $dt->orderColumn('pcs_date', '-pcs_date $1')->setTotalRecords($total)->toJson();
+        return $dt->orderColumn('pcs_date', '-pcs_date $1')->setTotalRecords($totalQueries)->toJson();
         // return $dt->toJson();
     }
 
@@ -151,7 +151,9 @@ class AssetController extends Controller
         //         'aktiva' => ''
         //     ]);
         // }
-        return $asset;
+        // return $asset;
+
+        return abort(404);
     }
 
     public function exportDetail(Asset $asset)

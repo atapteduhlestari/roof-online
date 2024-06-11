@@ -42,13 +42,13 @@ class UserController extends Controller
         }
 
         $user->update($data);
-        return redirect()->back()->with('success', 'Success!');
+        return redirect('/user')->with('success', 'Success!');
     }
 
     public function destroy(User $user)
     {
         return $user;
         $user->delete();
-        return redirect()->back()->with('success', 'Success!');
+        return redirect('/user')->with('success', 'Success!');
     }
 }
