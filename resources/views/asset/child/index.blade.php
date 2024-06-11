@@ -232,19 +232,20 @@
                                     @endforeach
                                 </select>
                             </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="sbu_id">SBU</label>
-                                <select class="form-control @error('sbu_id') is-invalid @enderror" name="sbu_id"
-                                    id="sbu_id">
-                                    <option value=""></option>
-                                    @foreach ($SBUs as $sbu)
-                                        <option value="{{ $sbu->id }}"
-                                            {{ old('sbu_id') == $sbu->id ? 'selected' : '' }}>
-                                            {{ $sbu->sbu_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            @can('superadmin')
+                                <div class="col-md-6 mb-3">
+                                    <label for="sbu_id">SBU</label>
+                                    <select class="form-control @error('sbu_id') is-invalid @enderror" name="sbu_id"
+                                        id="sbu_id">
+                                        <option value=""></option>
+                                        @foreach ($SBUs as $sbu)
+                                            <option value="{{ $sbu->id }}"
+                                                {{ old('sbu_id') == $sbu->id ? 'selected' : '' }}>
+                                                {{ $sbu->sbu_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endcan
                         </div>
 
                         <div class="row">

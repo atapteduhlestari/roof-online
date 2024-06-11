@@ -33,10 +33,14 @@ Route::middleware(['auth', 'reminder'])->group(function () {
     Route::get('/report-maintenance-detail', [TrnMaintenanceController::class, 'detailView']);
     Route::get('/trn-maintenance-detail-export', [TrnMaintenanceController::class, 'reportDetail']);
     Route::get('/trn-maintenance-plan-export', [TrnMaintenanceController::class, 'reportPlan']);
+    Route::get('/report-maintenance-summary', [TrnMaintenanceController::class, 'summaryView']);
+    Route::get('/trn-maintenance-summary-export', [TrnMaintenanceController::class, 'reportSummary']);
 
     Route::get('/report-renewal-detail', [TrnRenewalController::class, 'detailView']);
     Route::get('/trn-renewal-detail-export', [TrnRenewalController::class, 'reportDetail']);
     Route::get('/trn-renewal-plan-export', [TrnRenewalController::class, 'reportPlan']);
+    Route::get('/report-renewal-summary', [TrnRenewalController::class, 'summaryView']);
+    Route::get('/trn-renewal-summary-export', [TrnRenewalController::class, 'reportSummary']);
 
 
     Route::get('/report-asset-detail', [AssetController::class, 'detailView']);
@@ -97,7 +101,8 @@ Route::middleware(['auth', 'reminder'])->group(function () {
 
     Route::resource('/trn-maintenance', TrnMaintenanceController::class);
     Route::post('/trn-maintenance/search', [TrnMaintenanceController::class, 'search']);
-
+    Route::put('/trn-maintenance/update-status/{trnMaintenance}', [TrnMaintenanceController::class, 'updateStatus']);
+    Route::put('/trn-maintenance/update-status-plan/{trnMaintenance}', [TrnMaintenanceController::class, 'updateStatusPlan']);
     Route::get('/trn-maintenance/download/{trnMaintenance}', [TrnMaintenanceController::class, 'download']);
     Route::get('/trn-maintenance-export', [TrnMaintenanceController::class, 'export'])->name('maintenance-export');
     Route::get('/trn-maintenance/detail-report', [TrnMaintenanceController::class, 'detailReport'])->name('maintenance-detail-report');
@@ -137,13 +142,6 @@ Route::group(['middleware' => ['auth', 'superadmin', 'reminder']], function () {
     Route::resource('/document-group', DocumentGroupController::class)
         ->except(['create']);
 
-    Route::get('/report-maintenance-summary', [TrnMaintenanceController::class, 'summaryView']);
-    Route::get('/trn-maintenance-summary-export', [TrnMaintenanceController::class, 'reportSummary']);
-    Route::get('/report-renewal-summary', [TrnRenewalController::class, 'summaryView']);
-    Route::get('/trn-renewal-summary-export', [TrnRenewalController::class, 'reportSummary']);
-
-    Route::put('/trn-maintenance/update-status/{trnMaintenance}', [TrnMaintenanceController::class, 'updateStatus']);
-    Route::put('/trn-maintenance/update-status-plan/{trnMaintenance}', [TrnMaintenanceController::class, 'updateStatusPlan']);
     Route::resource('/maintenance', MaintenanceController::class)->except(['create']);
     Route::resource('/renewal', RenewalController::class)->except(['create']);
     Route::resource('/sdb', SDBController::class)->except(['create']);

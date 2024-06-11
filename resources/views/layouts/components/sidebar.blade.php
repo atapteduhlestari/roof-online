@@ -54,8 +54,8 @@
             </li> --}}
             @can('superadmin')
                 <li
-                    class="nav-item {{ request()->is('asset-parent*') || request()->is('group*') || request()->is('asset-group*') || request()->is('renewal*') || request()->is('maintenance*') || request()->is('cycle*') || request()->is('sbu*') ? 'active' : '' }}">
-                    <a class="nav-link {{ request()->is('asset-parent*') || request()->is('group*') || request()->is('asset-group*') || request()->is('renewal*') || request()->is('maintenance*') || request()->is('cycle*') || request()->is('sbu*') ? '' : 'collapsed' }}"
+                    class="nav-item {{ request()->is('asset-parent*') || request()->is('asset-child*') || request()->is('group*') || request()->is('asset-group*') || request()->is('document-group*') || request()->is('renewal*') || request()->is('maintenance*') || request()->is('cycle*') || request()->is('sbu*') ? 'active' : '' }}">
+                    <a class="nav-link {{ request()->is('asset-parent*') || request()->is('asset-child*') || request()->is('group*') || request()->is('asset-group*') || request()->is('document-group*') || request()->is('renewal*') || request()->is('maintenance*') || request()->is('cycle*') || request()->is('sbu*') ? '' : 'collapsed' }}"
                         href="#" data-toggle="collapse" data-target="#collapseData" aria-expanded="true"
                         aria-controls="collapseData">
                         <i class="fas fa-fw fa-cog"></i>
@@ -96,8 +96,8 @@
                 </li>
             @endcan
             <li
-                class="nav-item {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') ? 'active' : '' }}">
-                <a class="nav-link {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') ? '' : 'collapsed' }}"
+                class="nav-item {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') || request()->is('loan*') ? 'active' : '' }}">
+                <a class="nav-link {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') || request()->is('loan*') ? '' : 'collapsed' }}"
                     href="#" data-toggle="collapse" data-target="#collapseTransaction" aria-expanded="true"
                     aria-controls="collapseTransaction">
                     <i class="fas fa-fw fa-hand-holding-usd"></i>

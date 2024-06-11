@@ -20,9 +20,7 @@
                         <div class="card-header"><i class="fas fa-tools"></i> Maintenance</div>
                         <div class="card-body">
                             <a class="btn btn-sm btn-info" href="/report-maintenance-detail">Detail</a>
-                            @can('superadmin')
-                                <a class="btn btn-sm btn-primary" href="/report-maintenance-summary">Summary</a>
-                            @endcan
+                            <a class="btn btn-sm btn-primary" href="/report-maintenance-summary">Summary</a>
                         </div>
                     </div>
                 </div>
@@ -31,9 +29,7 @@
                         <div class="card-header"><i class="fas fa-file-signature"></i> Renewal</div>
                         <div class="card-body">
                             <a class="btn btn-sm btn-info" href="/report-renewal-detail">Detail</a>
-                            @can('superadmin')
-                                <a class="btn btn-sm btn-primary" href="/report-renewal-summary">Summary</a>
-                            @endcan
+                            <a class="btn btn-sm btn-primary" href="/report-renewal-summary">Summary</a>
                         </div>
                     </div>
                 </div>

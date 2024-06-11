@@ -34,8 +34,4 @@ class Reminder
         View::share('alerts', $alerts);
         return $next($request);
     }
-
-    public function checkUser()
-    {
-    }
 }

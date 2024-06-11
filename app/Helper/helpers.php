@@ -258,6 +258,11 @@ function isAdmin()
     return auth()->user()->is_admin == 2;
 }
 
+function checkUser()
+{
+    return auth()->user()->is_admin;
+}
+
 function userSBU()
 {
     return auth()->user()->sbu_id;
@@ -266,7 +271,6 @@ function userSBU()
 function findSBU($id)
 {
     $sbu = SBU::find($id);
-
     return $sbu ? $sbu->sbu_name : '';
 }
 

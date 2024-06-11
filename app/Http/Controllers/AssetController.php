@@ -56,7 +56,7 @@ class AssetController extends Controller
         if (isSuperadmin())
             $assets = $param == 'all' ? Asset::search($data)->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->get() : Asset::where('asset_group_id', $param)->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->search($data)->get();
         else
-            $assets = $param == 'all' ? Asset::where('sbu_id', userSBU())->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->search($data)->get() : Asset::where('asset_group_id', $param)->where('sbu_id', userSBU())->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->search($data)->get();
+            $assets = $param == 'all' ? Asset::where('sbu_id', userSBU())->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->search($data)->get() : Asset::where('asset_group_id', $param)->where('sbu_id', userSBU())->orderBy('pcs_date', 'desc')->search($data)->get();
 
         $assetGroup = AssetGroup::get();
         $employees = Employee::orderBy('name', 'asc')->get();
@@ -161,7 +161,6 @@ class AssetController extends Controller
         foreach ($asset->children as $doc) {
             $asset->sumRenewal += $doc->trnRenewal->sum('trn_value');
         }
-
         return view('export.asset_detail', compact('asset'));
     }
 
@@ -190,6 +189,8 @@ class AssetController extends Controller
 
     public function edit(Asset $asset)
     {
+        $this->authorize('update', $asset);
+
         $assetGroup = AssetGroup::get();
         $assets = Asset::get();
         $employees = Employee::orderBy('name', 'asc')->get();
@@ -208,6 +209,7 @@ class AssetController extends Controller
 
     public function update(AssetRequest $request, Asset $asset)
     {
+        $this->authorize('update', $asset);
         $data = $request->validated();
 
         $data['user_id'] = auth()->user()->id;
@@ -233,6 +235,8 @@ class AssetController extends Controller
 
     public function destroy(Asset $asset)
     {
+        $this->authorize('delete', $asset);
+
         if ($asset->children()->exists()) {
             return redirect('/asset-parent')->with('warning', 'Cannot delete assets that have documents!');
         }
@@ -325,7 +329,7 @@ class AssetController extends Controller
         if (isSuperadmin())
             $data['assets'] = Asset::with('sbu', 'employee')->filter($data)->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->get();
         else
-            $data['assets'] = Asset::with('sbu', 'employee')->where('sbu_id', userSBU())->filter($data)->orderBy('sbu_id', 'asc')->orderBy('pcs_date', 'desc')->get();
+            $data['assets'] = Asset::with('sbu', 'employee')->where('sbu_id', userSBU())->filter($data)->orderBy('pcs_date', 'desc')->get();
 
         if (count($data['assets']) <= 0)
             return redirect()->back()->with('warning', 'No data available');
@@ -349,13 +353,10 @@ class AssetController extends Controller
     {
         $data['request'] = request()->all();
 
-        $data['assets'] = isSuperadmin() ? Asset::filter($data['request'])->with([
-            'sbu' => fn ($q) =>
-            $q->select('id', 'sbu_name')
-        ])->get()->groupBy('sbu.sbu_name') : Asset::filter($data['request'])->with([
-            'sbu' => fn ($q) =>
-            $q->select('id', 'sbu_name')
-        ])->where('sbu_id', userSBU())->get()->groupBy('sbu.sbu_name');
+        if (isSuperadmin())
+            $data['assets'] = Asset::filter($data['request'])->with(['sbu' => fn ($q) => $q->select('id', 'sbu_name')])->get()->groupBy('sbu.sbu_name');
+        else
+            $data['assets'] = Asset::filter($data['request'])->with(['sbu' => fn ($q) => $q->select('id', 'sbu_name')])->where('sbu_id', userSBU())->get()->groupBy('sbu.sbu_name');
 
         $time = now()->format('dmY') . '-' . uniqid();
         $name = "ATL-GAN-ASSET-SUMMARY-{$time}.xlsx";

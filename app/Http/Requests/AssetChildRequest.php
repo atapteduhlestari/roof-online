@@ -18,7 +18,7 @@ class AssetChildRequest extends FormRequest
             'doc_name' => ['required', new SpecialCharacter],
             'doc_code' => 'required',
             'doc_no' => 'nullable',
-            'sbu_id' => 'required',
+            'sbu_id' => 'nullable',
             'sdb_id' => 'nullable',
             'asset_id' => 'nullable',
             'document_id' => 'required',

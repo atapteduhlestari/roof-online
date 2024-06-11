@@ -38,6 +38,9 @@ class AssetChildController extends Controller
     {
         $data = $request->validated();
 
+        if (isAdmin())
+            $data['sbu_id'] = userSBU();
+
         if ($request->file('file')) {
             $file = $request->file('file');
             $extension = $file->extension();
@@ -51,6 +54,8 @@ class AssetChildController extends Controller
 
     public function edit(AssetChild $assetChild)
     {
+        $this->authorize('update', $assetChild);
+
         $documentGroup = DocumentGroup::get();
         $child = $assetChild;
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
@@ -66,7 +71,11 @@ class AssetChildController extends Controller
 
     public function update(AssetChildRequest $request, AssetChild $assetChild)
     {
+        $this->authorize('update', $assetChild);
         $data = $request->validated();
+
+        if (isAdmin())
+            $data['sbu_id'] = userSBU();
 
         if ($request->file('file')) {
             Storage::delete($assetChild->file);
@@ -90,6 +99,7 @@ class AssetChildController extends Controller
 
     public function destroy(AssetChild $assetChild)
     {
+        $this->authorize('delete', $assetChild);
 
         if ($assetChild->trnRenewal()->exists()) {
             return redirect('/asset-child')->with('warning', 'Cannot delete document that has transactions!');
