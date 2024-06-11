@@ -94,6 +94,12 @@
                         <span>Asset</span>
                     </a>
                 </li>
+                <li class="nav-item  {{ request()->is('asset-child*') ? 'active' : '' }}">
+                    <a class="nav-link" href="/asset-child">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Document</span>
+                    </a>
+                </li>
             @endcan
             <li
                 class="nav-item {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') || request()->is('loan*') ? 'active' : '' }}">
