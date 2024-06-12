@@ -58,7 +58,7 @@
                     <a class="nav-link {{ request()->is('asset-parent*') || request()->is('asset-child*') || request()->is('group*') || request()->is('asset-group*') || request()->is('document-group*') || request()->is('renewal*') || request()->is('maintenance*') || request()->is('cycle*') || request()->is('sbu*') ? '' : 'collapsed' }}"
                         href="#" data-toggle="collapse" data-target="#collapseData" aria-expanded="true"
                         aria-controls="collapseData">
-                        <i class="fas fa-fw fa-cog"></i>
+                        <i class="fas fa-database"></i>
                         <span>Data</span>
                     </a>
                     <div id="collapseData"
