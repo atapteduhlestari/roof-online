@@ -12,7 +12,8 @@ class Error extends CI_Controller
     {
         $this->output->set_status_header('404');
         $data['title'] = 'ATAP TEDUH LESTARI';
-        $data['banner_title'] = '404';
+        $data['banner_title'] = '404 Not Found';
+        $data['meta_desc'] = false;
 
         $this->load->view('layouts/header', $data);
         $this->load->view('layouts/components/navbar');

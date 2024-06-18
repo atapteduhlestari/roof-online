@@ -19,6 +19,8 @@ class Post extends CI_Controller
     {
         $data['title'] = 'News - ATAP TEDUH LESTARI';
         $data['banner_title'] = 'News';
+        $data['meta_desc'] = false;
+
         $news_tot = $this->Model_news->tot_news();
         $from = $this->uri->segment(3);
 
@@ -61,6 +63,7 @@ class Post extends CI_Controller
     {
         $data['title'] = 'News - ATAP TEDUH LESTARI';
         $data['banner_title'] = 'News';
+        $data['meta_desc'] = false;
         $data['archives'] = $this->Model_news->get_archive();
         $data['news_data'] = $this->Model_news->get_news_by_date($year, $month);
 
@@ -74,10 +77,12 @@ class Post extends CI_Controller
 
     public function detail($id)
     {
-        $data['title'] = 'Detail Posts - ATAP TEDUH LESTARI';
-        $data['banner_title'] = 'Detail News';
         $data['news'] = $this->Model_news->first_news($id);
         $data['archives'] = $this->Model_news->get_archive();
+
+        $data['title'] = $data['news']->page_title . " - PT. ATAP TEDUH LESTARI";
+        $data['banner_title'] = $data['news']->judul;
+        $data['meta_desc'] = $data['news']->meta_desc;
 
         $this->load->view('layouts/header', $data);
         $this->load->view('layouts/components/navbar');

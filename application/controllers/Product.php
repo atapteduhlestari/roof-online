@@ -17,8 +17,9 @@ class Product extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Product - ATAP TEDUH LESTARI';
+        $data['title'] = 'Produk - Atap, Waterproofing, Genteng Metal, Struktur Rangka, lnsulasi, Kusen, Pintu, dan Jendela';
         $data['banner_title'] = 'Product - ATAP TEDUH LESTARI';
+        $data['meta_desc'] = 'Produk - Atap, Waterproofing, Genteng Metal, Struktur Rangka, lnsulasi, Kusen, Pintu, dan Jendela';
 
         $product_tot = $this->Model_product->tot_product();
         $data['product_tot'] = $product_tot;
@@ -88,7 +89,8 @@ class Product extends CI_Controller
         $this->pagination->initialize($config);
 
         $data['product_data'] = $this->Model_product->get_product_category($id, $config['per_page'], $from);
-        $data['title'] = 'Product Category: ' . $data['product_data'][0]->nama_kategori . ' - ATAP TEDUH LESTARI';
+        $data['title'] = $data['product_data'][0]->page_title  . ' - PT. ATAP TEDUH LESTARI';
+        $data['meta_desc'] = $data['product_data'][0]->meta_desc;
         $data['banner_title'] = 'Product Category: ' . $data['product_data'][0]->nama_kategori;
 
         $this->load->view('layouts/header', $data);
@@ -129,8 +131,9 @@ class Product extends CI_Controller
         $this->pagination->initialize($config);
 
         $data['product_data'] = $this->Model_product->get_product_subcategory($id, $config['per_page'], $from);
-        $data['title'] = 'Product Category: ' . $data['product_data'][0]->nama_subkategori . ' - ATAP TEDUH LESTARI';
+        $data['title'] = $data['product_data'][0]->nama_subkategori . ' - PT. ATAP TEDUH LESTARI';
         $data['banner_title'] = 'Product Category: ' . $data['product_data'][0]->nama_subkategori;
+        $data['meta_desc'] = $data['product_data'][0]->meta_desc;
 
         $this->load->view('layouts/header', $data);
         $this->load->view('layouts/components/navbar');
@@ -143,11 +146,12 @@ class Product extends CI_Controller
     {
         if ($id == 56) header("Location: https://lestarijendela.com/");
 
-        $data['title'] = 'Detail Product - ATAP TEDUH LESTARI';
         $data['product'] = $this->Model_product->product_first($id);
         $data['gambar_product'] = $this->Model_product->image_product($id);
         $data['gambar_project'] = $this->Model_product->image_project($id);
         $data['banner_title'] = 'Detail Product - ' . $data['product']->nama_produk;
+        $data['title'] = $data['product']->page_title . ' - PT. ATAP TEDUH LESTARI';
+        $data['meta_desc'] = $data['product']->meta_desc;
         $data['total_project'] =  $this->Model_product->tot_project($id);
 
         $this->load->view('layouts/header', $data);

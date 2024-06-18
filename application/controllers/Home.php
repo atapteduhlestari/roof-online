@@ -16,7 +16,8 @@ class Home extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'ATAP TEDUH LESTARI';
+        $data['title'] = 'PT. ATAP TEDUH LESTARI - Atap, Waterproofing, Genteng Metal, Struktur Rangka, lnsulasi, Kusen, Pintu, dan Jendela';
+        $data['meta_desc'] = false;
         $data['news_data'] = $this->Model_news->get_news();
 
         $this->load->view('layouts/header', $data);
@@ -27,8 +28,9 @@ class Home extends CI_Controller
 
     public function about()
     {
-        $data['title'] = 'About - ATAP TEDUH LESTARI';
+        $data['title'] = 'About - PT. ATAP TEDUH LESTARI';
         $data['banner_title'] = 'About Us';
+        $data['meta_desc'] = 'Berawal dari sebuah usaha distributor Genteng Beton di Kota Medan yang dimulai pada tahun 1979, Ir. Eddy Mahadi mulai merintis usahanya sebagai Specialist Atap. Kemudian tahun 1991 membuka toko ATAP di Kota Medan, sebagai penyedia produk - produk atap yang menjadi cikal bakal berdirinya kantor - kantor PT. Atap Teduh Lestari di Indonesia';
 
         $this->load->view('layouts/header', $data);
         $this->load->view('layouts/components/navbar');
@@ -40,8 +42,9 @@ class Home extends CI_Controller
 
     public function contact()
     {
-        $data['title'] = 'Contact - ATAP TEDUH LESTARI';
-        $data['banner_title'] = 'Contact';
+        $data['title'] = 'Contact Us - PT. ATAP TEDUH LESTARI';
+        $data['banner_title'] = 'Contact Us';
+        $data['meta_desc'] = false;
 
         $this->load->view('layouts/header', $data);
         $this->load->view('layouts/components/navbar');

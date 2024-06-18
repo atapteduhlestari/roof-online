@@ -17,8 +17,9 @@ class Project extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Gallery Project - ATAP TEDUH LESTARI';
+        $data['title'] = 'Gallery Project - PT. ATAP TEDUH LESTARI';
         $data['banner_title'] = 'Gallery Project';
+        $data['meta_desc'] = 'Referensi Proyek Atap, Waterproofing, Genteng Metal, Struktur Rangka, lnsulasi, Kusen, Pintu, dan Jendela PT. ATAP TEDUH LESTARI';
         $project_tot = $this->Model_project->tot_project();
         $from = $this->uri->segment(3);
         $data['discover_name'] = '';
@@ -60,8 +61,9 @@ class Project extends CI_Controller
     public function discover($keyword)
     {
         $keyword = str_replace('%20', ' ', $keyword);
-        $data['title'] = 'Gallery Project - ATAP TEDUH LESTARI';
+        $data['title'] = 'Gallery Project - PT. ATAP TEDUH LESTARI';
         $data['banner_title'] = 'Gallery Project';
+        $data['meta_desc'] = 'Referensi Proyek Atap, Waterproofing, Genteng Metal, Struktur Rangka, lnsulasi, Kusen, Pintu, dan Jendela PT. ATAP TEDUH LESTARI';
         $data['project_data'] = $this->Model_project->discover_project($keyword);
         $data['discover_name'] = $keyword;
 
@@ -78,10 +80,12 @@ class Project extends CI_Controller
 
     public function search()
     {
-        $data['title'] = 'Gallery Project - ATAP TEDUH LESTARI';
-        $data['banner_title'] = 'Gallery Project';
-
         $keyword = removeSpecialChar($this->input->post('keyword'));
+
+        $data['title'] = 'Gallery Project - PT. ATAP TEDUH LESTARI';
+        $data['banner_title'] = 'Gallery Project - ' . $keyword;
+        $data['meta_desc'] = 'Referensi Proyek Atap, Waterproofing, Genteng Metal, Struktur Rangka, lnsulasi, Kusen, Pintu, dan Jendela PT. ATAP TEDUH LESTARI';
+
         $search = ($this->uri->segment(3)) ? $this->uri->segment(3) : $keyword;
         $project_tot = $this->Model_project->tot_project($search);
         $from = $this->uri->segment(4);
@@ -124,6 +128,7 @@ class Project extends CI_Controller
     {
         $data['title'] = 'Gallery Videos - ATAP TEDUH LESTARI';
         $data['banner_title'] = 'Gallery Videos';
+        $data['meta_desc'] = false;
 
         $this->load->view('layouts/header', $data);
         $this->load->view('layouts/components/navbar');

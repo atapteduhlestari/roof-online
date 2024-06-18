@@ -22,22 +22,22 @@
                 <div class="row">
                     <div class="col-6 about-image mb-3">
                         <div class="about-image-wrap">
-                            <img class="rounded" src="<?= base_url(); ?>assets/images/home/about/1.jpeg">
+                            <img class="rounded" src="<?= base_url(); ?>assets/images/home/about/1.webp">
                         </div>
                     </div>
                     <div class="col-6 about-image mb-3">
                         <div class="about-image-wrap">
-                            <img class="rounded" src="<?= base_url(); ?>assets/images/home/about/6.jpeg">
+                            <img class="rounded" src="<?= base_url(); ?>assets/images/home/about/6.webp">
                         </div>
                     </div>
                     <div class="col-6 about-image mb-3">
                         <div class="about-image-wrap">
-                            <img class="rounded" src="<?= base_url(); ?>assets/images/home/about/7.jpeg">
+                            <img class="rounded" src="<?= base_url(); ?>assets/images/home/about/7.webp">
                         </div>
                     </div>
                     <div class="col-6 about-image mb-3">
                         <div class="about-image-wrap">
-                            <img class="rounded" src="<?= base_url(); ?>assets/images/home/about/8.jpeg">
+                            <img class="rounded" src="<?= base_url(); ?>assets/images/home/about/8.webp">
                         </div>
                     </div>
                 </div>
@@ -81,6 +81,6 @@
 </section><!-- Facts end -->
 <div class="row mt-n5" style="height:100vh">
     <div class="col-md-12 text-dark">
-        <img style="height:100vh; width:100%;  box-shadow: 10px 10px 25px 0px rgba(0, 0, 0, 0.28);" class="img-wrap mb-3" src="<?= base_url(); ?>assets/images/home/about/2.jpg">
+        <img style="height:100vh; width:100%;  box-shadow: 10px 10px 25px 0px rgba(0, 0, 0, 0.28);" class="img-wrap mb-3" src="<?= base_url(); ?>assets/images/home/about/2.webp">
     </div>
 </div>

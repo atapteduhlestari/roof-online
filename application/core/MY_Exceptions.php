@@ -12,6 +12,7 @@ class MY_Exceptions extends CI_Exceptions
         $CI->output->set_status_header('404');
         $data['title'] = 'ATAP TEDUH LESTARI';
         $data['banner_title'] = '404';
+        $data['meta_desc'] = false;
 
         $CI->load->view('layouts/header', $data);
         $CI->load->view('layouts/components/navbar');

@@ -36,6 +36,22 @@ function atlSong()
     return $lyrics;
 }
 
+function pageTitle($title)
+{
+    if ($title) {
+        return $title;
+    }
+    return "PT. ATAP TEDUH LESTARI";
+}
+
+function metaDescription($desc)
+{
+    if ($desc) {
+        return $desc;
+    }
+    return "PT. ATAP TEDUH LESTARI memproduksi dan mendistribusikan produk Atap, Waterproofing, Genteng Metal, Struktur Rangka, lnsulasi, Kusen, Pintu, dan Jendela yang berkualitas dengan garansi pemakaian sampai dengan 30 tahun dilengkapi dengan sertifikat hasil uji";
+}
+
 function removeSpecialChar($str)
 {
     $param = trim($str);

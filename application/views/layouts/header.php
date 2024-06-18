@@ -3,20 +3,21 @@
 
 <head>
     <meta charset="utf-8">
-    <title><?= $title ? $title : 'PT ATAP TEDUH LESTARI' ?></title>
+    <title><?= pageTitle($title); ?></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="'Atap Teduh Lestari merupakan perusahaan supplier atap dan bahan bangunan lainnya. Menyediakan berbagai produk untuk roofing, waterproofing, dan insulasi.';">
+    <meta name="title" content="<?= metaDescription($meta_desc); ?>">
+    <meta name="description" content="<?= metaDescription($meta_desc); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta name='author' content='Edward'>
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://roof-online.com/">
-    <meta property="og:title" content="PT. Atap Teduh Lestari">
-    <meta property="og:description" content="Atap Teduh Lestari merupakan perusahaan supplier atap dan bahan bangunan lain nya. Menyediakan berbagai produk untuk Atap ashpalt,/bitumenoofing, waterproofing, insulasi, Pintu dan Jendela, dan Strukur.">
+    <meta property="og:title" content="<?= pageTitle($title); ?>">
+    <meta property="og:description" content="<?= metaDescription($meta_desc); ?>">
     <meta property="og:image" content="<?= base_url(); ?>assets/images/logo/logo_.png">
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://roof-online.com/">
-    <meta property="twitter:title" content="PT. Atap Teduh Lestari">
-    <meta property="twitter:description" content="Atap Teduh Lestari merupakan perusahaan supplier atap dan bahan bangunan lain nya. Menyediakan berbagai produk untuk Atap ashpalt,/bitumenoofing, waterproofing, insulasi, Pintu dan Jendela, dan Strukur.">
+    <meta property="twitter:title" content="<?= pageTitle($title); ?>">
+    <meta property="twitter:description" content="<?= metaDescription($meta_desc); ?>">
     <meta property="twitter:image" content="<?= base_url(); ?>assets/images/logo/logo_.png">
 
     <link rel="icon" sizes="16x16" href="<?= base_url(); ?>assets/images/logo/logo_.png">
@@ -46,7 +47,7 @@
         .bg-cambridge {
             height: 100vh;
             background-color: #8bc34a;
-            background: url("<?= base_url(); ?>assets/images/home/cambridge.JPG");
+            background: url("<?= base_url(); ?>assets/images/home/cambridge.webp");
             background-attachment: fixed;
             background-repeat: no-repeat;
             background-size: cover;
@@ -58,7 +59,7 @@
         .bg-marathon {
             height: 100vh;
             background-color: #8bc34a;
-            background: url("<?= base_url(); ?>assets/images/home/marathon.JPG");
+            background: url("<?= base_url(); ?>assets/images/home/marathon.webp");
             background-attachment: fixed;
             background-repeat: no-repeat;
             background-size: cover;
@@ -70,7 +71,7 @@
         .bg-palmex {
             height: 100vh;
             background-color: #8bc34a;
-            background: url("<?= base_url(); ?>assets/images/home/palmex.jpg");
+            background: url("<?= base_url(); ?>assets/images/home/palmex.webp");
             background-attachment: fixed;
             background-repeat: no-repeat;
             background-size: cover;
@@ -82,7 +83,7 @@
         .bg-duo {
             height: 100vh;
             background-color: #8bc34a;
-            background: url("<?= base_url(); ?>assets/images/home/duo.jpeg");
+            background: url("<?= base_url(); ?>assets/images/home/duo.webp");
             background-attachment: fixed;
             background-repeat: no-repeat;
             background-size: cover;
@@ -94,7 +95,7 @@
         .bg-lj {
             height: 100vh;
             background-color: #8bc34a;
-            background: url("<?= base_url(); ?>assets/images/home/lj.JPG");
+            background: url("<?= base_url(); ?>assets/images/home/lj.webp");
             background-attachment: fixed;
             background-repeat: no-repeat;
             background-size: cover;
@@ -106,7 +107,7 @@
         .bg-truss {
             height: 85vh;
             background-color: #8bc34a;
-            background: url("<?= base_url(); ?>assets/images/home/12truss.jpg");
+            background: url("<?= base_url(); ?>assets/images/home/12truss.webp");
             background-attachment: fixed;
             background-repeat: no-repeat;
             background-position: 0 100%;
@@ -117,7 +118,7 @@
         .bg-hands {
             position: relative;
             height: 100vh;
-            background: url(' <?= base_url(); ?>assets/images/home/about/4.JPG');
+            background: url(' <?= base_url(); ?>assets/images/home/about/4.webp');
             background-attachment: fixed;
             background-repeat: no-repeat;
             background-size: cover;
@@ -129,7 +130,7 @@
         .bg-shake-hands {
             position: relative;
             height: 100vh;
-            background: url(' <?= base_url(); ?>assets/images/home/about/3.jpeg');
+            background: url(' <?= base_url(); ?>assets/images/home/about/3.webp');
             background-attachment: fixed;
             background-repeat: no-repeat;
             background-size: cover;

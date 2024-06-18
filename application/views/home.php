@@ -1,5 +1,5 @@
 <div class="banner-carousel banner-carousel-1 mb-0">
-    <div class="banner-carousel-item" style="background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.50)), url('<?= base_url(); ?>assets/images/slider-main/iko.jpg');background-position: center;background-repeat: no-repeat;background-size: cover;">
+    <div class="banner-carousel-item" style="background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.50)), url('<?= base_url(); ?>assets/images/slider-main/iko.webp');background-position: center;background-repeat: no-repeat;background-size: cover;">
         <div class="slider-content">
             <div class="container h-100">
                 <div class="row align-items-center h-100">
@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <div class="banner-carousel-item" style="background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.50)), url('<?= base_url(); ?>assets/images/slider-main/iko2.jpg');background-position: center;background-repeat: no-repeat;background-size: cover;">
+    <div class="banner-carousel-item" style="background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.50)), url('<?= base_url(); ?>assets/images/slider-main/iko2.webp');background-position: center;background-repeat: no-repeat;background-size: cover;">
         <div class="slider-content text-left">
             <div class="container h-100">
                 <div class="row align-items-center h-100">
@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <div class="banner-carousel-item" style="background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.50)), url('<?= base_url(); ?>assets/images/slider-main/palmex.jpg');background-position: center;background-repeat: no-repeat;background-size: cover;">
+    <div class="banner-carousel-item" style="background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.50)), url('<?= base_url(); ?>assets/images/slider-main/palmex.webp');background-position: center;background-repeat: no-repeat;background-size: cover;">
         <div class="slider-content">
             <div class="container h-100">
                 <div class="row align-items-center h-100">
@@ -62,7 +62,7 @@
         </div>
     </div>
 
-    <div class="banner-carousel-item" style="background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.50)), url('<?= base_url(); ?>assets/images/slider-main/duo.jpg');background-position: center;background-repeat: no-repeat;background-size: cover;">
+    <div class="banner-carousel-item" style="background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.50)), url('<?= base_url(); ?>assets/images/slider-main/duo.webp');background-position: center;background-repeat: no-repeat;background-size: cover;">
         <div class="slider-content text-right">
             <div class="container h-100">
                 <div class="row align-items-center h-100">
@@ -80,7 +80,7 @@
         </div>
     </div>
 
-    <div class="banner-carousel-item" style="background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.50)), url('<?= base_url(); ?>assets/images/slider-main/lj.jpg');background-position: center;background-repeat: no-repeat;background-size: cover;">
+    <div class="banner-carousel-item" style="background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.50)), url('<?= base_url(); ?>assets/images/slider-main/lj.webp');background-position: center;background-repeat: no-repeat;background-size: cover;">
         <div class="slider-content">
             <div class="container h-100">
                 <div class="row align-items-center h-100">
@@ -171,9 +171,9 @@
                         <div class="col-1 shuffle-sizer"></div>
                         <div class="col-lg-4 col-md-6 shuffle-item">
                             <div class="project-img-container">
-                                <a class="gallery-popup" href="<?= base_url(); ?>assets/images/projects/commercial.jpeg">
+                                <a class="gallery-popup" href="<?= base_url(); ?>assets/images/projects/commercial.webp">
                                     <div class="home-gallery">
-                                        <img class="img-fluid" style="height:360px!important; width:100%; object-fit:cover; object-position:center;" src="<?= base_url(); ?>assets/images/projects/commercial.jpeg" alt="Villa & Resort">
+                                        <img class="img-fluid" style="height:360px!important; width:100%; object-fit:cover; object-position:center;" src="<?= base_url(); ?>assets/images/projects/commercial.webp" alt="Villa & Resort">
                                     </div>
                                     <span class="gallery-icon"><i class="fa fa-plus"></i></span>
                                 </a>
@@ -187,9 +187,9 @@
 
                         <div class="col-lg-4 col-md-6 shuffle-item">
                             <div class="project-img-container">
-                                <a class="gallery-popup" href="<?= base_url(); ?>assets/images/projects/private-house.jpeg">
+                                <a class="gallery-popup" href="<?= base_url(); ?>assets/images/projects/private-house.webp">
                                     <div class="home-gallery">
-                                        <img class="img-fluid" style="height:350px!important; width:100%; object-fit:cover; object-position:center;" src="<?= base_url(); ?>assets/images/projects/private-house.jpeg" alt="Rumah Tinggal">
+                                        <img class="img-fluid" style="height:350px!important; width:100%; object-fit:cover; object-position:center;" src="<?= base_url(); ?>assets/images/projects/private-house.webp" alt="Private House">
                                     </div>
                                     <span class="gallery-icon"><i class="fa fa-plus"></i></span>
                                 </a>
@@ -203,9 +203,9 @@
 
                         <div class="col-lg-4 col-md-6 shuffle-item">
                             <div class="project-img-container">
-                                <a class="gallery-popup" href="<?= base_url(); ?>assets/images/projects/wisata.jpg">
+                                <a class="gallery-popup" href="<?= base_url(); ?>assets/images/projects/wisata.webp">
                                     <div class="home-gallery">
-                                        <img class="img-fluid" style="height:350px!important; width:100%; object-fit:cover; object-position:center;" src="<?= base_url(); ?>assets/images/projects/wisata.jpg" alt="Tempat Wisata">
+                                        <img class="img-fluid" style="height:350px!important; width:100%; object-fit:cover; object-position:center;" src="<?= base_url(); ?>assets/images/projects/wisata.webp" alt="Tempat Wisata">
                                     </div>
                                     <span class="gallery-icon"><i class="fa fa-plus"></i></span>
                                 </a>
@@ -219,9 +219,9 @@
 
                         <div class="col-lg-4 col-md-6 shuffle-item">
                             <div class="project-img-container">
-                                <a class="gallery-popup" href="<?= base_url(); ?>assets/images/projects/government.jpeg">
+                                <a class="gallery-popup" href="<?= base_url(); ?>assets/images/projects/government.webp">
                                     <div class="home-gallery">
-                                        <img class="img-fluid" style="height:350px!important; width:100%; object-fit:cover; object-position:center;" src="<?= base_url(); ?>assets/images/projects/government.jpeg" alt="Government">
+                                        <img class="img-fluid" style="height:350px!important; width:100%; object-fit:cover; object-position:center;" src="<?= base_url(); ?>assets/images/projects/government.webp" alt="Government">
                                     </div>
                                     <span class="gallery-icon"><i class="fa fa-plus"></i></span>
                                 </a>
@@ -235,9 +235,9 @@
 
                         <div class="col-lg-4 col-md-6 shuffle-item">
                             <div class="project-img-container">
-                                <a class="gallery-popup" href="<?= base_url(); ?>assets/images/projects/resort.jpg">
+                                <a class="gallery-popup" href="<?= base_url(); ?>assets/images/projects/resort.webp">
                                     <div class="home-gallery">
-                                        <img class="img-fluid" style="height:350px!important; width:100%; object-fit:cover; object-position:center;" src="<?= base_url(); ?>assets/images/projects/resort.jpg" alt="Residential">
+                                        <img class="img-fluid" style="height:350px!important; width:100%; object-fit:cover; object-position:center;" src="<?= base_url(); ?>assets/images/projects/resort.webp" alt="Residential">
                                     </div>
                                     <span class="gallery-icon"><i class="fa fa-plus"></i></span>
                                 </a>
@@ -251,9 +251,9 @@
 
                         <div class="col-lg-4 col-md-6 shuffle-item">
                             <div class="project-img-container">
-                                <a class="gallery-popup" href="<?= base_url(); ?>assets/images/projects/12truss.jpg">
+                                <a class="gallery-popup" href="<?= base_url(); ?>assets/images/projects/12truss.webp">
                                     <div class="home-gallery">
-                                        <img class="img-fluid" style="height:350px!important; width:100%; object-fit:cover; object-position:center;" src="<?= base_url(); ?>assets/images/projects/12truss.jpg" alt="Structure">
+                                        <img class="img-fluid" style="height:350px!important; width:100%; object-fit:cover; object-position:center;" src="<?= base_url(); ?>assets/images/projects/12truss.webp" alt="Structure">
                                     </div>
                                     <span class="gallery-icon"><i class="fa fa-plus"></i></span>
                                 </a>
@@ -411,43 +411,43 @@
         <div class="projectSlider ">
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/1.jpg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
-                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/1.jpg">
+                    <a href="<?= base_url() ?>assets/images/home/slider/1.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/1.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/2.jpg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
-                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/2.jpg">
+                    <a href="<?= base_url() ?>assets/images/home/slider/2.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/2.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/3.JPG" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
-                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/3.JPG">
+                    <a href="<?= base_url() ?>assets/images/home/slider/3.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/3.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/4.jpg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
-                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/4.jpg">
+                    <a href="<?= base_url() ?>assets/images/home/slider/4.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/4.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/5.jpg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
-                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/5.jpg">
+                    <a href="<?= base_url() ?>assets/images/home/slider/5.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/5.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/6.jpg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
-                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/6.jpg">
+                    <a href="<?= base_url() ?>assets/images/home/slider/6.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/6.webp">
                     </a>
                 </div>
             </div>
@@ -460,36 +460,36 @@
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/8.jpg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
-                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/8.jpg">
+                    <a href="<?= base_url() ?>assets/images/home/slider/8.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/8.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/9.jpg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
-                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/9.jpg">
+                    <a href="<?= base_url() ?>assets/images/home/slider/9.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/9.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/10.JPG" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
-                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/10.JPG">
+                    <a href="<?= base_url() ?>assets/images/home/slider/10.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/10.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/11.jpg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
-                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/11.jpg">
+                    <a href="<?= base_url() ?>assets/images/home/slider/11.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/11.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/12.jpg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
-                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/12.jpg">
+                    <a href="<?= base_url() ?>assets/images/home/slider/12.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/12.webp">
                     </a>
                 </div>
             </div>

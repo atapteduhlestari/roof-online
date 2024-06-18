@@ -76,7 +76,7 @@
                                         <li class="dropdown-submenu">
                                             <a href="<?= base_url(); ?>product" class="dropdown-toggle" data-toggle="dropdown">Roofing</a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="<?= base_url(); ?>product/subkategori/1">Asphalt</a></li>
+                                                <li><a href="<?= base_url(); ?>product/subkategori/1">Shingles AR</a></li>
                                                 <li><a href="<?= base_url(); ?>product/subkategori/5">Synthetic Thatch</a></li>
                                                 <li><a href="<?= base_url(); ?>product/subkategori/2">Membrane</a></li>
                                                 <li><a href="<?= base_url(); ?>product/subkategori/4">Slate</a></li>

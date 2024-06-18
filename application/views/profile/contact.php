@@ -473,7 +473,7 @@
                             <table class="table table-borderless" width="100%">
                                 <tr>
                                     <td colspan="2">
-                                        JI. Mahendradatta No. 99A, Padangsambian Kodya Denpasar, Bali 80118
+                                        Jl. Mahendradatta No. 99, Padangsambian, Kec. Denpasar Barat, Denpasar - Bali
                                     </td>
                                 </tr>
                                 <tr>

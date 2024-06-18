@@ -81,7 +81,7 @@ jQuery(function ($) {
 				$(".product-logo").each(function (i) {
 					setTimeout(function () {
 						$(".product-logo").eq(i).addClass("product-logo-show");
-					}, 300 * i);
+					}, 200 * i);
 				});
 			}
 		}
