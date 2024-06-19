@@ -73,21 +73,21 @@
                                 <li class="nav-item dropdown <?= $this->uri->segment(1) == 'product' ? 'active' : '' ?>">
                                     <a href="#!" id="productBtn" class=" nav-link dropdown-toggle" data-toggle="dropdown">Product <i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li class="dropdown-submenu">
+                                        <li class="dropdown-submenu <?= $this->uri->segment(2) == 'subkategori' || $this->uri->segment(2) == 'subkategori' || $this->uri->segment(2) == 'subkategori' || $this->uri->segment(2) == 'subkategori' || $this->uri->segment(2) == 'subkategori' ? 'active' : '' ?>">
                                             <a href="<?= base_url(); ?>product" class="dropdown-toggle" data-toggle="dropdown">Roofing</a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="<?= base_url(); ?>product/subkategori/1">Shingles AR</a></li>
-                                                <li><a href="<?= base_url(); ?>product/subkategori/5">Synthetic Thatch</a></li>
-                                                <li><a href="<?= base_url(); ?>product/subkategori/2">Membrane</a></li>
-                                                <li><a href="<?= base_url(); ?>product/subkategori/4">Slate</a></li>
-                                                <li><a href="<?= base_url(); ?>product/subkategori/3">Metal</a></li>
+                                                <li class="<?= $this->uri->segment(2) == 'subkategori' && $this->uri->segment(3) == '1' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/subkategori/1">Shingles AR</a></li>
+                                                <li class="<?= $this->uri->segment(2) == 'subkategori' && $this->uri->segment(3) == '5' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/subkategori/5">Synthetic Thatch</a></li>
+                                                <li class="<?= $this->uri->segment(2) == 'subkategori' && $this->uri->segment(3) == '2' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/subkategori/2">Membrane</a></li>
+                                                <li class="<?= $this->uri->segment(2) == 'subkategori' && $this->uri->segment(3) == '4' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/subkategori/4">Slate</a></li>
+                                                <li class="<?= $this->uri->segment(2) == 'subkategori' && $this->uri->segment(3) == '3' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/subkategori/3">Metal</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="<?= base_url(); ?>product/kategori/2">Waterproofing</a></li>
-                                        <li><a href="<?= base_url(); ?>product/kategori/3">Insulation</a></li>
-                                        <li><a href="<?= base_url(); ?>product/kategori/4">Structure</a></li>
-                                        <li><a href="<?= base_url(); ?>product/kategori/7">Ceiling & Wall</a></li>
-                                        <li><a href="<?= base_url(); ?>product/kategori/8">Windows & Doors</a></li>
+                                        <li class="<?= $this->uri->segment(3) == '2' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/kategori/2">Waterproofing</a></li>
+                                        <li class="<?= $this->uri->segment(3) == '3' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/kategori/3">Insulation</a></li>
+                                        <li class="<?= $this->uri->segment(3) == '4' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/kategori/4">Structure</a></li>
+                                        <li class="<?= $this->uri->segment(3) == '7' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/kategori/7">Ceiling & Wall</a></li>
+                                        <li class="<?= $this->uri->segment(3) == '8' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/kategori/8">Windows & Doors</a></li>
                                         <!-- <li><a href="http://lestarijendela.com/">Windows & Doors</a></li> -->
                                     </ul>
                                 </li>
@@ -95,8 +95,8 @@
                                 <li class="nav-item dropdown <?= $this->uri->segment(1) == 'project' ? 'active' : '' ?>">
                                     <a href="#!" class="nav-link dropdown-toggle" data-toggle="dropdown">Gallery <i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="<?= base_url(); ?>project">Gallery Project</a></li>
-                                        <li><a href="<?= base_url(); ?>project/videos">Gallery Videos</a></li>
+                                        <li class="<?= $this->uri->segment(1) == 'project' && $this->uri->segment(2) != 'videos'  ? 'active' : '' ?>"><a href="<?= base_url(); ?>project">Gallery Project</a></li>
+                                        <li class="<?= $this->uri->segment(2) == 'videos' ? 'active' : '' ?>"><a href="<?= base_url(); ?>project/videos">Gallery Videos</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item <?= $this->uri->segment(1) == 'post' ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url(); ?>post">News</a></li>

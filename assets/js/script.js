@@ -1,7 +1,7 @@
 (function () {
 	$(document).ready(function () {
-		$(".loader-frame").fadeOut(2500);
-		$(".loader").fadeOut(2500);
+		$(".loader-frame").fadeOut(2000);
+		$(".loader").fadeOut(2000);
 	});
 
 	var myAudio = document.getElementById("myAudio");

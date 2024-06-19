@@ -133,10 +133,10 @@
                     <div class="col-md-6">
                         <div class="ts-service-box">
                             <span class="ts-service-icon">
-                                <i class="fas fa-sliders-h"></i>
+                                <i class="fas fa-certificate"></i>
                             </span>
                             <div class="ts-service-box-content">
-                                <h3 class="service-box-title">Warranty</h3>
+                                <h3 class="service-box-title">Warranty Product</h3>
                             </div>
                         </div>
                     </div>

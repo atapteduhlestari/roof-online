@@ -449,8 +449,6 @@ filter: grayscale(0%); */
 
 .list-project-catalog {
 	cursor: pointer;
-	-webkit-box-shadow: 10px 10px 25px 0px rgba(0, 0, 0, 0.28);
-	-moz-box-shadow: 10px 10px 25px 0px rgba(0, 0, 0, 0.28);
 	box-shadow: 10px 10px 25px 0px rgba(0, 0, 0, 0.28);
 	transition: all 0.5s;
 }
@@ -583,8 +581,8 @@ filter: grayscale(0%); */
 	height: 24px;
 	background: rgba(255, 255, 255, 0.85);
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-	-webkit-animation: animloader2 2s ease infinite;
-	animation: animloader2 2s ease infinite;
+	-webkit-animation: animloader2 4s ease infinite;
+	animation: animloader2 4s ease infinite;
 }
 
 @-webkit-keyframes animloader {
