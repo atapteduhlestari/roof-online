@@ -2,4 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/u1731009/repositories/ATL-GA
-    - /bin/cp * $DEPLOYPATH
+    - /bin/cp -r * $DEPLOYPATH
