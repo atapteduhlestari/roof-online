@@ -93,6 +93,8 @@ class AssetChildController extends Controller
 
     public function download(AssetChild $assetChild)
     {
+        $this->authorize('download', $assetChild);
+
         $path = public_path() . $assetChild->takeDoc;
         return response()->download($path);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -51,6 +52,13 @@ class AssetChild extends Model
     public function getTakeDocAttribute()
     {
         return "/storage/{$this->file}";
+    }
+
+    public function getFileName()
+    {
+        $url = class_basename($this->file);
+        $strLength = Str::length($url);
+        return $strLength <= 50 ? $url : Str::substr($url, 25, $strLength);
     }
 
     public static function getAllLastTransaction($time)

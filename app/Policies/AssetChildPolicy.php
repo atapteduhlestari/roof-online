@@ -28,4 +28,10 @@ class AssetChildPolicy
         return $assetChild->sbu_id == $user->sbu_id || $user->is_admin === 1 ? Response::allow()
             : Response::deny('You do not have access');
     }
+
+    public function download(User $user, AssetChild $assetChild)
+    {
+        return $assetChild->sbu_id == $user->sbu_id || $user->is_admin === 1 ? Response::allow()
+            : Response::deny('You do not have access');
+    }
 }

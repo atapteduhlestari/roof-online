@@ -334,11 +334,17 @@
                                 <label for="">Asset Image</label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input  @error('image') is-invalid @enderror"
-                                        name="image" id="imageFileInput" accept="image/*">
+                                        name="image" id="fileInputForm" accept="image/*">
                                     @error('image')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                     <label class="custom-file-label" for="image">Choose file</label>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md">
+                                        <img class="my-2 rounded" id="imagePreview" style="max-height: 100px">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -360,7 +366,7 @@
         var table = $('#dataTable').DataTable({
             processing: true,
             serverSide: true,
-            pageLength: 25,
+            pageLength: 10,
             order: [
                 [5, 'DESC']
             ],
@@ -450,9 +456,15 @@
             reverse: true
         });
 
-        $('#imageFileInput').on('change', function(e) {
-            var fileName = $(this).val();
-            $(this).next('.custom-file-label').html(e.target.files[0].name);
+        $('#fileInputForm').on('change', function(e) {
+            let fileUpload = e.target.files[0];
+            let oFReader = new FileReader();
+            $(this).next('.custom-file-label').html(fileUpload.name);
+
+            oFReader.readAsDataURL(fileUpload);
+            oFReader.onload = function(oFREvent) {
+                document.getElementById("imagePreview").src = oFREvent.target.result;
+            };
         })
 
         btnSubmit.click(function() {

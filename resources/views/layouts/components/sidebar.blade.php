@@ -62,7 +62,7 @@
                         <span>Data</span>
                     </a>
                     <div id="collapseData"
-                        class="collapse {{ request()->is('asset-parent*') || request()->is('asset-child*') || request()->is('group*') || request()->is('asset-group*') || request()->is('document-group*') || request()->is('renewal*') || request()->is('maintenance*') || request()->is('cycle*') || request()->is('sbu*') ? 'show' : '' }}"
+                        class="collapse {{ request()->is('asset-parent*') || request()->is('asset-child*') || request()->is('group*') || request()->is('asset-group*') || request()->is('document-group*') || request()->is('renewal*') || request()->is('maintenance*') || request()->is('cycle*') || request()->is('sbu*') ? (detect() ?: 'show') : '' }}"
                         aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item  {{ request()->is('asset-parent*') ? 'active' : '' }}"
@@ -110,7 +110,7 @@
                     <span>Transaction</span>
                 </a>
                 <div id="collapseTransaction"
-                    class="collapse {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') || request()->is('loan*') ? 'show' : '' }}"
+                    class="collapse {{ request()->is('trn-renewal*') || request()->is('trn-maintenance*') || request()->is('loan*') ? (detect() ?: 'show') : '' }}"
                     aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item {{ request()->is('trn-renewal*') ? 'active' : '' }}"

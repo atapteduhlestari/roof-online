@@ -104,6 +104,7 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                             <label class="custom-file-label" for="file">Choose file</label>
+                            <small>{{ $child->getFileName() }}</small>
                         </div>
                     </div>
                 </div>

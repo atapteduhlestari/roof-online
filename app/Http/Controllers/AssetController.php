@@ -220,7 +220,6 @@ class AssetController extends Controller
             $data['sbu_id'] = userSBU();
 
         if ($request->file('image')) {
-
             Storage::delete($asset->image);
             $image = $request->file('image');
             $extension = $image->extension();
@@ -252,23 +251,22 @@ class AssetController extends Controller
 
     public function documents(Asset $asset)
     {
+        $this->authorize('update', $asset);
         $documentGroup = DocumentGroup::get();
         $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
 
-        if (isSuperadmin() || $asset->sbu_id == userSBU())
-            return view('asset.parent.docs.index', compact(
-                'documentGroup',
-                'asset',
-                'SDBs',
-                'SBUs'
-            ));
-        else
-            return redirect()->back()->with('warning', 'Access Denied!');
+        return view('asset.parent.docs.index', compact(
+            'documentGroup',
+            'asset',
+            'SDBs',
+            'SBUs'
+        ));
     }
 
     public function addDocuments(AssetChildRequest $request, Asset $asset)
     {
+        $this->authorize('update', $asset);
         $data = $request->validated();
         $data['asset_id'] = $asset->id;
 
@@ -285,6 +283,7 @@ class AssetController extends Controller
 
     public function editDocuments(Asset $asset, $childId)
     {
+        $this->authorize('update', $asset);
         $documentGroup = DocumentGroup::get();
         $child = AssetChild::find($childId);
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();

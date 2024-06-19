@@ -171,20 +171,27 @@
                             rows="5">{{ old('desc', $asset->desc) }}</textarea>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="">Asset Image</label>
+                        <label for="fileInputForm">Asset Image</label>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input  @error('image') is-invalid @enderror"
-                                name="image" id="imageFileInput" accept="image/*">
+                                name="image" id="fileInputForm" accept="image/*">
                             @error('image')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                             <label class="custom-file-label" for="image">Choose file</label>
                         </div>
+                        <div class="row">
+                            <div class="col-md">
+                                <img class="my-2 rounded" id="imagePreview" style="max-height: 100px"
+                                    src="{{ $asset->image ? $asset->takeImage : asset('/assets/img/empty-img.jpeg') }}">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <button type="button" id="btnSubmit" class="btn btn-sm btn-primary">Save Changes</button>
+                        <button type="button" id="btnSubmit" class="btn btn-sm btn-primary">Save
+                            Changes</button>
                     </div>
                 </div>
             </form>
@@ -218,9 +225,15 @@
             reverse: true
         });
 
-        $('#imageFileInput').on('change', function(e) {
-            var fileName = $(this).val();
-            $(this).next('.custom-file-label').html(e.target.files[0].name);
+        $('#fileInputForm').on('change', function(e) {
+            let fileUpload = e.target.files[0];
+            let oFReader = new FileReader();
+            $(this).next('.custom-file-label').html(fileUpload.name);
+
+            oFReader.readAsDataURL(fileUpload);
+            oFReader.onload = function(oFREvent) {
+                document.getElementById("imagePreview").src = oFREvent.target.result;
+            };
         })
 
         btnSubmit.click(function() {
