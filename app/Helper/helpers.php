@@ -3,7 +3,25 @@
 use Carbon\Carbon;
 use App\Models\SBU;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
+
+function getImage($fileName)
+{
+    $path = storage_path('app/public/') . $fileName;
+
+    if (!File::exists($path)) {
+        abort(404); // return 404 page
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = response()->make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $path;
+}
 
 function detect()
 {

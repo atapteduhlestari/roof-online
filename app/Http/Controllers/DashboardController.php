@@ -7,11 +7,13 @@ use App\Models\Asset;
 use App\Models\AssetChild;
 use App\Models\AssetGroup;
 use App\Models\TrnRenewal;
-use App\Models\TrnMaintenance;
-use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
-use App\Models\Calendar as ModelsCalendar;
+use App\Models\TrnMaintenance;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\File;
+use App\Models\Calendar as ModelsCalendar;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -164,5 +166,25 @@ class DashboardController extends Controller
             unlink($path);
         }
         return redirect()->back()->with('success', 'Success!');
+    }
+
+    public function displayImage($fileName)
+    {
+        $name = "uploads/images/assets/dsqcODx6OuWz6k7hcqSi2oaDx0nqJP4Aijfso30z.jpg";
+        // $path = storage_path('app/public/uploads/images/assets/' . $fileName);
+        $path = Storage::path('uploads/images/assets/' . $fileName);
+
+        // echo Storage::get('dsqcODx6OuWz6k7hcqSi2oaDx0nqJP4Aijfso30z.jpg');
+        if (!Storage::exists($name)) {
+            echo $path;
+            die;
+        }
+        $file = File::get($path);
+        $type = File::mimeType($path);
+
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+
+        return $response;
     }
 }

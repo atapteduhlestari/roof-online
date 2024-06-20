@@ -36,7 +36,7 @@
                         <div class="row my-3">
                             <div class="col-md">
                                 <img class="img-fluid"
-                                    src="{{ $asset->image ? asset($asset->takeImage) : asset('/assets/img/empty-img.jpeg') }}">
+                                    src="{{ $asset->image ? route('image.displayImage', class_basename($asset->image)) : asset('/assets/img/empty-img.jpeg') }}">
                             </div>
                         </div>
                         <div class="row">

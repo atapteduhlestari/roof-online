@@ -21,6 +21,7 @@ use App\Http\Controllers\TrnMaintenanceController;
 use App\Http\Controllers\UserController;
 
 Route::middleware(['auth', 'reminder'])->group(function () {
+    Route::get('image/uploads/images/assets/{filename}', [DashboardController::class, 'displayImage'])->name('image.displayImage');
 
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::get('/dashboard', [DashboardController::class, 'index']);

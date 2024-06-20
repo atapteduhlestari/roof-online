@@ -183,7 +183,7 @@
                         <div class="row">
                             <div class="col-md">
                                 <img class="my-2 rounded" id="imagePreview" style="max-height: 100px"
-                                    src="{{ $asset->image ? asset($asset->takeImage) : asset('/assets/img/empty-img.jpeg') }}">
+                                    src="{{ $asset->image ? route('image.displayImage', class_basename($asset->image)) : asset('/assets/img/empty-img.jpeg') }}">
                             </div>
                         </div>
                     </div>
