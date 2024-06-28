@@ -3,7 +3,7 @@
     <link href="/assets/template/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="/assets/template/vendor/selectize/selectize.css" rel="stylesheet">
 @endpush
-@section('title', 'GA | Asset')
+@section('title', 'GA | Document')
 @section('container')
     <!-- Begin Page Content -->
     <div class="container-fluid">

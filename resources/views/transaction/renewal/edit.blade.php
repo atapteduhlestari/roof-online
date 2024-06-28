@@ -9,7 +9,9 @@
         <!-- Page Heading -->
         <div class="d-flex align-items-center mb-3">
             <div class="flex-grow-1">
-                <h1 class="h3 mb-2 text-gray-800">Transaction | Edit Renewal</h1>
+                <h1 class="h3 mb-2 text-gray-800">Transaction Renewal / Edit /
+                    {{ $trnRenewal->document->parent->asset_name ? $trnRenewal->document->parent->asset_name . ' / ' : ' ' }}
+                    {{ $trnRenewal->document->doc_name }}</h1>
             </div>
             <a href="/trn-renewal" class="btn btn-secondary btn-sm mr-2">
                 <i class="fas fa-arrow-left"></i> Back

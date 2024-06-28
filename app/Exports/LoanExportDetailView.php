@@ -12,8 +12,7 @@ use Maatwebsite\Excel\Concerns\WithProperties;
 class LoanExportDetailView implements
     FromView,
     WithProperties,
-    WithEvents,
-    ShouldAutoSize
+    WithEvents
 {
 
     protected $data;
@@ -32,7 +31,7 @@ class LoanExportDetailView implements
     public function properties(): array
     {
         return [
-            'creator'        => 'IT - Edward',
+            'creator'        => 'Staff IT',
             'lastModifiedBy' => 'Administrator',
             'title'          => 'Loan Detail Report',
             'description'    => 'Loan Detail Report',

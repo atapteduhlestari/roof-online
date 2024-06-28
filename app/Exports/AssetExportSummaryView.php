@@ -33,7 +33,7 @@ class AssetExportSummaryView implements
     public function properties(): array
     {
         return [
-            'creator'        => 'IT - Edward',
+            'creator'        => 'Staff IT',
             'lastModifiedBy' => 'Administrator',
             'title'          => 'List Asset Detail Report',
             'description'    => 'List Asset Detail Report',

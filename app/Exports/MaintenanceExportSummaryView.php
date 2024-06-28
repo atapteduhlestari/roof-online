@@ -34,7 +34,7 @@ class MaintenanceExportSummaryView implements
     public function properties(): array
     {
         return [
-            'creator'        => 'IT - Edward',
+            'creator'        => 'Staff IT',
             'lastModifiedBy' => 'Administrator',
             'title'          => 'maintenance Summary Report',
             'description'    => 'maintenance Summary Report',

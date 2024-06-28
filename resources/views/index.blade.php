@@ -26,30 +26,28 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            {{-- @foreach ($groups as $item)
-                                <div class="col-md-12 mb-3">
-                                    <a href="/asset-group/{{ $item->id }}" class="btn btn-outline-dark btn-block">
-                                        {{ $item->asset_group_name }}
-                                    </a>
-                                </div>
-                            @endforeach --}}
                             <div class="col-md-12 mb-3">
-                                <a href="/asset-parent" class="btn btn-outline-dark btn-block">
-                                    All Assets
+                                <a href="/asset-parent" class="btn btn-outline-dark btn-block text-left">
+                                    All Assets | <span class="font-weight-bold">Total ({{ $assetTotal }})</span>
+                                </a>
+                                <small class="font-weight-bold">
+                                    <button class="btn btn-sm border-0" style=" outline:none; box-shadow:none;">
+                                        <i class="fas fa-question-circle"></i>
+
+                                    </button>
+                                    condition :
+                                    <span class="text-success">Excellent ({{ $assetCondition[1] ?? 0 }})</span> |
+                                    <span class="text-warning">Fair ({{ $assetCondition[2] ?? 0 }})</span> |
+                                    <span class="text-danger">Poor ({{ $assetCondition[3] ?? 0 }})</span> |
+                                    <span class="text-gray">Disposed ({{ $assetCondition[4] ?? 0 }})</span>
+                                </small>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <a href="/asset-child" class="btn btn-outline-dark btn-block text-left">
+                                    All Documents | <span class="font-weight-bold">Total ({{ $documentTotal }})</span>
                                 </a>
                             </div>
-                            <div class="col-md-12 mb-3">
-                                <a href="/asset-child" class="btn btn-outline-dark btn-block">
-                                    Documents
-                                </a>
-                            </div>
-                            @can('superadmin')
-                                <div class="col-md-12 mb-3">
-                                    <a href="/sdb" class="btn btn-outline-dark btn-block">
-                                        SDB
-                                    </a>
-                                </div>
-                            @endcan
                         </div>
                     </div>
                 </div>
@@ -64,14 +62,14 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 mb-3">
-                                <a href="/trn-maintenance" class="btn btn-outline-dark btn-block">
+                                <a href="/trn-maintenance" class="btn btn-outline-dark btn-block text-left">
                                     Maintenance
                                 </a>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 mb-3">
-                                <a href="/trn-renewal" class="btn btn-outline-dark btn-block">
+                                <a href="/trn-renewal" class="btn btn-outline-dark btn-block text-left">
                                     Renewal
                                 </a>
                             </div>

@@ -2,13 +2,13 @@
 @push('styles')
     <link href="/assets/template/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 @endpush
-@section('title', 'GA | Edit Renewal')
+@section('title', 'GA | Edit Renewal Type')
 @section('container')
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Renewal Edit | {{ $renewal->name }}</h1>
+        <h1 class="h3 mb-2 text-gray-800">Renewal Type / Edit | {{ $renewal->name }}</h1>
 
         <div class="my-4">
             <form action="/renewal/{{ $renewal->id }}" method="POST">

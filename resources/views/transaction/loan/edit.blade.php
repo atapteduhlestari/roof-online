@@ -7,7 +7,8 @@
 @section('container')
     <div class="container-fluid">
         <!-- Page Heading -->
-        <h1 class="h3 mb-0 text-gray-800">Transaction | Loan</h1>
+        <h1 class="h3 mb-0 text-gray-800">Transaction Loan / Edit /
+            {{ $loan->loan_type ? $loan->asset->asset_name : $loan->document->doc_name ?? '' }}</h1>
 
         <div class="card shadow mt-3">
             <div class="card-header py-3">
@@ -19,7 +20,6 @@
                     @method('PUT')
                     <div class="row">
                         <input id="loan_type" name="loan_type" type="hidden" value="{{ $loan->loan_type }}">
-
                         @if ($loan->loan_type)
                             <div class="col-md-12 mb-3" id="assetSelectForm">
                                 <label for="asset_id">Asset</label>

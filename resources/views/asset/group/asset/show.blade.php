@@ -9,7 +9,7 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Asset Type - {{ $assetGroup->asset_group_name }}</h1>
+        <h1 class="h3 mb-2 text-gray-800">Asset Type / {{ $assetGroup->asset_group_name }}</h1>
 
         <div class="d-flex">
             <div class="my-3 flex-grow-1">

@@ -81,7 +81,7 @@
                                 <div class="col-md">
                                     @if ($trnMaintenance->trn_status == 1)
                                         <button type="button" class="btn btn-sm btn-success btn-block">
-                                            <i class="fas fa-check"></i> Done
+                                            <i class="fas fa-check"></i> Closed
                                         </button>
                                     @else
                                         @if ($trnMaintenance->trn_type)

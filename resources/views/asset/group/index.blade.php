@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Group')
+@section('title', 'GA | Type')
 @section('container')
     <div class="container-fluid">
         <!-- Page Heading -->

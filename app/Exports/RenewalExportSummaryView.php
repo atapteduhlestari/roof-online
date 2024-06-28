@@ -32,7 +32,7 @@ class RenewalExportSummaryView implements
     public function properties(): array
     {
         return [
-            'creator'        => 'IT - Edward',
+            'creator'        => 'Staff IT',
             'lastModifiedBy' => 'Administrator',
             'title'          => 'Renewal Summary Report',
             'description'    => 'Renewal Summary Report',

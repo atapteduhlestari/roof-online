@@ -5,15 +5,16 @@ namespace App\Exports;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
 use Maatwebsite\Excel\Concerns\WithEvents;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithProperties;
 
 class RenewalExportDetailView implements
     FromView,
     WithProperties,
-    WithEvents,
-    ShouldAutoSize
+    WithEvents
 {
 
     protected $data;
@@ -32,7 +33,7 @@ class RenewalExportDetailView implements
     public function properties(): array
     {
         return [
-            'creator'        => 'IT - Edward',
+            'creator'        => 'Staff IT',
             'lastModifiedBy' => 'Administrator',
             'title'          => 'Renewal Detail Report',
             'description'    => 'Renewal Detail Report',
@@ -48,14 +49,14 @@ class RenewalExportDetailView implements
             AfterSheet::class => function (AfterSheet $event) {
                 $styleArray = [
                     'alignment' => [
-                        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+                        'horizontal' => Alignment::HORIZONTAL_LEFT,
                     ],
                 ];
                 $cellRange = 'A1:B3';
                 $sheet = $event->sheet;
 
                 $sheet->getStyle('A8:L8')->getFill()
-                    ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                    ->setFillType(Fill::FILL_SOLID)
                     ->getStartColor()->setARGB('A9D08E');
                 $sheet->getDelegate()->getStyle('A8:L8')->getFont()->setBold(true);
                 $sheet->getDelegate()->getStyle($cellRange)->applyFromArray($styleArray);

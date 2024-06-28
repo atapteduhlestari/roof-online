@@ -7,7 +7,7 @@
 @section('container')
     <div class="container-fluid">
         <!-- Page Heading -->
-        <h1 class="h3 mb-0 text-gray-800">Transaction - Maintenance</h1>
+        <h1 class="h3 mb-0 text-gray-800">Transaction Maintenance</h1>
 
         <div class="d-flex">
             <div class="my-3 flex-grow-1">
@@ -20,154 +20,84 @@
             </div>
 
             <div class="my-3">
-                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link" id="pills-search-tab" data-toggle="pill" href="#pills-search" role="tab"
-                            aria-controls="pills-search" aria-selected="true">
-                            Search <i class="fas fa-search"></i>
-                        </a>
-                    </li>
-                    {{-- <li class="nav-item">
-                        <a class="nav-link" id="pills-export-tab" data-toggle="pill" href="#pills-export" role="tab"
-                            aria-controls="pills-export" aria-selected="false">
-                            Export <i class="fas fa-file-export"></i>
-                        </a>
-                    </li> --}}
-                </ul>
+                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseSearch"
+                    aria-expanded="false" aria-controls="collapseSearch">
+                    Filter Search
+                </button>
             </div>
         </div>
 
-        <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade" id="pills-search" role="tabpanel" aria-labelledby="pills-search-tab">
-                <div class="card card-body mt-3">
-                    <h6 class="mb-3 font-weight-bold text-primary">Search Filter</h6>
-                    <form action="/trn-maintenance" method="get">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="start_date">Start Date</label>
-                                <div class="form-group d-flex">
-                                    <input type="date" class="form-control form-control-sm" id="start_date"
-                                        name="start_date" value="{{ old('start_date') }}">
-                                </div>
+        <div class="collapse show" id="collapseSearch">
+            <div class="card card-body mt-3">
+                <h6 class="mb-3 font-weight-bold text-primary">Search Filter</h6>
+                <form action="/trn-maintenance" method="get">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="start_date">Start Date</label>
+                            <div class="form-group d-flex">
+                                <input type="date" class="form-control form-control-sm" id="start_date" name="start_date"
+                                    value="{{ old('start_date') }}">
                             </div>
-                            <div class="col-md-6">
-                                <label for="due_date">Due Date</label>
-                                <div class="form-group d-flex">
-                                    <input type="date" class="form-control form-control-sm" id="due_date"
-                                        name="due_date" value="{{ old('due_date') }}">
-                                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="due_date">Due Date</label>
+                            <div class="form-group d-flex">
+                                <input type="date" class="form-control form-control-sm" id="due_date" name="due_date"
+                                    value="{{ old('due_date') }}">
                             </div>
+                        </div>
 
+                        <div class="col-md-6 mb-3">
+                            <label for="maintenance_search_id">Type</label>
+                            <select
+                                class="form-control form-control-sm @error('maintenance_search_id') is-invalid @enderror"
+                                id="maintenance_search_id" name="maintenance_search_id">
+                                <option value="">Select Type</option>
+                                @foreach ($maintenances as $mn)
+                                    <option value="{{ $mn->id }}"
+                                        {{ old('maintenance_search_id') == $mn->id ? 'selected' : '' }}>
+                                        {{ $mn->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        @can('superadmin')
                             <div class="col-md-6 mb-3">
-                                <label for="maintenance_search_id">Type</label>
-                                <select
-                                    class="form-control form-control-sm @error('maintenance_search_id') is-invalid @enderror"
-                                    id="maintenance_search_id" name="maintenance_search_id">
-                                    <option value="">Select Type</option>
-                                    @foreach ($maintenances as $mn)
-                                        <option value="{{ $mn->id }}"
-                                            {{ old('maintenance_search_id') == $mn->id ? 'selected' : '' }}>
-                                            {{ $mn->name }}</option>
+                                <label for="sbu_search_id">SBU</label>
+                                <select class="form-control form-control-sm @error('sbu_search_id') is-invalid @enderror"
+                                    id="sbu_search_id" name="sbu_search_id">
+                                    <option value="">Select SBU</option>
+                                    @foreach ($SBUs as $sb)
+                                        <option value="{{ $sb->id }}"
+                                            {{ old('sbu_search_id') == $sb->id ? 'selected' : '' }}>
+                                            {{ $sb->sbu_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-
-                            @can('superadmin')
-                                <div class="col-md-6 mb-3">
-                                    <label for="sbu_search_id">SBU</label>
-                                    <select class="form-control form-control-sm @error('sbu_search_id') is-invalid @enderror"
-                                        id="sbu_search_id" name="sbu_search_id">
-                                        <option value="">Select SBU</option>
-                                        @foreach ($SBUs as $sb)
-                                            <option value="{{ $sb->id }}"
-                                                {{ old('sbu_search_id') == $sb->id ? 'selected' : '' }}>
-                                                {{ $sb->sbu_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            @endcan
-                            <div class="col-md-6 mb-4">
-                                <label for="status">Status</label>
-                                <select class="form-control form-control-sm @error('status') is-invalid @enderror"
-                                    name="status" id="status">
-                                    <option value=""></option>
-                                    <option class="text-danger" value="false">
-                                        Open
-                                    </option>
-                                    <option class="text-success" value="1">
-                                        Closed
-                                    </option>
-                                </select>
-                            </div>
+                        @endcan
+                        <div class="col-md-6 mb-4">
+                            <label for="status">Status</label>
+                            <select class="form-control form-control-sm @error('status') is-invalid @enderror"
+                                name="status" id="status">
+                                <option value=""></option>
+                                <option class="text-danger" value="false">
+                                    Open
+                                </option>
+                                <option class="text-success" value="1">
+                                    Closed
+                                </option>
+                            </select>
                         </div>
-                        <div class="row">
-                            <div class="col-md">
-                                <button type="submit" class="btn btn-primary rounded text-xs">
-                                    Find <i class="fas fa-search"></i>
-                                </button>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <button type="submit" class="btn btn-primary rounded text-xs">
+                                Find <i class="fas fa-search"></i>
+                            </button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
-            {{-- <div class="tab-pane fade" id="pills-export" role="tabpanel" aria-labelledby="pills-export-tab">
-                <div class="card card-body mt-3">
-                    <h6 class="mb-3 font-weight-bold text-success">Export Filter</h6>
-                    <form action="/trn-maintenance-export" method="get">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="start_date">Start Date</label>
-                                <div class="form-group d-flex">
-                                    <input type="date" class="form-control form-control-sm" id="start_date"
-                                        name="start_date" value="{{ old('start_date') }}">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="due_date">Due Date</label>
-                                <div class="form-group d-flex">
-                                    <input type="date" class="form-control form-control-sm" id="due_date"
-                                        name="due_date" value="{{ old('due_date') }}">
-                                </div>
-                            </div>
-
-                            @can('superadmin')
-                                <div class="col-md-6 mb-3">
-                                    <label for="sbu_export_id">SBU</label>
-                                    <select class="form-control form-control-sm @error('sbu_export_id') is-invalid @enderror"
-                                        id="sbu_export_id" name="sbu_export_id">
-                                        <option value="">Select SBU</option>
-                                        @foreach ($SBUs as $sb)
-                                            <option value="{{ $sb->id }}"
-                                                {{ old('sbu_export_id') == $sb->id ? 'selected' : '' }}>
-                                                {{ $sb->sbu_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            @endcan
-                            <div class="col-md-6 mb-3">
-                                <label for="status">Status</label>
-                                <select class="form-control form-control-sm @error('status') is-invalid @enderror"
-                                    name="status" id="status">
-                                    <option value=""></option>
-                                    <option class="text-success" value="1">
-                                        <i class="fas fa-check"></i> Approved
-                                    </option>
-                                    <option class="text-danger" value="false">
-                                        <i class="fas fa-exclamation"></i> Waiting Approval
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md">
-                                <button type="submit" class="btn btn-success rounded text-xs">
-                                    Generate <i class="fas fa-file-excel"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div> --}}
         </div>
 
         <div class="card shadow mt-3">

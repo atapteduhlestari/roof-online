@@ -11,7 +11,7 @@
         <!-- Page Heading -->
         <div class="d-flex align-items-center mb-3">
             <div class="flex-grow-1">
-                <h1 class="h3 text-gray-800 flex-grow-1">Edit Assets | {{ $asset->asset_name }}</h1>
+                <h1 class="h3 text-gray-800 flex-grow-1"> Asset / Edit / {{ $asset->asset_name }}</h1>
             </div>
             <a href="/asset-parent" class="btn btn-secondary btn-sm mr-2">
                 <i class="fas fa-arrow-left"></i> Back

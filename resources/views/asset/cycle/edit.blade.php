@@ -8,7 +8,7 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Edit Cycle</h1>
+        <h1 class="h3 mb-2 text-gray-800">Cycle / Edit / {{ $cycle->cycle_name }}</h1>
 
         <div class="my-4">
             <form action="/cycle/{{ $cycle->id }}" method="POST">
@@ -48,7 +48,8 @@
                             <select class="form-control  @error('cycle_type') is-invalid @enderror" id="cycle_type"
                                 name="cycle_type">
                                 <option value="">Cycle Type</option>
-                                <option value="D" {{ old('cycle_type', $cycle->cycle_type) == 'D' ? 'selected' : '' }}>Day
+                                <option value="D" {{ old('cycle_type', $cycle->cycle_type) == 'D' ? 'selected' : '' }}>
+                                    Day
                                 </option>
                                 <option value="M" {{ old('cycle_type', $cycle->cycle_type) == 'M' ? 'selected' : '' }}>
                                     Month</option>

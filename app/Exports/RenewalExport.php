@@ -79,7 +79,7 @@ class RenewalExport implements
     public function properties(): array
     {
         return [
-            'creator'        => 'Edward Evbert',
+            'creator'        => 'Staff IT',
             'title'          => 'Asset Export',
             'description'    => 'Latest Asset',
             'subject'        => 'Asset Report',

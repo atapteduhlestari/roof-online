@@ -3,19 +3,27 @@
     <link href="/assets/template/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="/assets/template/vendor/selectize/selectize.css" rel="stylesheet">
 @endpush
-@section('title', 'GA | Asset - ' . $asset->asset_name)
+@section('title', 'GA | Asset ' . $asset->asset_name)
 @section('container')
     <!-- Begin Page Content -->
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="d-flex mb-3">
             <div class="flex-grow-1">
-                <h1 class="h3 mb-2 text-gray-800">Assets | {{ $asset->group->asset_group_name }}</h1>
+                <h1 class="h3 mb-2 text-gray-800">
+                    Assets /
+                    <a class="text-gray-800" href="/asset-group/{{ $asset->asset_group_id }}">
+                        {{ $asset->group->asset_group_name }}
+                    </a>
+                    /
+                    {{ $asset->asset_name }}
+                </h1>
             </div>
             <a href="/asset-parent" class="btn btn-secondary btn-sm">
                 <i class="fas fa-arrow-left"></i> Back
             </a>
         </div>
+
         <div class="card shadow mb-4 h-100">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">
@@ -28,8 +36,8 @@
                         <div class="row">
                             <div class="col-md">
                                 <a href="/asset-parent/export/{{ $asset->id }}"
-                                    class="btn btn-outline-success btn-sm px-3">
-                                    <i class="fas fa-print"></i> Print Detail
+                                    class="btn btn-outline-danger btn-sm px-3">
+                                    <i class="fas fa-print"></i> Export PDF
                                 </a>
                             </div>
                         </div>
@@ -37,6 +45,7 @@
                             <div class="col-md">
                                 <img class="img-fluid"
                                     src="{{ $asset->image ? route('image.displayImage', class_basename($asset->image)) : asset('/assets/img/empty-img.jpeg') }}">
+                                {!! $asset->image ? '' : '<small class="text-danger"><em>please upload an image!</em></small>' !!}
                             </div>
                         </div>
                         <div class="row">

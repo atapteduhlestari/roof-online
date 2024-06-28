@@ -8,7 +8,7 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Edit SDB</h1>
+        <h1 class="h3 mb-2 text-gray-800">SDB / Edit / {{ $sdb->sdb_name }}</h1>
 
         <div class="my-4">
             <form action="/sdb/{{ $sdb->id }}" method="POST">

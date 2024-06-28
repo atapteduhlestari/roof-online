@@ -32,7 +32,7 @@ class RenewalExportPlanView implements
     public function properties(): array
     {
         return [
-            'creator'        => 'IT - Edward',
+            'creator'        => 'Staff IT',
             'lastModifiedBy' => 'Administrator',
             'title'          => 'Renewal Detail Report',
             'description'    => 'Renewal Detail Report',

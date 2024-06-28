@@ -2,19 +2,19 @@
 @push('styles')
     <link href="/assets/template/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 @endpush
-@section('title', 'GA | Maintenance')
+@section('title', 'GA | Maintenance Type')
 @section('container')
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Maintenance</h1>
+        <h1 class="h3 mb-2 text-gray-800">Maintenance Type</h1>
 
         <div class="my-4">
             <div class="mb-3">
                 <h6 class="text-muted">Add new record</h6>
             </div>
-            <form action="/maintenance" method="POST">
+            <form id="form-add-maintenance-type" action="/maintenance" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col-md-6">
@@ -60,7 +60,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <button type="submit" class="btn btn-primary">
+                        <button id="prevent-submit" type="submit" class="btn btn-primary">
                             Submit
                         </button>
                     </div>
@@ -152,5 +152,9 @@
                 }
             })
         });
+
+        $('#form-add-maintenance-type').on('submit', function() {
+            $('#prevent-submit').attr('disabled', 'true');
+        })
     </script>
 @endpush

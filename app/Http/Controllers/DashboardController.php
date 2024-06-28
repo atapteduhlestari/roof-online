@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Asset;
 use App\Models\AssetChild;
-use App\Models\AssetGroup;
 use App\Models\TrnRenewal;
 use Illuminate\Http\Request;
 use App\Models\TrnMaintenance;
@@ -17,12 +16,12 @@ use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
-    public $calendar, $date, $now, $reqDays;
+    public $calendar, $date, $now, $requestDay;
 
     public function __construct()
     {
-        $this->reqDays = request()->days ?? 30;
-        $this->now = now()->addDays($this->reqDays)->format('Y-m-d');
+        $this->requestDay = request()->days ?? 30;
+        $this->now = now()->addDays($this->requestDay)->format('Y-m-d');
         $this->date = Carbon::createFromDate(request()->date);
         $this->calendar = new ModelsCalendar($this->date);
     }
@@ -34,31 +33,13 @@ class DashboardController extends Controller
         // ])
         //     ->whereHas('trnMaintenance', fn ($q) => $q->whereDate('trn_date', '<=', $now))
         //     ->get()->sortBy(fn ($q) => $q->trn_date);
+        $assetTotal = Asset::count();
+        $documentTotal = AssetChild::count();
+        $assetCondition = DB::table('asset')->select('condition', DB::raw('count(*) as total'))
+            ->groupBy('condition')->pluck('total', 'condition');
 
-        $groups = AssetGroup::get();
-        return view('index', compact('groups'));
+        return view('index', compact('assetCondition', 'assetTotal', 'documentTotal'));
     }
-
-    // public function calendarItems($calendar, $assets, $docs)
-    // {
-    //     foreach ($assets as $asset) {
-    //         $calendar->add_event(
-    //             $asset->name,
-    //             $asset->trn_date,
-    //             1,
-    //         );
-    //     }
-
-    //     foreach ($docs as $doc) {
-    //         $calendar->add_event(
-    //             $doc->name,
-    //             $doc->trn_date,
-    //             1,
-    //         );
-    //     }
-
-    //     return $calendar;
-    // }
 
     public function timeline()
     {
@@ -87,26 +68,25 @@ class DashboardController extends Controller
 
     public function timelineCalendar($calendar, $trn_maintenance, $trn_renewal)
     {
-        foreach ($trn_maintenance as $m) {
+        foreach ($trn_maintenance as $maintain) {
             $calendar->add_event(
-                $m->maintenance->name,
-                $m->trn_start_date,
+                $maintain->maintenance->name,
+                $maintain->trn_start_date,
                 1,
-                "/trn-maintenance/{$m->id}",
-                $m->trn_status ? "bg-primary" : '',
+                "/trn-maintenance/{$maintain->id}",
+                $maintain->trn_status ? "bg-primary" : '',
             );
         }
 
-        foreach ($trn_renewal as $r) {
+        foreach ($trn_renewal as $renew) {
             $calendar->add_event(
-                $r->renewal->name,
-                $r->trn_start_date,
+                $renew->renewal->name,
+                $renew->trn_start_date,
                 1,
-                "/trn-renewal/{$r->id}",
-                $r->trn_status ? "bg-primary" : '',
+                "/trn-renewal/{$renew->id}",
+                $renew->trn_status ? "bg-primary" : '',
             );
         }
-
         return $calendar;
     }
 

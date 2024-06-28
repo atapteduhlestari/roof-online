@@ -32,7 +32,7 @@ class MaintenanceExportPlanView implements
     public function properties(): array
     {
         return [
-            'creator'        => 'IT - Edward',
+            'creator'        => 'Staff IT',
             'lastModifiedBy' => 'Administrator',
             'title'          => 'Maintenance Detail Report',
             'description'    => 'Maintenance Detail Report',

@@ -2,13 +2,16 @@
 @push('styles')
     <link href="/assets/template/vendor/selectize/selectize.css" rel="stylesheet">
 @endpush
-@section('title', 'GA | Edit Docs')
+@section('title', 'GA | Edit Document')
 @section('container')
     <!-- Begin Page Content -->
     <div class="container-fluid">
         <div class="d-flex align-items-center mb-3">
             <div class="flex-grow-1">
-                <h1 class="h3 mb-2 text-gray-800">Document Edit</h1>
+                <h1 class="h3 mb-2 text-gray-800">Document / Edit /
+                    {{ $child->parent ? $child->parent->asset_name . ' / ' : ' ' }}
+                    {{ $child->doc_name }}
+                </h1>
             </div>
             <a href="/asset-child" class="btn btn-secondary btn-sm mr-2">
                 <i class="fas fa-arrow-left"></i> Back

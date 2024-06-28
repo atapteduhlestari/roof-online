@@ -8,13 +8,13 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        {{-- <h1 class="h3 mb-2 text-gray-800">Asset Type</h1> --}}
+        <h1 class="h3 mb-2 text-gray-800">Asset Type</h1>
 
         <div class="my-4">
             <div class="mb-3">
                 <h6 class="text-muted">Add new type</h6>
             </div>
-            <form action="/asset-group" method="POST">
+            <form id="form-add-assets-type" action="/asset-group" method="POST">
                 @csrf
                 <div class="row">
                     <div class="form-group col-6">
@@ -28,7 +28,7 @@
                         @enderror
                     </div>
                     <div class="col-6">
-                        <button type="submit" class="btn btn-primary">
+                        <button id="prevent-submit" type="submit" class="btn btn-primary">
                             Save
                         </button>
                     </div>
@@ -117,5 +117,9 @@
                 }
             })
         });
+
+        $('#form-add-assets-type').on('submit', function() {
+            $('#prevent-submit').attr('disabled', 'true');
+        })
     </script>
 @endpush

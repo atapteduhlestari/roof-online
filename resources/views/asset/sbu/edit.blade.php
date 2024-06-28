@@ -8,7 +8,7 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Edit SBU {{ $sbu->sbu_name }}</h1>
+        <h1 class="h3 mb-2 text-gray-800">SBU / Edit / {{ $sbu->sbu_name }}</h1>
         <div class="my-4">
             <form action="/sbu/{{ $sbu->id }}" method="POST">
                 @csrf
@@ -21,8 +21,9 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="sbu_address">SBU Address</label>
-                        <input type="text" class="form-control @error('sbu_address') is-invalid @enderror" name="sbu_address"
-                            id="sbu_address" value="{{ old('sbu_address', $sbu->sbu_address) }}" autocomplete="off">
+                        <input type="text" class="form-control @error('sbu_address') is-invalid @enderror"
+                            name="sbu_address" id="sbu_address" value="{{ old('sbu_address', $sbu->sbu_address) }}"
+                            autocomplete="off">
                     </div>
                 </div>
                 <hr>
