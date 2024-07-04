@@ -38,18 +38,18 @@ function atlSong()
 
 function pageTitle($title)
 {
-    if ($title) {
+    if ($title != false || !empty($desc)) {
         return $title;
     }
-    return "PT. ATAP TEDUH LESTARI";
+    return "PT. ATAP TEDUH LESTARI memproduksi dan menyediakan produk Atap Bitumen, Atap Ashpalt, Shingle Bitumen, Genteng Metal, Atap Alang Alang Sintetis, Waterproofing, Membrane Bakar, Insulasi, Struktur Rangka, Pintu dan Jendela";
 }
 
 function metaDescription($desc)
 {
-    if ($desc) {
+    if ($desc != false || !empty($desc)) {
         return $desc;
     }
-    return "PT. ATAP TEDUH LESTARI memproduksi dan mendistribusikan produk Atap, Waterproofing, Genteng Metal, Struktur Rangka, lnsulasi, Kusen, Pintu, dan Jendela yang berkualitas dengan garansi pemakaian sampai dengan 30 tahun dilengkapi dengan sertifikat hasil uji";
+    return "PT. ATAP TEDUH LESTARI memproduksi dan menyediakan produk Atap Bitumen, Atap Ashpalt, Shingle Bitumen, Genteng Metal, Atap Alang Alang Sintetis, Waterproofing, Membrane Bakar, Insulasi, Struktur Rangka, Pintu dan Jendela";
 }
 
 function removeSpecialChar($str)
@@ -66,7 +66,7 @@ function dd($param)
 {
     echo json_encode($param);
     die;
-}
+}   
 
 if (!function_exists('changeDateFormat')) {
     function changeDateFormat($format = 'd-m-Y', $originalDate)
@@ -75,13 +75,9 @@ if (!function_exists('changeDateFormat')) {
     }
 }
 
-function activeMenu($segment_1, $segment_2)
+function activeMenu($uri)
 {
-    if ($segment_1 == 'kategori' && $segment_2 == 1) {
-        return 'active';
-    }
-
-    if ($segment_1 == 'subkategori') {
+    if ($uri === 'atap-dan-genteng') {
         return 'active';
     }
 }

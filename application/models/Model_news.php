@@ -25,12 +25,12 @@ class Model_news extends CI_Model
     }
 
 
-    function first_news($id)
+    function first_news($slug)
     {
         $this->db->select('*');
         $this->db->from('newsletter');
         $this->db->order_by('tanggal', 'DESC');
-        $this->db->where('id_newsletter', $id);
+        $this->db->where('slug', $slug);
         $query =  $this->db->get();
 
         $result = array();

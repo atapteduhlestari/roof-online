@@ -35,6 +35,7 @@
 
     <link rel="canonical" href="https://roof-online.com/" />
     <link rel='shortlink' href='https://roof-online.com/' />
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 
     <style>
         .bg-page {
@@ -139,7 +140,6 @@
             filter: brightness(75%);
         }
     </style>
-
 </head>
 
 <body>

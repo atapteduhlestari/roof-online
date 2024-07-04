@@ -17,8 +17,9 @@ class Post extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'News - ATAP TEDUH LESTARI';
-        $data['banner_title'] = 'News';
+        //Edited link in routes.php
+        $data['title'] = 'Artikel - ATAP TEDUH LESTARI';
+        $data['banner_title'] = 'Artikel';
         $data['meta_desc'] = false;
 
         $news_tot = $this->Model_news->tot_news();
@@ -61,8 +62,9 @@ class Post extends CI_Controller
 
     public function date($year = null, $month = null)
     {
-        $data['title'] = 'News - ATAP TEDUH LESTARI';
-        $data['banner_title'] = 'News';
+        //Edited link in routes.php
+        $data['title'] = 'Artikel - PT. ATAP TEDUH LESTARI';
+        $data['banner_title'] = 'Artikel';
         $data['meta_desc'] = false;
         $data['archives'] = $this->Model_news->get_archive();
         $data['news_data'] = $this->Model_news->get_news_by_date($year, $month);
@@ -75,12 +77,13 @@ class Post extends CI_Controller
     }
 
 
-    public function detail($id)
+    public function detail($slug)
     {
-        $data['news'] = $this->Model_news->first_news($id);
+        //Edited link in routes.php
+        $data['news'] = $this->Model_news->first_news($slug);
         $data['archives'] = $this->Model_news->get_archive();
 
-        $data['title'] = $data['news']->page_title . " - PT. ATAP TEDUH LESTARI";
+        $data['title'] = $data['news']->page_title;
         $data['banner_title'] = $data['news']->judul;
         $data['meta_desc'] = $data['news']->meta_desc;
 

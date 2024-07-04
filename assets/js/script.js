@@ -4,6 +4,15 @@
 		$(".loader").fadeOut(2000);
 	});
 
+	$("#form-career").on("submit", function () {
+		$("#prevent-submit").attr("disabled", "true");
+	});
+
+	$("#file_upload").on("change", function (e) {
+		console.log("ok");
+		$(".custom-file-label").html(e.target.files[0].name);
+	});
+
 	var myAudio = document.getElementById("myAudio");
 
 	function newsArchive() {
@@ -209,6 +218,53 @@ jQuery(function ($) {
 		}
 		backToTop();
 
+		$(".carousel-product").on("wheel", function (e) {
+			e.preventDefault();
+
+			if (e.originalEvent.deltaY < 0) {
+				$(this).slick("slickNext");
+			} else {
+				$(this).slick("slickPrev");
+			}
+		});
+		function productCarousel() {
+			$(".carousel-product").slick({
+				dots: false,
+				infinite: true,
+				autoplay: true,
+				speed: 600,
+				slidesToShow: 3,
+				slidesToScroll: 1,
+				autoplaySpeed: 1500,
+				prevArrow: false,
+				nextArrow: false,
+				responsive: [
+					{
+						breakpoint: 1024,
+						settings: {
+							slidesToShow: 3,
+							slidesToScroll: 1,
+						},
+					},
+					{
+						breakpoint: 800,
+						settings: {
+							slidesToShow: 2,
+							slidesToScroll: 1,
+						},
+					},
+					{
+						breakpoint: 576,
+						settings: {
+							slidesToShow: 1,
+							slidesToScroll: 1,
+						},
+					},
+				],
+			});
+		}
+		productCarousel();
+
 		// banner-carousel
 		function bannerCarouselOne() {
 			$(".banner-carousel.banner-carousel-1").slick({
@@ -289,58 +345,6 @@ jQuery(function ($) {
 		}
 		projectShuffle();
 
-		// testimonial carousel
-		function testimonialCarousel() {
-			$(".testimonial-slide").slick({
-				slidesToShow: 1,
-				slidesToScroll: 1,
-				dots: true,
-				speed: 600,
-				arrows: false,
-			});
-		}
-		testimonialCarousel();
-
-		// team carousel
-		function teamCarousel() {
-			$(".team-slide").slick({
-				dots: false,
-				infinite: false,
-				speed: 300,
-				slidesToShow: 4,
-				slidesToScroll: 2,
-				arrows: true,
-				prevArrow:
-					'<button type="button" class="carousel-control left" aria-label="carousel-control"><i class="fas fa-chevron-left"></i></button>',
-				nextArrow:
-					'<button type="button" class="carousel-control right" aria-label="carousel-control"><i class="fas fa-chevron-right"></i></button>',
-				responsive: [
-					{
-						breakpoint: 992,
-						settings: {
-							slidesToShow: 3,
-							slidesToScroll: 3,
-						},
-					},
-					{
-						breakpoint: 768,
-						settings: {
-							slidesToShow: 2,
-							slidesToScroll: 2,
-						},
-					},
-					{
-						breakpoint: 481,
-						settings: {
-							slidesToShow: 1,
-							slidesToScroll: 1,
-						},
-					},
-				],
-			});
-		}
-		teamCarousel();
-
 		// media popup
 		function mediaPopup() {
 			$(".gallery-popup").colorbox({
@@ -360,9 +364,6 @@ jQuery(function ($) {
 	$(".projectSlider").slick({
 		autoplay: true,
 		autoplaySpeed: 1000,
-		dots: true,
-		centerMode: true,
-		centerPadding: "50px",
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		mobileFirst: true,
@@ -371,23 +372,26 @@ jQuery(function ($) {
 				breakpoint: 1024,
 				settings: {
 					slidesToShow: 3,
-					slidesToScroll: 3,
-					infinite: true,
-					dots: true,
+					slidesToScroll: 1,
+					centerMode: true,
+					centerPadding: "100px",
 				},
 			},
 			{
-				breakpoint: 600,
+				breakpoint: 800,
 				settings: {
 					slidesToShow: 2,
 					slidesToScroll: 2,
+					centerMode: true,
+					centerPadding: "100px",
 				},
 			},
 			{
-				breakpoint: 480,
+				breakpoint: 576,
 				settings: {
 					slidesToShow: 1,
 					slidesToScroll: 1,
+					centerMode: false,
 				},
 			},
 		],

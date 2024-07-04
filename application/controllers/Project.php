@@ -17,9 +17,9 @@ class Project extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Gallery Project - PT. ATAP TEDUH LESTARI';
-        $data['banner_title'] = 'Gallery Project';
-        $data['meta_desc'] = 'Referensi Proyek Atap, Waterproofing, Genteng Metal, Struktur Rangka, lnsulasi, Kusen, Pintu, dan Jendela PT. ATAP TEDUH LESTARI';
+        $data['title'] = 'Galeri Proyek - PT. ATAP TEDUH LESTARI';
+        $data['banner_title'] = 'Galeri Proyek';
+        $data['meta_desc'] = 'Referensi Proyek Atap Bitumen, Atap Ashpalt, Shingle Bitumen, Membrane Bakar, Waterproofing, Genteng Metal, Struktur Rangka, lnsulasi, Kusen, Pintu, dan Jendela PT. ATAP TEDUH LESTARI';
         $project_tot = $this->Model_project->tot_project();
         $from = $this->uri->segment(3);
         $data['discover_name'] = '';
@@ -61,9 +61,9 @@ class Project extends CI_Controller
     public function discover($keyword)
     {
         $keyword = str_replace('%20', ' ', $keyword);
-        $data['title'] = 'Gallery Project - PT. ATAP TEDUH LESTARI';
-        $data['banner_title'] = 'Gallery Project';
-        $data['meta_desc'] = 'Referensi Proyek Atap, Waterproofing, Genteng Metal, Struktur Rangka, lnsulasi, Kusen, Pintu, dan Jendela PT. ATAP TEDUH LESTARI';
+        $data['title'] = 'Galeri Proyek - PT. ATAP TEDUH LESTARI';
+        $data['banner_title'] = 'Galeri Proyek';
+        $data['meta_desc'] = 'Referensi Proyek Atap Bitumen, Atap Ashpalt, Shingle Bitumen, Membrane Bakar, Waterproofing, Genteng Metal, Struktur Rangka, lnsulasi, Kusen, Pintu, dan Jendela PT. ATAP TEDUH LESTARI';
         $data['project_data'] = $this->Model_project->discover_project($keyword);
         $data['discover_name'] = $keyword;
 
@@ -82,9 +82,9 @@ class Project extends CI_Controller
     {
         $keyword = removeSpecialChar($this->input->post('keyword'));
 
-        $data['title'] = 'Gallery Project - PT. ATAP TEDUH LESTARI';
-        $data['banner_title'] = 'Gallery Project - ' . $keyword;
-        $data['meta_desc'] = 'Referensi Proyek Atap, Waterproofing, Genteng Metal, Struktur Rangka, lnsulasi, Kusen, Pintu, dan Jendela PT. ATAP TEDUH LESTARI';
+        $data['title'] = 'Galeri Proyek - PT. ATAP TEDUH LESTARI';
+        $data['banner_title'] = 'Galeri Proyek - ' . $keyword;
+        $data['meta_desc'] = 'Referensi Proyek Atap Bitumen, Atap Ashpalt, Shingle Bitumen, Membrane Bakar, Waterproofing, Genteng Metal, Struktur Rangka, lnsulasi, Kusen, Pintu, dan Jendela PT. ATAP TEDUH LESTARI';
 
         $search = ($this->uri->segment(3)) ? $this->uri->segment(3) : $keyword;
         $project_tot = $this->Model_project->tot_project($search);

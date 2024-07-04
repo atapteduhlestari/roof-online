@@ -68,38 +68,38 @@
                     </h3>
                     <ul class="list-arrow">
                         <li>
-                            <a href="<?= base_url(); ?>product/kategori/1">
-                                Roofing
+                            <a href="<?= base_url(); ?>product/atap-dan-genteng">
+                                Atap/Genteng
                             </a>
                         </li>
                         <li>
-                            <a href=" <?= base_url(); ?>product/kategori/2">
+                            <a href=" <?= base_url(); ?>product/waterproofing">
                                 Waterproofing
                             </a>
                         </li>
                         <li>
-                            <a href="<?= base_url(); ?>product/kategori/3">
-                                Insulation
+                            <a href="<?= base_url(); ?>product/insulasi">
+                                Insulasi
                             </a>
                         </li>
                         <li>
-                            <a href="<?= base_url(); ?>product/kategori/4">
-                                Structure
+                            <a href="<?= base_url(); ?>product/struktur-rangka">
+                                Struktur Rangka
                             </a>
                         </li>
                         <li>
-                            <a href="<?= base_url(); ?>product/kategori/7">
-                                Ceiling & Wall
+                            <a href="<?= base_url(); ?>product/plafon-dan-dinding">
+                                Plafon & Dinding
                             </a>
                         </li>
                         <li>
-                            <a href="<?= base_url(); ?>product/kategori/8">
-                                Windows & Doors
+                            <a href="<?= base_url(); ?>product/pintu-dan-jendela">
+                                Pintu & Jendela
                             </a>
                         </li>
                         <li>
                             <a href="<?= base_url(); ?>project">
-                                Gallery Project
+                                Galeri Proyek
                             </a>
                         </li>
                     </ul>
@@ -109,13 +109,13 @@
                     <h3 class="widget-title">INFO</h3>
                     <ul class="list-arrow">
                         <li>
-                            <a href="<?= base_url(); ?>home/about">
-                                About
+                            <a href="<?= base_url(); ?>tentang">
+                                Tentang
                             </a>
                         </li>
                         <li>
-                            <a href="<?= base_url(); ?>home/contact">
-                                Contact
+                            <a href="<?= base_url(); ?>kontak">
+                                Kontak
                             </a>
                         </li>
                         <li>

@@ -4,7 +4,7 @@
             <div class="content-inner-page">
                 <div class="d-flex">
                     <h5>
-                        <a href="<?= base_url(); ?>product/kategori/<?= $product->id_kategori ?>">
+                        <a href="<?= base_url(); ?>product/<?= $product->slug ?>">
                             Category : <?= $product->nama_kategori ?>
                         </a>
                     </h5>
@@ -49,23 +49,23 @@
                                     Category
                                 </h3>
                                 <ul class="nav service-menu">
-                                    <li class="<?= $product->id_kategori == 1 ? 'active' : ''; ?>">
-                                        <a href="<?= base_url(); ?>product/kategori/1">Roofing</a>
+                                    <li class="<?= $product->kategori_slug === 'atap-dan-genteng' ? 'active' : ''; ?>">
+                                        <a href="<?= base_url(); ?>product/atap-dan-genteng">Atap/Genteng</a>
                                     </li>
-                                    <li class="<?= $product->id_kategori == 2 ? 'active' : ''; ?>">
-                                        <a href="<?= base_url(); ?>product/kategori/2">Waterproofing</a>
+                                    <li class="<?= $product->kategori_slug === 'waterproofing' ? 'active' : ''; ?>">
+                                        <a href="<?= base_url(); ?>product/waterproofing">Waterproofing</a>
                                     </li>
-                                    <li class="<?= $product->id_kategori == 3 ? 'active' : ''; ?>">
-                                        <a href="<?= base_url(); ?>product/kategori/3">Insulation</a>
+                                    <li class="<?= $product->kategori_slug === 'insulasi' ? 'active' : ''; ?>">
+                                        <a href="<?= base_url(); ?>product/insulasi">Insulasi</a>
                                     </li>
-                                    <li class="<?= $product->id_kategori == 4 ? 'active' : ''; ?>">
-                                        <a href="<?= base_url(); ?>product/kategori/4">Structure</a>
+                                    <li class="<?= $product->kategori_slug === 'struktur-rangka' ? 'active' : ''; ?>">
+                                        <a href="<?= base_url(); ?>product/struktur-rangka">Struktur Rangka</a>
                                     </li>
-                                    <li class="<?= $product->id_kategori == 7 ? 'active' : ''; ?>">
-                                        <a href="<?= base_url(); ?>product/kategori/7">Ceiling & Wall</a>
+                                    <li class="<?= $product->kategori_slug === 'plafon-dan-dinding' ? 'active' : ''; ?>">
+                                        <a href="<?= base_url(); ?>product/plafon-dan-dinding">Plafon & Dinding</a>
                                     </li>
-                                    <li>
-                                        <a href="<?= base_url(); ?>product/kategori/8">Windows & Doors</a>
+                                    <li class="<?= $product->kategori_slug === 'pintu-dan-jendela' ? 'active' : ''; ?>">
+                                        <a href="<?= base_url(); ?>product/pintu-dan-jendela">Pintu & Jendela</a>
                                     </li>
                                 </ul>
                             </div>
@@ -115,6 +115,7 @@
                                         <?php endif; ?>
                                     </div>
                                     <?php if ($total_project > 6) : ?>
+                                        <small><?= $product->nama_subkategori ?></small>
                                         <div class="d-flex mt-5">
                                             <a class="btn btn-primary mx-auto" href="<?= base_url(); ?>project/discover/<?= $product->nama_produk ?>"> Discover more</a>
                                         </div>
@@ -125,6 +126,38 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="container-fluid mt-5">
+        <h2 class="column-title mrt-0 text-center">Discover More </h2>
+        <div class="carousel carousel-product">
+            <?php foreach ($product_list as $list) : ?>
+                <div class="card shadow-sm mx-2 list-product-catalog h-100">
+                    <div class="card-body">
+                        <?php if ($list->slug == 'lestari-jendela') : ?>
+                            <a href="<?= 'https://lestarijendela.com/' ?>">
+                                <img loading="lazy" src="<?= $list->gambar_produk; ?>" alt="<?= $list->nama_produk; ?>" class=" rounded mb-4 col mx-auto p-1 img-wrap" alt="<?= $list->nama_produk ?>">
+                            </a>
+                        <?php else : ?>
+                            <a href="<?= base_url(); ?>product/<?= $list->sub_slug ? $list->sub_slug : $list->kategori_slug ?>/<?= $list->slug ?>/detail">
+                                <img loading="lazy" src="<?= $list->gambar_produk; ?>" alt="<?= $list->nama_produk; ?>" class=" rounded mb-4 col mx-auto p-1 img-wrap" alt="<?= $list->nama_produk ?>">
+                            </a>
+                        <?php endif; ?>
+                        <div class="text-center">
+                            <small><?= $list->sub_slug ? $list->nama_subkategori : $list->nama_kategori ?></small>
+                            <img loading="lazy" class="mb-2 mx-auto" src="<?= base_url() . $list->gambar_logo; ?>" style="height:37.5px;" alt="<?= $list->nama_logo ?>">
+                            <h5>
+                                <a href="<?= base_url(); ?>product/<?= isset($list->sub_slug) ? $list->sub_slug : $list->kategori_slug ?>/<?= $list->slug ?>/detail" class="text-hov-white"><?= $list->nama_produk; ?></a>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <div class="text-center mt-3">
+            <small class="text-dark"><em>
+                    <- scroll or drag to swipe ->
+                </em></small>
         </div>
     </div>
 </section>

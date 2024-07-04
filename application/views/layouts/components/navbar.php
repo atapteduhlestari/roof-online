@@ -16,10 +16,10 @@
                                 <div class="info-box">
                                     <div class="info-box-content">
                                         <p class="info-box-subtitle text-center">
-                                            <img height="47" src="<?= base_url(); ?>assets/images/logo/iaf.png" alt="">
-                                            <img height="60" src="<?= base_url(); ?>assets/images/logo/iso-9001.png" alt="">
-                                            <!-- <img height="60" src="<?= base_url(); ?>assets/images/logo/iso.png" alt=""> -->
-                                            <img height="50" src="<?= base_url(); ?>assets/images/logo/tkdn.jpg" alt="">
+                                            <img height="47" src="<?= base_url(); ?>assets/images/logo/iaf.png" alt="logo-iaf">
+                                            <img height="60" src="<?= base_url(); ?>assets/images/logo/iso-9001.png" alt="logo-iso9001">
+                                            <!-- <img height="60" src="<?= base_url(); ?>assets/images/logo/iso.png" alt="logo-iso"> -->
+                                            <img height="50" src="<?= base_url(); ?>assets/images/logo/tkdn.jpg" alt="logotkdn">
                                         </p>
                                     </div>
                                 </div>
@@ -27,7 +27,7 @@
                             <li>
                                 <div class="info-box">
                                     <div class="info-box-content">
-                                        <p class="info-box-title">Call Us</p>
+                                        <p class="info-box-title">Hubungi Kami</p>
                                         <p class="info-box-subtitle">
                                             <a class="text-dark" href="tel:0218646506">(021) 864-6506</a>
                                         </p>
@@ -37,7 +37,7 @@
                             <li>
                                 <div class="info-box">
                                     <div class="info-box-content">
-                                        <p class="info-box-title">Our Email</p>
+                                        <p class="info-box-title">Email</p>
                                         <p class="info-box-subtitle">
                                             <a class="text-dark" href="mailto:info@roofonline.com">info@roof-online.com</a>
                                         </p>
@@ -71,37 +71,38 @@
                                 <li class="nav-item"><a class="nav-link" href="<?= base_url(); ?>"><i class="fas fa-home"></i></a></li>
 
                                 <li class="nav-item dropdown <?= $this->uri->segment(1) == 'product' ? 'active' : '' ?>">
-                                    <a href="#!" id="productBtn" class=" nav-link dropdown-toggle" data-toggle="dropdown">Product <i class="fa fa-angle-down"></i></a>
+                                    <a href="#!" id="productBtn" class=" nav-link dropdown-toggle" data-toggle="dropdown">Produk <i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li class="dropdown-submenu <?= $this->uri->segment(2) == 'subkategori' || $this->uri->segment(2) == 'subkategori' || $this->uri->segment(2) == 'subkategori' || $this->uri->segment(2) == 'subkategori' || $this->uri->segment(2) == 'subkategori' ? 'active' : '' ?>">
-                                            <a href="<?= base_url(); ?>product" class="dropdown-toggle" data-toggle="dropdown">Roofing</a>
+                                        <li class="dropdown-submenu <?= $this->uri->segment(2) == 'atap-dan-genteng' ? 'active' : '' ?>">
+                                            <a href="<?= base_url(); ?>product" class="dropdown-toggle" data-toggle="dropdown">Atap/Genteng</a>
                                             <ul class="dropdown-menu">
-                                                <li class="<?= $this->uri->segment(2) == 'subkategori' && $this->uri->segment(3) == '1' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/subkategori/1">Shingles AR</a></li>
-                                                <li class="<?= $this->uri->segment(2) == 'subkategori' && $this->uri->segment(3) == '5' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/subkategori/5">Synthetic Thatch</a></li>
-                                                <li class="<?= $this->uri->segment(2) == 'subkategori' && $this->uri->segment(3) == '2' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/subkategori/2">Membrane</a></li>
-                                                <li class="<?= $this->uri->segment(2) == 'subkategori' && $this->uri->segment(3) == '4' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/subkategori/4">Slate</a></li>
-                                                <li class="<?= $this->uri->segment(2) == 'subkategori' && $this->uri->segment(3) == '3' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/subkategori/3">Metal</a></li>
+                                                <li class="<?= $this->uri->segment(2) == 'atap-dan-genteng' && $this->uri->segment(3) == 'atap-bitumen' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/atap-dan-genteng/atap-bitumen">Atap Bitumen</a></li>
+                                                <li class="<?= $this->uri->segment(2) == 'atap-dan-genteng' && $this->uri->segment(3) == 'atap-alang-alang-sintetis' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/atap-dan-genteng/atap-alang-alang-sintetis">Atap Alang-Alang Sintetis</a></li>
+                                                <li class="<?= $this->uri->segment(2) == 'atap-dan-genteng' && $this->uri->segment(3) == 'membrane' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/atap-dan-genteng/membrane">Membrane Bakar</a></li>
+                                                <li class="<?= $this->uri->segment(2) == 'atap-dan-genteng' && $this->uri->segment(3) == 'genteng-metal' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/atap-dan-genteng/genteng-metal">Genteng Metal</a></li>
+                                                <li class="<?= $this->uri->segment(2) == 'atap-dan-genteng' && $this->uri->segment(3) == 'atap-slate' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/atap-dan-genteng/atap-slate">Atap Slate</a></li>
                                             </ul>
                                         </li>
-                                        <li class="<?= $this->uri->segment(3) == '2' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/kategori/2">Waterproofing</a></li>
-                                        <li class="<?= $this->uri->segment(3) == '3' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/kategori/3">Insulation</a></li>
-                                        <li class="<?= $this->uri->segment(3) == '4' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/kategori/4">Structure</a></li>
-                                        <li class="<?= $this->uri->segment(3) == '7' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/kategori/7">Ceiling & Wall</a></li>
-                                        <li class="<?= $this->uri->segment(3) == '8' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/kategori/8">Windows & Doors</a></li>
+                                        <li class="<?= $this->uri->segment(2) == 'waterproofing' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/waterproofing">Waterproofing</a></li>
+                                        <li class="<?= $this->uri->segment(2) == 'insulasi' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/insulasi">Insulasi</a></li>
+                                        <li class="<?= $this->uri->segment(2) == 'struktur-rangka' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/struktur-rangka">Struktur Rangka</a></li>
+                                        <li class="<?= $this->uri->segment(2) == 'plafon-dan-dinding' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/plafon-dan-dinding">Plafon & Dinding</a></li>
+                                        <li class="<?= $this->uri->segment(2) == 'pintu-dan-jendela' ? 'active' : '' ?>"><a href="<?= base_url(); ?>product/pintu-dan-jendela">Pintu & Jendela</a></li>
                                         <!-- <li><a href="http://lestarijendela.com/">Windows & Doors</a></li> -->
                                     </ul>
                                 </li>
 
                                 <li class="nav-item dropdown <?= $this->uri->segment(1) == 'project' ? 'active' : '' ?>">
-                                    <a href="#!" class="nav-link dropdown-toggle" data-toggle="dropdown">Gallery <i class="fa fa-angle-down"></i></a>
+                                    <a href="#!" class="nav-link dropdown-toggle" data-toggle="dropdown">Galeri <i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li class="<?= $this->uri->segment(1) == 'project' && $this->uri->segment(2) != 'videos'  ? 'active' : '' ?>"><a href="<?= base_url(); ?>project">Gallery Project</a></li>
-                                        <li class="<?= $this->uri->segment(2) == 'videos' ? 'active' : '' ?>"><a href="<?= base_url(); ?>project/videos">Gallery Videos</a></li>
+                                        <li class="<?= $this->uri->segment(1) == 'project' && $this->uri->segment(2) != 'videos'  ? 'active' : '' ?>"><a href="<?= base_url(); ?>project">Galeri Proyek</a></li>
+                                        <li class="<?= $this->uri->segment(2) == 'videos' ? 'active' : '' ?>"><a href="<?= base_url(); ?>project/videos">Galeri Video</a></li>
                                     </ul>
                                 </li>
-                                <li class="nav-item <?= $this->uri->segment(1) == 'post' ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url(); ?>post">News</a></li>
-                                <li class="nav-item <?= $this->uri->segment(2) == 'about' ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url(); ?>home/about">About</a></li>
-                                <li class="nav-item <?= $this->uri->segment(2) == 'contact' ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url(); ?>home/contact">Contact</a></li>
+                                <li class="nav-item <?= $this->uri->segment(1) == 'artikel' ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url(); ?>artikel">Artikel</a></li>
+                                <li class="nav-item <?= $this->uri->segment(1) == 'tentang' ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url(); ?>tentang">Tentang</a></li>
+                                <li class="nav-item <?= $this->uri->segment(1) == 'kontak' ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url(); ?>kontak">Kontak</a></li>
+                                <li class="nav-item <?= $this->uri->segment(1) == 'karir' ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url(); ?>karir">Karir</a></li>
                             </ul>
                         </div>
                     </nav>

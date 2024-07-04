@@ -18,7 +18,7 @@
         <div class="row mt-3" id="list-projects">
             <?php if (!$project_data) : ?>
                 <div class="col-md-6">
-                    Sorry we couldn't find what you're looking for <i class="far fa-frown"></i>
+                    Maaf kami tidak dapat menemukan yang anda cari <i class="far fa-frown"></i>
                 </div>
             <?php endif; ?>
             <?php foreach ($project_data as $rec) : ?>

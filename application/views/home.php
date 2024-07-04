@@ -285,7 +285,7 @@
                 <p>
                     <b>Shingles AR</b> IKO Cambridge memberikan penampilan yang lebih cantik untuk segala bentuk rumah dari yang tradisional hingga modern, di pedesaan ataupun di kota. IKO Cambridge Architectural Laminated Shingles memiliki konstruksi double layer dengan bahan dasar asphalt yang diperkuat tulangan fiberglass.<b> Memiliki ukuran dan area exposure lebih lebar dengan tampilan "acak" terlihat seperti sirap alami sehingga memberikan kesan elegan pada atap rumah dengan biaya yang terjangkau.</b>
                 </p>
-                <a href="<?= base_url(); ?>product/detail/10" class="highlight btn btn-primary border">Read more</a>
+                <a href="<?= base_url(); ?>product/atap-bitumen/cambridge/detail" class="highlight btn btn-primary border">Read more</a>
 
             </div>
             <div class="col-md-7 mb-3">
@@ -311,7 +311,7 @@
                 <p>
                     <b>Shingles AR</b> IKO Marathon Plus AR Traditional 3-tab terbuat dari asphalt yang diperkuat dengan tulangan fiberglass untuk mengatasi cuaca ekstrim. Desain klasik IKO Marathon Plus AR akan mempercantik bangunan anda.<b> Memiliki lapisan batuan (Algae Resistance) sehingga mencegah perubahan warna kehitaman pada lembar yang disebabkan oleh jamur dan membuat atap anda tetap terlihat cantik walaupun sudah bertahun-tahun terpasang.</b>
                 </p>
-                <a href="<?= base_url(); ?>product/detail/11" class="highlight btn btn-primary border">Read more</a>
+                <a href="<?= base_url(); ?>product/atap-bitumen/marathon-plus-ar/detail" class="highlight btn btn-primary border">Read more</a>
 
             </div>
         </div>
@@ -330,7 +330,7 @@
                 <p>
                     Palmex Original menawarkan solusi permanen untuk proyek2 di seluruh dunia.<b> Palmex original merupakan atap alang-alang sintetis berbahan dasar HDPE, sehingga memiliki ketahanan hingga 50 tahun, 100% Weatherproof dan recyclable.</b> Palmex memiliki tampilan seperti alang-alang alami tanpa memerlukan perawatan rutin sehingga tidak perlu penggantian dan cocok sebagai investasi jangka panjang.
                 </p>
-                <a href="<?= base_url(); ?>product/detail/20" class="highlight btn btn-primary border">Read more</a>
+                <a href="<?= base_url(); ?>product/atap-alang-alang-sintetis/synthetic-thatch-original/detail" class="highlight btn btn-primary border">Read more</a>
 
             </div>
             <div class="col-md-7 mb-3">
@@ -355,7 +355,7 @@
                     Duo Composite Membrane Adalah waterproofing membrane bakar premium Asal Belgia,<b> berbahan dasar Modified Bitumen yang di padukan dengan SBS ( Styerene Butadiene Styerene ) dan TPO ( Thermoplastic Polyolefin ) sehingga menghasilkan membran yang sangat kuat namun tetap flexible.</b>
                     DuO menggabungkan Fiberglass dan Polyester menjadi Composite Reinforcement yang menghasilkan tulangan yang flexible namun sangat kuat serta memilki kekuatan terhadap sobek atau tusukan.
                 </p>
-                <a href="<?= base_url(); ?>product/detail/14" class="highlight btn btn-primary border">Read more</a>
+                <a href="<?= base_url(); ?>product/waterproofing/duo-composite-membrane/detail" class="highlight btn btn-primary border">Read more</a>
 
             </div>
         </div>
@@ -398,7 +398,7 @@
                     Rangka Baja Ringan 1.2 Truss - <b>Satu-satunya Rangka Baja Ringan di Indonesia yang menggunakan Frame Profil S, Web Capsul, dan Connector Mur + Baut.</b> Sistem Mur + Baut diadopsi dari Rangka Baja Berat. Dengan sistem Mur + Baut maka ikatan rangka semakin kuat dibandingkan dengan screw biasa. Profil S mempunyai momen Inersia lebih besar, sehingga mempunyai kekuatan lebih besar
                     juga mampu menahan beban tarik dan beban tekan serta dapat meminimalkan resiko terjadi puntiran. Profil S mampu dipasang untuk bentangan sampai 24 meter tanpa balok tambahan.
                 </p>
-                <a href="<?= base_url(); ?>product/detail/4" class="highlight btn btn-primary border">Read more</a>
+                <a href="<?= base_url(); ?>product/struktur-rangka/1-2-truss-rangka-baja-ringan/detail" class="highlight btn btn-primary border">Read more</a>
 
             </div>
         </div>
@@ -411,84 +411,84 @@
         <div class="projectSlider ">
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/1.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/1.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="gallery-home-project">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/1.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/2.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/2.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="gallery-home-project">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/2.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/3.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/3.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="gallery-home-project">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/3.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/4.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/4.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="gallery-home-project">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/4.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/5.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/5.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="gallery-home-project">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/5.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/6.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/6.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="gallery-home-project">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/6.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/7.jpeg" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
-                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/7.jpeg">
+                    <a href="<?= base_url() ?>assets/images/home/slider/7.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="gallery-home-project">
+                        <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/7.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/8.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/8.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="gallery-home-project">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/8.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/9.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/9.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="gallery-home-project">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/9.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/10.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/10.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="gallery-home-project">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/10.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/11.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/11.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="gallery-home-project">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/11.webp">
                     </a>
                 </div>
             </div>
             <div class="card text-white border-0 home-project-catalog h-100">
                 <div class="card-img-wrap p-1 rounded">
-                    <a href="<?= base_url() ?>assets/images/home/slider/12.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="example-gallery">
+                    <a href="<?= base_url() ?>assets/images/home/slider/12.webp" data-max-width="750" data-footer="" data-toggle="lightbox" data-gallery="gallery-home-project">
                         <img loading="lazy" style="height:300px;" class="img-fit img-fluid rounded" alt="" src="<?= base_url(); ?>assets/images/home/slider/12.webp">
                     </a>
                 </div>
@@ -496,28 +496,31 @@
         </div>
     </div>
 </section>
+<hr class="container">
 
 <section class="content" id="product-logo-section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 mt-5 mt-lg-0">
-                <h3 class="column-title text-center">Let us put one over your building</h3>
+            <div class="col-lg-12 mt-3 mt-lg-0">
+                <p>
+                    <b>PT. ATAP TEDUH LESTARI</b> memproduksi dan menyediakan produk Atap Bitumen, Atap Ashpalt, Shingle Bitumen, Genteng Metal, Atap Alang Alang Sintetis, Waterproofing, Membrane Bakar, Insulasi, Struktur Rangka Bangunan, serta Pintu dan Jendela
+                </p>
                 <div class="row all-clients justify-content-center">
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/subkategori/1"><img loading="lazy" class="img-fluid" title="IKO Shingle Bitumen" style="height:70px;" src="<?= base_url(); ?>assets/images/logo/iko-logo.png" alt="IKO" /></a>
+                            <a href="<?= base_url(); ?>product/atap-dan-genteng/atap-bitumen"><img loading="lazy" class="img-fluid" title="IKO Shingle Bitumen" style="height:70px;" src="<?= base_url(); ?>assets/images/logo/iko-logo.png" alt="IKO" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/subkategori/5"><img loading="lazy" class="img-fluid" title="Palmex Synthetic Thatch" style="height:115px;" src="<?= base_url(); ?>assets/images/logo/palmex-logo.png" alt="Palmex" /></a>
+                            <a href="<?= base_url(); ?>product/atap-dan-genteng/atap-alang-alang-sintetis"><img loading="lazy" class="img-fluid" title="Palmex Synthetic Thatch" style="height:115px;" src="<?= base_url(); ?>assets/images/logo/palmex-logo.png" alt="Palmex" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/14"><img loading="lazy" title="Duo Composite Membrane" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/duo-logo.png" alt="DUO" /></a>
+                            <a href="<?= base_url(); ?>product/waterproofing/duo-composite-membrane/detail"><img loading="lazy" title="Duo Composite Membrane" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/duo-logo.png" alt="DUO" /></a>
                         </figure>
                     </div>
 
@@ -529,132 +532,132 @@
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/55"><img loading="lazy" title="Lestari Abadi Door" class="img-fluid" style="height:119px;" src="<?= base_url(); ?>assets/images/logo/lead-logo.png" alt="Lestari Abadi Door" /></a>
+                            <a href="<?= base_url(); ?>product/pintu-dan-jendela/lestari-abadi-door/detail"><img loading="lazy" title="Lestari Abadi Door" class="img-fluid" style="height:119px;" src="<?= base_url(); ?>assets/images/logo/lead-logo.png" alt="Lestari Abadi Door" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/19"><img loading="lazy" title="IKO Spectraplan TPE" class="img-fluid" style="height:50px;" src="<?= base_url(); ?>assets/images/logo/iko-spectraplan.png" alt="IKO Spectraplan TPE" /></a>
+                            <a href="<?= base_url(); ?>product/waterproofing/spectraplan-tpe/detail"><img loading="lazy" title="IKO Spectraplan TPE" class="img-fluid" style="height:50px;" src="<?= base_url(); ?>assets/images/logo/iko-spectraplan.png" alt="IKO Spectraplan TPE" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/51"><img loading="lazy" title="Soprasun APP Membrane" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/soprasun.png" alt="Soprema Soprasun" /></a>
+                            <a href="<?= base_url(); ?>product/waterproofing/soprasun-p3/detail"><img loading="lazy" title="Soprasun APP Membrane" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/soprasun.png" alt="Soprema Soprasun" /></a>
                         </figure>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/46"><img loading="lazy" title="Sagitta APP Membrane" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/sagitta.png" alt="General Membrane Sagitta" /></a>
-                        </figure>
-                    </div>
-
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
-                        <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/27"><img loading="lazy" title="Polygum Polymer Bitumen" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/polygum.png" alt="Polygum" /></a>
+                            <a href="<?= base_url(); ?>product/waterproofing/general-membrane-sagitta/detail"><img loading="lazy" title="Sagitta APP Membrane" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/sagitta.png" alt="General Membrane Sagitta" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/18"><img loading="lazy" title="IKO Enertherm ALU Insulation" class="img-fluid" style="height:50px;" src="<?= base_url(); ?>assets/images/logo/iko-enertherm.png" alt="IKO Enertherm Insulation" /></a>
+                            <a href="<?= base_url(); ?>product/waterproofing/polygum/detail"><img loading="lazy" title="Polygum Polymer Bitumen" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/polygum.png" alt="Polygum" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/52"><img loading="lazy" title="Soprema Tecsound Soundproofing Membrane" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/tecsound.png" alt="Soundproofing Membrane" /></a>
+                            <a href="<?= base_url(); ?>product/insulasi/enertherm-alu-insulation/detail"><img loading="lazy" title="IKO Enertherm ALU Insulation" class="img-fluid" style="height:50px;" src="<?= base_url(); ?>assets/images/logo/iko-enertherm.png" alt="IKO Enertherm Insulation" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/29"><img loading="lazy" title="Micapel Slate Roof" class="img-fluid" style="height:80px;" src="<?= base_url(); ?>assets/images/logo/micapel.png" alt="Micapel Slate Roof" /></a>
+                            <a href="<?= base_url(); ?>product/insulasi/soprema-tecsound/detail"><img loading="lazy" title="Soprema Tecsound Soundproofing Membrane" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/tecsound.png" alt="Soundproofing Membrane" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/57"><img loading="lazy" title="SpaceTech Space Frame" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/space-frame-logo.png" alt="SpaceTech Space Frame" /></a>
+                            <a href="<?= base_url(); ?>product/atap-slate/micapel-roofing-slate/detail"><img loading="lazy" title="Micapel Slate Roof" class="img-fluid" style="height:80px;" src="<?= base_url(); ?>assets/images/logo/micapel.png" alt="Micapel Slate Roof" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/24"><img loading="lazy" title="KAWA KZ Standing Seam" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/kawa.png" alt="Unisons Kawa KZ" /></a>
+                            <a href="<?= base_url(); ?>product/struktur-rangka/spacetech-space-frame/detail"><img loading="lazy" title="SpaceTech Space Frame" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/space-frame-logo.png" alt="SpaceTech Space Frame" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/kategori/7"><img loading="lazy" title="Knauf Aquapanel Cement Board" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/aquapanel.png" alt="Knauf Aquapanel" /></a>
+                            <a href="<?= base_url(); ?>product/genteng-metal/kawa-kz-standing-seam/detail"><img loading="lazy" title="KAWA KZ Standing Seam" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/kawa.png" alt="Unisons Kawa KZ" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/28"><img loading="lazy" title="Easyuse Drain Cell for Roof Garden" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/easyuse.png" alt="Easyuse" /></a>
+                            <a href="<?= base_url(); ?>product/plafon-dan-dinding"><img loading="lazy" title="Knauf Aquapanel Cement Board" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/aquapanel.png" alt="Knauf Aquapanel" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/23"><img loading="lazy" title="1.2 Truss Rangka Atap Baja Ringan" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/12truss.JPG" alt="1.2 Truss Rangka Baja Ringan" /></a>
+                            <a href="<?= base_url(); ?>product/membrane/easyuse-membrane-roof-garden/detail"><img loading="lazy" title="Easyuse Drain Cell for Roof Garden" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/easyuse.png" alt="Easyuse" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/30"><img loading="lazy" title="Maharoof Atap Metal" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/maharoof.jpg" alt="Maharoof Genteng Metal" /></a>
+                            <a href="<?= base_url(); ?>product/struktur-rangka/1-2-truss-rangka-baja-ringan/detail"><img loading="lazy" title="1.2 Truss Rangka Atap Baja Ringan" class="img-fluid" style="height:100px;" src="<?= base_url(); ?>assets/images/logo/12truss.JPG" alt="1.2 Truss Rangka Baja Ringan" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/49"><img loading="lazy" title="Maha SpanRoof Atap Metal" class="img-fluid" style="height:70px;" src="<?= base_url(); ?>assets/images/logo/mahaspan.jpeg" alt="Maha Spanroof" /></a>
+                            <a href="<?= base_url(); ?>product/genteng-metal/maharoof-genteng-metal/detail"><img loading="lazy" title="Maharoof Genteng Metal" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/maharoof.jpg" alt="Maharoof Genteng Metal" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/42"><img loading="lazy" title="MahaFlat Atap Metal" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/mahaflat.jpg" alt="MahaFlat" /></a>
+                            <a href="<?= base_url(); ?>product/genteng-metal/maha-spanroof-genteng-metal/detail"><img loading="lazy" title="Maha SpanRoof Genteng Metal" class="img-fluid" style="height:70px;" src="<?= base_url(); ?>assets/images/logo/mahaspan.jpeg" alt="Maha Spanroof" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/44"><img loading="lazy" title="Flexideck Seam Atap Metal" class="img-fluid" style="height:65px;" src="<?= base_url(); ?>assets/images/logo/flexideck.jpg" alt="Flexideck Seam" /></a>
+                            <a href="<?= base_url(); ?>product/genteng-metal/mahaflat-genteng-metal/detail"><img loading="lazy" title="MahaFlat Genteng Metal" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/mahaflat.jpg" alt="MahaFlat" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/43"><img loading="lazy" title="TaperRoof Atap Metal" class="img-fluid" style="height:50px;" src="<?= base_url(); ?>assets/images/logo/taperoof.jpg" alt="TaperRoof" /></a>
+                            <a href="<?= base_url(); ?>product/genteng-metal/flexideck-seam/detail"><img loading="lazy" title="Flexideck Seam Genteng Metal" class="img-fluid" style="height:65px;" src="<?= base_url(); ?>assets/images/logo/flexideck.jpg" alt="Flexideck Seam" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/32"><img loading="lazy" title="EcoRoof Atap Metal" class="img-fluid" style="height:50px;" src="<?= base_url(); ?>assets/images/logo/ecoroof.jpg" alt="EcoRoof" /></a>
+                            <a href="<?= base_url(); ?>product/genteng-metal/taperroof-genteng-metal/detail"><img loading="lazy" title="TaperRoof Genteng Metal" class="img-fluid" style="height:50px;" src="<?= base_url(); ?>assets/images/logo/taperoof.jpg" alt="TaperRoof" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/50"><img loading="lazy" title="FlexiRoof Atap Metal" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/flexiroof.jpg" alt="FlexiRoof" /></a>
+                            <a href="<?= base_url(); ?>product/genteng-metal/ecoroof-genteng-metal/detail"><img loading="lazy" title="EcoRoof Genteng Metal" class="img-fluid" style="height:50px;" src="<?= base_url(); ?>assets/images/logo/ecoroof.jpg" alt="EcoRoof" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/48"><img loading="lazy" title="Pelapis Atap Metal" class="img-fluid" style="height:75px;" src="<?= base_url(); ?>assets/images/logo/mahainsulasi.jpg" alt="Maha Insulasi" /></a>
+                            <a href="<?= base_url(); ?>product/genteng-metal/flexiroof-genteng-metal/detail"><img loading="lazy" title="FlexiRoof Genteng Metal" class="img-fluid" style="height:60px;" src="<?= base_url(); ?>assets/images/logo/flexiroof.jpg" alt="FlexiRoof" /></a>
                         </figure>
                     </div>
 
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
                         <figure class="home-logo rounded">
-                            <a href="<?= base_url(); ?>product/detail/31"><img loading="lazy" title="Emarin Atap Metal" class="img-fluid" style="height:65px;" src="<?= base_url(); ?>assets/images/logo/emarin.jpg" alt="Emarin" /></a>
+                            <a href="<?= base_url(); ?>product/insulasi/maha-insulasi/detail"><img loading="lazy" title="Maha Insulasi Pelapis Genteng Metal" class="img-fluid" style="height:75px;" src="<?= base_url(); ?>assets/images/logo/mahainsulasi.jpg" alt="Maha Insulasi" /></a>
+                        </figure>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-logo">
+                        <figure class="home-logo rounded">
+                            <a href="<?= base_url(); ?>product/genteng-metal/emarin-genteng-metal/detail"><img loading="lazy" title="Emarin Genteng Metal" class="img-fluid" style="height:65px;" src="<?= base_url(); ?>assets/images/logo/emarin.jpg" alt="Emarin" /></a>
                         </figure>
                     </div>
                 </div>

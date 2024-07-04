@@ -52,3 +52,30 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['404_override'] = 'Error';
 $route['translate_uri_dashes'] = FALSE;
+
+//to update slug with keyword name of the table
+$route['slug/(:any)'] = 'Home/slug/$1';
+
+$route['tentang'] = 'Home/about';
+$route['kontak'] = 'Home/contact';
+$route['karir'] = 'Home/career';
+$route['save'] = 'Home/save';
+
+//pagination product index
+$route['product/(:num)'] = 'Product/index';
+//detail product
+$route['product/(:any)/(:any)/detail'] = 'Product/detail/$2';
+
+//kategori product
+$route['product/(:any)'] = 'Product/kategori/$1';
+//pagination product kategori
+$route['product/(:any)/(:num)'] = 'Product/kategori/$1';
+
+//subkategori product
+$route['product/(:any)/(:any)'] = 'Product/subkategori/$1/$2';
+//pagination product subkategori
+$route['product/(:any)/(:any)/(:num)'] = 'Product/subkategori/$1/$2';
+
+$route['artikel'] = 'Post';
+$route['artikel/(:any)'] = 'Post/detail/$1';
+$route['artikel/date/(:any)/(:any)'] = 'Post/date/$1/$2';

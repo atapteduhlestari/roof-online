@@ -16,7 +16,7 @@
                                     <ul class="arrow nav nav-tabs">
                                         <?php foreach ($archive as $month) : ?>
                                             <li class="<?= ($this->uri->segment(4) == $month->month) && ($this->uri->segment(3) == $year) ? 'active' : '' ?>">
-                                                <a href="<?= base_url() . 'post/date/' . $month->year . '/' . $month->month ?>">
+                                                <a href="<?= base_url() . 'artikel/date/' . $month->year . '/' . $month->month ?>">
                                                     <?= $month->month ?>
                                                 </a>
                                             </li>
@@ -34,13 +34,13 @@
                         <div class="col-md-6 mb-4">
                             <div class="latest-post home-recent-posts h-100">
                                 <div class="card-img-wrap">
-                                    <a href="<?= base_url(); ?>post/detail/<?= $news->id_newsletter ?>">
+                                    <a href="<?= base_url(); ?>artikel/<?= $news->slug ?>">
                                         <img loading="lazy" class="img-fluid rounded img-title" height="100" src="<?= $news->gambar_url ?>" alt="<?= $news->judul ?>">
                                     </a>
                                 </div>
                                 <div class="post-body p-3">
                                     <h4 class="post-title">
-                                        <a href="<?= base_url(); ?>post/detail/<?= $news->id_newsletter ?>" class="d-inline-block">
+                                        <a href="<?= base_url(); ?>artikel/<?= $news->slug ?>" class="d-inline-block">
                                             <?= $news->judul ?>
                                         </a>
                                     </h4>
