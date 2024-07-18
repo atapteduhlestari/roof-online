@@ -21,12 +21,10 @@ class TrnMaintenanceController extends Controller
     public function index()
     {
         $data = request()->all();
-        // $trnMaintenances = TrnMaintenance::select(['trn_desc', 'trn_date'])->where('trn_status', false)->get();
-        // return $trnMaintenances;
         if (isSuperadmin())
-            $trnMaintenances = TrnMaintenance::search($data)->orderBy('trn_date', 'asc')->get();
+            $trnMaintenances = TrnMaintenance::search($data)->orderBy('trn_date', 'asc')->paginate(10);
         else
-            $trnMaintenances = TrnMaintenance::search($data)->where('sbu_id', userSBU())->orderBy('trn_date', 'asc')->get();
+            $trnMaintenances = TrnMaintenance::search($data)->where('sbu_id', userSBU())->orderBy('trn_date', 'asc')->paginate(10);
 
         $maintenances = Maintenance::get();
         $assets = Asset::with('sbu')->orderBy('asset_name', 'asc')->where('condition', '!=', 4)->get();
@@ -45,6 +43,7 @@ class TrnMaintenanceController extends Controller
     public function create(Request $request)
     {
         $asset = Asset::findOrFail($request->id);
+        $this->authorize('update', $asset);
 
         if ($asset->condition == 4) {
             return redirect()->back()->with('fail', 'Asset is Disposed !');
@@ -79,7 +78,6 @@ class TrnMaintenanceController extends Controller
 
     public function storeTrnData($data)
     {
-
         $date = createDate($data['trn_date']);
         $count = TrnMaintenance::whereMonth('trn_date', $date->month)
             ->whereYear('trn_date', $date->year)
@@ -95,14 +93,13 @@ class TrnMaintenanceController extends Controller
 
     public function show(TrnMaintenance $trnMaintenance)
     {
-        if (isSuperadmin() || $trnMaintenance->sbu_id == userSBU())
-            return view('transaction.maintenance.show', compact('trnMaintenance'));
-        else
-            return redirect()->back()->with('warning', 'Access Denied!');
+        $this->authorize('view', $trnMaintenance);
+        return view('transaction.maintenance.show', compact('trnMaintenance'));
     }
 
     public function edit(TrnMaintenance $trnMaintenance)
     {
+        $this->authorize('update', $trnMaintenance);
         $maintenances = Maintenance::get();
         $employees = Employee::orderBy('name', 'asc')->get();
         $SBUs = SBU::orderBy('sbu_name', 'asc')->get();

@@ -22,20 +22,6 @@ class AssetController extends Controller
 {
     public function index()
     {
-        // $assetsUnique = $assets->unique(['asset_code']);
-        // $userDuplicates = $assets->diff($assets);
-        // return $userDuplicates;
-
-        // foreach ($assets as $asset) {
-        //     if ($asset->image) {
-        //         if (!str_contains($asset->image, '.jpg')) {
-        //             $asset->update([
-        //                 'image' => $asset->image . '.jpg'
-        //             ]);
-        //         }
-        //     }
-        // }
-        // return $assets;
         $assetGroup = AssetGroup::get();
         $employees = Employee::orderBy('name', 'asc')->get();
         $SDBs = SDB::orderBy('sdb_name', 'asc')->get();
@@ -77,7 +63,7 @@ class AssetController extends Controller
         $asset = new Asset();
         $query = $asset->query();
 
-        if (!isSuperadmin())
+        if (isUserSBU())
             $query = $asset->where('sbu_id', userSBU());
 
         $totalQueries = $query->count();
@@ -100,21 +86,22 @@ class AssetController extends Controller
             $color = colorCondition($asset->condition);
             return "<span class='$color'> {$text}</span>";
         })->addColumn('action', function ($row) {
-            return '<div class="d-flex justify-content-around">
-        <div>
-            <a title="Asset Detail" href="/asset-parent/docs/' . $row->id . '" class="btn btn-outline-dark btn-sm">Detail</a>
-        </div>
-        <div>
-            <a title="Edit Data" href="/asset-parent/' . $row->id . '/edit" class="btn btn-outline-dark btn-sm">Edit</a>
-        </div>
-        <div>
-            <form action="/asset-parent/' . $row->id . '" method="post" id="deleteForm">
-            ' . csrf_field() . '
-            ' . method_field("DELETE") . '
-                <button title="Delete Data" class="btn btn-outline-danger btn-sm" onclick="return false" id="deleteButton" data-id="' . $row->id . '"><i class="fas fa-trash-alt"></i></button>
-            </form>
-        </div>
-    </div>';
+            return
+                '<div class="d-flex justify-content-around">
+                    <div>
+                        <a title="Asset Detail" href="/asset-parent/docs/' . $row->id . '" class="btn btn-outline-dark btn-sm">Detail</a>
+                    </div>
+                    <div>
+                        <a title="Edit Data" href="/asset-parent/' . $row->id . '/edit" class="btn btn-outline-dark btn-sm">Edit</a>
+                    </div>
+                    <div>
+                        <form action="/asset-parent/' . $row->id . '" method="post" id="deleteForm">
+                        ' . csrf_field() . '
+                        ' . method_field("DELETE") . '
+                            <button title="Delete Data" class="btn btn-outline-danger btn-sm" onclick="return false" id="deleteButton" data-id="' . $row->id . '"><i class="fas fa-trash-alt"></i></button>
+                        </form>
+                    </div>
+                </div>';
         })->rawColumns(['action', 'condition']);
 
         return $dt->orderColumn('pcs_date', '-pcs_date $1')->setTotalRecords($totalQueries)->toJson();
@@ -129,7 +116,7 @@ class AssetController extends Controller
         $data['pcs_value'] = removeDots($request->pcs_value);
         $data['nilai_buku'] = removeDots($request->nilai_buku);
 
-        if (isAdmin())
+        if (isUserSBU())
             $data['sbu_id'] = userSBU();
 
         if ($request->file('image')) {
@@ -216,7 +203,7 @@ class AssetController extends Controller
         $data['pcs_value'] = removeDots($request->pcs_value);
         $data['nilai_buku'] = removeDots($request->nilai_buku);
 
-        if (isAdmin())
+        if (isUserSBU())
             $data['sbu_id'] = userSBU();
 
         if ($request->file('image')) {

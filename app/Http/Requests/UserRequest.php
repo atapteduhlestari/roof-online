@@ -21,7 +21,8 @@ class UserRequest extends FormRequest
             'sbu_id' => 'required',
             'username' => ['required', Rule::unique('users')->ignore($this->user, 'id')],
             'email' => ['required', 'email:rfc', Rule::unique('users')->ignore($this->user, 'id')],
-            'password' => 'nullable|min:6'
+            'password' => 'nullable|min:6',
+            'active' => 'required',
         ];
 
         if ($this->isMethod('POST'))

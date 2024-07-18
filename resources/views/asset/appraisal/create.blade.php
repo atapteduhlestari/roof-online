@@ -22,7 +22,7 @@
             aria-expanded="false" aria-controls="collapseExample">
             Add new
         </button>
-        <div class="collapse" id="collapseExample">
+        <div class="collapse @if ($errors->any()) show @endif" id="collapseExample">
             <div class="mb-4">
                 <form action="/appraisal" method="POST" id="formAppraisal">
                     @csrf

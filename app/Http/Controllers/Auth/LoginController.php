@@ -26,12 +26,13 @@ class LoginController extends Controller
         $this->username = $this->findUsername();
     }
 
-    protected function authenticated()
+    protected function authenticated(Request $request, $user)
     {
-        // if (Auth::check()) {
-        //     session()->flash('warning', 'You logged in with another devices');
-        // }
         Auth::logoutOtherDevices(request('password'));
+        $user->update([
+            'last_login_at' => now()->toDateTimeString(),
+            'last_login_ip' => $request->getClientIp()
+        ]);
         return redirect('/')->with('success', 'Login Success!');
     }
 
@@ -55,9 +56,13 @@ class LoginController extends Controller
         ]);
     }
 
-    public function loggedOut()
+    public function logout(Request $request)
     {
+        $request->user()->update(['last_logout_at' => now()]);
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect('/login')->with('success', 'Logout Berhasil!');
     }
 }

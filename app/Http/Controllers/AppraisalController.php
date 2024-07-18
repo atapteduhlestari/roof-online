@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Appraisal;
 use App\Models\Asset;
 use Illuminate\Http\Request;
-
+    
 class AppraisalController extends Controller
 {
     public function index()
     {
-        $appraisals = Appraisal::get();
-        $assets = Asset::orderBy('asset_name', 'ASC')->get();
+        $appraisals = isSuperAdmin() ? Appraisal::get() : Appraisal::where('sbu_id', userSBU())->get();
+        $assets = isSuperAdmin() ? Asset::orderBy('asset_name', 'ASC')->get() : Asset::where('sbu_id', userSBU())->orderBy('asset_name', 'ASC')->get();
 
         return view('asset.appraisal.index', compact('appraisals', 'assets'));
     }
@@ -20,6 +20,8 @@ class AppraisalController extends Controller
     {
         $id = $request->asset_id;
         $asset = Asset::findOrFail($id);
+        $this->authorize('update', $asset);
+
         return view('asset.appraisal.create', compact('asset'));
     }
 
@@ -31,16 +33,14 @@ class AppraisalController extends Controller
             'apr_value' => 'required',
         ]);
 
+        $asset = Asset::findOrFail($request->asset_id);
+        $this->authorize('update', $asset);
+
         $data = $request->all();
         $data['apr_value'] = removeDots($request->apr_value);
 
         Appraisal::create($data);
         return redirect()->back()->with('success', 'Success!');
-    }
-
-    public function show(Appraisal $appraisal)
-    {
-        //
     }
 
     public function edit(Appraisal $appraisal)
@@ -55,6 +55,9 @@ class AppraisalController extends Controller
             'apr_date' => 'required|date',
             'apr_value' => 'required',
         ]);
+
+        $asset = Asset::findOrFail($request->asset_id);
+        $this->authorize('update', $asset);
 
         $data = $request->all();
         $data['apr_value'] = removeDots($request->apr_value);

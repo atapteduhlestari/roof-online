@@ -41,6 +41,11 @@ function createDate($param)
     return $param ? Carbon::create($param) : '';
 }
 
+function diffForHuman($param)
+{
+    return $param ? Carbon::parse($param)->diffForHumans() : '';
+}
+
 function textCondition($param)
 {
     if ($param == 1)
@@ -279,7 +284,7 @@ function isSuperadmin()
     return auth()->user()->is_admin == 1;
 }
 
-function isAdmin()
+function isUserSBU()
 {
     return auth()->user()->is_admin == 2;
 }

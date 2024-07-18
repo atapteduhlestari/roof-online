@@ -1,6 +1,5 @@
 @extends('layouts.master')
 @push('styles')
-    <link href="/assets/template/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="/assets/template/vendor/selectize/selectize.css" rel="stylesheet">
 @endpush
 @section('title', 'GA | Maintenance Transaction')
@@ -27,7 +26,7 @@
             </div>
         </div>
 
-        <div class="collapse show" id="collapseSearch">
+        <div class="collapse" id="collapseSearch">
             <div class="card card-body mt-3">
                 <h6 class="mb-3 font-weight-bold text-primary">Search Filter</h6>
                 <form action="/trn-maintenance" method="get">
@@ -104,10 +103,9 @@
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Table Data</h6>
             </div>
-
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-borderless" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -122,9 +120,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($trnMaintenances as $trn)
+                            @foreach ($trnMaintenances as $key => $trn)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $loop->index + $trnMaintenances->firstItem() }}</td>
                                     <td>
                                         <a href="/asset-parent/docs/{{ $trn->asset->id }}">{{ $trn->asset->asset_name }}
                                         </a>
@@ -174,6 +172,24 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-5 mb-3">
+                        <div class="text-left">
+                            Showing
+                            {{ $trnMaintenances->firstItem() }}
+                            to
+                            {{ $trnMaintenances->lastItem() }}
+                            of
+                            {{ $trnMaintenances->total() }}
+                            entries
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-7 mx-auto">
+                        <div class="text-right float-right">
+                            {{ $trnMaintenances->onEachSide(0)->links() }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -327,7 +343,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>
                     </form>
@@ -337,16 +352,9 @@
     </div>
 @endsection
 @push('scripts')
-    <!-- Page level plugins -->
-    <script src="/assets/template/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/assets/template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="/assets/template/vendor/selectize/selectize.js"></script>
     <script src="/js/jquery.mask.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#dataTable').DataTable();
-        });
-
         $('.currency').mask('000.000.000.000', {
             reverse: true
         });

@@ -28,22 +28,14 @@ class DashboardController extends Controller
 
     public function index()
     {
-        // $assets = Asset::with([
-        //     'trnMaintenance' => fn ($q) => $q->whereDate('trn_date', '<=', $now)
-        // ])
-        //     ->whereHas('trnMaintenance', fn ($q) => $q->whereDate('trn_date', '<=', $now))
-        //     ->get()->sortBy(fn ($q) => $q->trn_date);
-        $assetTotal = Asset::count();
-        $documentTotal = AssetChild::count();
-        $assetCondition = DB::table('asset')->select('condition', DB::raw('count(*) as total'))
-            ->groupBy('condition')->pluck('total', 'condition');
-
+        $assetTotal = isSuperadmin() ? Asset::count() : Asset::where('sbu_id', userSBU())->count();
+        $documentTotal = isSuperadmin() ? AssetChild::count() : AssetChild::where('sbu_id', userSBU())->count();
+        $assetCondition = Asset::getCountByCondition(isSuperadmin());
         return view('index', compact('assetCondition', 'assetTotal', 'documentTotal'));
     }
 
     public function timeline()
     {
-
         if (isSuperadmin()) {
             $assets = Asset::getAllLastTransaction($this->now)->get();
             $docs = AssetChild::getAllLastTransaction($this->now)->get();
@@ -53,7 +45,7 @@ class DashboardController extends Controller
         }
 
         $data = timelineReminders($assets, $docs);
-
+        return $data->paginate(1);
         if (isSuperadmin()) {
             $trn_maintenance = TrnMaintenance::get();
             $trn_renewal = TrnRenewal::get();
@@ -150,15 +142,8 @@ class DashboardController extends Controller
 
     public function displayImage($fileName)
     {
-        $name = "uploads/images/assets/dsqcODx6OuWz6k7hcqSi2oaDx0nqJP4Aijfso30z.jpg";
-        // $path = storage_path('app/public/uploads/images/assets/' . $fileName);
         $path = Storage::path('uploads/images/assets/' . $fileName);
 
-        // echo Storage::get('dsqcODx6OuWz6k7hcqSi2oaDx0nqJP4Aijfso30z.jpg');
-        if (!Storage::exists($name)) {
-            echo $path;
-            die;
-        }
         $file = File::get($path);
         $type = File::mimeType($path);
 

@@ -22,9 +22,9 @@ class TrnRenewalController extends Controller
         $data = request()->all();
         // return $trnRenewals = TrnRenewal::where('trn_status', $data['status'])->get();
         if (isSuperadmin())
-            $trnRenewals = TrnRenewal::search($data)->orderBy('trn_date', 'asc')->get();
+            $trnRenewals = TrnRenewal::search($data)->orderBy('trn_date', 'asc')->paginate(10);
         else
-            $trnRenewals = TrnRenewal::search($data)->where('sbu_id', userSBU())->orderBy('trn_date', 'asc')->get();
+            $trnRenewals = TrnRenewal::search($data)->where('sbu_id', userSBU())->orderBy('trn_date', 'asc')->paginate(10);
 
         // return $trnRenewals;
         $renewals = Renewal::get();
@@ -43,9 +43,11 @@ class TrnRenewalController extends Controller
 
     public function create(Request $request)
     {
+        $assetChild = AssetChild::findOrFail($request->id);
+        $this->authorize('update', $assetChild);
+
         $renewals = Renewal::orderBy('name', 'asc')->get();
         $employees = Employee::orderBy('name', 'asc')->get();
-        $assetChild = AssetChild::findOrFail($request->id);
         $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
 
         return view('transaction.renewal.create', compact(
@@ -88,10 +90,8 @@ class TrnRenewalController extends Controller
 
     public function show(TrnRenewal $trnRenewal)
     {
-        if (isSuperadmin() || $trnRenewal->sbu_id == userSBU())
-            return view('transaction.renewal.show', compact('trnRenewal'));
-        else
-            return redirect()->back()->with('warning', 'Access Denied!');
+        $this->authorize('view', $trnRenewal);
+        return view('transaction.renewal.show', compact('trnRenewal'));
     }
 
     /* public function export()
@@ -131,6 +131,7 @@ class TrnRenewalController extends Controller
 
     public function edit(TrnRenewal $trnRenewal)
     {
+        $this->authorize('view', $trnRenewal);
         $renewals = Renewal::get();
         $employees = Employee::orderBy('name', 'asc')->get();
         $SBUs = SBU::orderBy('sbu_name', 'asc')->get();
@@ -167,7 +168,6 @@ class TrnRenewalController extends Controller
 
     public function destroy(TrnRenewal $trnRenewal)
     {
-
         if ($trnRenewal->trn_status)
             return redirect()->back()->with('warning', 'Status is <b>CLOSED!</b>');
 

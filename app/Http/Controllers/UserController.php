@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserRequest;
 use App\Models\SBU;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -21,6 +20,7 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $data = $request->validated();
+
         $data['password'] = Hash::make($request->password);
         User::create($data);
 
@@ -47,7 +47,6 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        return $user;
         $user->delete();
         return redirect('/user')->with('success', 'Success!');
     }

@@ -31,6 +31,12 @@
                                 <th>Username</th>
                                 <th>Email</th>
                                 <th>SBU</th>
+                                <th>Last IP</th>
+                                <th>Last login</th>
+                                <th>Last logout</th>
+                                <th>Created at</th>
+                                <th>Updated at</th>
+                                <th>Status</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
@@ -42,6 +48,16 @@
                                     <td>{{ $user->username }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->sbu->sbu_name }}</td>
+                                    <td>{{ $user->last_login_ip }}</td>
+                                    <td>{{ diffForHuman($user->last_login_at) }}</td>
+                                    <td>{{ diffForHuman($user->last_logout_at) }}</td>
+                                    <td>{{ diffForHuman($user->created_at) }}</td>
+                                    <td>{{ diffForHuman($user->updated_at) }}</td>
+                                    <td>
+                                        <span class="{{ $user->active ? 'text-success' : 'text-danger' }}">
+                                            {{ $user->active ? 'active' : 'not active' }}
+                                        </span>
+                                    </td>
                                     <td>
                                         <div class="d-flex justify-content-around">
                                             <div>

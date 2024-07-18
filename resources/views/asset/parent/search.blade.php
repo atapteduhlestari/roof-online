@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <div class="collapse show" id="collapseSearch">
+        <div class="collapse" id="collapseSearch">
             <div class="card card-body mt-3">
                 <h6 class="mb-3 font-weight-bold text-primary">Search</h6>
                 <form action="/asset-parent/search/all" method="get">

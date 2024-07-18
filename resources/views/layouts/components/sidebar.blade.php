@@ -13,9 +13,7 @@
                 <img height="100" class="mb-2" src="/assets/template/img/undraw_team_collaboration_re_ow29.svg"
                     alt="...">
             </div>
-            {{-- <div class="sidebar-card d-none d-lg-flex">
-                <img height="50" class="mb-2" src="/assets/app/images/logo/logo.png" alt="...">
-            </div> --}}
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -31,27 +29,6 @@
                 Functional
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            {{-- <li
-                class="nav-item tes {{ request()->is('asset-group*') || request()->is('asset-parent*') ? 'active' : '' }}">
-                <a class="nav-link {{ request()->is('asset-group*') || request()->is('asset-parent*') ? '' : 'collapsed' }}"
-                    href="#" data-toggle="collapse" data-target="#collapseAsset" aria-expanded="true"
-                    aria-controls="collapseAsset">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Assets</span>
-                </a>
-                <div id="collapseAsset"
-                    class="collapse  {{ request()->is('asset-group*') || request()->is('asset-parent*') ? 'show' : '' }}"
-                    aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item  {{ request()->is('asset-group*') ? 'active' : '' }}"
-                            href="/asset-group">Group</a>
-                        <a class="collapse-item  {{ request()->is('asset-parent*') ? 'active' : '' }}"
-                            href="/asset-parent">Assets</a>
-
-                    </div>
-                </div>
-            </li> --}}
             @can('superadmin')
                 <li
                     class="nav-item {{ request()->is('asset-parent*') || request()->is('asset-child*') || request()->is('group*') || request()->is('asset-group*') || request()->is('document-group*') || request()->is('renewal*') || request()->is('maintenance*') || request()->is('cycle*') || request()->is('sbu*') ? 'active' : '' }}">
@@ -75,7 +52,7 @@
                             </a>
                             {{-- <a class="collapse-item {{ request()->is('cycle*') ? 'active' : '' }}" href="/cycle">
                             Cycle
-                        </a> --}}
+                                </a> --}}
                             <a class="collapse-item {{ request()->is('sbu*') ? 'active' : '' }}" href="/sbu">
                                 SBU
                             </a>
@@ -141,10 +118,9 @@
             </li> --}}
 
             <hr class="sidebar-divider d-none d-md-block">
-            <!-- Sidebar Toggler (Sidebar) -->
+
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0 bg-custom" id="sidebarToggle"></button>
             </div>
-
         </ul>
         <!-- End of Sidebar -->

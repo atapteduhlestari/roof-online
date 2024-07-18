@@ -38,7 +38,7 @@ class AssetChildController extends Controller
     {
         $data = $request->validated();
 
-        if (isAdmin())
+        if (isUserSBU())
             $data['sbu_id'] = userSBU();
 
         if ($request->file('file')) {
@@ -74,7 +74,7 @@ class AssetChildController extends Controller
         $this->authorize('update', $assetChild);
         $data = $request->validated();
 
-        if (isAdmin())
+        if (isUserSBU())
             $data['sbu_id'] = userSBU();
 
         if ($request->file('file')) {

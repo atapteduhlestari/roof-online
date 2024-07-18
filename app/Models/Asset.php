@@ -71,7 +71,6 @@ class Asset extends Model
 
     public static function getAllLastTransaction($time)
     {
-
         return DB::table('trn_maintenance')
             ->select(['trn_maintenance.*', 'trn_maintenance.id as trn_id', 'asset.*', 'asset_maintenance.*', 'sbu.sbu_name'])
             ->join('sbu', 'trn_maintenance.sbu_id', 'sbu.id')
@@ -128,6 +127,18 @@ class Asset extends Model
         $query->when($filters['condition']  ?? false, function ($query, $condition) {
             return $query->where('condition', $condition);
         });
+    }
+
+    public static function getCountByCondition($admin)
+    {
+        if ($admin)
+            $data = Asset::select('condition', DB::raw('count(*) as total'))
+                ->groupBy('condition')->pluck('total', 'condition');
+        else
+            $data =  Asset::where('sbu_id', userSBU())->select('condition', DB::raw('count(*) as total'))
+                ->groupBy('condition')->pluck('total', 'condition');
+
+        return $data;
     }
 
     public function scopeSearch($query, $filters)

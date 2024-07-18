@@ -110,7 +110,7 @@
                     <form action="/loan" method="POST" id="formLoan">
                         @csrf
                         <div class="row">
-                            <input id="loan_type" name="loan_type" type="hidden" value="">
+                            <input id="loan_type" name="loan_type" type="hidden" value="{{ old('loan_type') }}">
                             <div class="col-md-12 mb-3" id="assetSelectForm">
                                 <label for="asset_id">Select Asset</label>
                                 <select class="form-control @error('asset_id') is-invalid @enderror" id="asset_id"
@@ -269,8 +269,35 @@
         });
     </script>
 
+    @if (old('loan_type') === 1)
+        <script>
+            $('#docSelectForm').hide();
+            $('#assetSelectForm').show();
+            $('#loan_type').val(1);
+        </script>
+    @elseif (old('loan_type') === 0)
+        <script>
+            $('#assetSelectForm').hide();
+            $('#docSelectForm').show();
+            $('#loan_type').val(0);
+        </script>
+    @endif
+
     @if ($errors->any())
         <script>
+            let loan_type = $('#loan_type').val()
+
+            if (loan_type == 1) {
+                $('#docSelectForm').hide();
+                $('#assetSelectForm').show();
+                $('#loan_type').val(1);
+            }
+
+            if (loan_type == 0) {
+                $('#assetSelectForm').hide();
+                $('#docSelectForm').show();
+                $('#loan_type').val(0);
+            }
             $('#addNewRecord').modal('show');
         </script>
     @endif

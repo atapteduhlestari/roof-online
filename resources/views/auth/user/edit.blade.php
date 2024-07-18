@@ -54,6 +54,19 @@
                             <input type="password" class="form-control @error('password') is-invalid @enderror"
                                 name="password" id="password">
                         </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="active">Status</label>
+                            <select class="form-control @error('active') is-invalid @enderror" name="active"
+                                id="active">
+                                <option value="" selected disabled>Select</option>
+                                <option value="1" class="text-success"
+                                    {{ old('active', $user->active) == 1 ? 'selected' : '' }}>Active
+                                </option>
+                                <option value="0" class="text-danger"
+                                    {{ old('active', $user->active) == false ? 'selected' : '' }}>Not active</option>
+
+                            </select>
+                        </div>
                     </div>
                     <a href="/user" class="btn btn-secondary" data-dismiss="modal">Back</a>
                     <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>

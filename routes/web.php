@@ -20,9 +20,14 @@ use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\TrnMaintenanceController;
 use App\Http\Controllers\UserController;
 
+Auth::routes([
+    'register' => false,
+    'reset' => false,
+    'verify' => false,
+]);
+
 Route::middleware(['auth', 'reminder'])->group(function () {
     Route::get('image/uploads/images/assets/{filename}', [DashboardController::class, 'displayImage'])->name('image.displayImage');
-
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/report', [DashboardController::class, 'report']);
@@ -131,12 +136,6 @@ Route::group(['middleware' => ['auth', 'superadmin', 'reminder']], function () {
     Route::put('/user/{user}', [UserController::class, 'update']);
     Route::delete('/user/{user}', [UserController::class, 'destroy']);
 
-
-    // Route::get('/asset-group', [AssetGroupController::class, 'index']);
-    // Route::post('/asset-group', [AssetGroupController::class, 'store']);
-    // Route::get('/asset-group/{assetGroup}/edit', [AssetGroupController::class, 'edit']);
-    // Route::put('/asset-group/{assetGroup}', [AssetGroupController::class, 'update']);
-    // Route::delete('/asset-group/{assetGroup}', [AssetGroupController::class, 'destroy']);
     Route::resource('/asset-group', AssetGroupController::class)
         ->except(['create']);
 
@@ -159,9 +158,3 @@ Route::group(['middleware' => ['auth', 'superadmin', 'reminder']], function () {
 //     $data = collect($json)->where('id', 1)->first();
 //     return $data;
 // });
-
-Auth::routes([
-    'register' => false,
-    'reset' => false,
-    'verify' => false,
-]);

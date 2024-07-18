@@ -1,6 +1,5 @@
 @extends('layouts.master')
 @push('styles')
-    <link href="/assets/template/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="/assets/template/vendor/selectize/selectize.css" rel="stylesheet">
 @endpush
 @section('title', 'GA | Renewal Transaction')
@@ -26,7 +25,7 @@
             </div>
         </div>
 
-        <div class="collapse show" id="collapseSearch">
+        <div class="collapse" id="collapseSearch">
             <div class="card card-body mt-3">
                 <h6 class="mb-3 font-weight-bold text-primary">Search Filter</h6>
                 <form action="/trn-renewal" method="get">
@@ -105,7 +104,7 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-borderless" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -122,7 +121,7 @@
                         <tbody>
                             @foreach ($trnRenewals as $trn)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $loop->index + $trnRenewals->firstItem() }}</td>
                                     <td>
                                         {{ $trn->document->doc_name }} - {{ $trn->document->parent->asset_name ?? '' }}
                                     </td>
@@ -171,6 +170,24 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-5 mb-3">
+                        <div class="text-left">
+                            Showing
+                            {{ $trnRenewals->firstItem() }}
+                            to
+                            {{ $trnRenewals->lastItem() }}
+                            of
+                            {{ $trnRenewals->total() }}
+                            entries
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-7 mx-auto">
+                        <div class="text-right float-right">
+                            {{ $trnRenewals->onEachSide(0)->links() }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -337,15 +354,9 @@
 @endsection
 @push('scripts')
     <!-- Page level plugins -->
-    <script src="/assets/template/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/assets/template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="/assets/template/vendor/selectize/selectize.js"></script>
     <script src="/js/jquery.mask.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#dataTable').DataTable();
-        });
-
         $('.currency').mask('000.000.000.000', {
             reverse: true
         });
