@@ -45,7 +45,6 @@ class DashboardController extends Controller
         }
 
         $data = timelineReminders($assets, $docs);
-        return $data->paginate(1);
         if (isSuperadmin()) {
             $trn_maintenance = TrnMaintenance::get();
             $trn_renewal = TrnRenewal::get();

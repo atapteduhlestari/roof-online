@@ -82,11 +82,11 @@ function remaining($param)
         return;
     }
 
-    if ($dueDate < 0) {
+    if ($dueDate <= 0) {
         return "<span class='text-danger'>Out of date</span>";
     }
 
-    return $dueDate += 1;
+    // $dueDate += 1;
 
     // return date_diff($dt, $now)->format('%y years, %m months, and %d days');
 }

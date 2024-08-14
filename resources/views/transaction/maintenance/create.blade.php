@@ -5,6 +5,15 @@
 @endpush
 @section('title', 'GA | Maintenance Transaction')
 @section('container')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="d-flex align-items-center mb-3">
@@ -108,6 +117,18 @@
                                 <option value="{{ $sbu->id }}" {{ old('sbu_id') == $sbu->id ? 'selected' : '' }}>
                                     {{ $sbu->sbu_name }}</option>
                             @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="trn_type">Type</label>
+                        <select class="form-control @error('trn_type') is-invalid @enderror" name="trn_type" id="trn_type">
+                            <option value="">Select Type</option>
+                            <option value="1">
+                                <i class="fas fa-check"></i> Routine
+                            </option>
+                            <option value="0">
+                                <i class="fas fa-exclamation"></i> Accidentally
+                            </option>
                         </select>
                     </div>
                 </div>

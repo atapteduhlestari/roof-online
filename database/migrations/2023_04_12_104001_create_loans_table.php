@@ -24,7 +24,7 @@ class CreateLoansTable extends Migration
             $table->longText('description')->nullable();
             $table->date('loan_start_date');
             $table->date('loan_due_date');
-            $table->date('loan_date');
+            $table->date('loan_date')->nullable();
             $table->boolean('loan_status')->default(0);
             $table->timestamps();
         });

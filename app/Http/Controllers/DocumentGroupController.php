@@ -41,7 +41,14 @@ class DocumentGroupController extends Controller
 
     public function update(Request $request, DocumentGroup $documentGroup)
     {
-        //
+        $request->validate([
+            'document_group_name' => ['required', new SpecialCharacter]
+        ]);
+
+        $data = $request->all();
+        $documentGroup->update($data);
+
+        return redirect()->back()->with('success', 'Success!');
     }
 
     public function destroy(DocumentGroup $documentGroup)
