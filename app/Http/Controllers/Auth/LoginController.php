@@ -60,9 +60,6 @@ class LoginController extends Controller
     {
         $request->user()->update(['last_logout_at' => now()]);
         Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
         return redirect('/login')->with('success', 'Logout Berhasil!');
     }
 }
