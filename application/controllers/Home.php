@@ -76,30 +76,32 @@ class Home extends CI_Controller
             $this->session->set_flashdata('error', 'Silahkan isi form lamaran');
             redirect('/karir', 'refresh');
         }
-
         if (!$this->hiring) {
             $this->session->set_flashdata('error', 'Belum ada lowongan!');
             redirect('/karir', 'refresh');
         }
 
-        $this->form_validation->set_rules('nama', 'Nama', 'trim|required|alpha');
+        $this->form_validation->set_rules('nama', 'Nama', 'trim|required|callback_validate_name');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('phone', 'Phone', 'trim|required|integer');
         $this->form_validation->set_rules('position', 'Position', 'trim|required');
-        $this->form_validation->set_rules('file_upload', 'File', 'callback_file_check');
-        $this->form_validation->set_rules('g-recaptcha-response', 'Captcha', 'callback_captcha_check');
-
+        $this->form_validation->set_rules('file_upload', 'File', 'trim|callback_file_check');
+        $this->form_validation->set_rules('g-recaptcha-response', 'Captcha', 'trim|callback_captcha_check');
         if ($this->form_validation->run() == FALSE) {
             $this->career();
         }
+        $data = $this->input->post();
 
         if ($this->form_validation->run()) {
-            $filename = time() . '-' . $_FILES['file_upload']['name'];
+            $candidateName = str_replace(' ', '_', trim($this->input->post('nama', TRUE)));
+            $extension =  pathinfo($_FILES['file_upload']['name'], PATHINFO_EXTENSION);
+            $filename = date('d-m-Y_his') . '-' . "$candidateName.$extension";
             $config['file_name']    = $filename;
             $config['upload_path']   = FCPATH . '/assets/documents/';
             $config['allowed_types'] = 'pdf|jpg|png|jpeg';
             $config['max_size']      = '1024';
             $config['overwrite']     = TRUE;
+
             $this->load->library('upload', $config);
 
             if (!$this->upload->do_upload('file_upload')) {
@@ -114,11 +116,21 @@ class Home extends CI_Controller
                 'position' => $this->input->post('position', TRUE),
                 'file_upload' => $filename,
             ];
+
             $this->Model_candidates->insertDataCandidate($data);
             $this->session->set_flashdata('success', 'Terima kasih, lamaran anda akan segera kami proses!');
             redirect('/karir');
         }
         $this->session->set_flashdata('danger', 'Silahkan coba lagi!');
+    }
+
+    public function validate_name($name)
+    {
+        if (!preg_match('/^[a-zA-Z\s]+$/', $name)) {
+            $this->form_validation->set_message('validate_name', 'The %s field may only contain alpha characters & White spaces');
+            return false;
+        }
+        return true;
     }
 
     public function file_check()
@@ -127,22 +139,25 @@ class Home extends CI_Controller
         $maxsize  = 1048576;
 
         if (isset($_FILES['file_upload']['name']) && $_FILES['file_upload']['name'] != "") {
+
             if (($_FILES['file_upload']['size'] >= $maxsize) || ($_FILES["file_upload"]["size"] == 0)) {
                 $this->form_validation->set_message('file_check', 'File harus kurang dari 1MB');
                 return false;
             }
+
             $mime = get_mime_by_extension($_FILES['file_upload']['name']);
+
             if (in_array($mime, $allowed_mime_type_arr)) {
                 trim($_FILES['file_upload']['name']);
                 return true;
-            } else {
-                $this->form_validation->set_message('file_check', 'Unggah hanya file PDF');
-                return false;
             }
-        } else {
-            $this->form_validation->set_message('file_check', 'Mohon unggah CV anda');
+
+            $this->form_validation->set_message('file_check', 'Unggah hanya file PDF');
             return false;
         }
+
+        $this->form_validation->set_message('file_check', 'Mohon unggah CV anda');
+        return false;
     }
 
     public function captcha_check()
@@ -150,11 +165,12 @@ class Home extends CI_Controller
         if (isset($_POST['g-recaptcha-response']) && $_POST['g-recaptcha-response'] != "") {
             trim($_POST['g-recaptcha-response']);
             return true;
-        } else {
-            $this->form_validation->set_message('captcha_check', 'Please finish captcha');
-            return false;
         }
+
+        $this->form_validation->set_message('captcha_check', 'Please finish captcha');
+        return false;
     }
+
 
     public function slug($table = false)
     {
@@ -162,9 +178,9 @@ class Home extends CI_Controller
         return $data;
     }
 
-    public function page_title($table = false)
-    {
-        $data = $this->Model_product->set_page_title($table);
-        return $data;
-    }
+    // public function page_title($table = false)
+    // {
+    //     $data = $this->Model_product->set_page_title($table);
+    //     return $data;
+    // }
 }

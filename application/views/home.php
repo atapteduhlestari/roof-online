@@ -682,7 +682,7 @@
         <div class="row text-center">
             <div class="col-12">
                 <h3 class="section-sub-title">
-                    Recent Posts
+                    Recent Articles
                 </h3>
             </div>
         </div>
@@ -691,13 +691,13 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="latest-post home-recent-posts h-100">
                         <div class=" card-img-wrap">
-                            <a href="<?= base_url(); ?>post/detail/<?= $news->id_newsletter ?>">
+                            <a href="<?= base_url(); ?>artikel/<?= $news->slug ?>">
                                 <img loading="lazy" class="img-fluid rounded img-title" height="100" src="<?= $news->gambar_url ?>" alt="<?= $news->judul ?>">
                             </a>
                         </div>
                         <div class="post-body p-3">
                             <h4 class="post-title">
-                                <a href="<?= base_url(); ?>post/detail/<?= $news->id_newsletter ?>" class="d-inline-block">
+                                <a href="<?= base_url(); ?>artikel/<?= $news->slug ?>" class="d-inline-block">
                                     <?= $news->judul ?>
                                 </a>
                             </h4>
