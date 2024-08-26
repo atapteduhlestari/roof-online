@@ -20,6 +20,7 @@ use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\TrnMaintenanceController;
 use App\Http\Controllers\UserController;
 
+//Auth Login
 Auth::routes([
     'register' => false,
     'reset' => false,
@@ -31,7 +32,7 @@ Route::middleware(['auth', 'reminder'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/report', [DashboardController::class, 'report']);
-    Route::get('/group', [DashboardController::class, 'group']);    
+    Route::get('/group', [DashboardController::class, 'group']);
 
     Route::get('/report-loan-detail', [LoanController::class, 'detailView']);
     Route::get('/loan-detail-export', [LoanController::class, 'reportDetail']);

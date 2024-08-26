@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Appraisal;
 use App\Models\Asset;
 use Illuminate\Http\Request;
-    
+
 class AppraisalController extends Controller
 {
     public function index()
