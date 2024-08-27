@@ -94,7 +94,7 @@
                             href="/trn-renewal">Renewal</a>
                         <a class="collapse-item {{ request()->is('trn-maintenance*') ? 'active' : '' }}"
                             href="/trn-maintenance">Maintenance</a>
-                        <a class="collapse-item {{ request()->is('loan*') ? 'active' : '' }}" href="/loan">Loan</a>
+                        {{-- <a class="collapse-item {{ request()->is('loan*') ? 'active' : '' }}" href="/loan">Loan</a> --}}
                     </div>
                 </div>
             </li>
